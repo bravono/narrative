@@ -1,0 +1,257 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.App-body {
+  background-color: #ffbe5a;
+  width: 375px;
+  height: 667px;
+}
+
+.App-logo {
+  width: 45.07px;
+  height: 70.11px;
+}
+
+.App-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 500px;
+  margin-top: 10px;
+}
+.App-header-div {
+  width: 81.4px;
+  height: 49.55px;
+  margin: 10px 0 10px 7px;
+}
+.App-logo {
+  font-size: 16px;
+  margin-left: 5px;
+}
+.arrow {
+  margin-top: 27px;
+  margin-right: 12px;
+}
+.time-pending {
+  width: 60.5px;
+}
+.time {
+  width: 60px;
+  height: 30px;
+  background-color: white;
+  border: 2px solid black;
+  font-size: 25px;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 15px;
+}
+.pending {
+  width: 57px;
+  font-size: 12.55px;
+  font-weight: bold;
+  color: #000000;
+  margin-top: 5px;
+}
+.black-div {
+  width: 70px;
+  height: 18px;
+  border-radius: 8px;
+  background-color: #181717;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+.confirm-btn {
+  background-color: #0b2d99;
+  color: #fffefe;
+  width: 99.19px;
+  height: 35.39px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.App-header-div-two {
+  width: 140px;
+  margin-top: 9px;
+  margin-left: 25px;
+}
+.research-text {
+  width: 99.31px;
+  font-size: 11px;
+}
+
+.pause {
+  background-color: #85767a;
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+.option {
+  padding-top: 20px;
+  height: 235px;
+}
+.option-area {
+  display: flex;
+  margin-left: 40px;
+  background-color: #fffcd1;
+  border: 2px solid black;
+  border-left: none;
+  width: 230px;
+  height: 145px;
+  margin-top: 15px;
+}
+.circle {
+  height: 145px;
+  width: 30px;
+  border-radius: 60%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}
+.circle-black {
+  height: 50px;
+  width: 5px;
+  border-radius: 70%;
+  background-color: black;
+}
+.option-text-area {
+  display: flex;
+  flex-direction: column;
+}
+.option-value {
+  width: 185px;
+  height: 40px;
+  background-color: #ffbe5a;
+  display: flex;
+  flex-direction: column;
+  border-left: none;
+  font-size: 12px;
+  padding: 3px 10px;
+  font-weight: 600;
+  border-right: 1px dotted grey;
+  border-bottom: 1px solid grey;
+}
+/* .black {
+  border-bottom: none;
+} */
+.white {
+  background-color: white;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+.option-text-area {
+  background-color: #ff4343;
+}
+.half-white {
+  width: 30px;
+  height: 25px;
+  background-color: white;
+}
+
+input {
+  accent-color: red;
+}
+
+.radio-btn {
+  content: "";
+  width: 22.73px;
+  height: 22.73px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 6px auto;
+  cursor: pointer;
+}
+.select {
+  font-size: 12px;
+  font-weight: bolder;
+  text-align: center;
+  background-color: #fffcd1;
+  text-align: center;
+  border: none;
+  padding-top: 8px;
+}
+.the-c {
+  background-color: #44ceec;
+  color: #fffefe;
+  width: 97px;
+  height: 26px;
+  text-align: center;
+  font-size: 13px;
+  padding: 6px 5px;
+  border-radius: 3px;
+  margin-top: -20px;
+}
+.choice {
+  margin-left: 40px;
+}
+.continue {
+  margin-right: 40px;
+}
+.comp,
+.pdf {
+  margin-left: 38px;
+  margin-bottom: 15px;
+}
+.talk,
+.exit {
+  margin-left: 76px;
+  margin-bottom: 15px;
+}
+
+.App-question {
+  width: 307px;
+  height: 165px;
+  background-color: #fffcd1;
+  margin-top: 4px;
+  margin-left: 53px;
+  padding-top: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #000000;
+}
+.question-text {
+  width: 283.96px;
+  height: 137.13px;
+  color: #000000;
+  margin: auto;
+  padding-left: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.add {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  cursor: pointer;
+}
+
+.story {
+  background-color: #0b2d99;
+  width: 128px;
+  height: 35px;
+  font-size: 16px;
+  color: #fffcd1;
+  text-align: center;
+  padding-top: 8px;
+  margin-left: 35px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+.preview {
+  margin-left: 45px;
+  border-radius: 3px;
+}
+
+
