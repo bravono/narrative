@@ -1,10 +1,10 @@
 import "./App.css";
-import Question from "./components/Question";
+import Question from "./components/StoryQueue";
 import TimerArrow from "./components/TimerArrow";
 import { TimerArrowProvider } from "./components/TimerArrowProvider";
-import AppLogo from "./Components/AppLogo";
-import Time from "./Components/Time";
-import Button from "./Components/Button";
+import AppLogo from "./components/AppLogo";
+import Time from "./components/Time";
+import Button from "./components/Button";
 
 function App() {
   return (
