@@ -1,5 +1,5 @@
 
-const OptionComp = () => {
+const Option = () => {
   return (
     <div>
       <div className="App-question option">
@@ -49,4 +49,4 @@ const OptionComp = () => {
   );
 };
 
-export default OptionComp;
+export default Option;

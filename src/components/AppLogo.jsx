@@ -1,9 +1,5 @@
-const AppLogo = ({ src, alt, className}) => {
-    return (
-      <div>
-        <img src={src} alt={alt} className={className}/>
-      </div>
-    );
-  };
-  
-  export default AppLogo;
+const AppLogo = ({ src, alt, className }) => {
+  return <img src={src} alt={alt} className={className} />;
+};
+
+export default AppLogo;

@@ -1,41 +1,43 @@
-import Logo from "./assets/Logo.svg";
-import Timer_Arrow from "./assets/Timer_Arrow.svg";
-import Edge_Emotional_States_Sitting_Stool_Blue from "./assets/Edge_Emotional_States_Sitting_Stool_Blue.svg";
 import "./App.css";
-import QuestionComp from "./components/Question";
+import Question from "./components/Question";
+import TimerArrow from "./components/TimerArrow";
+import { TimerArrowProvider } from "./components/TimerArrowProvider";
+import AppLogo from "./Components/AppLogo";
+import Time from "./Components/Time";
+import Button from "./Components/Button";
 
 function App() {
   return (
     <div className="App">
       <div className="App-body">
         <div className="App-header">
-          <img
+          <AppLogo
             className="App-logo"
-            src={Edge_Emotional_States_Sitting_Stool_Blue}
+            src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
             alt="Edge"
           />
 
           <div className="App-header-div time-pending">
-            <div className="time">4:59</div>
-            <div className="pending">PENDING</div>
+            <Time value="4:59" className="time" />
+            <Time value="PENDING" className="pending" />
           </div>
 
-          <div className="arrow">
-            <img src={Timer_Arrow} alt="arrow" />
-          </div>
+          <TimerArrowProvider>
+            <TimerArrow className="arrow" />
+          </TimerArrowProvider>
 
           <div className="App-header-div">
             <div className="black-div"></div>
-            <div className="confirm-btn start">START</div>
+            <Button value="START" className="confirm-btn start" />
           </div>
 
           <div className="App-header-div-two">
-            <img className="research-text" src={Logo} alt="logo" />
-
-            <div className="confirm-btn pause">PAUSE</div>
+            <AppLogo src="/assets/Logo.svg" alt="Logo" />
+            <Button value="PAUSE" className="confirm-btn pause" />
           </div>
+
         </div>
-        <QuestionComp />
+        <Question />
       </div>
     </div>
   );
