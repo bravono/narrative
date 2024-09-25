@@ -254,4 +254,15 @@ input {
   border-radius: 3px;
 }
 
-
+.timer {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #fffefe;
+  font-size: 1rem;
+  border: #000000 2px solid;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+}

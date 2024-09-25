@@ -5,6 +5,8 @@ import { TimerArrowProvider } from "./components/TimerArrowProvider";
 import AppLogo from "./components/AppLogo";
 import Time from "./components/Time";
 import Button from "./components/Button";
+import Button from "./components/Button";
+import Timer from "./components/Timer";
 
 function App() {
   return (
