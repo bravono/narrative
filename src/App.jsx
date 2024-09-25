@@ -1,5 +1,5 @@
 import "./App.css";
-import Question from "./components/StoryQueue";
+import StoryQueue from "./components/StoryQueue";
 import TimerArrow from "./components/TimerArrow";
 import { TimerArrowProvider } from "./components/TimerArrowProvider";
 import AppLogo from "./components/AppLogo";
@@ -35,9 +35,8 @@ function App() {
             <AppLogo src="/assets/Logo.svg" alt="Logo" />
             <Button value="PAUSE" className="confirm-btn pause" />
           </div>
-
         </div>
-        <Question />
+        <StoryQueue />
       </div>
     </div>
   );
