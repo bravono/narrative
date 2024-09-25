@@ -1,6 +1,6 @@
 import React from "react";
-import OptionComp from "./Option";
-const QuestionComp = () => {
+import Option from "./Option";
+const Question = () => {
   return (
     <div>
       <div className="App-question">
@@ -14,9 +14,9 @@ const QuestionComp = () => {
         <div className="confirm-btn preview">PREVIEW</div>
       </div>
 
-      <OptionComp/>
+      <Option/>
     </div>
   );
 };
 
-export default QuestionComp;
+export default Question;

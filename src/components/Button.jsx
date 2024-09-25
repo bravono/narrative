@@ -1,9 +1,4 @@
-function Button() {
-  return (
-    <>
-      <button className="btn btn-secondary disabled btn-sm">BUTTON</button>
-    </>
-  );
-}
-
+const Button = ({ value, className }) => {
+  return <div className={className}>{value}</div>;
+};
 export default Button;
