@@ -13,7 +13,7 @@ function App() {
   return (
     <main className="main-container">
       <section className="top-section">
-        {/* <Edge
+         <Edge
           className="App-logo"
           src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
           alt="Edge"
@@ -35,10 +35,8 @@ function App() {
           </div>
         </div>
         <StoryQueue />
-        <Ring />
-        <LowerPointerArrow />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
