@@ -3,6 +3,8 @@ import Timer_Arrow from "./assets/Timer_Arrow.svg";
 import Edge_Emotional_States_Sitting_Stool_Blue from "./assets/Edge_Emotional_States_Sitting_Stool_Blue.svg";
 import "./App.css";
 import QuestionComp from "./components/Question";
+import Button from "./components/Button";
+import Timer from "./components/Timer";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           </div>
         </div>
         <QuestionComp />
+        <Button />
+        <Timer />
       </div>
     </div>
   );
