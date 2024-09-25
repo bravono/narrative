@@ -6,6 +6,7 @@ import AppLogo from "./components/AppLogo";
 import Time from "./components/Time";
 import Button from "./components/Button";
 import Ring from "./components/Ring";
+import LowerPointerArrow from "./components/LowerPointerArrow";
 // import Timer from "./components/Timer";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         </div>
         <StoryQueue />
         <Ring />
+        <LowerPointerArrow />
       </div>
     </div>
   );
