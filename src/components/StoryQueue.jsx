@@ -1,6 +1,5 @@
 import React from "react";
-import Option from "./Option";
-const Question = () => {
+const StoryQueue = () => {
   return (
     <div>
       <div className="App-question">
@@ -14,9 +13,8 @@ const Question = () => {
         <div className="confirm-btn preview">PREVIEW</div>
       </div>
 
-      <Option/>
     </div>
   );
 };
 
-export default Question;
+export default StoryQueue;

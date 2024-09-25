@@ -1,11 +1,11 @@
 import "./App.css";
-import Question from "./components/StoryQueue";
+import StoryQueue from "./components/StoryQueue";
 import TimerArrow from "./components/TimerArrow";
 import { TimerArrowProvider } from "./components/TimerArrowProvider";
 import AppLogo from "./components/AppLogo";
 import Time from "./components/Time";
 import Button from "./components/Button";
-import Timer from "./components/Timer";
+// import Timer from "./components/Timer";
 
 function App() {
   return (
@@ -37,10 +37,7 @@ function App() {
             <Button value="PAUSE" className="confirm-btn pause" />
           </div>
         </div>
-        <QuestionComp />
-        <Button />
-        <Timer />
-        <Question />
+        <StoryQueue />
       </div>
     </div>
   );
