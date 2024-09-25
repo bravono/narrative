@@ -5,6 +5,9 @@ import { TimerArrowProvider } from "./components/TimerArrowProvider";
 import Edge from "./components/Edge";
 import Time from "./components/Time";
 import Button from "./components/Button";
+import Ring from "./components/Ring";
+import LowerPointerArrow from "./components/LowerPointerArrow";
+// import Timer from "./components/Timer";
 
 function App() {
   return (
@@ -30,13 +33,12 @@ function App() {
             <Button label="START" className="confirm-btn start" />
             <Button label="PAUSE" className="confirm-btn pause" />
           </div>
-        </div> */}
-      </section>
-      <section className="mid-section">
-        {/* <StoryQueue /> */}
-      </section>
-      <section className="bottom-section"></section>
-    </main>
+        </div>
+        <StoryQueue />
+        <Ring />
+        <LowerPointerArrow />
+      </div>
+    </div>
   );
 }
 
