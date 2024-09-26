@@ -43,7 +43,7 @@ function App() {
         <StoryQueue />
       </section>
       <section className="bottom-section">
-        <LoveScroll className="love-arrow-up"/>        
+        <LoveScroll className="love-arrow-down"/>        
       </section>
     </main>
   );
