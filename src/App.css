@@ -1,11 +1,10 @@
-body, html{
+html {
   height: 100%;
   margin: 0;
   font-size: 62.5%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .main-container {
@@ -24,11 +23,11 @@ body, html{
 }
 
 .top-section {
-  border: 1px solid limegreen;
+  border: 3px solid limegreen;
   display: flex;
 }
 
-.mid-section {
+.middle-section {
   border: 1px solid limegreen;
   display: flex;
 }

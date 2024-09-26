@@ -1,4 +1,5 @@
+
 const Button = ({ label, className }) => {
-  return <div className={className}>{label}</div>;
+  return <button className={className}>{label}</button>;
 };
 export default Button;
