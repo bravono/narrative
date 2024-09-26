@@ -7,13 +7,15 @@ import Time from "./components/Time";
 import Button from "./components/Button";
 import Ring from "./components/Ring";
 import LowerPointerArrow from "./components/LowerPointerArrow";
+import TalkBubble from "./components/TalkBubble";
+
 // import Timer from "./components/Timer";
 
 function App() {
   return (
     <main className="main-container">
       <section className="top-section">
-         <Edge
+        <Edge
           className="App-logo"
           src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
           alt="Edge"
@@ -23,9 +25,9 @@ function App() {
             <Time value="4:59" className="time" />
             <Time value="PENDING" className="pending" />
           </div>
-        <TimerArrowProvider>
-          <TimerArrow className="arrow" />
-        </TimerArrowProvider>
+          <TimerArrowProvider>
+            <TimerArrow className="arrow" />
+          </TimerArrowProvider>
         </div>
         <div>
           <Edge src="/assets/Logo.svg" alt="Logo" />

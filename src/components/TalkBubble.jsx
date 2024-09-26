@@ -1,4 +1,4 @@
-import "./css/TalkBubble.css";
+import "../css/TalkBubble.css";
 export default function TalkBubble({ props }) {
   return (
     <div className="container-svg">

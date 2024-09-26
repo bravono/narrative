@@ -1,24 +1,24 @@
-.container-svg {
+/* .container-svg {
   position: relative;
-  width: 307px;
-  height: 165px;
+  /* width: 307px;
+  height: 165px; 
   background-color: #fffcd1;
   margin-top: 4px;
   margin-left: 53px;
   padding-top: 15px;
   margin-bottom: 10px;
   border: 2px solid #000000;
-}
+} */
 .image-svg {
-  position: absolute;
+  position: relative;
   width: 285px;
   height: 250px;
-  top: -30%;
+  top: -20%;
   left: 0%;
 }
 .svg-overlay-text {
   position: absolute;
-  top: 8%;
+  top: 31%;
   left: 15%;
   font-size: 10.5px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
