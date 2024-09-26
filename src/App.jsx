@@ -8,6 +8,7 @@ import Button from "./components/Button";
 import Ring from "./components/Ring";
 import LowerPointerArrow from "./components/LowerPointerArrow";
 import TalkBubble from "./components/TalkBubble";
+import EdgeStanding from "./components/EdgeStanding";
 
 // import Timer from "./components/Timer";
 
@@ -37,6 +38,7 @@ function App() {
           </div>
         </div>
         <StoryQueue />
+
       </section>
     </main>
   );
