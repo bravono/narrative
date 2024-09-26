@@ -1,4 +1,5 @@
 import "./App.css";
+
 import StoryQueue from "./components/StoryQueue";
 import TimerArrow from "./components/TimerArrow";
 import { TimerArrowProvider } from "./components/TimerArrowProvider";
@@ -9,7 +10,7 @@ import Ring from "./components/Ring";
 import LowerPointerArrow from "./components/LowerPointerArrow";
 import TalkBubble from "./components/TalkBubble";
 import EdgeStanding from "./components/EdgeStanding";
-
+import LoveScroll from "./components/LoveScroll";
 // import Timer from "./components/Timer";
 
 function App() {
@@ -33,12 +34,16 @@ function App() {
         <div>
           <Edge src="/assets/Logo.svg" alt="Logo" />
           <div className="btn-top">
-            <Button label="START" className="confirm-btn start" />
-            <Button label="PAUSE" className="confirm-btn pause" />
+            <Button className="btn btn-buyfacts" label="START" />
+            <Button className="btn btn-buyfacts" label="PAUSE" />
           </div>
         </div>
+      </section>
+      <section className="middle-section">
         <StoryQueue />
-
+      </section>
+      <section className="bottom-section">
+        <LoveScroll className="love-arrow-up"/>        
       </section>
     </main>
   );
