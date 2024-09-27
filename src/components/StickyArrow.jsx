@@ -1,5 +1,5 @@
 function StickyArrow() {
-  return <img src="/assets/StickyArrow.png" />;
+  return <img src="/assets/BrownStickyArrow.png" />;
 }
 
 export default StickyArrow;
