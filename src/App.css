@@ -278,3 +278,21 @@ input {
   width: 60px;
   height: 20px;
 }
+
+.stickyArrow-container {
+  position: relative;
+}
+.stickyArrow-container .hover {
+  position: absolute;
+  top: 47%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.3 ease;
+  writing-mode: vertical-lr;
+  font-weight: 700;
+}
+
+.stickyArrow-container:hover .hover {
+  opacity: 1;
+}

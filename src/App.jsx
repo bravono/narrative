@@ -11,6 +11,7 @@ import LowerPointerArrow from "./components/LowerPointerArrow";
 import TalkBubble from "./components/TalkBubble";
 import EdgeStanding from "./components/EdgeStanding";
 import LoveScroll from "./components/LoveScroll";
+import StickyArrow from "./components/StickyArrow";
 // import Timer from "./components/Timer";
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
       <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
       </section>
+      <StickyArrow types="small" />
+      <StickyArrow types="large" label="SINGLECHOICE" />
     </main>
   );
 }
