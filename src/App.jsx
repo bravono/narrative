@@ -16,6 +16,8 @@ import ActiveBlank from "./components/ActiveBlank";
 import Percentage from "./components/Percentage";
 import ChoiceRapper from "./components/ChoiceRapper";
 import RingListContainer from "./components/RingListContainer";
+import Column from "./components/Column";
+import Row from "./components/Row";
 // import Timer from "./components/Timer";
 
 function App() {
