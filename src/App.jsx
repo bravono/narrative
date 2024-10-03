@@ -12,12 +12,16 @@ import TalkBubble from "./components/TalkBubble";
 import EdgeStanding from "./components/EdgeStanding";
 import LoveScroll from "./components/LoveScroll";
 import StickyArrow from "./components/StickyArrow";
+import ActiveBlank from "./components/ActiveBlank";
+import Percentage from "./components/Percentage";
+import ChoiceRapper from "./components/ChoiceRapper";
+import RingListContainer from "./components/RingListContainer";
 // import Timer from "./components/Timer";
 
 function App() {
   return (
     <main className="main-container">
-      <section className="top-section">
+      <section className="top-section">        
         <Edge
           className="App-logo"
           src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"

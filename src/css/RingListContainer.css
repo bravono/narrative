@@ -1,0 +1,9 @@
+.ring-list-container{
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    background-color: grey;
+}
