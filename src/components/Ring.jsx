@@ -5,7 +5,7 @@ function Ring() {
         {" "}
         <div>
           {" "}
-          <svg width="30%" height="30%" viewBox="0 0 100 100">
+          <svg width="30%" height="100%" viewBox="0 0 100 100">
             {" "}
             <circle
               cx="50"
@@ -22,8 +22,8 @@ function Ring() {
               stroke="#007bff"
               strokeWidth="5"
               strokeDasharray="360, 360"
-            />{" "}
-          </svg>{" "}
+            />
+          </svg>
         </div>
       </div>{" "}
     </>

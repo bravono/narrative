@@ -282,6 +282,7 @@ input {
 .stickyArrow-container {
   position: relative;
 }
+
 .stickyArrow-container .hover {
   position: absolute;
   top: 47%;
@@ -295,4 +296,36 @@ input {
 
 .stickyArrow-container:hover .hover {
   opacity: 1;
+}
+
+.interactive-bar {
+  width: 200px;
+  height: 100px;
+  border: 2px solid #1b1919;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #10b17b88;
+  width: 0%;
+}
+
+.bar-container {
+  display: flex;
+}
+
+.bar-btn {
+  background-color: #f0f0f0;
+  border-radius: 10px 0 0 10px;
+  width: 40px;
+  margin-right: 5px;
+  font-weight: 900;
+  font-size: larger;
+  text-align: center;
 }

@@ -18,12 +18,13 @@ import ChoiceRapper from "./components/ChoiceRapper";
 import RingListContainer from "./components/RingListContainer";
 import Column from "./components/Column";
 import Row from "./components/Row";
+import Bar from "./components/Bar";
 // import Timer from "./components/Timer";
 
 function App() {
   return (
     <main className="main-container">
-      <section className="top-section">        
+      <section className="top-section">
         <Edge
           className="App-logo"
           src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
@@ -49,11 +50,13 @@ function App() {
       <section className="middle-section">
         <StoryQueue />
       </section>
-      <section className="bottom-section">
+      {/* <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
-      </section>
-      <StickyArrow types="small" />
-      <StickyArrow types="large" label="SINGLECHOICE" />
+      </section> */}
+      {/* <StickyArrow types="small" />
+      <StickyArrow types="large" label="SINGLECHOICE" /> */}
+
+      <Bar />
     </main>
   );
 }
