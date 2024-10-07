@@ -307,7 +307,7 @@ input {
   position: relative;
 }
 
-.background {
+.bar-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -328,4 +328,38 @@ input {
   font-weight: 900;
   font-size: larger;
   text-align: center;
+}
+
+.animated-image {
+  position: relative;
+  animation: backAndForth 2s infinite linear;
+}
+
+@keyframes backAndForth {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 40px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.LowerPointer-image {
+  position: relative;
+  animation: upAndDown 2s infinite linear;
+}
+
+@keyframes upAndDown {
+  0% {
+    top: 70px;
+  }
+  50% {
+    top: 0;
+  }
+  100% {
+    top: 40px;
+  }
 }

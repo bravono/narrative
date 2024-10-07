@@ -1,5 +1,9 @@
-function RightPointerArrow() {
-  return <img src="/assets/RightUnion.png" />;
-}
+const RightPointerArrow = () => {
+  return (
+    <div>
+      <img src="/assets/PointerArrow.svg" className="animated-image" />
+    </div>
+  );
+};
 
 export default RightPointerArrow;

@@ -18,7 +18,7 @@ import ChoiceRapper from "./components/ChoiceRapper";
 import RingListContainer from "./components/RingListContainer";
 import Column from "./components/Column";
 import Row from "./components/Row";
-import Bar from "./components/Bar";
+
 // import Timer from "./components/Timer";
 
 function App() {
@@ -50,13 +50,9 @@ function App() {
       <section className="middle-section">
         <StoryQueue />
       </section>
-      {/* <section className="bottom-section">
+      <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
-      </section> */}
-      {/* <StickyArrow types="small" />
-      <StickyArrow types="large" label="SINGLECHOICE" /> */}
-
-      <Bar />
+      </section>
     </main>
   );
 }

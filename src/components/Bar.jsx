@@ -55,7 +55,7 @@ function Bar() {
           className="interactive-bar"
           onMouseDown={handleMouseDown}
         >
-          <div ref={backgroundRef} className="background"></div>
+          <div ref={backgroundRef} className="bar-background"></div>
         </div>
       </div>
     </>
