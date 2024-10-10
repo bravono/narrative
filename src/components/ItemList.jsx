@@ -3,12 +3,13 @@ import React, { useState } from "react";
 const ItemList = ({ type, items }) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleSelectChange = (event) => {
-    const selectedValue = event.target.value;
-    if (selectedItems.includes(selectedValue)) {
-      setSelectedItems(selectedItems.filter((item) => item !== selectedValue));
+  const handleItemClick = (item) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(
+        selectedItems.filter((selectedItem) => selectedItem !== item)
+      );
     } else {
-      setSelectedItems([...selectedItems, selectedValue]);
+      setSelectedItems([...selectedItems, item]);
     }
   };
 
@@ -23,19 +24,16 @@ const ItemList = ({ type, items }) => {
 
   return (
     <div>
-      {items.map((item) => (
-        <div key={item}>
-          {type === "select" ? (
-            <select onChange={handleSelectChange} value={selectedItems}>
-              <option value="">Select an item</option>
-              {items.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <label>
+      <p className="checkbox-label">POSSIBLE TOPPINGS</p>
+
+      {items.map((item, index) => (
+        <div
+          key={item}
+          className={index % 2 === 0 ? "even-item" : "odd-item"}
+          onClick={() => handleItemClick(item)}
+        >
+          {type === "checkbox" ? (
+            <label className="checkbox-label">
               <input
                 type="checkbox"
                 value={item}
@@ -44,10 +42,12 @@ const ItemList = ({ type, items }) => {
               />
               {item}
             </label>
+          ) : (
+            <span className="checkbox-label">{item}</span>
           )}
         </div>
       ))}
-      <p>Selected items: {selectedItems.join(", ")}</p>
+      <p className="checkbox-label">Select Up to Six</p>
     </div>
   );
 };

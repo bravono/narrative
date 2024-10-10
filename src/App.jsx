@@ -57,13 +57,16 @@ function App() {
       </section>
 
       <ItemList
-        type="checkbox"
+        type=""
         items={[
-          "chololate Sprinkles",
+          "Chololate Sprinkles",
           "Chocolate Bit",
           "Marshmallow",
           "Nut",
           "Whipped Sause",
+          "Chololate Sauce",
+          "Butter Scotch",
+          "Peanut Butter Pieces",
         ]}
       />
     </main>
