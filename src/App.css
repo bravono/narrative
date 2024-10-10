@@ -363,3 +363,24 @@ input {
     top: 40px;
   }
 }
+
+.triangle {
+  position: relative;
+  width: 200px;
+  height: 173.21px; /* Calculated based on equilateral triangle dimensions */
+  /* border-left: solid 100px transparent;
+  border-right: solid 100px transparent;
+  border-bottom: solid 173.21px #000; */
+  /* background-color: #ff4343; */
+  /* shape-outside: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 10 0% 100%); */
+}
+
+.ball {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(30, 30, 61);
+  cursor: move;
+}

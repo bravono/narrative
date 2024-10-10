@@ -18,6 +18,8 @@ import ChoiceRapper from "./components/ChoiceRapper";
 import RingListContainer from "./components/RingListContainer";
 import Column from "./components/Column";
 import Row from "./components/Row";
+import Triangle from "./components/Triangle";
+import ItemList from "./components/ItemList";
 
 // import Timer from "./components/Timer";
 
@@ -53,6 +55,17 @@ function App() {
       <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
       </section>
+
+      <ItemList
+        type="checkbox"
+        items={[
+          "chololate Sprinkles",
+          "Chocolate Bit",
+          "Marshmallow",
+          "Nut",
+          "Whipped Sause",
+        ]}
+      />
     </main>
   );
 }
