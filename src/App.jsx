@@ -51,24 +51,35 @@ function App() {
       </section>
       <section className="middle-section">
         <StoryQueue />
-      </section>
-      <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
+        {/* <ItemList
+          type=""
+          items={[
+            "Chololate Sprinkles",
+            "Chocolate Bit",
+            "Marshmallow",
+            "Nut",
+            "Whipped Sause",
+            "Chololate Sauce",
+            "Butter Scotch",
+            "Peanut Butter Pieces",
+          ]}
+        /> */}
+      </section>
+      
+      <section className="bottom-section">
+        <div className="bottom-buttons">
+          <div className="btn-btm-first-row">
+            <Button label="COMPARE" className="compare-btn" />
+            <Button label="TALK" className="talk-btn" />
+          </div>
+          <div className="btn-btm-second-row">
+            <Button label="PDF IT" className="pdf-it-btn" />
+            <Button label="EXIT" className="exit-btn" />
+          </div>
+        </div>
       </section>
 
-      <ItemList
-        type=""
-        items={[
-          "Chololate Sprinkles",
-          "Chocolate Bit",
-          "Marshmallow",
-          "Nut",
-          "Whipped Sause",
-          "Chololate Sauce",
-          "Butter Scotch",
-          "Peanut Butter Pieces",
-        ]}
-      />
     </main>
   );
 }

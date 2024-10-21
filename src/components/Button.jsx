@@ -1,5 +1,6 @@
+// import '../css/Button.css';
 
-const Button = ({ label, className }) => {
+const Button = ({ label, className}) => {
   return <button className={className}>{label}</button>;
 };
 export default Button;
