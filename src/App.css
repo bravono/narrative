@@ -412,3 +412,201 @@ input {
   font-weight: bold;
   font-size: small;
 }
+
+.ring-style {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 20px solid #c7dde7;
+  position: relative;
+  cursor: move;
+}
+:root {
+  --ring-border-color: hsl(${percentage}, 100%, 50%);
+}
+
+.arrow-up {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  cursor: pointer;
+}
+.arrow-down {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fill-style {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: none;
+  clip-path: circle(50% 50%);
+}
+
+.tally-style {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  z-index: 1;
+  font-weight: 700;
+}
+
+.tally-text {
+  position: absolute;
+  top: 40%;
+  left: 39%;
+  font-weight: 700;
+}
+
+.total-style {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  z-index: 1;
+  font-weight: 700;
+}
+
+.total-text {
+  position: absolute;
+  top: 65%;
+  left: 39%;
+  font-weight: 700;
+}
+
+.rank-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+.rank-card {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #0ed1c7;
+  color: #000000;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+
+.rank-button {
+  font-size: 10px;
+  background-color: #0a0101;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+}
+
+.rank-button-container {
+  display: flex;
+  margin-top: -16px;
+  justify-content: space-evenly;
+}
+
+.star-container {
+  width: 100px; /* Adjust the size as needed */
+  height: 100px;
+  position: relative;
+}
+/* 
+.star {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  clip-path: polygon(
+    50% 0%,
+    61.8% 15.4%,
+    100% 50%,
+    61.8% 84.6%,
+    50% 100%,
+    38.2% 84.6%,
+    0% 50%,
+    38.2% 15.4%
+  );
+  transform: rotate(45deg);
+} */
+
+.star-inner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #860000;
+  clip-path: polygon(
+    50% 0%,
+    61.8% 15.4%,
+    100% 50%,
+    61.8% 84.6%,
+    50% 100%,
+    38.2% 84.6%,
+    0% 50%,
+    38.2% 15.4%
+  );
+  transform: rotate(-45deg);
+}
+
+.star-center {
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000000;
+  text-align: center;
+  font-size: medium;
+}
+
+.star {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px #000000;
+  justify-content: center;
+  clip-path: polygon(
+    50% 0%,
+    61.8% 38.2%,
+    100% 40%,
+    75% 70%,
+    88.2% 95.1%,
+    50% 80%,
+    11.8% 95.1%,
+    25% 70%,
+    0% 40%,
+    38.2% 38.2%
+  );
+}
+
+.rating-button-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rating-button {
+  font-size: 10px;
+  background-color: #0a0101;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+  margin-inline-start: -43px;
+}

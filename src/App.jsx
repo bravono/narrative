@@ -18,8 +18,9 @@ import ChoiceRapper from "./components/ChoiceRapper";
 import RingListContainer from "./components/RingListContainer";
 import Column from "./components/Column";
 import Row from "./components/Row";
-import Triangle from "./components/Triangle";
 import ItemList from "./components/ItemList";
+import Rank from "./components/Rank";
+import Star from "./components/Star";
 
 // import Timer from "./components/Timer";
 
@@ -56,7 +57,7 @@ function App() {
         <LoveScroll className="love-arrow-down" />
       </section>
 
-      <ItemList
+      {/* <ItemList
         type=""
         items={[
           "Chololate Sprinkles",
@@ -68,7 +69,11 @@ function App() {
           "Butter Scotch",
           "Peanut Butter Pieces",
         ]}
-      />
+      /> */}
+
+      {/* <Ring /> */}
+      {/* <Rank /> */}
+      <Star />
     </main>
   );
 }
