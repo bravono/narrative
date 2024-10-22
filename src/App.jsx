@@ -20,6 +20,7 @@ import Column from "./components/Column";
 import Row from "./components/Row";
 import Triangle from "./components/Triangle";
 import ItemList from "./components/ItemList";
+import Footer from "./components/Footer";
 
 // import Timer from "./components/Timer";
 
@@ -66,20 +67,10 @@ function App() {
           ]}
         /> */}
       </section>
-      
-      <section className="bottom-section">
-        <div className="bottom-buttons">
-          <div className="btn-btm-first-row">
-            <Button label="COMPARE" className="compare-btn" />
-            <Button label="TALK" className="talk-btn" />
-          </div>
-          <div className="btn-btm-second-row">
-            <Button label="PDF IT" className="pdf-it-btn" />
-            <Button label="EXIT" className="exit-btn" />
-          </div>
-        </div>
-      </section>
 
+      <section className="bottom-section">
+        <Footer />
+      </section>
     </main>
   );
 }

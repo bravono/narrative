@@ -74,32 +74,6 @@ section {
   margin-top: 5px;
 }
 
-.btn-btm-first-row,
-.btn-btm-second-row {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 37px;
-  margin-right: 7px;
-}
-.compare-btn,
-.pdf-it-btn,
-.talk-btn,
-.exit-btn {
-  background-color: #ebb463;
-}
-button {
-  /* background-color: #ebb463; */
-  background-color: #85767a;
-  color: #fffefe;
-  width: 99px;
-  height: 35.39px;
-  text-align: center;
-  border: none;
-  font-size: 13px;
-  padding: 6px 15px;
-  border-radius: 3px;
-  margin: 10px;
-}
 
 /* .black-div {
   width: 70px;
