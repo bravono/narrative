@@ -1,9 +1,7 @@
-import { useTimerArrowContext } from "./TimerArrowProvider";
+import React from "react";
 
-const TimerArrow = ({ className }) => {
-  const { imageSrc, altText } = useTimerArrowContext();
-
-  return <img src={imageSrc} alt={altText} className={className} />;
+const TimerArrow = () => {
+  return <img src="public/assets/Timer_Arrow.svg" className="timer-arrow" />;
 };
 
 export default TimerArrow;

@@ -1,7 +1,7 @@
-const Logo = () => {
+const Logo = (className) => {
   return (
     <>
-      <img src={Edge_Emotional_States_Sitting_Stool_Blue} />
+      <img src="/assets/Logo.svg" className="logo" />
     </>
   );
 };

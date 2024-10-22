@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  position: relative;
+  margin: 10px;
+  justify-content: start;
+}
+
+.top-button-group {
+  display: flex;
+}
+
+.top-button {
+  margin: 10px 14px;
+  align-self: flex-end;
+}
+
+.logo {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

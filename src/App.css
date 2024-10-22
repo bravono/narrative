@@ -15,6 +15,7 @@ html {
   width: 375px;
   height: 667px;
   flex-direction: column;
+  position: relative;
 }
 
 .time-group {
@@ -27,8 +28,10 @@ section {
 }
 
 .top-section {
-  border: 3px solid limegreen;
-  display: flex;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .middle-section {
@@ -73,7 +76,6 @@ section {
   color: #000000;
   margin-top: 5px;
 }
-
 
 /* .black-div {
   width: 70px;
@@ -257,19 +259,6 @@ section {
   margin-left: 45px;
   border-radius: 3px;
 } */
-
-.timer {
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  padding: 1rem;
-  background-color: #fffefe;
-  font-size: 1rem;
-  border: #000000 2px solid;
-  align-items: center;
-  width: 60px;
-  height: 20px;
-}
 
 .stickyArrow-container {
   position: relative;

@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "../css/timer.css";
+import TimerArrow from "./TimerArrow";
 
-function Timer() {
+function Timer({ duration, label }) {
   return (
     <>
-      <div className="timer">
-        <span id="hours">0</span>:<span id="minutes">00</span>
+      <div className="timer-group">
+        <div className="timer">{duration || "00:00"}</div>
+        <span className="label">{label || "PENDING"}</span>
       </div>
+      <TimerArrow />
     </>
   );
 }
