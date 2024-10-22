@@ -73,15 +73,17 @@ section {
   color: #000000;
   margin-top: 5px;
 }
-.black-div {
+
+
+/* .black-div {
   width: 70px;
   height: 18px;
   border-radius: 8px;
   background-color: #181717;
   margin-bottom: 5px;
   margin-left: 20px;
-}
-.confirm-btn {
+} */
+/* .confirm-btn {
   background-color: #0b2d99;
   color: #fffefe;
   width: 99.19px;
@@ -90,28 +92,28 @@ section {
   padding: 8px;
   border-radius: 3px;
   cursor: pointer;
-}
-.App-header-div-two {
+} */
+/* .App-header-div-two {
   width: 140px;
   margin-top: 9px;
   margin-left: 25px;
-}
-.research-text {
+} */
+/* .research-text {
   width: 99.31px;
   font-size: 11px;
-}
+} */
 
-.pause {
+/* .pause {
   background-color: #85767a;
   border-radius: 3px;
   margin-top: 5px;
-}
+} */
 
-.option {
+/* .option {
   padding-top: 20px;
   height: 235px;
-}
-.option-area {
+} */
+/* .option-area {
   display: flex;
   margin-left: 40px;
   background-color: #fffcd1;
@@ -120,8 +122,8 @@ section {
   width: 230px;
   height: 145px;
   margin-top: 15px;
-}
-.circle {
+} */
+/* .circle {
   height: 145px;
   width: 30px;
   border-radius: 60%;
@@ -130,18 +132,18 @@ section {
   justify-content: center;
   align-items: center;
   border: 2px solid black;
-}
-.circle-black {
+} */
+/* .circle-black {
   height: 50px;
   width: 5px;
   border-radius: 70%;
   background-color: black;
-}
-.option-text-area {
+} */
+/* .option-text-area {
   display: flex;
   flex-direction: column;
-}
-.option-value {
+} */
+/* .option-value {
   width: 185px;
   height: 40px;
   background-color: #ffbe5a;
@@ -153,30 +155,30 @@ section {
   font-weight: 600;
   border-right: 1px dotted grey;
   border-bottom: 1px solid grey;
-}
+} */
 /* .black {
   border-bottom: none;
 } */
-.white {
+/* .white {
   background-color: white;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-}
-.option-text-area {
+} */
+/* .option-text-area {
   background-color: #ff4343;
-}
-.half-white {
+} */
+/* .half-white {
   width: 30px;
   height: 25px;
   background-color: white;
-}
+} */
 
-input {
+/* input {
   accent-color: red;
-}
+} */
 
-.radio-btn {
+/* .radio-btn {
   content: "";
   width: 22.73px;
   height: 22.73px;
@@ -185,8 +187,8 @@ input {
   flex-direction: column;
   margin: 6px auto;
   cursor: pointer;
-}
-.select {
+} */
+/* .select {
   font-size: 12px;
   font-weight: bolder;
   text-align: center;
@@ -194,8 +196,8 @@ input {
   text-align: center;
   border: none;
   padding-top: 8px;
-}
-.the-c {
+} */
+/* .the-c {
   background-color: #44ceec;
   color: #fffefe;
   width: 97px;
@@ -205,25 +207,15 @@ input {
   padding: 6px 5px;
   border-radius: 3px;
   margin-top: -20px;
-}
-.choice {
+} */
+/* .choice {
   margin-left: 40px;
-}
-.continue {
+} */
+/* .continue {
   margin-right: 40px;
-}
-.comp,
-.pdf {
-  margin-left: 38px;
-  margin-bottom: 15px;
-}
-.talk,
-.exit {
-  margin-left: 76px;
-  margin-bottom: 15px;
-}
+} */
 
-.App-question {
+/* .App-question {
   width: 307px;
   height: 165px;
   background-color: #fffcd1;
@@ -232,8 +224,8 @@ input {
   padding-top: 15px;
   margin-bottom: 10px;
   border: 2px solid #000000;
-}
-.question-text {
+} */
+/* .question-text {
   width: 283.96px;
   height: 137.13px;
   color: #000000;
@@ -241,15 +233,15 @@ input {
   padding-left: 15px;
   font-size: 18px;
   font-weight: bold;
-}
-.add {
+} */
+/* .add {
   display: flex;
   justify-content: space-around;
   margin: auto;
   cursor: pointer;
-}
+} */
 
-.story {
+/* .story {
   background-color: #0b2d99;
   width: 128px;
   height: 35px;
@@ -260,11 +252,11 @@ input {
   margin-left: 35px;
   margin-bottom: 10px;
   border-radius: 3px;
-}
-.preview {
+} */
+/* .preview {
   margin-left: 45px;
   border-radius: 3px;
-}
+} */
 
 .timer {
   display: flex;
@@ -333,6 +325,9 @@ input {
 .animated-image {
   position: relative;
   animation: backAndForth 2s infinite linear;
+}
+.bottom-section {
+  width: 100%;
 }
 
 @keyframes backAndForth {

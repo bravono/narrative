@@ -19,8 +19,7 @@ import RingListContainer from "./components/RingListContainer";
 import Column from "./components/Column";
 import Row from "./components/Row";
 import ItemList from "./components/ItemList";
-import Rank from "./components/Rank";
-import Star from "./components/Star";
+import Footer from "./components/Footer";
 
 // import Timer from "./components/Timer";
 
@@ -52,28 +51,25 @@ function App() {
       </section>
       <section className="middle-section">
         <StoryQueue />
-      </section>
-      <section className="bottom-section">
         <LoveScroll className="love-arrow-down" />
+        {/* <ItemList
+          type=""
+          items={[
+            "Chololate Sprinkles",
+            "Chocolate Bit",
+            "Marshmallow",
+            "Nut",
+            "Whipped Sause",
+            "Chololate Sauce",
+            "Butter Scotch",
+            "Peanut Butter Pieces",
+          ]}
+        /> */}
       </section>
 
-      {/* <ItemList
-        type=""
-        items={[
-          "Chololate Sprinkles",
-          "Chocolate Bit",
-          "Marshmallow",
-          "Nut",
-          "Whipped Sause",
-          "Chololate Sauce",
-          "Butter Scotch",
-          "Peanut Butter Pieces",
-        ]}
-      /> */}
-
-      {/* <Ring /> */}
-      {/* <Rank /> */}
-      <Star />
+      <section className="bottom-section">
+        <Footer />
+      </section>
     </main>
   );
 }
