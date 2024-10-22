@@ -1,5 +1,10 @@
-const Edge = ({ src, alt, className }) => {
-  return <img src={src} alt={alt} className={className} />;
+const Edge = ({ src, className }) => {
+  return (
+    <img
+      src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
+      className="edge"
+    />
+  );
 };
 
 export default Edge;
