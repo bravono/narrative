@@ -1,6 +1,6 @@
 import Button from "./Button";
 import LoveScroll from "./LoveScroll";
-import StoryQueue from "./StoryQueue";
+import Queue from "./Queue";
 import Bar from "./Bar";
 
 function Body() {
@@ -11,12 +11,12 @@ function Body() {
           <LoveScroll className="love-arrow-up" />
           <LoveScroll className="love-arrow-down" />
         </div>
-        <StoryQueue>
+        <Queue>
           <p>
             Eating food is often a personal pleasure and social activity. Some
             people like all types of ....
           </p>
-        </StoryQueue>
+        </Queue>
       </div>
       <div className="btn-body">
         <Button
@@ -31,9 +31,9 @@ function Body() {
         />
       </div>
 
-      <StoryQueue>
+      <Queue>
         <Bar />
-      </StoryQueue>
+      </Queue>
     </div>
   );
 }
