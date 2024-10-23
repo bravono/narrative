@@ -74,7 +74,6 @@ section {
   margin-top: 5px;
 }
 
-
 /* .black-div {
   width: 70px;
   height: 18px;
@@ -604,4 +603,19 @@ section {
   border: none;
   cursor: pointer;
   margin-inline-start: -43px;
+}
+
+.btn-body {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 43px;
+  margin-right: -9px;
+}
+
+.love-scroll {
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  width: 20px;
+  align-items: center;
 }

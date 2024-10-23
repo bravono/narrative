@@ -20,6 +20,7 @@ import Column from "./components/Column";
 import Row from "./components/Row";
 import ItemList from "./components/ItemList";
 import Footer from "./components/Footer";
+import Body from "./components/Body";
 
 // import Timer from "./components/Timer";
 
@@ -50,8 +51,10 @@ function App() {
         </div>
       </section>
       <section className="middle-section">
-        <StoryQueue />
-        <LoveScroll className="love-arrow-down" />
+        <Body />
+
+        {/* <StoryQueue /> */}
+        {/* <LoveScroll className="love-arrow-down" /> */}
         {/* <ItemList
           type=""
           items={[
