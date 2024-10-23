@@ -1,5 +1,4 @@
 button {
-  background-color: #85767a;
   color: #fffefe;
   height: 35.39px;
   text-align: center;
@@ -8,21 +7,6 @@ button {
   padding: 6px 15px;
   border-radius: 3px;
   margin: 10px;
-}
-.color-variation-one {
-  background-color: #009bfc;
-}
-.color-variation-two {
-  background-color: #0b2d99;
-}
-.color-variation-three {
-  background-color: #85767a;
-}
-.color-variation-four {
-  background: #44ceec;
-}
-.color-variation-five {
-  background-color: #85767a59;
 }
 
 .btn-buyfacts {
