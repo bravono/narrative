@@ -1,0 +1,8 @@
+.top-button-group {
+  display: flex;
+}
+
+.top-button {
+  margin: 10px 14px;
+  align-self: flex-end;
+}
