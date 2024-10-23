@@ -5,6 +5,7 @@
   font-size: 3rem;
   align-items: center;
   margin: 0 2px 0 10px;
+  align-self: flex-end;
 }
 
 .timer {
@@ -21,11 +22,7 @@
 .timer-arrow {
   width: 25px;
   align-self: flex-start;
-  margin-top: 8px;
-}
-
-.timer {
-  margin-left: 2px;
+  margin-top: 15px;
 }
 
 .label {

@@ -1,5 +1,5 @@
-import Button from "./Button";
 import LoveScroll from "./LoveScroll";
+import MiddleButton from "./MiddleButton";
 import StoryQueue from "./StoryQueue";
 
 function Body() {
@@ -12,15 +12,7 @@ function Body() {
         </div>
         <StoryQueue />
       </div>
-      <div className="btn-body">
-        <Button label="ADD TO STORY" className="" color="" />
-        <Button
-          label="PREVIEW"
-          className="btn btn-buyfacts"
-          color="color-variation-five"
-        />
-      </div>
-
+      <MiddleButton />
       <StoryQueue />
     </div>
   );
