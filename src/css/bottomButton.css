@@ -1,0 +1,15 @@
+.bottom_buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-left: 40px;
+}
+
+.bottom_buttons-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom_button {
+  background: var(--color-disabled);
+}
