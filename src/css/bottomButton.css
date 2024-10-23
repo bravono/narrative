@@ -2,12 +2,13 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin-left: 40px;
+  margin-left: var(--left-margin);
 }
 
 .bottom_buttons-row {
   display: flex;
   justify-content: space-between;
+  margin-right: 10px;
 }
 
 .bottom_button {
