@@ -1,23 +1,25 @@
-import LoveScroll from "./LoveScroll";
+import ScrollArrow from "./ScrollArrow";
 import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
 import Bar from "./Bar";
 import Teleprompter from "./Telepromter";
+import "../css/body.css";
 
 function Body() {
   return (
-    <div>
-      <div className="body">
-        <div className="love-scroll">
-          <LoveScroll className="love-arrow-up" />
-          <LoveScroll className="love-arrow-down" />
-        </div>
-        <Queue>
+    <div className="body_main">
+      <div className="story_queue-group">
+        <ScrollArrow />
+        <Queue className={"story-queue question"}>
           <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
         </Queue>
       </div>
       <MiddleButton />
-      <Queue />
+      <div className="story_queue-single">
+        <Queue className={"story-queue answer"}>
+          <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
+        </Queue>
+      </div>
     </div>
   );
 }

@@ -1,16 +1,8 @@
 import React from "react";
 import "../css/Queue.css";
 
-const Queue = ({ children }) => {
-  return (
-    <div className="story-queue">
-      {children}
-      {/* <p>
-        Eating food is often a personal pleasure and social activity. Some
-        people like all types of ....
-      </p> */}
-    </div>
-  );
+const Queue = ({ className, children }) => {
+  return <div className={className}>{children}</div>;
 };
 
 export default Queue;

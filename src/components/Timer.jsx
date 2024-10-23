@@ -1,6 +1,6 @@
 import React from "react";
-import "../css/timer.css";
 import TimerArrow from "./TimerArrow";
+import "../css/timer.css";
 
 function Timer({ duration, label }) {
   return (

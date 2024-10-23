@@ -1,11 +1,9 @@
 import React from "react";
 import Edge from "./Edge";
 import Timer from "./Timer";
-import TimerArrow from "./TimerArrow";
 import Logo from "./Logo";
-import Button from "./Button";
-import "../css/header.css";
 import TopButton from "./TopButton";
+import "../css/header.css";
 
 const Header = () => {
   return (

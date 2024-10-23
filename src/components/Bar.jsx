@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import LoveScroll from "./LoveScroll";
+import ScrollArrow from "./ScrollArrow";
 
 function Bar() {
   const [value, setValue] = useState(0);
@@ -42,11 +42,11 @@ function Bar() {
       <div className="bar-container">
         <div className="bar-btn">
           <span id="decrease" onClick={handleButtonClick}>
-            <LoveScroll id="decrease" />
+            <ScrollArrow id="decrease" />
           </span>
           {value}%
           <span id="increase" onClick={handleButtonClick}>
-            <LoveScroll />
+            <ScrollArrow />
           </span>
         </div>
 
