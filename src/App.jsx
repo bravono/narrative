@@ -28,7 +28,6 @@ function App() {
       </section>
       <section className="middle-section">
         <Body />
-
         {/* <Queue /> */}
         {/* <LoveScroll className="love-arrow-down" /> */}
         {/* <ItemList

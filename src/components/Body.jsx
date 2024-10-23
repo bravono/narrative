@@ -2,6 +2,7 @@ import Button from "./Button";
 import LoveScroll from "./LoveScroll";
 import Queue from "./Queue";
 import Bar from "./Bar";
+import Teleprompter from "./Telepromter";
 
 function Body() {
   return (
@@ -12,12 +13,10 @@ function Body() {
           <LoveScroll className="love-arrow-down" />
         </div>
         <Queue>
-          <p>
-            Eating food is often a personal pleasure and social activity. Some
-            people like all types of ....
-          </p>
+          <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
         </Queue>
       </div>
+
       <div className="btn-body">
         <Button
           label="ADD TO STORY"

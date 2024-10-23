@@ -1,0 +1,20 @@
+.teleprompter {
+  overflow-y: auto;
+  position: relative;
+  background-color: none;
+  color: black;
+  height: 150px;
+}
+
+.teleprompter-text {
+  font-size: 20px;
+}
+
+/* .scrollbar {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #ccc;
+  right: 0;
+  top: 0;
+} */
