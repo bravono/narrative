@@ -17,7 +17,7 @@ function Body() {
         </Queue>
       </div>
       <MiddleButton />
-      <StoryQueue />
+      <Queue />
     </div>
   );
 }
