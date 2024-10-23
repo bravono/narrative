@@ -5,6 +5,7 @@ import TimerArrow from "./TimerArrow";
 import Logo from "./Logo";
 import Button from "./Button";
 import "../css/header.css";
+import TopButton from "./TopButton";
 
 const Header = () => {
   return (
@@ -15,10 +16,7 @@ const Header = () => {
       <div className="header">
         <Edge />
         <Timer duration={"10:00"} label={"PENDING"} />
-        <div className="top-button-group">
-          <Button label="START" className="top-button" />
-          <Button label="PAUSE" className="top-button" />
-        </div>
+        <TopButton />
       </div>
     </>
   );
