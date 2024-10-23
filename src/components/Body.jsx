@@ -1,6 +1,6 @@
 import Button from "./Button";
 import LoveScroll from "./LoveScroll";
-import StoryQueue from "./StoryQueue";
+import Queue from "./Queue";
 
 function Body() {
   return (
@@ -10,7 +10,7 @@ function Body() {
           <LoveScroll className="love-arrow-up" />
           <LoveScroll className="love-arrow-down" />
         </div>
-        <StoryQueue />
+        <Queue />
       </div>
       <div className="btn-body">
         <Button label="ADD TO STORY" className="" color="" />
@@ -21,7 +21,7 @@ function Body() {
         />
       </div>
 
-      <StoryQueue />
+      <Queue />
     </div>
   );
 }

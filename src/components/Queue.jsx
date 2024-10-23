@@ -1,7 +1,7 @@
 import React from "react";
-import "../css/storyQueue.css";
+import "../css/Queue.css";
 
-const StoryQueue = ({children}) => {
+const Queue = ({children}) => {
   return (
     <div className="story-queue">
       {children}
@@ -13,4 +13,4 @@ const StoryQueue = ({children}) => {
   );
 };
 
-export default StoryQueue;
+export default Queue;

@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import StoryQueue from "./components/StoryQueue";
+import Queue from "./components/Queue";
 import Button from "./components/Button";
 import Ring from "./components/Ring";
 import LowerPointerArrow from "./components/LowerPointerArrow";
@@ -29,7 +29,7 @@ function App() {
       <section className="middle-section">
         <Body />
 
-        {/* <StoryQueue /> */}
+        {/* <Queue /> */}
         {/* <LoveScroll className="love-arrow-down" /> */}
         {/* <ItemList
           type=""
