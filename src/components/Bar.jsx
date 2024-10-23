@@ -41,13 +41,13 @@ function Bar() {
     <>
       <div className="bar-container">
         <div className="bar-btn">
-          <button id="decrease" onClick={handleButtonClick}>
+          <span id="decrease" onClick={handleButtonClick}>
             <LoveScroll id="decrease" />
-          </button>
+          </span>
           {value}%
-          <button id="increase" onClick={handleButtonClick}>
+          <span id="increase" onClick={handleButtonClick}>
             <LoveScroll />
-          </button>
+          </span>
         </div>
 
         <div
