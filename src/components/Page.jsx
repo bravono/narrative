@@ -1,4 +1,8 @@
-import Header from "../components/Header";
+import Header from "./Header";
+import Footer from "./Footer";
+import Body from "./MainContent";
+import RadioButton from "./RadioButton";
+// import Header from "../components/Header";
 import Queue from "../components/Queue";
 import Button from "../components/Button";
 import Ring from "../components/Ring";
@@ -12,12 +16,6 @@ import Percentage from "../components/Percentage";
 import ChoiceRapper from "../components/ChoiceRapper";
 import RingListContainer from "../components/RingListContainer";
 import Column from "../components/Column";
-import Row from "../components/Row";
-import ItemList from "../components/ItemList";
-import Footer from "../components/Footer";
-import Body from "../components/Body";
-
-// import Timer from "./components/Timer";
 
 function Page() {
   return (

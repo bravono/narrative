@@ -3,10 +3,9 @@ import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
 import Bar from "./Bar";
 import Teleprompter from "./Telepromter";
-import ItemList from "../components/ItemList";
-import "../css/body.css";
-import CheckBox from "./CheckBox";
 import RadioButton from "./RadioButton";
+import "../css/mainContent.css";
+import CheckBox from "./CheckBox";
 
 function Body() {
   return (
@@ -20,7 +19,8 @@ function Body() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
-          {/* <ItemList type="ring" items={["one", "two", "three", "four"]} /> */}
+          <RadioButton />
+          <CheckBox />
         </Queue>
       </div>
     </div>
