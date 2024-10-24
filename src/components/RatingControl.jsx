@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function StarControl() {
+function RatingControl() {
   const [number, setNumber] = useState(0);
 
   const handleIncrement = () => {
@@ -62,4 +62,4 @@ function StarControl() {
   );
 }
 
-export default StarControl;
+export default RatingControl;
