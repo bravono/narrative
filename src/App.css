@@ -163,34 +163,6 @@ html {
   cursor: move;
 }
 
-.list-item {
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  background-color: #ffd700;
-}
-
-.list-item:hover {
-  background-color: #8d1616;
-}
-
-.even-item {
-  background-color: #9fbeba;
-  cursor: pointer;
-  padding: 3px;
-}
-
-.odd-item {
-  background-color: #f5a905;
-  cursor: pointer;
-  padding: 3px;
-}
-
-.checkbox-label {
-  font-weight: bold;
-  font-size: small;
-}
-
 .ring-style {
   width: 150px;
   height: 150px;

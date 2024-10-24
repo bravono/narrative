@@ -4,6 +4,9 @@ import Queue from "./Queue";
 import Bar from "./Bar";
 import Teleprompter from "./Telepromter";
 import "../css/body.css";
+import ItemList from "./ItemList";
+import CheckBox from "./CheckBox";
+import RadioButton from "./RadioButton";
 
 function Body() {
   return (
@@ -17,7 +20,10 @@ function Body() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
-          <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
+          <ItemList
+            type="ring"
+            items={["one", "two", "three", "four"]}
+          ></ItemList>
         </Queue>
       </div>
     </div>

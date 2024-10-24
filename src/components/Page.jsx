@@ -5,7 +5,7 @@ import Ring from "../components/Ring";
 import LowerPointerArrow from "../components/LowerPointerArrow";
 import TalkBubble from "../components/TalkBubble";
 import EdgeStanding from "../components/EdgeStanding";
-import LoveScroll from "../components/LoveScroll";
+// import LoveScroll from "../components/LoveScroll";
 import StickyArrow from "../components/StickyArrow";
 import ActiveBlank from "../components/ActiveBlank";
 import Percentage from "../components/Percentage";
