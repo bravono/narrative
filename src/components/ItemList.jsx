@@ -86,23 +86,19 @@ const ItemList = ({ type, items }) => {
           onClick={() => handleItemClick(item)}
         >
           {type === "checkbox" ? (
-            <label className="checkbox-label">
+            <label className="checkbox-label item">
               {item}
               <CheckBox />
             </label>
           ) : type === "radiobutton" ? (
-            <label className="radiobutton-label">
+            <label className="radiobutton-label item">
               {item}
               <RadioButton />
             </label>
           ) : type === "ring" ? (
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                value={item}
-                checked={selectedItems.includes(item)}
-                onChange={handleCheckboxChange}
-              />
+            <label className="ring-items">
+              <CheckBox />
+
               {item}
             </label>
           ) : (

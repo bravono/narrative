@@ -26,9 +26,22 @@
 .checkbox-label {
   font-weight: bold;
   font-size: small;
+  display: flex;
 }
 
-.radiobutton-label {
+.ring-items {
+  display: flex;
+  font-weight: bold;
+}
+/* .radiobutton-label {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  padding-left: 25px;
+  background-color: #8d1616;
+} */
+
+.item {
   display: flex;
   justify-content: space-between;
   width: 150px;

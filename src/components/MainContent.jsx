@@ -6,6 +6,7 @@ import Teleprompter from "./Telepromter";
 import RadioButton from "./RadioButton";
 import "../css/mainContent.css";
 import CheckBox from "./CheckBox";
+import ItemList from "./ItemList";
 
 function Body() {
   return (
@@ -19,8 +20,7 @@ function Body() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
-          <RadioButton />
-          <CheckBox />
+          <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} />
         </Queue>
       </div>
     </div>
