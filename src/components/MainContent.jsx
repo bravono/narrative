@@ -7,6 +7,7 @@ import RadioButton from "./RadioButton";
 import "../css/mainContent.css";
 import CheckBox from "./CheckBox";
 import ItemList from "./ItemList";
+import StickyArrow from "./StickyArrow";
 
 function Body() {
   return (
@@ -20,7 +21,8 @@ function Body() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
-          <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} />
+          {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
+          <StickyArrow types="small" label="MULTI CHOICE" />
         </Queue>
       </div>
     </div>

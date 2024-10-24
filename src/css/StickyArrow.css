@@ -5,14 +5,18 @@
 .stickyArrow-container .hover {
   position: absolute;
   top: 47%;
-  left: 51%;
+  left: 9px;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: 0.3 ease;
-  writing-mode: vertical-lr;
-  font-weight: 700;
+  writing-mode: vertical-rl;
+  font-weight: 600;
 }
 
 .stickyArrow-container:hover .hover {
   opacity: 1;
+}
+
+.sticky-image {
+  object-fit: cover;
 }
