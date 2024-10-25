@@ -15,7 +15,7 @@ const StickyArrow = ({ types, label, color }) => {
       <img
         src={"/assets/StickyArrow.svg"}
         alt={label}
-        style={{ width: size }}
+        style={{ width: size, fill: color }}
         className="sticky-image"
       />
       <label className="hover" style={{ fontSize: labelSize }}>
