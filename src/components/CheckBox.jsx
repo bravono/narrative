@@ -1,7 +1,9 @@
+import "../css/CheckBox.css";
+
 function CheckBox() {
   return (
     <>
-      <div>
+      <div className="checkbox-container">
         <input type="checkbox" />
       </div>
     </>

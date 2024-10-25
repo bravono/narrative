@@ -1,0 +1,26 @@
+/* .checked .checked-circle {
+  fill: blue;
+}
+
+.unchecked .unchecked-circle {
+  fill: transparent;
+} */
+
+.radio-container {
+  width: 24px;
+  height: 24px;
+}
+
+.radio-container input[type="radio"] {
+  width: 24px;
+  height: 24px;
+  background-color: red;
+  border: 2px solid red;
+  appearance: none;
+  border-radius: 3px;
+
+  &:checked {
+    background-color: bisque;
+    border-color: blue;
+  }
+}
