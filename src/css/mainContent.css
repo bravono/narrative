@@ -8,6 +8,10 @@
   align-items: center;
   justify-content: space-between;
 }
+.learn-mode {
+  display: flex;
+  justify-content: end;
+}
 .story_queue-single {
   display: flex;
   justify-content: end;
@@ -21,4 +25,15 @@
 .answer {
   height: 250px;
   margin-bottom: 10px;
+}
+.contents {
+  display: flex;
+}
+.talkbubble-btn {
+  position: absolute;
+  top: 32.5%;
+  margin-left: 15px;
+}
+.talk-btn {
+  margin: 0 15px;
 }
