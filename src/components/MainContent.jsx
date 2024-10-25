@@ -2,11 +2,10 @@ import ScrollArrow from "./ScrollArrow";
 import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
 import Teleprompter from "./Telepromter";
-import Row from "./Row";
 import "../css/mainContent.css";
-import CheckBox from "./CheckBox";
 import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
+import CheckBox from "./CheckBox";
 
 function MainContent() {
   return (
@@ -21,8 +20,7 @@ function MainContent() {
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          {/* <StickyArrow types="small" label="MULTI CHOICE" color="red" /> */}
-          <CheckBox />
+          <StickyArrow types="small" label="MULTI CHOICE" />
         </Queue>
       </div>
     </div>
