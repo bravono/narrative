@@ -22,9 +22,7 @@ function Body() {
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          <StickyArrow types="large" label="MULTI CHOICE" color="white" />
-          <StickyArrow types="large" label="MULTI CHOICE" color="red" />
-          <StickyArrow types="large" label="MULTI CHOICE" color="yellow" />
+          <StickyArrow types="large" label="MULTI CHOICE" color="green" />
         </Queue>
       </div>
     </div>
