@@ -4,6 +4,9 @@ import Queue from "./Queue";
 import Teleprompter from "./Telepromter";
 import Row from "./Row";
 import "../css/mainContent.css";
+import CheckBox from "./CheckBox";
+import ItemList from "./ItemList";
+import StickyArrow from "./StickyArrow";
 
 function MainContent() {
   return (
@@ -16,7 +19,10 @@ function MainContent() {
       </div>
       <MiddleButton />
       <div className="story_queue-single">
-        <Queue className={"story-queue answer"}></Queue>
+        <Queue className={"story-queue answer"}>
+          {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
+          <StickyArrow types="small" label="MULTI CHOICE" />
+        </Queue>
       </div>
     </div>
   );
