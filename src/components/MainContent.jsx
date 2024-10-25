@@ -7,21 +7,21 @@ import "../css/mainContent.css";
 import CheckBox from "./CheckBox";
 import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
+import Barrel from "./Barrel";
 
 function MainContent() {
   return (
-    <div className="body_main">
+    <div className="body_content">
       <div className="story_queue-group">
         <ScrollArrow />
-        <Queue className={"story-queue question"}>
+        <Queue className={"queue question"}>
           <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
         </Queue>
       </div>
       <MiddleButton />
       <div className="story_queue-single">
-        <Queue className={"story-queue answer"}>
-          {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          <StickyArrow types="small" label="MULTI CHOICE" />
+        <Queue className={"queue answer"}>
+          <Barrel />
         </Queue>
       </div>
     </div>

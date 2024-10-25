@@ -1,6 +1,19 @@
-.story-queue {
+.queue {
   background-color: #fffcd1;
   border: 2px solid #000000;
   border-radius: 5px;
   width: 311px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  height: 160px;
+  margin-bottom: 10px;
+}
+
+.answer {
+  height: 250px;
+  margin-bottom: 10px;
 }

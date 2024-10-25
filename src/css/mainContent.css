@@ -1,4 +1,4 @@
-.body_main {
+.body_content {
   width: 100%;
   margin: 0 10px;
 }
@@ -11,14 +11,4 @@
 .story_queue-single {
   display: flex;
   justify-content: end;
-}
-
-.question {
-  height: 160px;
-  margin-bottom: 10px;
-}
-
-.answer {
-  height: 250px;
-  margin-bottom: 10px;
 }
