@@ -4,8 +4,8 @@
 }
 
 .checkbox-container input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   background-color: #a7e2ee;
   border: 2px solid #a7e2ee;
   appearance: none;
