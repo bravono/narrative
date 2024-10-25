@@ -1,10 +1,8 @@
 function CheckBoxDone() {
   return (
-    <>
-      <div>
-        <img src="/assets/CheckBoxDone.svg" />
-      </div>
-    </>
+    <div>
+      <img src="/assets/CheckBoxDone.svg" />
+    </div>
   );
 }
 
