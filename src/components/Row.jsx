@@ -1,3 +1,3 @@
-export default function Row({ src, alt, className }) {
-  return <img className={className} src={src} alt={alt} />;
+export default function Row() {
+  return <img className="" src="/assets/Row Vector.svg" />;
 }

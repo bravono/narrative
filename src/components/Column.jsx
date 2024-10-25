@@ -1,3 +1,3 @@
-export default function Column({ src, alt, className }) {
-  return <img className={className} src={src} alt={alt} />;
+export default function Column() {
+  return <img src="/assets/Column Vector.svg" />;
 }
