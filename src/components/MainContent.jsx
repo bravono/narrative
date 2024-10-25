@@ -21,7 +21,8 @@ function MainContent() {
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          <StickyArrow types="small" label="MULTI CHOICE" />
+          {/* <StickyArrow types="small" label="MULTI CHOICE" color="red" /> */}
+          <CheckBox />
         </Queue>
       </div>
     </div>
