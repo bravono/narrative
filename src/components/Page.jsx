@@ -1,6 +1,6 @@
 import Header from "./Header";
+import MainContent from "./MainContent";
 import Footer from "./Footer";
-import Body from "./MainContent";
 import RadioButton from "./RadioButton";
 
 function Page() {
@@ -10,7 +10,7 @@ function Page() {
         <Header />
       </section>
       <section className="middle-section">
-        <Body />
+        <MainContent />
       </section>
       <section className="bottom-section">
         <Footer />

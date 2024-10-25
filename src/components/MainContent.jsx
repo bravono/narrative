@@ -1,13 +1,11 @@
 import ScrollArrow from "./ScrollArrow";
 import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
-import Bar from "./Bar";
 import Teleprompter from "./Telepromter";
-import RadioButton from "./RadioButton";
+import Row from "./Row";
 import "../css/mainContent.css";
-import CheckBox from "./CheckBox";
 
-function Body() {
+function MainContent() {
   return (
     <div className="body_main">
       <div className="story_queue-group">
@@ -18,13 +16,10 @@ function Body() {
       </div>
       <MiddleButton />
       <div className="story_queue-single">
-        <Queue className={"story-queue answer"}>
-          <RadioButton />
-          <CheckBox />
-        </Queue>
+        <Queue className={"story-queue answer"}></Queue>
       </div>
     </div>
   );
 }
 
-export default Body;
+export default MainContent;
