@@ -7,6 +7,7 @@ import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
 import CheckBox from "./CheckBox";
 import CheckBoxDone from "./CheckBoxDone";
+import CheckBoxInactive from "./CheckBoxInactive";
 
 function MainContent() {
   return (
@@ -23,6 +24,7 @@ function MainContent() {
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
           {/* <StickyArrow types="small" label="MULTI CHOICE" /> */}
           <CheckBoxDone />
+          <CheckBoxInactive />
         </Queue>
       </div>
     </div>
