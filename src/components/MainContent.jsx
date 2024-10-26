@@ -6,6 +6,7 @@ import "../css/mainContent.css";
 import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
 import CheckBox from "./CheckBox";
+import CheckBoxDone from "./CheckBoxDone";
 
 function MainContent() {
   return (
@@ -20,7 +21,8 @@ function MainContent() {
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          <StickyArrow types="small" label="MULTI CHOICE" />
+          {/* <StickyArrow types="small" label="MULTI CHOICE" /> */}
+          <CheckBoxDone />
         </Queue>
       </div>
     </div>
