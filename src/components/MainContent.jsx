@@ -8,6 +8,7 @@ import CheckBox from "./CheckBox";
 import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
 import Barrel from "./Barrel";
+import Triangle from "./Triangle";
 
 function MainContent() {
   return (
@@ -21,7 +22,7 @@ function MainContent() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"queue answer"}>
-          <Barrel />
+          <Triangle />
         </Queue>
       </div>
     </div>
