@@ -14,7 +14,7 @@ const Header = () => {
       <div className="header">
         <Edge />
         <Timer duration={"10:00"} label={"PENDING"} />
-        <TopButton />
+        <TopButton classNameA={"primary"} />
       </div>
     </>
   );

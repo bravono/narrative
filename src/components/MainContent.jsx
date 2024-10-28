@@ -18,7 +18,7 @@ function MainContent() {
           <Teleprompter text="START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END" />
         </Queue>
       </div>
-      <MiddleButton />
+      <MiddleButton classNameB={"primary"} />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
           {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
