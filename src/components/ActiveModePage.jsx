@@ -21,13 +21,17 @@ function ActiveModePage() {
   return (
     <main className="main-container">
       <section className="top-section">
-        <Header />
+        <Header classNameA={"primary"} />
       </section>
       <section className="middle-section">
-        <MainContent />
+        <MainContent classNameB={"primary"} />
       </section>
       <section className="bottom-section">
-        <Footer />
+        <Footer
+          classNameA={"primary"}
+          classNameB={"primary"}
+          classNameD={"primary"}
+        />
       </section>
     </main>
   );
