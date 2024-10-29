@@ -22,9 +22,8 @@ function MainContent({ ...props }) {
       </div>
       <MiddleButton {...props} />
       <div className="story_queue-single">
-        <Queue className={"story-queue answer"}>
-          {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          <StickyArrow types="small" label="MULTI CHOICE" />
+        <Queue className={"queue answer"}>
+          <Bar />
         </Queue>
       </div>
     </div>
