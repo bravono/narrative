@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import TopButton from "./TopButton";
 import "../css/header.css";
 
-const Header = () => {
+const Header = ({ ...props }) => {
   return (
     <>
       <div className="logo">
@@ -14,7 +14,7 @@ const Header = () => {
       <div className="header">
         <Edge />
         <Timer duration={"10:00"} label={"PENDING"} />
-        <TopButton />
+        <TopButton {...props} />
       </div>
     </>
   );

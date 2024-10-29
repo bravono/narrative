@@ -1,7 +1,9 @@
+import "../css/RadioButton.css";
+
 function RadioButton() {
   return (
     <>
-      <div>
+      <div className="radio-container">
         <input type="radio" />
       </div>
     </>
