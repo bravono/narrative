@@ -1,4 +1,4 @@
-.body_main {
+.body_content {
   width: 100%;
   margin: 0 10px;
 }
@@ -25,15 +25,4 @@
 .answer {
   height: 250px;
   margin-bottom: 10px;
-}
-.contents {
-  display: flex;
-}
-.talkbubble-btn {
-  position: absolute;
-  top: 32.5%;
-  margin-left: 15px;
-}
-.talk-btn {
-  margin: 0 15px;
 }
