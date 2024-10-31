@@ -5,52 +5,59 @@ import Queue from "./Queue";
 import TalkBubble from "./TalkBubble";
 import Timer from "./Timer";
 import TopButton from "./TopButton";
-import "../css/header.css";
-import "../css/mainContent.css";
+import "../css/LearnModePage.css";
 import EdgeStanding from "./EdgeStanding";
-import Button from "./Button";
+import LearnButton from "./LearnButton";
 
 export default function LearnModePage() {
   return (
     <main className="main-container">
       <section className="top-section">
-
         <div className="header">
           <EdgeChair />
           <Timer duration={"4:59"} label={"PENDING"} />
-          <TopButton />
+          <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
-        
       </section>
 
       <section className="middle-section">
-        <div className="body_main">
+        <div className="body_content">
           <div className="story_queue-group learn-mode">
-            <Queue className={"story-queue question"}>
+            <Queue className={"queue question"}>
               <div className={"contents"}>
-                <TalkBubble />
+                <LearnButton
+                  classNameA={"secondary"}
+                  classNameB={"secondary"}
+                />
+
+                <TalkBubble
+                  props={`My name is Samsudeen Yusuf. This is a prop 🧪🧪🧪
+                  testing the functionality of the talk bubble svg. 
+                  This has perhaps confirms the status of the function`}
+                />
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
                 />
               </div>
-              <div className="talkbubble-btn">
-                <Button label="LEARN" className="bottom_button talk-btn" />
-                <Button label="EXIT" className="bottom_button talk-btn" />
-              </div>
             </Queue>
           </div>
 
-          <MiddleButton />
+          <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"story-queue answer"} />
+            <Queue className={"queue answer"} />
           </div>
         </div>
       </section>
 
       <section className="bottom-section">
-        <BottomButton />
+        <BottomButton
+          classNameA={"learn"}
+          classNameB={"learn"}
+          classNameC={"learn"}
+          classNameD={"learn"}
+        />
       </section>
     </main>
   );
