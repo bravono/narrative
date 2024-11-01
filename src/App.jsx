@@ -3,8 +3,7 @@ import LearnModePage from "./components/LearnModePage";
 import "./App.css";
 
 function App() {
-  // return <ActiveModePage />;
-  return <LearnModePage />
+  return <ActiveModePage />;
 }
 
 export default App;
