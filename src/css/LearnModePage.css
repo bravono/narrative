@@ -1,0 +1,63 @@
+/* .header {
+  display: flex;
+  position: relative;
+  margin: 10px;
+  justify-content: start;
+} */
+
+/* .logo {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+} */
+
+.body_content {
+  width: 100%;
+  margin: 0 10px;
+}
+
+.story_queue-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.learn-mode {
+  display: flex;
+  justify-content: end;
+}
+.story_queue-single {
+  display: flex;
+  justify-content: end;
+}
+
+.question {
+  height: 160px;
+  margin-bottom: 10px;
+}
+
+.contents {
+  display: flex;
+}
+.talkbubble-btn {
+  position: relative;
+}
+
+.talk-btn-learn,
+.talk-btn-exit {
+  position: absolute;
+  bottom: 40px;
+  width: 79px;
+  height: 29px;
+  text-align: center;
+  padding: 5px;
+}
+.talk-btn-learn {
+  left: 40px;
+}
+.talk-btn-exit {
+  left: 140px;
+}
+.answer {
+  height: 250px;
+  margin-bottom: 10px;
+}

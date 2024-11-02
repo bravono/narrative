@@ -8,6 +8,22 @@
   --left-margin: 50px;
 }
 
+.primary {
+  background: var(--color-primary);
+}
+.secondary {
+  background: var(--color-secondary);
+}
+.accent {
+  background: var(--color-accent);
+}
+.disabled {
+  background: var(--color-disabled);
+}
+.learn {
+  background: var(--color-learn);
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
