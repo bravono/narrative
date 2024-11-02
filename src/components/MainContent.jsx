@@ -5,13 +5,9 @@ import Teleprompter from "./Telepromter";
 import "../css/mainContent.css";
 import ItemList from "./ItemList";
 import StickyArrow from "./StickyArrow";
-import CheckBox from "./CheckBox";
-import CheckBoxDone from "./CheckBoxDone";
-import CheckBoxInactive from "./CheckBoxInactive";
 import Bar from "./Bar";
 import Barrel from "./Barrel";
 import Ring from "./Ring";
-import PointerArrowHorizontal from "./PointerArrowHorizontal";
 
 function MainContent({ ...props }) {
   return (
@@ -26,11 +22,7 @@ function MainContent({ ...props }) {
       <div className="story_queue-single">
         {/* <Queue className={"queue answer"}> */}
         <Ring />
-        <Queue className={"story-queue answer"}>
-          <CheckBoxDone />
-          <CheckBoxInactive />
-          <PointerArrowHorizontal direction="right" />
-        </Queue>
+        <Queue className={"story-queue answer"} />
       </div>
     </div>
   );
