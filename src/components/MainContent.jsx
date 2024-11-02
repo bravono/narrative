@@ -8,6 +8,7 @@ import StickyArrow from "./StickyArrow";
 import CheckBox from "./CheckBox";
 import CheckBoxDone from "./CheckBoxDone";
 import CheckBoxInactive from "./CheckBoxInactive";
+import PointerArrowHorizontal from "./PointerArrowHorizontal";
 
 function MainContent() {
   return (
@@ -21,10 +22,9 @@ function MainContent() {
       <MiddleButton />
       <div className="story_queue-single">
         <Queue className={"story-queue answer"}>
-          {/* <ItemList type="checkbox" items={["One", "Two", "Three", "Four"]} /> */}
-          {/* <StickyArrow types="small" label="MULTI CHOICE" /> */}
           <CheckBoxDone />
           <CheckBoxInactive />
+          <PointerArrowHorizontal direction="right" />
         </Queue>
       </div>
     </div>

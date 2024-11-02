@@ -6,7 +6,7 @@ import RadioButton from "./RadioButton";
 import Queue from "../components/Queue";
 import Button from "../components/Button";
 import Ring from "../components/Ring";
-import LowerPointerArrow from "../components/LowerPointerArrow";
+// import LowerPointerArrow from "../components/LowerPointerArrow";
 import TalkBubble from "../components/TalkBubble";
 import EdgeStanding from "../components/EdgeStanding";
 // import LoveScroll from "../components/LoveScroll";
