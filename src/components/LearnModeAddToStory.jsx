@@ -1,3 +1,4 @@
+import React from "react";
 import BottomButton from "./BottomButton";
 import EdgeChair from "./EdgeChair";
 import MiddleButton from "./MiddleButton";
@@ -7,17 +8,22 @@ import Timer from "./Timer";
 import TopButton from "./TopButton";
 import "../css/LearnModePage.css";
 import EdgeStanding from "./EdgeStanding";
-import LearnButton from "./LearnButton";
 import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-export default function LearnModePage({ classNameA, classNameB }) {
+export default function LearnModeAddToStory({ classNameA, classNameB }) {
+  // export default function LearnModeAddToStory({ ...props }) {
   const navigate = useNavigate();
 
-  const handleRoute = () => {
-    alert("Routing to LearnModeTimer");
-    navigate("/LearnModeTimer");
+  const goToPrevious = () => {
+    alert("Routing to LearnModePause");
+    navigate("/LearnModePause");
+  };
+
+  const goToNext = () => {
+    alert("Routing to LearnModePreview");
+    navigate("/LearnModePreview");
   };
 
   return (
@@ -41,27 +47,27 @@ export default function LearnModePage({ classNameA, classNameB }) {
               <div className={"contents"}>
                 <div className="talkbubble-btn">
                   <Button
-                    onClick={handleRoute}
-                    label="LEARN"
+                    onClick={goToPrevious}
+                    label="PREVIOUS"
                     className={`${classNameA} bottom_button talk-btn-learn`}
                   />
                   <Button
-                    label="EXIT"
+                    onClick={goToNext}
+                    label="NEXT"
                     className={`${classNameB} bottom_button talk-btn-exit`}
                   />
                 </div>
-                {/* <LearnButton
-                  onClick={handleClick}
+
+                {/* <LearnButtonState {...props} /> */}
+                {/* <LearnButtonState
+                  onClick={handleClicks}
                   classNameA={"secondary"}
                   classNameB={"secondary"}
                 /> */}
 
                 <TalkBubble
-                  props={`Welcome to the opportunity to
-                    compare taking the same survey 
-                    using a traditional question/list 
-                    methd and a narrative sentence 
-                    with a blank/list method.`}
+                  props={`The add to story enables
+                    you to add to the survey.`}
                 />
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
