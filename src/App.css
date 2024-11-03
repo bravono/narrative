@@ -106,23 +106,6 @@ html {
   }
 }
 
-.LowerPointer-image {
-  position: relative;
-  animation: upAndDown 2s infinite linear;
-}
-
-@keyframes upAndDown {
-  0% {
-    top: 70px;
-  }
-  50% {
-    top: 0;
-  }
-  100% {
-    top: 40px;
-  }
-}
-
 .triangle {
   position: relative;
   width: 200px;
