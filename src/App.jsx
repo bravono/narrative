@@ -1,4 +1,4 @@
-import ActiveModePage from "./components/ActiveModePage";
+import ActiveModePage from "./components/composed/ActiveModePage";
 import LearnModePage from "./components/LearnModePage";
 import "./App.css";
 import LearnModeTimer from "./components/LearnModeTimer";
