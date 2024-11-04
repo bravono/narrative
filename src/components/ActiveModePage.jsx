@@ -1,6 +1,11 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollArrow from "./ScrollArrow";
+import Queue from "./Queue";
+import Teleprompter from "./Telepromter";
+import MiddleButton from "./MiddleButton";
+import Barrel from "./Barrel";
 
 function ActiveModePage() {
   const text = `
