@@ -5,7 +5,19 @@
   --color-disabled: #85767a;
   --color-learn: #85767a59;
 
-  --left-margin: 50px;
+  --left-margin: 5rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .primary {
@@ -24,25 +36,16 @@
   background: var(--color-learn);
 }
 
-body {
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .top-section {
   position: absolute;
   top: 10px;
-  margin: 0;
+  margin: -1rem;
   width: 100%;
 }
 
 .middle-section {
   display: flex;
   width: 100%;
-  /* padding: 0 10px 0 40px; */
 }
 .bottom-section {
   position: absolute;
