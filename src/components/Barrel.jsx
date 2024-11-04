@@ -90,7 +90,7 @@ const Barrel = () => {
         </table>
         {/* <img src="/assets/Column_dotted.svg" className="column_dotted" /> */}
       </div>
-      <p>Select Up to Six</p>
+      <p className="instruction">Select Up to Six</p>
       <AnswerQueueButtons />
     </div>
   );
