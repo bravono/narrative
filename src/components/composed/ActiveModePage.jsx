@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import ScrollArrow from "./ScrollArrow";
-import Queue from "./Queue";
-import Teleprompter from "./Telepromter";
-import MiddleButton from "./MiddleButton";
-import Barrel from "./Barrel";
+import Header from "../Header";
+import Footer from "../Footer";
+import ScrollArrow from "../ScrollArrow";
+import Queue from "../Queue";
+import Teleprompter from "../Telepromter";
+import MiddleButton from "../MiddleButton";
+import Barrel from "../Barrel";
+import Bar from "./Bar";
 
 function ActiveModePage() {
   const text = `
@@ -26,7 +27,7 @@ function ActiveModePage() {
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Barrel />
+              <Bar />
             </Queue>
           </div>
         </div>
