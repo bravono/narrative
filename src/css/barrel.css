@@ -7,7 +7,7 @@
 .barrel-set {
   position: relative;
   margin-top: 20px;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
 }
 
 .barrel {

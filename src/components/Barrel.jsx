@@ -2,11 +2,13 @@ import React from "react";
 import AnswerQueueButtons from "./composed/AnswerQueueButtons";
 import Lever from "./Lever";
 import "../css/Barrel.css";
+import StickyArrow from "./StickyArrow";
 
 const Barrel = () => {
   return (
     <div className="barrel-set">
       <Lever />
+      <StickyArrow className={"single_choice"} />
       <div className="barrel">
         <table>
           <thead>

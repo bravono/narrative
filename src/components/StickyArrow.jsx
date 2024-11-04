@@ -1,33 +1,38 @@
 import React from "react";
 import "../css/StickyArrow.css";
 
-const StickyArrow = ({ types, label, color }) => {
-  const imageSizes = {
-    small: "15px",
-    large: "25px",
-  };
-
-  const size = imageSizes[types] || "100px"; // Default to small if types is invalid
-  const labelSize = size === "15px" ? "6px" : "11px";
-
+const StickyArrow = ({ className }) => {
   return (
-    <div className="stickyArrow-container">
+    <div className="sticky_arrow">
       <svg
+        className={` ${className}`}
         viewBox="0 0 7 20"
-        fill={color}
         xmlns="http://www.w3.org/2000/svg"
-        style={{ width: size, fill: color }}
       >
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M0.77002 0.309998H6.50002V15.2484L3.6355 19.31L0.77002 15.2484V0.309998Z"
         />
+        <text
+          x="50%"
+          y="34%"
+          dominantBaseline="middle"
+          textAnchor="middle"
+          fontSize="5px"
+          fontWeight={900}
+          style={{}}
+          fill="black"
+          onMouseEnter={(e) => {
+            e.target.style.opacity = 1;
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.opacity = 0;
+          }}
+        >
+          {`SINGLE CHOICE`}
+        </text>
       </svg>
-
-      <label className="hover" style={{ fontSize: labelSize }}>
-        {label}
-      </label>
     </div>
   );
 };
