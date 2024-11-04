@@ -1,3 +1,4 @@
+import "../css/Logo.css";
 const Logo = (className) => {
   return (
     <>
