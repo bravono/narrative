@@ -1,5 +1,56 @@
 .column_dotted {
-  position: relative;
+  /* position: relative;
   right: 12rem;
-  bottom: 3px;
+  bottom: 3px; */
+}
+
+.barrel-set {
+  position: relative;
+  margin-top: 20px;
+  /* border: 1px solid grey; */
+}
+
+.barrel {
+  width: 215px;
+  height: 177px;
+  background: url(/assets/Barrel_skeleton.svg);
+  display: flex;
+  justify-content: center;
+}
+
+table,
+td {
+  border-collapse: collapse;
+  border: 1px solid green;
+}
+
+table {
+  position: relative;
+  left: 7%;
+}
+
+thead th:first-child {
+  font-size: 13px;
+  width: 72.6px;
+  /* border: 1px solid red; */
+  text-align: start;
+}
+
+th {
+  padding-top: 5px;
+  line-height: 1;
+}
+
+td {
+  text-align: center;
+  padding: 0;
+  min-width: 25px;
+}
+
+p {
+  margin-top: 0;
+  margin: 0 0 0px 20px;
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 5px;
 }
