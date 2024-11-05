@@ -1,6 +1,6 @@
 import React from "react";
 import AnswerQueueButtons from "./composed/AnswerQueueButtons";
-import Lever from "./Lever";
+import Lever from "./BarrelLever";
 import "../css/Barrel.css";
 import StickyArrow from "./StickyArrow";
 
