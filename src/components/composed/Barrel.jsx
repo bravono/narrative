@@ -1,13 +1,19 @@
-import React from "react";
-import AnswerQueueButtons from "./composed/AnswerQueueButtons";
-import Lever from "./BarrelLever";
-import "../css/Barrel.css";
-import StickyArrow from "./StickyArrow";
+import React, { useState } from "react";
+import AnswerQueueButtons from "./AnswerQueueButtons";
+import Lever from "../standalone/BarrelLever";
+import "../../css/Barrel.css";
+import StickyArrow from "../StickyArrow";
 
 const Barrel = () => {
+  const [isSorted, setIsSorted] = useState(false);
+
+  const handleSort = () => {
+    setIsSorted((prevIsSorted) => !prevIsSorted);
+    console.log(isSorted);
+  };
   return (
     <div className="barrel-set">
-      <Lever />
+      <Lever sorted={isSorted} onClick={handleSort} />
       <StickyArrow className={"single_choice"} />
       <div className="barrel">
         <table>

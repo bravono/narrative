@@ -5,7 +5,7 @@ import ScrollArrow from "../ScrollArrow";
 import Queue from "../Queue";
 import Teleprompter from "../Telepromter";
 import MiddleButton from "../MiddleButton";
-import Barrel from "../Barrel";
+import Barrel from "./Barrel";
 import Bar from "./Bar";
 import Ring from "./Ring";
 
