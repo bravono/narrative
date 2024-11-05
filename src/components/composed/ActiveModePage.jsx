@@ -28,7 +28,7 @@ function ActiveModePage() {
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Barrel />
+              <Ring />
             </Queue>
           </div>
         </div>
