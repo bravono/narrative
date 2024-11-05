@@ -1,0 +1,84 @@
+.ring-set {
+  display: flex;
+  border: 1px solid grey;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+}
+
+.ring {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.1rem 0;
+  margin-bottom: 3.5rem;
+}
+
+.ring-list-container {
+  width: 13.6rem;
+  height: 13rem;
+  padding: 0.5rem;
+  font-size: 2rem;
+  border-radius: 0 10px 10px 0;
+  font-weight: 600;
+  background-color: #e0e0e0;
+  display: flex;
+}
+
+.ring-table {
+  font-size: 1.5rem;
+}
+
+table td:first-child {
+  text-align: start;
+}
+
+.ring-label {
+  font-size: 1.2rem;
+  pointerevents: "none";
+  font-weight: 600;
+}
+
+.ring-number {
+  font-size: 1.5rem;
+  pointerevents: "none";
+  font-weight: 900;
+}
+
+.polygon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  position: absolute;
+  height: 4rem;
+  top: 24%;
+  left: 73.5%;
+}
+
+.polygon {
+  cursor: pointer;
+  pointerevents: auto;
+  width: 1.5rem;
+}
+.polygon:hover {
+  fill: red;
+}
+
+.ring-instruction {
+  margin: 0 0 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.ring-heading {
+  margin: 0.1rem 0 0.3rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.ring-buttons {
+  align-self: center;
+  width: 22.75rem;
+}

@@ -1,0 +1,6 @@
+.ring-lever {
+  position: absolute;
+  width: 7rem;
+  top: -5px;
+  cursor: pointer;
+}
