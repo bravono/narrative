@@ -4,10 +4,16 @@
   background-color: none;
   color: black;
   height: 150px;
+  padding-left: 10px;
 }
 
 .teleprompter-text {
   font-size: 20px;
+}
+
+.teleprompter-text > *:nth-child(-n + 5),
+.teleprompter-text > *:nth-last-child(-n + 2) {
+  opacity: 0.5;
 }
 
 /* .scrollbar {
