@@ -29,7 +29,7 @@ function ActiveModePage() {
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Triangle />
+              <Bar />
             </Queue>
           </div>
         </div>
