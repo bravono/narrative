@@ -106,23 +106,6 @@ html {
   }
 }
 
-.LowerPointer-image {
-  position: relative;
-  animation: upAndDown 2s infinite linear;
-}
-
-@keyframes upAndDown {
-  0% {
-    top: 70px;
-  }
-  50% {
-    top: 0;
-  }
-  100% {
-    top: 40px;
-  }
-}
-
 .triangle {
   position: relative;
   width: 200px;
@@ -251,11 +234,11 @@ html {
   justify-content: space-evenly;
 }
 
-.star-container {
-  width: 100px; /* Adjust the size as needed */
+/* .star-container {
+  width: 100px; 
   height: 100px;
   position: relative;
-}
+} */
 /* 
 .star {
   width: 100%;
@@ -274,7 +257,7 @@ html {
   transform: rotate(45deg);
 } */
 
-.star-inner {
+/* .star-inner {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -292,8 +275,8 @@ html {
     38.2% 15.4%
   );
   transform: rotate(-45deg);
-}
-
+} */
+/* 
 .star-center {
   width: 25px;
   height: 25px;
@@ -306,9 +289,9 @@ html {
   border: 1px solid #000000;
   text-align: center;
   font-size: medium;
-}
+} */
 
-.star {
+/* .star {
   width: 50px;
   height: 50px;
   background-color: #fff;
@@ -326,7 +309,7 @@ html {
     0% 40%,
     38.2% 38.2%
   );
-}
+} */
 
 .rating-button-container {
   display: flex;

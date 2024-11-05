@@ -1,13 +1,13 @@
 import "../css/Button.css";
 
-const Button = ({ label, className }) => {
-  const handleClick = (e) => {
-    console.log(
-      `${e.target.textContent} button clicked 😁😂😂 It is good to have some sun sha`
-    );
-  };
+const Button = ({ label, className, onClick }) => {
+  // const handleClick = (e) => {
+  //   console.log(
+  //     `${e.target.textContent} button clicked 😁😂😂 It is good to have some sun sha`
+  //   );
+  // };
   return (
-    <button onClick={handleClick} className={`button ${className}`}>
+    <button onClick={onClick} className={`button ${className}`}>
       {label}
     </button>
   );

@@ -13,15 +13,17 @@
   position: relative;
   width: 285px;
   height: 250px;
-  top: -20%;
-  left: 0%;
+  top: -2%;
+  left: 2%;
 }
 .svg-overlay-text {
   position: absolute;
-  top: 31%;
-  left: 15%;
+  top: 15.5%;
+  left: 25%;
   font-size: 10.5px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   line-height: 1.9;
   font-weight: 600;
+  width: 165px;
+  padding-right: 5px;
 }

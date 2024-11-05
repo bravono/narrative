@@ -2,21 +2,31 @@
   position: relative;
 }
 
-.stickyArrow-container .hover {
+.sticky_arrow {
+  width: 10px;
   position: absolute;
-  top: 47%;
-  left: 9px;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: 0.3 ease;
-  writing-mode: vertical-rl;
-  font-weight: 600;
+  left: 115px;
+  top: -25px;
 }
 
-.stickyArrow-container:hover .hover {
-  opacity: 1;
+.sticky_arrow:hover {
+  width: 30px;
+  left: 107px;
+  top: -50px;
 }
 
-.sticky-image {
-  object-fit: cover;
+.single_choice {
+  fill: #fec7a5;
+}
+
+.multiple_choice {
+  fill: #a7e2ee;
+}
+
+.ranking {
+  fill: #f1c06c;
+}
+
+.rating {
+  fill: #5dffa2;
 }

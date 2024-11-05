@@ -1,0 +1,13 @@
+.ring-lever {
+  position: absolute;
+  width: 7rem;
+  cursor: pointer;
+}
+
+.ring-lever-sort {
+  top: -5px;
+}
+
+.ring-lever-unsort {
+  top: -3px;
+}

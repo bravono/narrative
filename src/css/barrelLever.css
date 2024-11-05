@@ -1,0 +1,13 @@
+.barrel-lever {
+  cursor: pointer;
+  left: 1%;
+  position: absolute;
+}
+
+.barrel-lever-unsort {
+  top: -13%;
+}
+
+.barrel-lever-sort {
+  top: -11%;
+}
