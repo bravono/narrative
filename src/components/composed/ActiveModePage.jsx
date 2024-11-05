@@ -8,6 +8,7 @@ import MiddleButton from "../MiddleButton";
 import Barrel from "./Barrel";
 import Bar from "./Bar";
 import Ring from "./Ring";
+import Triangle from "./Triangle";
 
 function ActiveModePage() {
   const text = `
@@ -28,7 +29,7 @@ function ActiveModePage() {
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Ring />
+              <Bar />
             </Queue>
           </div>
         </div>

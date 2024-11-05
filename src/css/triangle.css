@@ -1,0 +1,39 @@
+.triangle-set {
+  display: grid;
+  height: 100%;
+  justify-items: center;
+  align-items: center;
+}
+.triangle-svg {
+  overflow: visible;
+  width: 17.5rem;
+  height: 15.1rem;
+  margin: 1.4rem;
+  user-select: none;
+}
+
+.triangle {
+  fill: none;
+  stroke: #45546a;
+  stroke-width: 1.5rem;
+}
+.draggable-circle {
+  fill: #45546a;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  border: 1px solid green;
+}
+
+.draggable-circle.glow {
+  fill: gold;
+}
+
+.triangle-instruction {
+  font-size: 1.5rem;
+  margin: 0.2rem 0 0 0;
+  align-self: start;
+}
+
+.corner-text {
+  font-size: 3rem;
+}
