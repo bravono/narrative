@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
-import ScrollArrow from "../ScrollArrow";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import MiddleButton from "../MiddleButton";
@@ -57,7 +56,6 @@ function ActiveModePage() {
 
   // Function to handle scrolling down
   const scrollDown = () => {
-    console.log("Scroll Down");
     if (containerRef.current) {
       containerRef.current.scrollBy({
         top: 50, // Adjust scroll amount as needed
