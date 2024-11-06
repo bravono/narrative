@@ -67,3 +67,27 @@ body {
 .scroll_arrow-down {
   transform: scaleX(1);
 }
+
+.header {
+  display: flex;
+  position: relative;
+  margin: 10px;
+  justify-content: start;
+}
+
+.logo {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.top_button-group {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.top_button {
+  margin: 0 0 0 19px;
+  align-self: flex-end;
+}
