@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Header from "../Header";
+import Header from "./Header";
 import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
@@ -67,7 +67,11 @@ function ActiveModePage() {
   return (
     <main className="main-container">
       <section className="top-section">
-        <Header classNameA={"primary"} />
+        <Header
+          classNameA={"primary"}
+          duration={duration || "0:00"}
+          label={"PENDING"}
+        />
       </section>
       <section className="middle-section">
         <div className="body_content">
