@@ -34,11 +34,7 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
         </div>
         <div className="header">
           <EdgeChair />
-          <Timer
-            style={{ border: isTimerActive ? "2px solid #009bfc" : "none" }}
-            duration={"4:59"}
-            label={"PENDING"}
-          />
+          <Timer duration={"4:59"} label={"PENDING"} />
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
