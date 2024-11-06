@@ -1,27 +1,15 @@
 import React from "react";
-<<<<<<< HEAD:src/components/LearnModeRingTally.jsx
-import BottomButton from "./BottomButton";
-import EdgeChair from "./EdgeChair";
-import MiddleButton from "./MiddleButton";
-import Queue from "./Queue";
-import TalkBubble from "./TalkBubble";
-import Timer from "../utilities/Timer";
-import TopButton from "./TopButton";
-import "../css/LearnModePage.css";
-import EdgeStanding from "./EdgeStanding";
-import Logo from "./Logo";
-=======
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-import Timer from "../Timer";
+// import Timer from "../Timer";
 import TopButton from "../TopButton";
+import Timer from "../../utilities/Timer";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
->>>>>>> LearnModePagesRefactoring:src/components/learnmodepages/LearnModeRingTally.jsx
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
@@ -73,11 +61,7 @@ export default function LearnModeRingTally({ classNameA, classNameB }) {
                 <LearnButtonState
                   classNameA={"secondary"}
                   classNameB={"secondary"}
-<<<<<<< HEAD:src/components/LearnModeRingTally.jsx
-                /> */}
-=======
                 />
->>>>>>> LearnModePagesRefactoring:src/components/learnmodepages/LearnModeRingTally.jsx
 
                 <TalkBubble props={`This is the Ring/Tally.`} />
                 <EdgeStanding

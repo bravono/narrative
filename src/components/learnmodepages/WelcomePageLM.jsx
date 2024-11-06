@@ -1,28 +1,15 @@
-<<<<<<< HEAD:src/components/LearnModePage.jsx
-import BottomButton from "./BottomButton";
-import EdgeChair from "./EdgeChair";
-import MiddleButton from "./MiddleButton";
-import Queue from "./Queue";
-import TalkBubble from "./TalkBubble";
-import Timer from "../utilities/Timer";
-import TopButton from "./TopButton";
-import "../css/LearnModePage.css";
-import EdgeStanding from "./EdgeStanding";
-import LearnButton from "./LearnButton";
-import Logo from "./Logo";
-=======
 import React from "react";
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-import Timer from "../Timer";
+// import Timer from "../Timer";
+import Timer from "../../utilities/Timer";
 import TopButton from "../TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
->>>>>>> LearnModePagesRefactoring:src/components/learnmodepages/WelcomePageLM.jsx
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButton from "./LearnButton";

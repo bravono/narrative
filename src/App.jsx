@@ -1,4 +1,3 @@
-import ActiveModePage from "./components/ActiveModePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
 import LearnModeTimer from "./components/learnmodepages/LearnModeTimer";
@@ -27,8 +26,7 @@ import LearnModeRingTotal from "./components/learnmodepages/LearnModeRingTotal";
 import LearnModeAddChoice from "./components/learnmodepages/LearnModeAddChoice";
 import LearnModeContinue from "./components/learnmodepages/LearnModeContinue";
 import LearnModeSelectAnything from "./components/learnmodepages/LearnModeSelectAnything";
-import ActiveModePage from "./components/composed/ActiveModePage";
-import LearnModePage from "./components/LearnModePage";
+// import ActiveModePage from "./components/composed/ActiveModePage";
 import "./App.css";
 
 function App() {
@@ -87,7 +85,7 @@ function App() {
       </Routes>
     </Router>
   );
-  return <ActiveModePage />;
+  // return <ActiveModePage />;
 }
 
 export default App;
