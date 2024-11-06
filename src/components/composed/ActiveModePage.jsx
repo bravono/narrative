@@ -1,5 +1,7 @@
-import React, { useState, useRef } from "react";
-import Header from "./Header";
+import React, { useState, useRef, useEffect } from "react";
+import { getSurvey } from "../../services/surveyServices";
+import { Toastify as toast } from "toastify";
+import Header from "../Header";
 import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
@@ -10,39 +12,39 @@ import Ring from "./Ring";
 import Triangle from "./Triangle";
 
 function ActiveModePage() {
-  const containerRef = useRef(null); // Step 1: Create a ref
+  const containerRef = useRef(null);
+  const [isFollowUp, setIsFollowUp] = useState(false);
+  const [error, setError] = useState("");
+  const [story, setStory] = useState("");
+  const [questionType, setQuestionType] = useState("");
+  const [widget, setWidget] = useState("");
+  const [heading, setHeading] = useState("");
+  const [choiceList, setChoiceList] = useState("");
+  const [instruction, setInstruction] = useState("");
 
-  const textLines = [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
-  ];
+  const fetchSurvey = async () => {
+    try {
+      const survey = await getSurvey();
+      const data = survey.data;
+
+      setStory(data.story);
+      setQuestionType(data.blank.questionType);
+      setWidget(data.blank.widget);
+      setHeading(data.blank.heading);
+      setChoiceList(data.blank.choiceList);
+      setInstruction(data.blank.instruction);
+      if (data.blank.children.length) {
+        setIsFollowUp(true);
+      }
+    } catch (error) {
+      setError("Error with POST request");
+      toast("Something Failed");
+    }
+  };
+
+  useEffect(() => {
+    fetchSurvey();
+  });
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -89,13 +91,26 @@ function ActiveModePage() {
               />
             </div>
             <Queue className={"queue question"}>
-              <Teleprompter textLines={textLines} containerRef={containerRef} />
+              <Teleprompter textLines={story} containerRef={containerRef} />
             </Queue>
           </div>
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Bar />
+              {widget === "barrel" ? (
+                <Barrel
+                  heading={heading}
+                  choiceList={choiceList}
+                  questionType={questionType}
+                  isFollowUP={isFollowUp}
+                />
+              ) : widget === "bar" ? (
+                <Bar />
+              ) : widget === "ring" ? (
+                <Ring />
+              ) : (
+                <Triangle />
+              )}
             </Queue>
           </div>
         </div>

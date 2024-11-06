@@ -1,0 +1,4 @@
+{
+  "apiEndpoint": "https://dev.nsdbsurveys.com/gotcha/cubicon/cubicon.php",
+  "testEndpoint": "http://localhost:5000/survey"
+}

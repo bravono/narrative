@@ -39,6 +39,7 @@ thead th:first-child {
 th {
   padding-top: 5px;
   line-height: 1;
+  height: 25px;
 }
 
 td {
