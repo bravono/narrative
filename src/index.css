@@ -51,3 +51,19 @@ body {
   position: absolute;
   bottom: 0;
 }
+
+.scroll_arrow-group {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  height: 50%;
+  user-select: none;
+}
+.scroll_arrow-up {
+  transform: scaleY(-1);
+  margin-bottom: 20px;
+}
+
+.scroll_arrow-down {
+  transform: scaleX(1);
+}

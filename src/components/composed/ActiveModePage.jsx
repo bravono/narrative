@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
 import ScrollArrow from "../ScrollArrow";
 import Queue from "../Queue";
-import Teleprompter from "../Telepromter";
+import Teleprompter from "../standalone/Teleprompter";
 import MiddleButton from "../MiddleButton";
 import Barrel from "./Barrel";
 import Bar from "./Bar";
@@ -11,8 +11,61 @@ import Ring from "./Ring";
 import Triangle from "./Triangle";
 
 function ActiveModePage() {
-  const text = `
-  START hello my name is Najeem Mohammed , from Ilorin Kwara State hello my name is Njeem Mohammed , ,hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed hello my name is Njeem Mohammed , from Ilorin Kwara State END`;
+  const containerRef = useRef(null); // Step 1: Create a ref
+
+  const textLines = [
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni perspiciatis quae vero.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius quidem voluptatem similique!",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At, consequatur. Fugiat quaerat",
+  ];
+
+  // Function to handle scrolling up
+  const scrollUp = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        top: -50, // Adjust scroll amount as needed
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // Function to handle scrolling down
+  const scrollDown = () => {
+    console.log("Scroll Down");
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        top: 50, // Adjust scroll amount as needed
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <main className="main-container">
       <section className="top-section">
@@ -21,9 +74,20 @@ function ActiveModePage() {
       <section className="middle-section">
         <div className="body_content">
           <div className="story_queue-group">
-            <ScrollArrow />
+            <div className="scroll_arrow-group ">
+              <img
+                src="/assets/Arrow Up.svg"
+                className="scroll_arrow-up teleprompter-buttons"
+                onClick={scrollUp}
+              />
+              <img
+                src="/assets/Arrow Up.svg"
+                className="scroll_arrow-down teleprompter-buttons"
+                onClick={scrollDown}
+              />
+            </div>
             <Queue className={"queue question"}>
-              <Teleprompter text={text} />
+              <Teleprompter textLines={textLines} containerRef={containerRef} />
             </Queue>
           </div>
           <MiddleButton />
