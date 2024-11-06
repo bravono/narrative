@@ -46,8 +46,9 @@
 .talk-btn-exit {
   position: absolute;
   bottom: 40px;
-  width: 79px;
-  height: 29px;
+  font-size: 8.97px;
+  width: 55.6px;
+  height: 19.84px;
   text-align: center;
   padding: 5px;
   background: var(--color-secondary);
@@ -58,7 +59,7 @@
 .talk-btn-exit {
   left: 140px;
 }
-.color{
+.color {
   background: var(--color-disabled);
 }
 
