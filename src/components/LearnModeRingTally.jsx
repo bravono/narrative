@@ -4,7 +4,7 @@ import EdgeChair from "./EdgeChair";
 import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
 import TalkBubble from "./TalkBubble";
-import Timer from "./Timer";
+import Timer from "../utilities/Timer";
 import TopButton from "./TopButton";
 import "../css/LearnModePage.css";
 import EdgeStanding from "./EdgeStanding";
@@ -65,9 +65,7 @@ export default function LearnModeRingTally({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 /> */}
 
-                <TalkBubble
-                  props={`This is the Ring/Tally.`}
-                />
+                <TalkBubble props={`This is the Ring/Tally.`} />
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

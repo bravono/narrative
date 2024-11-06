@@ -4,7 +4,7 @@ import EdgeChair from "./EdgeChair";
 import MiddleButton from "./MiddleButton";
 import Queue from "./Queue";
 import TalkBubble from "./TalkBubble";
-import Timer from "./Timer";
+import Timer from "../utilities/Timer";
 import TopButton from "./TopButton";
 import "../css/LearnModePage.css";
 import EdgeStanding from "./EdgeStanding";

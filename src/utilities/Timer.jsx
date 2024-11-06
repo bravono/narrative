@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TimerArrow from "../components/TimerArrow";
 import "../css/timer.css";
-import React, { useState, useEffect } from "react";
 
 function Timer({ duration, label }) {
   const [timeLeft, setTimeLeft] = useState(duration * 60); // Convert minutes to seconds
