@@ -4,9 +4,10 @@
     "blank": {
       "name": "a",
       "questionType": "singleChoice",
-      "choiceList": ["item 1", "item 2", "item 3"],
-      "heading": "",
-      "instruction": "",
+      "choiceList": ["Breakfast", "Lunch", "Dinner"],
+      "heading": "MEAL TYPE",
+      "instruction": "Select Up to Six",
+      "widget": "barrel",
       "children": [
         {
           "name": "a1",

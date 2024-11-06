@@ -13,14 +13,29 @@ import Triangle from "./Triangle";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
+  const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
+  const [questionType, setQuestionType] = useState("");
+  const [widget, setWidget] = useState("");
+  const [heading, setHeading] = useState("");
+  const [choiceList, setChoiceList] = useState("");
+  const [instruction, setInstruction] = useState("");
 
   const fetchSurvey = async () => {
     try {
       const survey = await getSurvey();
       const data = survey.data;
+
       setStory(data.story);
+      setQuestionType(data.blank.questionType);
+      setWidget(data.blank.widget);
+      setHeading(data.blank.heading);
+      setChoiceList(data.blank.choiceList);
+      setInstruction(data.blank.instruction);
+      if (data.blank.children.length) {
+        setIsFollowUp(true);
+      }
     } catch (error) {
       setError("Error with POST request");
       toast("Something Failed");
@@ -78,7 +93,20 @@ function ActiveModePage() {
           <MiddleButton />
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Bar />
+              {widget === "barrel" ? (
+                <Barrel
+                  heading={heading}
+                  choiceList={choiceList}
+                  questionType={questionType}
+                  isFollowUP={isFollowUp}
+                />
+              ) : widget === "bar" ? (
+                <Bar />
+              ) : widget === "ring" ? (
+                <Ring />
+              ) : (
+                <Triangle />
+              )}
             </Queue>
           </div>
         </div>
