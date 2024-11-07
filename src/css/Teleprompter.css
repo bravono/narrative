@@ -21,8 +21,8 @@
   position: relative;
   padding: 10px;
   overflow-y: scroll; /* Enables vertical scrolling */
-  line-height: 2;
-  font-size: 1.2rem;
+  line-height: 1.4;
+  font-size: 2rem;
   mask-image: linear-gradient(
     to bottom,
     transparent,
@@ -42,12 +42,3 @@
   margin: 0.1rem;
   text-align: start;
 }
-
-/* .scrollbar {
-  position: absolute;
-}
-
-.placeholder {
-}
-
-//  BEGIN FROM USING MASKING
