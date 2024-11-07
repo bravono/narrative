@@ -6,9 +6,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
-.question {
+.question,
+.welcome {
   height: 160px;
   margin-bottom: 10px;
 }
@@ -22,4 +24,9 @@
   height: 570px;
   margin-bottom: 50px;
   padding: 5px;
+}
+
+.welcome {
+  padding: 1rem;
+  font-size: 1.5rem;
 }
