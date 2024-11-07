@@ -6,7 +6,7 @@ import Queue from "../Queue";
 import Timer from "../../utilities/Timer";
 import TalkBubble from "../TalkBubble";
 // import Timer from "../Timer";
-import TopButton from "../TopButton";
+import TopButton from "../composed/TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
@@ -18,13 +18,13 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
-    // alert("Routing to LearnModeBarClick");
-    // navigate("/LearnModeBarClick");
+  // alert("Routing to LearnModeBarClick");
+  // navigate("/LearnModeBarClick");
   // };
 
   // const goToNext = () => {
-    // alert("Routing to LearnModeRingTally");
-    // navigate("/LearnModeRingTally");
+  // alert("Routing to LearnModeRingTally");
+  // navigate("/LearnModeRingTally");
   // };
 
   return (

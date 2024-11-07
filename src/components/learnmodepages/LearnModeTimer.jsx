@@ -4,8 +4,8 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
-import TopButton from "../TopButton";
+import TopButton from "../composed/TopButton";
+
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Timer from "../../utilities/Timer";
@@ -35,8 +35,8 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer
-            style={{ border: isTimerActive ? "2px solid #009bfc" : "none" }}
-            duration={"4:59"}
+            style={{ border: "2px solid #009bfc" }}
+            duration={600}
             label={"PENDING"}
           />
           <TopButton classNameA={"learn"} classNameB={"learn"} />

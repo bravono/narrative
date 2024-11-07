@@ -4,9 +4,8 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import Timer from "../../utilities/Timer";
-import TopButton from "../TopButton";
+import TopButton from "../composed/TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
@@ -15,13 +14,14 @@ import Button from "../Button";
 import LearnButton from "./LearnButton";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleRoute = () => {
-  //   alert("Routing to LearnModeTimer");
-  //   navigate("/LearnModeTimer");
-  // };
-
+  const handleExit = () => {
+    navigate("/welcomepageactivemode");
+  };
+  const handleLearn = () => {
+    navigate("/LearnModeTimer");
+  };
   return (
     <main className="main-container">
       <section className="top-section">
@@ -30,8 +30,8 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
         </div>
         <div className="header">
           <EdgeChair />
-          <Timer duration={"4:59"} label={"PENDING"} />
-   
+          <Timer duration={600} label={"PENDING"} />
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -52,11 +52,18 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
                     className={`${classNameB} bottom_button talk-btn-exit`}
                   />
                 </div> */}
-                <LearnButton
-         
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
+                <div className="talkbubble-btn">
+                  <Button
+                    onClick={handleLearn}
+                    label="LEARN"
+                    className={`${classNameA} bottom_button talk-btn-learn`}
+                  />
+                  <Button
+                    onClick={handleExit}
+                    label="EXIT"
+                    className={`${classNameB} bottom_button talk-btn-exit`}
+                  />
+                </div>
 
                 <TalkBubble
                   props={`Welcome to the opportunity to
@@ -73,7 +80,6 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-   
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
@@ -83,7 +89,6 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
       </section>
 
       <section className="bottom-section">
-    
         <BottomButton
           classNameA={"learn"}
           classNameB={"learn"}
