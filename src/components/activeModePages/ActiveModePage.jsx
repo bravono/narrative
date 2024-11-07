@@ -14,6 +14,7 @@ import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import { Navigate, useNavigate } from "react-router-dom";
+import ActiveBlank from "../ActiveBlank";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -28,6 +29,8 @@ function ActiveModePage() {
   const [choiceList, setChoiceList] = useState("");
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(600);
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState("");
 
   // console.log(duration);
 
@@ -73,6 +76,40 @@ function ActiveModePage() {
     }
   }, [duration, isRunning]); // Only re-run if `duration` changes
 
+  useEffect(() => {
+    let recognition;
+
+    if (isRecording) {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+
+      recognition.onstart = () => {
+        console.log("Recording started...");
+      };
+
+      recognition.onresult = (event) => {
+        const current = event.resultIndex;
+        const transcript = event.results[current][0].transcript;
+        setTranscript((prevTranscript) => prevTranscript + transcript);
+      };
+
+      recognition.onend = () => {
+        console.log("Recording stopped.");
+        setIsRecording(false);
+      };
+
+      recognition.continuous = true;
+      recognition.start();
+    }
+
+    return () => {
+      if (recognition) {
+        recognition.stop();
+      }
+    };
+  }, [isRecording]);
+
   // Function to handle scrolling up
   const scrollUp = () => {
     if (containerRef.current) {
@@ -106,6 +143,51 @@ function ActiveModePage() {
   const handleEdge = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/");
+  };
+
+  const handleAddToStory = () => {
+    // function replaceAndStyle(str, replacementText) {
+    //   return story.replace(
+    //     regex,
+    //     `<span style="color: red; font-weight: bold;">${replacementText}</span>`
+    //   );
+    // }
+    const regex = /_{1,}[a-z]+_{1,}/;
+    const newString = story.replace(regex, "BREAKFAST");
+    setStory(newString);
+    console.log(newString);
+  };
+  const handlePreview = () => {
+    navigate("/fullstory");
+  };
+  const handleCompare = () => {
+    navigate("/compare");
+  };
+  const handleTalk = () => {
+    setIsRecording((prevIsRecording) => !prevIsRecording); // Toggle recording state
+    console.log(transcript);
+    setTranscript("");
+  };
+  const handlePDF = () => {
+    // Check if the story is complete (replace with your actual logic)
+    const isStoryComplete = false;
+
+    if (isStoryComplete) {
+      // Handle PDF download or action
+      console.log("PDF button clicked - story is complete");
+    } else {
+      // Show the completion message
+      const messageBox = document.getElementById("completionMessage");
+      messageBox.classList.add("show");
+
+      // Optionally, hide the message after a few seconds
+      setTimeout(() => {
+        messageBox.classList.remove("show");
+      }, 3000); // Hide after 3 seconds
+    }
+  };
+  const handleExit = () => {
+    navigate("/exit");
   };
 
   return (
@@ -150,7 +232,18 @@ function ActiveModePage() {
               <Teleprompter textLines={story} containerRef={containerRef} />
             </Queue>
           </div>
-          <MiddleButton />
+          <div className="middle_buttons-group">
+            <Button
+              onClick={handleAddToStory}
+              label="ADD TO STORY"
+              className={` middle_button primary`}
+            />
+            <Button
+              onClick={handlePreview}
+              label="PREVIEW"
+              className={`middle_button primary`}
+            />
+          </div>
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
               {widget === "barrel" ? (
@@ -174,11 +267,35 @@ function ActiveModePage() {
         </div>
       </section>
       <section className="bottom-section">
-        <Footer
-          classNameA={"primary"}
-          classNameB={"primary"}
-          classNameD={"primary"}
-        />
+        <div className="bottom_buttons">
+          <div className="bottom_buttons-row">
+            <Button
+              label="COMPARE"
+              onClick={handleCompare}
+              className={`bottom_button primary`}
+            />
+            <Button
+              onClick={handleTalk}
+              label={isRecording ? "STOP" : "TALK"}
+              className={`bottom_button primary`}
+            />
+          </div>
+          <div className="bottom_buttons-row">
+            <Button
+              onClick={handlePDF}
+              label="PDF IT"
+              className={`bottom_button`}
+            />
+            <div className="completion-message" id="completionMessage">
+              Complete Your Story to Use
+            </div>
+            <Button
+              onClick={handleExit}
+              label="EXIT"
+              className={`bottom_button primary`}
+            />
+          </div>
+        </div>
       </section>
     </main>
   );
