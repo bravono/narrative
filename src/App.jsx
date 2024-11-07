@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WelcomePageAM from "./components/activeModePages/WelcomePageAM";
+import ActiveModePage from "./components/activeModePages/ActiveModePage";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
 import LearnModeTimer from "./components/learnmodepages/LearnModeTimer";
 import LearnModeStart from "./components/learnmodepages/LearnModeStart";
@@ -35,6 +37,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<WelcomePageLM />} />
+        <Route path="/welcomepageactivemode" element={<WelcomePageAM />} />
+        <Route path="/activemodepage" element={<ActiveModePage />} />
         <Route path="/LearnModeTimer" element={<LearnModeTimer />} />
         <Route path="/LearnModeStart" element={<LearnModeStart />} />
         <Route path="/LearnModePause" element={<LearnModePause />} />
