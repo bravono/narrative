@@ -1,9 +1,17 @@
-const Edge = ({ src, className }) => {
-  return (
-    <img
-      src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
-      className="edge"
-    />
+import "../css/edge.css";
+
+const Edge = ({ type, onClick }) => {
+  return type === "standing" ? (
+    <img src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+  ) : (
+    <div className="edge-container">
+      <div className="click-me-box">Click Me</div>
+      <img
+        src="/assets/Edge_Emotional_States_Sitting_Stool_Blue.svg"
+        className="edge"
+        onClick={onClick}
+      />
+    </div>
   );
 };
 

@@ -1,8 +1,16 @@
 import "../css/EdgeStanding.css";
 
 export const EdgeChair = () => {
-  return <img className="edge-chair" src="/assets/Chair 1.svg" />;
+  return (
+    <img
+      style={{
+        paddingTop: "58px",
+        width: "46px",
+        alignSelf: "end",
+      }}
+      src="/assets/Chair 1.svg"
+    />
+  );
 };
 
 export default EdgeChair;
-
