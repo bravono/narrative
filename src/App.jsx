@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePageAM from "./components/activeModePages/WelcomePageAM";
 import ActiveModePage from "./components/activeModePages/ActiveModePage";
+import FullStoryPage from "./components/activeModePages/FullStoryPage";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
+import Compare from "./components/activeModePages/compare";
+import Exit from "./components/activeModePages/ExitPage";
 import LearnModeTimer from "./components/learnmodepages/LearnModeTimer";
 import LearnModeStart from "./components/learnmodepages/LearnModeStart";
 import LearnModePause from "./components/learnmodepages/LearnModePause";
@@ -28,17 +31,18 @@ import LearnModeRingTotal from "./components/learnmodepages/LearnModeRingTotal";
 import LearnModeAddChoice from "./components/learnmodepages/LearnModeAddChoice";
 import LearnModeContinue from "./components/learnmodepages/LearnModeContinue";
 import LearnModeSelectAnything from "./components/learnmodepages/LearnModeSelectAnything";
-// import ActiveModePage from "./components/composed/ActiveModePage";
 import "./App.css";
 
 function App() {
-  // return <ActiveModePage />;
   return (
     <Router>
       <Routes>
         <Route path="/" element={<WelcomePageLM />} />
-        <Route path="/welcomepageactivemode" element={<WelcomePageAM />} />
-        <Route path="/activemodepage" element={<ActiveModePage />} />
+        <Route path="/welcomeactivemode" element={<WelcomePageAM />} />
+        <Route path="/activemode" element={<ActiveModePage />} />
+        <Route path="/fullstory" element={<FullStoryPage />} />
+        <Route path="/compare" element={<Compare />} />
+        <Route path="/exit" element={<Exit />} />
         <Route path="/LearnModeTimer" element={<LearnModeTimer />} />
         <Route path="/LearnModeStart" element={<LearnModeStart />} />
         <Route path="/LearnModePause" element={<LearnModePause />} />
