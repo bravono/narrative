@@ -1,14 +1,5 @@
 /* .header {
-  display: flex;
   position: relative;
-  margin: 10px;
-  justify-content: start;
-} */
-
-/* .logo {
-  position: absolute;
-  right: 5px;
-  top: 5px;
 } */
 
 .body_content {
@@ -66,4 +57,68 @@
 .answer {
   height: 250px;
   margin-bottom: 10px;
+}
+
+/* styling for the pointer arrow on Learn Mode */
+
+.timer_right_arrow {
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  z-index: 5;
+}
+.start_vertical_arrow {
+  position: absolute;
+  right: 120px;
+  top: 75px;
+  z-index: 5;
+}
+
+.pause_vertical_arrow {
+  position: absolute;
+  right: 25px;
+  top: 75px;
+  z-index: 5;
+}
+
+.add_story_right_arrow {
+  position: absolute;
+  left: -10px;
+  top: 270px;
+  z-index: 5;
+}
+
+.preview_right_arrow {
+  position: absolute;
+  left: 210px;
+  top: 270px;
+  z-index: 5;
+}
+
+.compare_right_arrow {
+  position: absolute;
+  left: -10px;
+  bottom: 60px;
+  z-index: 5;
+}
+
+.pdf_right_arrow {
+  position: absolute;
+  left: -10px;
+  bottom: 16px;
+  z-index: 5;
+}
+
+.talk_right_arrow {
+  position: absolute;
+  left: 235px;
+  bottom: 60px;
+  z-index: 5;
+}
+
+.exit_right_arrow {
+  position: absolute;
+  left: 240px;
+  bottom: 16px;
+  z-index: 5;
 }

@@ -5,7 +5,6 @@ import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
 import TopButton from "../composed/TopButton";
-
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
@@ -13,6 +12,7 @@ import Timer from "../../utilities/Timer";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import RightPointerArrow from "../RightPointerArrow";
 
 export default function LearnModeCompare({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function LearnModeCompare({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -76,6 +76,9 @@ export default function LearnModeCompare({ classNameA, classNameB }) {
             </Queue>
           </div>
 
+          <div className="compare_right_arrow">
+            <RightPointerArrow />
+          </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">

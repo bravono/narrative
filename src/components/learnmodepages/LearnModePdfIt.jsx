@@ -4,16 +4,15 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
-
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import RightPointerArrow from "../RightPointerArrow";
 
 export default function LearnModePdfIt({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -79,6 +78,9 @@ export default function LearnModePdfIt({ classNameA, classNameB }) {
             </Queue>
           </div>
 
+          <div className="pdf_right_arrow">
+            <RightPointerArrow />
+          </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">

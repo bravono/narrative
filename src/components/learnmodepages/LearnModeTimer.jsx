@@ -13,6 +13,7 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import RightPointerArrow from "../RightPointerArrow";
 
 export default function LearnModeTimer({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -34,11 +35,12 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
         </div>
         <div className="header">
           <EdgeChair />
-          <Timer
-            // style={{ border: "2px solid #009bfc" }}
-            duration={600}
-            label={"PENDING"}
-          />
+
+          <div className="timer_right_arrow">
+            <RightPointerArrow />
+          </div>
+
+          <Timer duration={600} label={"PENDING"} />
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>

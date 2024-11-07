@@ -4,16 +4,16 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
-
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import PointerArrowVertical from "../PointerArrowVertical"
+
 
 export default function LearnModeStart({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -39,6 +39,7 @@ export default function LearnModeStart({ classNameA, classNameB }) {
           <Timer duration={600} label={"PENDING"} />
       
           <TopButton classNameA={"learn"} classNameB={"learn"} />
+          <div className="start_vertical_arrow"><PointerArrowVertical /></div>
         </div>
       </section>
 

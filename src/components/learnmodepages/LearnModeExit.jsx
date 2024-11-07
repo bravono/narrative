@@ -5,7 +5,6 @@ import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
 import TopButton from "../composed/TopButton";
-
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
@@ -13,6 +12,7 @@ import Timer from "../../utilities/Timer";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import RightPointerArrow from "../RightPointerArrow";
 
 export default function LearnModeExit({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -77,6 +77,9 @@ export default function LearnModeExit({ classNameA, classNameB }) {
             </Queue>
           </div>
 
+          <div className="exit_right_arrow">
+            <RightPointerArrow />
+          </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
