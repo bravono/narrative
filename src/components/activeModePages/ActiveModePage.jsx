@@ -5,14 +5,15 @@ import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import MiddleButton from "../MiddleButton";
-import Barrel from "./Barrel";
-import Bar from "./Bar";
-import Ring from "./Ring";
-import Triangle from "./Triangle";
+import Barrel from "../composed/Barrel";
+import Bar from "../composed/Bar";
+import Ring from "../composed/Ring";
+import Triangle from "../composed/Triangle";
 import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -92,12 +93,19 @@ function ActiveModePage() {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleStart = () => {
     console.log("Started");
   };
   const handlePause = () => {
     console.log("Paused");
     setIsRunning((prevIsRunning) => !prevIsRunning);
+  };
+
+  const handleEdge = () => {
+    setIsRunning((prevIsRunning) => !prevIsRunning);
+    navigate("/");
   };
 
   return (
@@ -107,7 +115,7 @@ function ActiveModePage() {
           <Logo />
         </div>
         <div className="header">
-          <Edge />
+          <Edge onClick={handleEdge} />
           <Timer duration={duration} label={"PENDING"} />
           <div className="top_button-group">
             <Button
@@ -156,8 +164,10 @@ function ActiveModePage() {
                 <Bar />
               ) : widget === "ring" ? (
                 <Ring />
-              ) : (
+              ) : widget === "triangle" ? (
                 <Triangle />
+              ) : (
+                ""
               )}
             </Queue>
           </div>

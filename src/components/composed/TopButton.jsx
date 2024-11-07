@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Button";
-import "../css/TopButton.css";
+import "../../css/topButton.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function TopButton({ classNameA, classNameB }) {
