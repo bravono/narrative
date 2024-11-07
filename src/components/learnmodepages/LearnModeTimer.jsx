@@ -35,7 +35,7 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer
-            style={{ border: "2px solid #009bfc" }}
+            // style={{ border: "2px solid #009bfc" }}
             duration={600}
             label={"PENDING"}
           />

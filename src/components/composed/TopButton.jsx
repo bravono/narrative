@@ -12,10 +12,8 @@ export default function TopButton({ classNameA, classNameB }) {
 
   const myClick = (label) => {
     if (label === "START") {
-      alert("/LearnModeStart");
       navigate("/LearnModeStart");
     } else if (label === "PAUSE") {
-      alert("/LearnModePause");
       navigate("/LearnModePause");
     }
   };

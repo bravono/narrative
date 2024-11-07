@@ -34,8 +34,8 @@ export default function LearnModeBarDrag({ classNameA, classNameB }) {
         </div>
         <div className="header">
           <EdgeChair />
-          <Timer duration={"4:59"} label={"PENDING"} />
-          {/* <TopButton {...props} /> */}
+          <Timer duration={600} label={"PENDING"} />
+         
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -75,7 +75,7 @@ export default function LearnModeBarDrag({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-          {/* <MiddleButton {...props} /> */}
+      
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
@@ -85,7 +85,7 @@ export default function LearnModeBarDrag({ classNameA, classNameB }) {
       </section>
 
       <section className="bottom-section">
-        {/* <BottomButton {...props} /> */}
+  
         <BottomButton
           classNameA={"learn"}
           classNameB={"learn"}

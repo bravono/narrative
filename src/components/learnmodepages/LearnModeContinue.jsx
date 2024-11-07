@@ -35,7 +35,8 @@ export default function LearnModeContinue({ classNameA, classNameB }) {
         </div>
         <div className="header">
           <EdgeChair />
-          <Timer duration={"4:59"} label={"PENDING"} />
+          <Timer duration={600} label={"PENDING"} />
+          
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>

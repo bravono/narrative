@@ -12,10 +12,8 @@ export default function MiddleButton({ classNameA, classNameB }) {
 
   const myClick = (label) => {
     if (label === "ADD TO STORY") {
-      alert("/LearnModeAddToStory");
       navigate("/LearnModeAddToStory");
     } else if (label === "PREVIEW") {
-      alert("/LearnModePreview");
       navigate("/LearnModePreview");
     }
   };

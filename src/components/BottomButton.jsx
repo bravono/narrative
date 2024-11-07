@@ -19,16 +19,12 @@ export default function BottomButton({
 
   const myClick = (label) => {
     if (label === "COMPARE") {
-      alert("/LearnModeCompare");
       navigate("/LearnModeCompare");
     } else if (label === "TALK") {
-      alert("/LearnModeTalk");
       navigate("/LearnModeTalk");
     } else if (label === "PDF IT") {
-      alert("/LearnModePdfIt");
       navigate("/LearnModePdfIt");
     } else if (label === "EXIT") {
-      alert("/LearnModeExit");
       navigate("/LearnModeExit");
     }
   };
