@@ -17,7 +17,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
 
   const handleExit = () => {
-    navigate("/welcomepageactivemode");
+    navigate("/welcomeactivemode");
   };
   const handleLearn = () => {
     navigate("/LearnModeTimer");

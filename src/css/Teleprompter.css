@@ -17,10 +17,9 @@
   overflow: hidden;
   justify-content: center;
   height: 80%;
-  overflow: hidden;
   position: relative;
   padding: 10px;
-  overflow-y: scroll; /* Enables vertical scrolling */
+  overflow-y: auto; /* Enables vertical scrolling */
   line-height: 1.4;
   font-size: 2rem;
   mask-image: linear-gradient(
@@ -40,5 +39,4 @@
 .text-line {
   transition: opacity 0.8s, font-size 0.3s;
   margin: 0.1rem;
-  text-align: start;
 }

@@ -8,6 +8,7 @@ export default function BottomButton({
   classNameB,
   classNameC,
   classNameD,
+  onClick
 }) {
   const navigate = useNavigate();
   const location = useLocation();

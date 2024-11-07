@@ -1,13 +1,13 @@
 import Queue from "./Queue";
 
-function Sorry() {
+function ThankYou() {
   return (
     <main className="main-container">
       <Queue className={"queue question"}>
-        <p>We are sorry to see you go, but "Goodbye"</p>
+        <p>Thank you for telling us your story</p>
       </Queue>
     </main>
   );
 }
 
-export default Sorry;
+export default ThankYou;

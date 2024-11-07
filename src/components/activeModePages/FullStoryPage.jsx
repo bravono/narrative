@@ -1,10 +1,10 @@
-import Footer from "./Footer";
-import Queue from "./Queue";
-import Button from "./Button";
-import BottomButton from "./BottomButton";
-import FooterButton from "./FooterButton";
+import Footer from "../Footer";
+import Queue from "../Queue";
+import Button from "../Button";
+import BottomButton from "../BottomButton";
+import FooterButton from "../FooterButton";
 
-function FinishedStory() {
+function FullStory() {
   return (
     <main className="main-container">
       <Queue className={"queue story"}>
@@ -51,4 +51,4 @@ function FinishedStory() {
   );
 }
 
-export default FinishedStory;
+export default FullStory;

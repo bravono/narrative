@@ -68,6 +68,14 @@ body {
   transform: scaleX(1);
 }
 
+.scroll_arrow-up:hover {
+  opacity: 0.3;
+}
+
+.scroll_arrow-down:hover {
+  opacity: 0.3;
+}
+
 .header {
   display: flex;
   position: relative;
