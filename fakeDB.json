@@ -4,7 +4,14 @@
     "blank": {
       "name": "a",
       "questionType": "singleChoice",
-      "choiceList": ["Breakfast", "Lunch", "Dinner", "Super"],
+      "choiceList": [
+        "Breakfast",
+        "Lunch",
+        "Dinner",
+        "Super",
+        "Midnight Snack",
+        "Early morning coffee"
+      ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
       "widget": "ring",

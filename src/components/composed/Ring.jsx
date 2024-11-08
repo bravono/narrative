@@ -116,6 +116,10 @@ const Ring = (props) => {
     setSegmentValue(0); // Reset segmentValue to 0
   };
 
+  const handleContinueOrRoundup = (updatedChoiceValuePair) => {
+    setChoiceValuePair(updatedChoiceValuePair);
+  };
+
   const tableRows = choiceList.map((choice, rowIndex) => {
     useEffect(() => {
       if (choice === activeCell) {
@@ -276,8 +280,12 @@ const Ring = (props) => {
               : "disabled"
           }
           label={
-            allChoicesHaveValue && total > 94 && total < 100 ? "ROUNDUP" : ""
+            allChoicesHaveValue && total > 94 && total < 100
+              ? "ROUNDUP"
+              : "CONTINUE"
           }
+          choiceValuePair={choiceValuePair}
+          onContinueOrRoundup={handleContinueOrRoundup}
         />
       </div>
       {total > 100 && (
