@@ -20,6 +20,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+table,
+p,
+button {
+  user-select: none;
+}
+
 .primary {
   background: var(--color-primary);
 }
