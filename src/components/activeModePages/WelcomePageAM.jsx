@@ -55,7 +55,7 @@ function WelcomePageAM() {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleStart = () => {
-    navigate("/activemodepage");
+    navigate("/activemode");
   };
 
   return (
