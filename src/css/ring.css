@@ -41,6 +41,10 @@ table td:first-child {
   font-weight: 600;
 }
 
+.highlight {
+  fill: red;
+}
+
 .ring-number {
   font-size: 1.5rem;
   pointerevents: "none";
@@ -81,4 +85,19 @@ table td:first-child {
 .ring-buttons {
   align-self: center;
   width: 22.75rem;
+}
+
+.total_above {
+}
+
+.total_below,
+.total_above {
+  background-color: rgba(0, 155, 252, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 45%;
+  user-select: none;
 }
