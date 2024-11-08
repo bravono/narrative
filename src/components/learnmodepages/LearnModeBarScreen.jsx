@@ -5,7 +5,6 @@ import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import Timer from "../../utilities/Timer";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import TopButton from "../composed/TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
@@ -13,6 +12,8 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Bar from "../composed/Bar";
+import PointerArrowVertical from "../PointerArrowVertical";
 
 export default function LearnModeBarScreen({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -79,7 +80,12 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <Bar />
+              <div className="bar_screen_arrow ">
+                <PointerArrowVertical />
+              </div>
+            </Queue>
           </div>
         </div>
       </section>

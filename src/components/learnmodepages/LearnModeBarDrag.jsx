@@ -12,6 +12,8 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Bar from "../composed/Bar";
+import LeftPointerArrow from "../LeftPointerArrow";
 
 export default function LearnModeBarDrag({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -35,7 +37,7 @@ export default function LearnModeBarDrag({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-         
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -75,17 +77,20 @@ export default function LearnModeBarDrag({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-      
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <Bar />
+              <div className="bar_drag_arrow ">
+                <LeftPointerArrow />
+              </div>
+            </Queue>
           </div>
         </div>
       </section>
 
       <section className="bottom-section">
-  
         <BottomButton
           classNameA={"learn"}
           classNameB={"learn"}

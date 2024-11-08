@@ -4,7 +4,6 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import TopButton from "../composed/TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
@@ -13,6 +12,7 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Triangle from "../composed/Triangle";
 
 export default function LearnModeSelectAnything({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function LearnModeSelectAnything({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -81,7 +81,9 @@ export default function LearnModeSelectAnything({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <Triangle />
+            </Queue>
           </div>
         </div>
       </section>
