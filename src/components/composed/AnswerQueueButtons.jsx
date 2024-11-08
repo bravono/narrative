@@ -7,6 +7,7 @@ export default function AnswerQueueButtons({
   isFollowUp,
   classAddAChoice,
   classContinue,
+  label,
 }) {
   const handleAddChoice = () => {
     console.log("Choice Added");
@@ -21,7 +22,7 @@ export default function AnswerQueueButtons({
         <div className="answer_queue_buttons">
           <Button
             onClick={handleAddChoice}
-            className={`${classAddAChoice} disabled button-small`}
+            className={`${classAddAChoice} button-small`}
             label="ADD A CHOICE"
           />
         </div>
@@ -33,13 +34,13 @@ export default function AnswerQueueButtons({
       <div className="answer_queue_buttons">
         <Button
           onClick={handleAddChoice}
-          className={`${classAddAChoice} disabled button-small`}
+          className={`${classAddAChoice} button-small`}
           label="ADD A CHOICE"
         />
         <Button
           onClick={handleContinue}
-          className={`${classContinue} accent button-small`}
-          label="CONTINUE"
+          className={`${classContinue} button-small`}
+          label={label || "CONTINUE"}
         />
       </div>
     </>
