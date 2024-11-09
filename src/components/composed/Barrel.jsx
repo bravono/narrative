@@ -10,16 +10,15 @@ const Barrel = ({
   questionType,
   isFollowUP,
   instruction,
+  onSortToggle,
 }) => {
   const isFollowUp = true;
-  const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveCell] = useState(null);
+  const [isSorted, setIsSorted] = useState(false);
 
-  const handleSort = () => {
+  const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
-    setChoiceList(choiceList.sort((a, b) => a.localeCompare(b)));
-
-    console.log(isSorted);
+    onSortToggle(isSorted);
   };
 
   const handleItemSelect = (choice, index) => {
@@ -46,7 +45,7 @@ const Barrel = ({
   });
   return (
     <div className="barrel-set">
-      <Lever sorted={isSorted} onClick={handleSort} />
+      <Lever sorted={isSorted} onClick={handleSortToggle} />
       <StickyArrow className={"single_choice"} />
       <div className="barrel">
         <table>

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
+import { Navigate, useNavigate } from "react-router-dom";
+import shuffleArray from "../../utilities/shuffleArray";
 import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
@@ -13,7 +15,6 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import { Navigate, useNavigate } from "react-router-dom";
 import ActiveBlank from "../ActiveBlank";
 
 function ActiveModePage() {
@@ -203,6 +204,14 @@ function ActiveModePage() {
     }
   };
 
+  const handleSortToggle = (data) => {
+    if (data === true) {
+      setChoiceList(shuffleArray(choiceList));
+    } else {
+      setChoiceList(choiceList.sort((a, b) => a.localeCompare(b)));
+    }
+  };
+
   return (
     <main className="main-container">
       <section className="top-section">
@@ -265,6 +274,8 @@ function ActiveModePage() {
                   choiceList={choiceList}
                   questionType={questionType}
                   isFollowUP={isFollowUp}
+                  instruction={instruction}
+                  onSortToggle={handleSortToggle}
                 />
               ) : widget === "bar" ? (
                 <Bar onHaveChoice={handleUpdateChoice} />
@@ -273,6 +284,7 @@ function ActiveModePage() {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
+                  onSortToggle={handleSortToggle}
                 />
               ) : widget === "triangle" ? (
                 <Triangle
