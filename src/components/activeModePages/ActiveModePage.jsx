@@ -147,23 +147,14 @@ function ActiveModePage() {
     setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/");
   };
+  useEffect(() => {}, [story]);
 
-  const handleAddToStory = (data) => {
-    // Triangle Case
-    if (widget.toLocaleLowerCase() === "triangle") {
-      setUserChoice(data);
-    }
-    // Bar Case
-    if (widget.toLocaleLowerCase() === "bar") {
-      setUserChoice(data);
-    }
-
+  const handleAddToStory = () => {
     // Add user's choice to the story;
     if (userChoice) {
+      console.log("This is user's choice", userChoice);
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      const newStory = story.replace(regex, `[${userChoice}]`);
-      setStory(newStory);
-      console.log(story);
+      setStory(story.replace(regex, `[${userChoice}]`));
     }
   };
 
@@ -198,6 +189,17 @@ function ActiveModePage() {
   };
   const handleExit = () => {
     navigate("/exit");
+  };
+
+  const handleUpdateChoice = (data) => {
+    // Triangle Case
+    if (widget.toLocaleLowerCase() === "triangle") {
+      setUserChoice(data);
+    }
+    // Bar Case
+    if (widget.toLocaleLowerCase() === "bar") {
+      setUserChoice(data);
+    }
   };
 
   return (
@@ -246,7 +248,7 @@ function ActiveModePage() {
             <Button
               onClick={handleAddToStory}
               label="ADD TO STORY"
-              className={` middle_button primary`}
+              className={userChoice ? ` middle_button primary` : "disabled"}
             />
             <Button
               onClick={handlePreview}
@@ -276,7 +278,7 @@ function ActiveModePage() {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
-                  onHaveChoice={handleAddToStory}
+                  onHaveChoice={handleUpdateChoice}
                 />
               ) : (
                 ""
