@@ -32,6 +32,7 @@ function ActiveModePage() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [userChoice, setUserChoice] = useState("");
+  const [blankName, setBlankName] = useState("");
 
   // console.log(duration);
 
@@ -48,6 +49,7 @@ function ActiveModePage() {
         setChoiceList(data.blank.choiceList);
         setInstruction(data.blank.instruction);
         setDuration(data.durationInMin * 60);
+        setBlankName(data.blank.name);
         if (data.blank.children.length) {
           setIsFollowUp(true);
         }
@@ -147,16 +149,24 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = (data) => {
-    setUserChoice(choiceList[data - 1]);
+    // Triangle Case
+    if (widget.toLocaleLowerCase() === "triangle") {
+      setUserChoice(data);
+    }
+    // Bar Case
+    if (widget.toLocaleLowerCase() === "bar") {
+      setUserChoice(data);
+    }
 
+    // Add user's choice to the story;
     if (userChoice) {
-      console.log("User's choice", userChoice);
-      const regex = /_{1,}[a-z][1-9]?_{1,}/;
-      const newString = story.replace(regex, `[${userChoice}]`);
-      setStory(newString);
+      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+      const newStory = story.replace(regex, `[${userChoice}]`);
+      setStory(newStory);
       console.log(story);
     }
   };
+
   const handlePreview = () => {
     navigate("/fullstory");
   };
@@ -254,7 +264,7 @@ function ActiveModePage() {
                   isFollowUP={isFollowUp}
                 />
               ) : widget === "bar" ? (
-                <Bar />
+                <Bar onHaveChoice={handleAddToStory} />
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}
