@@ -151,7 +151,7 @@ function ActiveModePage() {
 
     if (userChoice) {
       console.log("User's choice", userChoice);
-      const regex = /_{1,}[a-z]+_{1,}/g;
+      const regex = /_{1,}[a-z][1-9]?_{1,}/;
       const newString = story.replace(regex, `[${userChoice}]`);
       setStory(newString);
       console.log(story);
