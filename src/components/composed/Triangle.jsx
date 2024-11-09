@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/triangle.css";
 
-const Triangle = () => {
+const Triangle = ({ onHaveChoice, ...props }) => {
+  const { heading, choiceList, instruction } = props;
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -22,7 +23,10 @@ const Triangle = () => {
   const checkCornerProximity = (cx, cy) => {
     corners.forEach((corner, index) => {
       if (distance({ x: cx, y: cy }, corner) < 50) {
-        console.log(`Reached corner ${index + 1}`);
+        const corner = index + 1;
+        if (corner) {
+          onHaveChoice(corner);
+        }
       }
     });
   };
@@ -64,7 +68,7 @@ const Triangle = () => {
 
   return (
     <div className="triangle-set">
-      <p className="triangle-instruction">DRAG THE PUCK INTO ANY CORNER</p>
+      <p className="triangle-instruction">{instruction}</p>
       <svg
         ref={svgRef}
         viewBox="0 0 300 300"
@@ -102,7 +106,7 @@ const Triangle = () => {
           transform="rotate(0 140,10)"
           textAnchor="middle"
         >
-          {"Corner 1"}
+          {choiceList[0]}
         </text>
         <text
           className="corner-text"
@@ -111,7 +115,7 @@ const Triangle = () => {
           transform="rotate(0 10,290)"
           textAnchor="middle"
         >
-          {"Corner 2"}
+          {choiceList[1]}
         </text>
         <text
           className="corner-text"
@@ -120,10 +124,10 @@ const Triangle = () => {
           transform="rotate(0 290,290)"
           textAnchor="middle"
         >
-          {"Corner 3"}
+          {choiceList[2]}
         </text>
       </svg>
-      <AnswerQueueButtons />
+      <AnswerQueueButtons classAddAChoice="disabled" />
     </div>
   );
 };

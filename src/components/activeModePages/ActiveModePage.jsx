@@ -31,6 +31,7 @@ function ActiveModePage() {
   const [duration, setDuration] = useState(600);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [userChoice, setUserChoice] = useState("");
 
   // console.log(duration);
 
@@ -145,17 +146,16 @@ function ActiveModePage() {
     navigate("/");
   };
 
-  const handleAddToStory = () => {
-    // function replaceAndStyle(str, replacementText) {
-    //   return story.replace(
-    //     regex,
-    //     `<span style="color: red; font-weight: bold;">${replacementText}</span>`
-    //   );
-    // }
-    const regex = /_{1,}[a-z]+_{1,}/;
-    const newString = story.replace(regex, "BREAKFAST");
-    setStory(newString);
-    console.log(newString);
+  const handleAddToStory = (data) => {
+    setUserChoice(choiceList[data - 1]);
+
+    if (userChoice) {
+      console.log("User's choice", userChoice);
+      const regex = /_{1,}[a-z]+_{1,}/g;
+      const newString = story.replace(regex, `[${userChoice}]`);
+      setStory(newString);
+      console.log(story);
+    }
   };
   const handlePreview = () => {
     navigate("/fullstory");
@@ -262,7 +262,12 @@ function ActiveModePage() {
                   instruction={instruction}
                 />
               ) : widget === "triangle" ? (
-                <Triangle />
+                <Triangle
+                  heading={heading}
+                  choiceList={choiceList}
+                  instruction={instruction}
+                  onHaveChoice={handleAddToStory}
+                />
               ) : (
                 ""
               )}
