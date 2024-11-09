@@ -199,6 +199,7 @@ function ActiveModePage() {
     // Bar Case
     if (widget.toLocaleLowerCase() === "bar") {
       setUserChoice(data);
+      console.log(data);
     }
   };
 
@@ -266,7 +267,7 @@ function ActiveModePage() {
                   isFollowUP={isFollowUp}
                 />
               ) : widget === "bar" ? (
-                <Bar onHaveChoice={handleAddToStory} />
+                <Bar onHaveChoice={handleUpdateChoice} />
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}
