@@ -3,17 +3,15 @@ import RingLever from "../standalone/RingLever";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/ring.css";
 
-const Ring = ({
-  size = 150,
-  strokeWidth = 23,
-  color = "#4caf50", //Use dynamic call here
-}) => {
+const Ring = (props) => {
+  const size = 150;
+  const strokeWidth = 23;
+  const color = "#4caf50";
+  const { heading, choiceList, instruction } = props;
   const isFollowUp = true;
   const [segmentValue, setSegmentValue] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef(null);
-  const [heading, setHeading] = useState("");
-  const [instruction, setInstruction] = useState("");
   const [isSorted, setIsSorted] = useState(false);
   const [activeCell, setActiveCell] = useState(null);
   const [choiceValuePair, setChoiceValuePair] = useState({});
@@ -118,14 +116,10 @@ const Ring = ({
     setSegmentValue(0); // Reset segmentValue to 0
   };
 
-  const choiceList = [
-    "Choice A",
-    "Choice B",
-    "Choice C",
-    "Choice D",
-    "Choice E",
-    "Choice F",
-  ];
+  const handleContinueOrRoundup = (updatedChoiceValuePair) => {
+    setChoiceValuePair(updatedChoiceValuePair);
+  };
+
   const tableRows = choiceList.map((choice, rowIndex) => {
     useEffect(() => {
       if (choice === activeCell) {
@@ -281,11 +275,17 @@ const Ring = ({
           isFollowUp={isFollowUp}
           classAddAChoice={"disabled"}
           classContinue={
-            (allChoicesHaveValue && total < 100) || total === 100
+            (allChoicesHaveValue && total > 94 && total < 100) || total === 100
               ? "primary"
               : "disabled"
           }
-          label={allChoicesHaveValue && total < 100 ? "ROUNDUP" : ""}
+          label={
+            allChoicesHaveValue && total > 94 && total < 100
+              ? "ROUNDUP"
+              : "CONTINUE"
+          }
+          choiceValuePair={choiceValuePair}
+          onContinueOrRoundup={handleContinueOrRoundup}
         />
       </div>
       {total > 100 && (

@@ -8,12 +8,41 @@ export default function AnswerQueueButtons({
   classAddAChoice,
   classContinue,
   label,
+  choiceValuePair,
+  onContinueOrRoundup,
 }) {
   const handleAddChoice = () => {
     console.log("Choice Added");
   };
-  const handleContinue = () => {
-    console.log("Continued");
+  const handleContinueOrRoundup = () => {
+    if (label.toLowerCase() === "roundup") {
+      const choices = Object.keys(choiceValuePair);
+      const values = Object.values(choiceValuePair);
+
+      // Calculate the total
+      const total = values.reduce((sum, value) => sum + value, 0);
+
+      // Calculate the amount to distribute
+      const amountToDistribute = Math.min(5, 100 - total); // Distribute up to 5 or the remaining amount to reach 100
+
+      if (amountToDistribute > 0) {
+        // Calculate proportions
+        const proportions = values.map((value) => value / total);
+
+        // Calculate the distribution for each choice
+        const distribution = proportions.map((proportion) =>
+          Math.round(proportion * amountToDistribute)
+        );
+
+        // Update the choice-value pairs
+        const updatedChoiceValuePair = {};
+        choices.forEach((choice, index) => {
+          updatedChoiceValuePair[choice] =
+            choiceValuePair[choice] + distribution[index];
+        });
+        onContinueOrRoundup(updatedChoiceValuePair);
+      }
+    }
   };
 
   if (!isFollowUp) {
@@ -38,9 +67,9 @@ export default function AnswerQueueButtons({
           label="ADD A CHOICE"
         />
         <Button
-          onClick={handleContinue}
+          onClick={handleContinueOrRoundup}
           className={`${classContinue} button-small`}
-          label={label || "CONTINUE"}
+          label={label}
         />
       </div>
     </>

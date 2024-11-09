@@ -256,7 +256,11 @@ function ActiveModePage() {
               ) : widget === "bar" ? (
                 <Bar />
               ) : widget === "ring" ? (
-                <Ring />
+                <Ring
+                  heading={heading}
+                  choiceList={choiceList}
+                  instruction={instruction}
+                />
               ) : widget === "triangle" ? (
                 <Triangle />
               ) : (
