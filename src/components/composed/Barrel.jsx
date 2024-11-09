@@ -4,19 +4,38 @@ import Lever from "../standalone/BarrelLever";
 import "../../css/Barrel.css";
 import StickyArrow from "../StickyArrow";
 
-const Barrel = ({ heading, choiceList, questionType, isFollowUP }) => {
+const Barrel = ({
+  heading,
+  choiceList,
+  questionType,
+  isFollowUP,
+  instruction,
+}) => {
   const isFollowUp = true;
   const [isSorted, setIsSorted] = useState(false);
-  const [activeCell, setActiveCell] = useState(null);
+  const [activeRow, setActiveCell] = useState(null);
 
   const handleSort = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
+    setChoiceList(choiceList.sort((a, b) => a.localeCompare(b)));
+
     console.log(isSorted);
+  };
+
+  const handleItemSelect = (choice, index) => {
+    setActiveCell(index);
+    console.log(choice, index);
   };
 
   const tableRows = choiceList.map((choice, index) => {
     return (
-      <tr key={index}>
+      <tr
+        key={index}
+        onClick={() => handleItemSelect(choice, index)}
+        style={{
+          backgroundColor: activeRow === index ? "lightblue" : "",
+        }}
+      >
         <td>{choice}</td>
         <td></td>
         <td></td>
@@ -34,15 +53,20 @@ const Barrel = ({ heading, choiceList, questionType, isFollowUP }) => {
           <tbody>
             <tr>
               <th>{heading}</th>
-              <th>SINGLE CHOICE</th>
+              <th></th>
             </tr>
             {tableRows}
           </tbody>
         </table>
         {/* <img src="/assets/Column_dotted.svg" className="column_dotted" /> */}
       </div>
-      <p className="instruction">Select Up to Six</p>
-      <AnswerQueueButtons isFollowUp={isFollowUP} />
+      <p className="instruction">{instruction}</p>
+      <AnswerQueueButtons
+        isFollowUp={isFollowUp}
+        classAddAChoice={"primary"}
+        classContinue={"primary"}
+        label={"CONTINUE"}
+      />
     </div>
   );
 };
