@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/bar.css";
 
-const Bar = () => {
+const Bar = ({ onHaveChoice }) => {
   const isFollowUp = false;
   const progressBarRef = useRef(null);
   const isDragging = useRef(false);
@@ -42,6 +42,10 @@ const Bar = () => {
       setProgress(Math.max(0, Math.min(newProgress, 100))); // Keep progress between 0 and 100
     }
   };
+
+  useEffect(() => {
+    onHaveChoice(`${Math.round(progress)}%`);
+  }, [progress]);
 
   return (
     <div className="bar-set">
