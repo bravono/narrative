@@ -8,6 +8,7 @@ const Triangle = ({ onHaveChoice, ...props }) => {
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [circlePosition, setCirclePosition] = useState({ x: 150, y: 180 });
+  const [userChoice, setUserChoice] = useState("");
 
   const corners = [
     { x: 150, y: 20 }, // Point 1
@@ -25,7 +26,7 @@ const Triangle = ({ onHaveChoice, ...props }) => {
       if (distance({ x: cx, y: cy }, corner) < 50) {
         const corner = index + 1;
         if (corner) {
-          onHaveChoice(corner);
+          setUserChoice(choiceList[corner - 1]);
         }
       }
     });
@@ -65,6 +66,11 @@ const Triangle = ({ onHaveChoice, ...props }) => {
     document.addEventListener("mouseup", handleMouseUp);
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, []);
+
+  useEffect(() => {
+    onHaveChoice(userChoice);
+    console.log(userChoice);
+  }, [userChoice]);
 
   return (
     <div className="triangle-set">
