@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
-import "../../css/Barrel.css";
 import StickyArrow from "../StickyArrow";
+import "../../css/Barrel.css";
+import Checkbox from "../standalone/CheckBox";
+import Radio from "../standalone/Radio";
+import Rank from "../standalone/Rank";
+import RankControl from "../standalone/RankControl";
+import Rate from "../standalone/Rate";
+import RateControl from "../standalone/RateControl";
+import RadioButton from "../standalone/RadioButton";
 
 const Barrel = ({
   heading,
@@ -11,10 +18,12 @@ const Barrel = ({
   isFollowUP,
   instruction,
   onSortToggle,
+  onHaveChoice,
 }) => {
   const isFollowUp = true;
   const [activeRow, setActiveCell] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
+  const [userChoice, setUserChoice] = useState([]);
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -23,8 +32,16 @@ const Barrel = ({
 
   const handleItemSelect = (choice, index) => {
     setActiveCell(index);
-    console.log(choice, index);
+    setUserChoice((prevUserChoice) => [...prevUserChoice, choice]);
   };
+
+  useEffect(() => {
+    if (userChoice) {
+      onHaveChoice(userChoice);
+    }
+
+    console.log(userChoice);
+  }, [userChoice]);
 
   const tableRows = choiceList.map((choice, index) => {
     return (
@@ -36,7 +53,7 @@ const Barrel = ({
         }}
       >
         <td>{choice}</td>
-        <td></td>
+        <td>{<Checkbox />}</td>
         <td></td>
         <td></td>
         <td></td>

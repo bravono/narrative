@@ -193,15 +193,7 @@ function ActiveModePage() {
   };
 
   const handleUpdateChoice = (data) => {
-    // Triangle Case
-    if (widget.toLocaleLowerCase() === "triangle") {
-      setUserChoice(data);
-    }
-    // Bar Case
-    if (widget.toLocaleLowerCase() === "bar") {
-      setUserChoice(data);
-      console.log(data);
-    }
+    setUserChoice(data);
   };
 
   const handleSortToggle = (data) => {
@@ -276,6 +268,7 @@ function ActiveModePage() {
                   isFollowUP={isFollowUp}
                   instruction={instruction}
                   onSortToggle={handleSortToggle}
+                  onHaveChoice={handleUpdateChoice}
                 />
               ) : widget === "bar" ? (
                 <Bar onHaveChoice={handleUpdateChoice} />
