@@ -1,11 +1,18 @@
-import "../../css/radioButton.css"
+import React, { useState } from "react";
+import "../../css/checkbox.css";
+function RadioButton({ onClick }) {
+  const [isChecked, setIsChecked] = useState(false);
 
-function RadioButton() {
+  const handleToggle = () => {
+    setIsChecked((prev) => !prev);
+  };
   return (
     <>
-      <div className="radio-container">
-        <input type="radio" />
-      </div>
+      {isChecked ? (
+        <img onClick={handleToggle} src="/assets/RadioChecked.svg" />
+      ) : (
+        <img onClick={handleToggle} src="/assets/RadioUnchecked.svg" />
+      )}
     </>
   );
 }

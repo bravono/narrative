@@ -49,14 +49,15 @@ const Barrel = ({
         key={index}
         onClick={() => handleItemSelect(choice, index)}
         style={{
-          backgroundColor: activeRow === index ? "lightblue" : "",
+          backgroundColor: activeRow === index ? "#EBFF00" : "",
+          border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
         <td>{choice}</td>
         <td>{<Checkbox />}</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{<RadioButton />}</td>
+        <td>{<Rate/>}</td>
+        <td>{<Rank />}</td>
       </tr>
     );
   });
