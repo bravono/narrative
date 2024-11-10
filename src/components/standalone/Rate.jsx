@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "../css/Rating.css";
 
 // import RatingControl from "./RatingControl";
 
-function Rating() {
+function Rate() {
   // const [showRatingControl, setShowRatingControl] = useState(false);
 
   const handleClick = () => {
@@ -37,4 +36,4 @@ function Rating() {
   );
 }
 
-export default Rating;
+export default Rate;

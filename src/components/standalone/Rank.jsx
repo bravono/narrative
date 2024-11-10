@@ -1,16 +1,6 @@
-// const Rank = () => {
-//   return (
-//     <>
-//       <img src={"/assets/Rank.svg"} />
-//     </>
-//   );
-// };
-
-// export default Rank;
-
 import React, { useState } from "react";
 import RankControl from "./RankControl";
-import "../css/Rank.css";
+import "../../css/rank.css";
 
 function Rank() {
   // const [showRankControl, setShowRankControl] = useState(false);

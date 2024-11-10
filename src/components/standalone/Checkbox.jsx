@@ -1,6 +1,5 @@
-import "../css/CheckBox.css";
-
-function CheckBox() {
+import "../../css/checkbox.css"
+function Checkbox() {
   return (
     <>
       <div className="checkbox-container">
@@ -10,4 +9,4 @@ function CheckBox() {
   );
 }
 
-export default CheckBox;
+export default Checkbox;

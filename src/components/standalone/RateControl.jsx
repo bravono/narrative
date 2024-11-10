@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function RatingControl() {
+function RateControl() {
   const [number, setNumber] = useState(0);
 
   const handleIncrement = () => {
@@ -62,4 +62,4 @@ function RatingControl() {
   );
 }
 
-export default RatingControl;
+export default RateControl;
