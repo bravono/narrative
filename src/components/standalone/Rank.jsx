@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import RankControl from "./RankControl";
 import "../../css/rank.css";
 
-function Rank({ onRank, userChoice }) {
+function Rank({ onRank }) {
   const myRanks = [1, 2, 3, 4, 5, 6];
   const [rank, setRank] = useState(0);
   const [usedRanks, setUsedRanks] = useState([]);
