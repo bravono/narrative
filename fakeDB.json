@@ -7,7 +7,7 @@
       "choiceList": ["Breakfast", "Lunch", "Dinner"],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "bar",
+      "widget": "ring",
       "children": [
         {
           "name": "a1",

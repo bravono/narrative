@@ -3,11 +3,10 @@ import RingLever from "../standalone/RingLever";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/ring.css";
 
-const Ring = (props) => {
+const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
   const size = 150;
   const strokeWidth = 23;
   const color = "#4caf50";
-  const { heading, choiceList, instruction } = props;
   const isFollowUp = true;
   const [segmentValue, setSegmentValue] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -100,9 +99,9 @@ const Ring = (props) => {
     setSegmentValue(segmentValue - 1);
   };
 
-  const handleSort = () => {
+  const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
-    console.log("sorted");
+    onSortToggle(isSorted);
   };
 
   const handleItemSelect = (choice, rowIndex, colIndex) => {
@@ -156,7 +155,7 @@ const Ring = (props) => {
 
   return (
     <div className="ring-set">
-      <RingLever sorted={isSorted} onClick={handleSort} />
+      <RingLever sorted={isSorted} onClick={handleSortToggle} />
       <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
       <div className="ring">
         <div>
