@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import shuffleArray from "../../utilities/shuffleArray";
-import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
-import MiddleButton from "../MiddleButton";
 import Barrel from "../composed/Barrel";
 import Bar from "../composed/Bar";
 import Ring from "../composed/Ring";
@@ -15,10 +13,11 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import ActiveBlank from "../ActiveBlank";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
+  const location = useLocation();
+  const initialDuration = location.state?.timeLeft || 60;
   const [counterComplete, setCounterComplete] = useState(false);
   const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
@@ -29,7 +28,7 @@ function ActiveModePage() {
   const [heading, setHeading] = useState("");
   const [choiceList, setChoiceList] = useState("");
   const [instruction, setInstruction] = useState("");
-  const [duration, setDuration] = useState(600);
+  const [duration, setDuration] = useState(initialDuration);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [userChoice, setUserChoice] = useState("");
@@ -76,9 +75,9 @@ function ActiveModePage() {
         });
       }, 1000);
 
-      return () => clearInterval(timerId); // Clean up the interval on component unmount
+      return () => clearInterval(timerId);
     }
-  }, [duration, isRunning]); // Only re-run if `duration` changes
+  }, [duration, isRunning]);
 
   useEffect(() => {
     let recognition;
@@ -160,7 +159,7 @@ function ActiveModePage() {
   };
 
   const handlePreview = () => {
-    navigate("/preview", { state: { story } });
+    navigate("/preview", { state: { story, timeLeft: duration } });
   };
   const handleCompare = () => {
     navigate("/compare");
