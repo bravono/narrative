@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Rate({ onRate }) {
   const [rate, setRate] = useState(0);
@@ -8,6 +8,10 @@ function Rate({ onRate }) {
       setRate((prev) => prev + 1);
     }
   };
+
+  useEffect(() => {
+    onRate(rate)
+  }, [rate])
 
   return (
     <svg

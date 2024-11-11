@@ -26,6 +26,7 @@ const Barrel = ({
   const [userChoice, setUserChoice] = useState([]);
   const [choiceValuePair, setChoiceValuePair] = useState({});
   const [rank, setRank] = useState("");
+  const [rate, setRate] = useState("");
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -44,25 +45,40 @@ const Barrel = ({
     if (!(choice in choiceValuePair)) {
       setChoiceValuePair((prevChoiceValuePair) => ({
         ...prevChoiceValuePair,
-        [choice]: true, // Or any value you want to associate with the choice
+        [choice]: "", // Or any value you want to associate with the choice
       }));
     }
     console.log(choice);
   };
 
-  const handleRating = () => {};
+  const handleRating = (data) => {
+    setRate(data); // Update the rate state first
+    // Update the selected choice with the new rate
+    if (questionType === "rating") {
+      setChoiceValuePair((prevChoiceValuePair) => {
+        const updateChoiceValuePair = { ...prevChoiceValuePair };
+        if (Object.keys(prevChoiceValuePair).length > 0) {
+          const selectedChoice = userChoice;
+          updateChoiceValuePair[selectedChoice] = data;
+        }
+        return updateChoiceValuePair;
+      });
+    }
+  };
 
   const handleRanking = (data) => {
     setRank(data); // Update the rank state first
     // Update the selected choice with the new rank
-    if (questionType === "ranking"){setChoiceValuePair((prevChoiceValuePair) => {
-      const updateChoiceValuePair = { ...prevChoiceValuePair };
-      if (Object.keys(prevChoiceValuePair).length > 0) {
-        const selectedChoice = userChoice;
-        updateChoiceValuePair[selectedChoice] = data;
-      }
-      return updateChoiceValuePair;
-    });}
+    if (questionType === "ranking") {
+      setChoiceValuePair((prevChoiceValuePair) => {
+        const updateChoiceValuePair = { ...prevChoiceValuePair };
+        if (Object.keys(prevChoiceValuePair).length > 0) {
+          const selectedChoice = userChoice;
+          updateChoiceValuePair[selectedChoice] = data;
+        }
+        return updateChoiceValuePair;
+      });
+    }
   };
 
   useEffect(() => {
@@ -86,8 +102,8 @@ const Barrel = ({
         <td>{choice}</td>
         <td>{<Checkbox />}</td>
         <td>{<RadioButton />}</td>
-        <td>{<Rate onRate={handleRating} userChoice={userChoice} />}</td>
-        <td>{<Rank onRank={handleRanking} userChoice={userChoice} />}</td>
+        <td>{<Rate onRate={handleRating} />}</td>
+        <td>{<Rank onRank={handleRanking} />}</td>
       </tr>
     );
   });
