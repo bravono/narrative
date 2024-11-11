@@ -14,11 +14,9 @@ function Rank({ onRank, userChoice }) {
     }
   };
 
-  // useEffect(() => {
-  //   console.log("Rank :", rank);
-  //   console.log("Used Rank:", usedRanks);
-  //   console.log("Choice and Value", choiceValuePair);
-  // }, [rank, usedRanks]);
+  useEffect(() => {
+    onRank(rank);
+  }, [rank]);
 
   return (
     <svg

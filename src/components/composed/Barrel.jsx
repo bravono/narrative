@@ -24,6 +24,8 @@ const Barrel = ({
   const [activeRow, setActiveCell] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
+  const [choiceValuePair, setChoiceValuePair] = useState({});
+  const [rank, setRank] = useState("");
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -32,16 +34,44 @@ const Barrel = ({
 
   const handleItemSelect = (choice, index) => {
     setActiveCell(index);
-    setUserChoice((prevUserChoice) => [...prevUserChoice, choice]);
+
+    setRank(0);
+
+    if (!userChoice.includes(choice)) {
+      setUserChoice(choice);
+    }
+
+    if (!(choice in choiceValuePair)) {
+      setChoiceValuePair((prevChoiceValuePair) => ({
+        ...prevChoiceValuePair,
+        [choice]: true, // Or any value you want to associate with the choice
+      }));
+    }
+    console.log(choice);
+  };
+
+  const handleRating = () => {};
+
+  const handleRanking = (data) => {
+    setRank(data); // Update the rank state first
+    // Update the selected choice with the new rank
+    if (questionType === "ranking"){setChoiceValuePair((prevChoiceValuePair) => {
+      const updateChoiceValuePair = { ...prevChoiceValuePair };
+      if (Object.keys(prevChoiceValuePair).length > 0) {
+        const selectedChoice = userChoice;
+        updateChoiceValuePair[selectedChoice] = data;
+      }
+      return updateChoiceValuePair;
+    });}
   };
 
   useEffect(() => {
-    if (userChoice) {
-      onHaveChoice(userChoice);
-    }
-
-    console.log(userChoice);
+    onHaveChoice(userChoice);
   }, [userChoice]);
+
+  useEffect(() => {
+    console.log(choiceValuePair);
+  }, [choiceValuePair]);
 
   const tableRows = choiceList.map((choice, index) => {
     return (
@@ -56,8 +86,8 @@ const Barrel = ({
         <td>{choice}</td>
         <td>{<Checkbox />}</td>
         <td>{<RadioButton />}</td>
-        <td>{<Rate/>}</td>
-        <td>{<Rank />}</td>
+        <td>{<Rate onRate={handleRating} userChoice={userChoice} />}</td>
+        <td>{<Rank onRank={handleRanking} userChoice={userChoice} />}</td>
       </tr>
     );
   });
