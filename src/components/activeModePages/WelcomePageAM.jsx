@@ -14,23 +14,6 @@ import Button from "../Button";
 
 function WelcomePageAM() {
   const [duration, setDuration] = useState(600);
-  const [isRunning, setIsRunning] = useState(true);
-
-  useEffect(() => {
-    const fetchSurvey = async () => {
-      try {
-        const survey = await getSurvey();
-        const data = survey.data;
-
-        setDuration(data.durationInMin * 60);
-      } catch (error) {
-        setError("Error with POST request");
-        toast("Something Failed");
-      }
-    };
-
-    fetchSurvey();
-  }, []); // Empty dependency array to run only on mount
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -94,7 +77,7 @@ function WelcomePageAM() {
             </div>
             <Queue className={"queue welcome"}>
               <Teleprompter
-                textLines={`Welcome
+                textLines={`Welcome.
                 This is a narrative survey
                 mehtod and your story will
                 appear here`}
