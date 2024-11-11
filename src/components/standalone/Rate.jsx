@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-function Rate() {
-  // const [showRatingControl, setShowRatingControl] = useState(false);
+function Rate({ onRate }) {
+  const [rate, setRate] = useState(0);
 
-  const handleClick = () => {
-    // setShowRatingControl(!showRatingControl);
+  const handleRate = () => {
+    if (rate < 5) {
+      setRate((prev) => prev + 1);
+    }
   };
 
   return (
@@ -14,6 +16,7 @@ function Rate() {
       viewBox="0 0 38 37"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={handleRate}
     >
       <path
         d="M30.67 36.05L18.96 29.89L7.24 36.05L9.48 23L0 13.77L13.1 11.86L18.96 0L24.81 11.87L37.91 13.77L28.43 23L30.67 36.05Z"
@@ -36,7 +39,7 @@ function Rate() {
         fontSize="20"
         fontWeight="100"
       >
-        ?
+        {rate > 0 ? rate : "?"}
       </text>
     </svg>
   );
