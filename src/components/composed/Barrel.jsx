@@ -21,6 +21,7 @@ const Barrel = ({
   onHaveChoice,
 }) => {
   const isFollowUp = true;
+  const [isChecked, setIsChecked] = useState(false);
   const [activeRow, setActiveCell] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
@@ -50,24 +51,37 @@ const Barrel = ({
     }
     console.log(choice);
   };
+  const type = questionType.toLowerCase();
 
   const handleCheckToggle = (data) => {
-    if (questionType === "checkbox") {
-      setChoiceValuePair((prevChoiceValuePair) => {
-        const updateChoiceValuePair = { ...prevChoiceValuePair };
-        if (Object.keys(prevChoiceValuePair).length > 0) {
-          const selectedChoice = userChoice;
-          updateChoiceValuePair[selectedChoice] = data;
-        }
-        return updateChoiceValuePair;
-      });
-    }
+    setChoiceValuePair((prevChoiceValuePair) => {
+      const updateChoiceValuePair = { ...prevChoiceValuePair };
+      if (Object.keys(prevChoiceValuePair).length > 0) {
+        const selectedChoice = userChoice;
+        updateChoiceValuePair[selectedChoice] = data;
+      }
+      return updateChoiceValuePair;
+    });
+  };
+
+  const handleRadioToggle = (data) => {
+    setIsChecked((prev) => !prev);
+
+    setChoiceValuePair((prevChoiceValuePair) => {
+      const updatedChoiceValuePair = {}; // Create a new object
+
+      for (const choice in prevChoiceValuePair) {
+        updatedChoiceValuePair[choice] = choice === userChoice ? data : false;
+      }
+
+      return updatedChoiceValuePair;
+    });
   };
 
   const handleRating = (data) => {
     setRate(data); // Update the rate state first
     // Update the selected choice with the new rate
-    if (questionType === "rating") {
+    if (type === "rating") {
       setChoiceValuePair((prevChoiceValuePair) => {
         const updateChoiceValuePair = { ...prevChoiceValuePair };
         if (Object.keys(prevChoiceValuePair).length > 0) {
@@ -82,7 +96,7 @@ const Barrel = ({
   const handleRanking = (data) => {
     setRank(data); // Update the rank state first
     // Update the selected choice with the new rank
-    if (questionType === "ranking") {
+    if (type === "ranking") {
       setChoiceValuePair((prevChoiceValuePair) => {
         const updateChoiceValuePair = { ...prevChoiceValuePair };
         if (Object.keys(prevChoiceValuePair).length > 0) {
@@ -114,7 +128,9 @@ const Barrel = ({
       >
         <td>{choice}</td>
         <td>{<Checkbox onCheck={handleCheckToggle} />}</td>
-        <td>{<RadioButton />}</td>
+        <td>
+          {<RadioButton onCheck={handleRadioToggle} isChecked={isChecked} />}
+        </td>
         <td>{<Rate onRate={handleRating} />}</td>
         <td>{<Rank onRank={handleRanking} />}</td>
       </tr>
