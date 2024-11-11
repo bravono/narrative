@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RankControl from "./RankControl";
 import "../../css/rank.css";
 
-function Rank() {
-  // const [showRankControl, setShowRankControl] = useState(false);
+function Rank({ onRank, userChoice }) {
+  const myRanks = [1, 2, 3, 4, 5, 6];
+  const [rank, setRank] = useState(0);
+  const [usedRanks, setUsedRanks] = useState([]);
+  const [choiceValuePair, setChoiceValuePair] = useState([]);
 
-  const handleClick = () => {
-    // setShowRankControl(!showRankControl);
+  const handleRank = () => {
+    if (rank < 6) {
+      setRank((prev) => prev + 1);
+    }
   };
+
+  // useEffect(() => {
+  //   console.log("Rank :", rank);
+  //   console.log("Used Rank:", usedRanks);
+  //   console.log("Choice and Value", choiceValuePair);
+  // }, [rank, usedRanks]);
 
   return (
     <svg
@@ -16,6 +27,7 @@ function Rank() {
       viewBox="0 0 62 97"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={handleRank}
     >
       <rect
         x="10.25"
@@ -86,7 +98,7 @@ function Rank() {
         fontSize="70"
         fontWeight="100"
       >
-        ?
+        {rank ? rank : "?"}
       </text>
     </svg>
   );
