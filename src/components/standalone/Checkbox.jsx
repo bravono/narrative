@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/checkbox.css";
-function Checkbox({ onClick }) {
+function Checkbox({ onCheck }) {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleToggle = () => {
+  const handleCheckToggle = () => {
     setIsChecked((prev) => !prev);
   };
+
+  useEffect(() => {
+    onCheck(isChecked);
+  }, [isChecked]);
+
   return (
     <>
       {isChecked ? (
-        <img onClick={handleToggle} src="/assets/CheckboxChecked.svg" />
+        <img onClick={handleCheckToggle} src="/assets/CheckboxChecked.svg" />
       ) : (
-        <img onClick={handleToggle} src="/assets/Checkbox.svg" />
+        <img onClick={handleCheckToggle} src="/assets/Checkbox.svg" />
       )}
     </>
   );

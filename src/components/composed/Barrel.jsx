@@ -51,6 +51,19 @@ const Barrel = ({
     console.log(choice);
   };
 
+  const handleCheckToggle = (data) => {
+    if (questionType === "checkbox") {
+      setChoiceValuePair((prevChoiceValuePair) => {
+        const updateChoiceValuePair = { ...prevChoiceValuePair };
+        if (Object.keys(prevChoiceValuePair).length > 0) {
+          const selectedChoice = userChoice;
+          updateChoiceValuePair[selectedChoice] = data;
+        }
+        return updateChoiceValuePair;
+      });
+    }
+  };
+
   const handleRating = (data) => {
     setRate(data); // Update the rate state first
     // Update the selected choice with the new rate
@@ -100,7 +113,7 @@ const Barrel = ({
         }}
       >
         <td>{choice}</td>
-        <td>{<Checkbox />}</td>
+        <td>{<Checkbox onCheck={handleCheckToggle} />}</td>
         <td>{<RadioButton />}</td>
         <td>{<Rate onRate={handleRating} />}</td>
         <td>{<Rank onRank={handleRanking} />}</td>
