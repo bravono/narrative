@@ -1,0 +1,16 @@
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  font-size: 1.5rem;
+}
+
+.preview-queue {
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+.preview-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

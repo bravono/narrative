@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePageAM from "./components/activeModePages/WelcomePageAM";
 import ActiveModePage from "./components/activeModePages/ActiveModePage";
-import FullStoryPage from "./components/activeModePages/FullStoryPage";
+import Preview from "./components/activeModePages/Preview";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
 import Compare from "./components/activeModePages/compare";
 import Exit from "./components/activeModePages/ExitPage";
@@ -40,7 +40,7 @@ function App() {
         <Route path="/" element={<WelcomePageLM />} />
         <Route path="/welcomeactivemode" element={<WelcomePageAM />} />
         <Route path="/activemode" element={<ActiveModePage />} />
-        <Route path="/fullstory" element={<FullStoryPage />} />
+        <Route path="/preview" element={<Preview />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/exit" element={<Exit />} />
         <Route path="/LearnModeTimer" element={<LearnModeTimer />} />
@@ -93,7 +93,6 @@ function App() {
       </Routes>
     </Router>
   );
-  // return <ActiveModePage />;
 }
 
 export default App;

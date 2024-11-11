@@ -160,7 +160,7 @@ function ActiveModePage() {
   };
 
   const handlePreview = () => {
-    navigate("/fullstory");
+    navigate("/preview", { state: { story } });
   };
   const handleCompare = () => {
     navigate("/compare");
@@ -250,7 +250,11 @@ function ActiveModePage() {
             <Button
               onClick={handleAddToStory}
               label="ADD TO STORY"
-              className={userChoice ? ` middle_button primary` : "disabled"}
+              className={
+                userChoice || userChoice.length
+                  ? ` middle_button primary`
+                  : "disabled"
+              }
             />
             <Button
               onClick={handlePreview}
