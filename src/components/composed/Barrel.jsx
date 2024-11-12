@@ -12,20 +12,22 @@ import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
 
 const Barrel = ({
+  isFollowUP,
+  isRecording,
   heading,
   choiceList,
+  choiceValuePair,
   questionType,
-  isFollowUP,
   instruction,
   onSortToggle,
   onHaveChoice,
+  onAddToChoice,
 }) => {
   const isFollowUp = true;
   const [isChecked, setIsChecked] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
-  const [choiceValuePair, setChoiceValuePair] = useState({});
   const [rank, setRank] = useState("");
   const [rate, setRate] = useState("");
 
@@ -54,7 +56,7 @@ const Barrel = ({
   const type = questionType.toLowerCase();
 
   const handleCheckToggle = (data) => {
-    setChoiceValuePair((prevChoiceValuePair) => {
+    onSortToggle((prevChoiceValuePair) => {
       const updateChoiceValuePair = { ...prevChoiceValuePair };
       if (Object.keys(prevChoiceValuePair).length > 0) {
         const selectedChoice = userChoice;
@@ -65,8 +67,7 @@ const Barrel = ({
   };
 
   const handleRadioToggle = (data) => {
-
-    setChoiceValuePair((prevChoiceValuePair) => {
+    onSortToggle((prevChoiceValuePair) => {
       const updatedChoiceValuePair = {}; // Create a new object
 
       for (const choice in prevChoiceValuePair) {
@@ -115,7 +116,7 @@ const Barrel = ({
     console.log(choiceValuePair);
   }, [choiceValuePair]);
 
-  const tableRows = choiceList.map((choice, index) => {
+  const tableRows = Object.keys(choiceValuePair).map((choice, index) => {
     return (
       <tr
         key={index}
@@ -154,9 +155,11 @@ const Barrel = ({
       <p className="instruction">{instruction}</p>
       <AnswerQueueButtons
         isFollowUp={isFollowUp}
-        classAddAChoice={"primary"}
-        classContinue={"primary"}
+        isRecording={isRecording}
+        classAddAChoice={"accent"}
+        classContinue={"disabled"}
         label={"CONTINUE"}
+        onAddToChoice={onAddToChoice}
       />
     </div>
   );

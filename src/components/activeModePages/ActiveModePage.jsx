@@ -307,6 +307,7 @@ function ActiveModePage() {
                 <Barrel
                   heading={heading}
                   choiceList={choiceList}
+                  choiceValuePair={choiceValuePair}
                   questionType={questionType}
                   isFollowUP={isFollowUp}
                   instruction={instruction}
