@@ -27,6 +27,7 @@
     },
     "redirect": "",
     "durationInMin": "10",
-    "timeCounter": "down"
+    "timeCounter": "down",
+    "sessionId": "123abc"
   }
 }
