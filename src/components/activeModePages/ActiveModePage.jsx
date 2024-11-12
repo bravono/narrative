@@ -13,6 +13,7 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
+import Segment from "../standalone/segment";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -290,7 +291,7 @@ function ActiveModePage() {
                   onHaveChoice={handleUpdateChoice}
                 />
               ) : (
-                ""
+                <Segment/>
               )}
             </Queue>
           </div>
