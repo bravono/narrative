@@ -3,7 +3,14 @@ import RingLever from "../standalone/RingLever";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/ring.css";
 
-const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
+const Ring = ({
+  heading,
+  instruction,
+  choiceList,
+  choiceValuePair,
+  onSortToggle,
+  onUpdateChoiceValuePair,
+}) => {
   const size = 150;
   const strokeWidth = 23;
   const color = "#4caf50";
@@ -13,14 +20,12 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
-  const [choiceValuePair, setChoiceValuePair] = useState({});
   const [total, setTotal] = useState(0);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (segmentValue / 100) * circumference;
-  
 
   // Function to calculate SegmentValue based on angle
   const updateSegmentValue = (clientX, clientY) => {
@@ -105,10 +110,7 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
     console.log("Current choice:", choice);
     setActiveRow(choice);
 
-    setChoiceValuePair((prevChoiceValuePair) => ({
-      ...prevChoiceValuePair,
-      [choice]: Math.round(segmentValue), // Update or add the choice-value pair
-    }));
+    onUpdateChoiceValuePair(choice, Math.round(segmentValue));
 
     setSegmentValue(0); // Reset segmentValue to 0
   };
@@ -117,10 +119,10 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
     setChoiceValuePair(updatedChoiceValuePair);
   };
 
-  const tableRows = choiceList.map((choiceList, rowIndex) => {
+  const tableRows = Object.keys(choiceValuePair).map((choiceList, rowIndex) => {
     useEffect(() => {
-      console.log(choiceList);
-    }, [choiceList]);
+      console.log(choiceValuePair);
+    }, [choiceValuePair]);
 
     return (
       <tr

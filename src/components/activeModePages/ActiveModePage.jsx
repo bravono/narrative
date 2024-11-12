@@ -28,6 +28,7 @@ function ActiveModePage() {
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
   const [choiceList, setChoiceList] = useState("");
+  const [choiceValuePair, setChoiceValuePair] = useState("");
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
   const [isRecording, setIsRecording] = useState(false);
@@ -48,6 +49,13 @@ function ActiveModePage() {
         setWidget(data.blank.widget);
         setHeading(data.blank.heading);
         setChoiceList(data.blank.choiceList);
+        setChoiceValuePair((prevChoiceValuePair) => {
+          const newChoiceValuePair = {};
+          data.blank.choiceList.forEach((choice) => {
+            newChoiceValuePair[choice] = 0;
+          });
+          return newChoiceValuePair;
+        });
         setInstruction(data.blank.instruction);
         setDuration(data.durationInMin * 60);
         setBlankName(data.blank.name);
@@ -196,12 +204,37 @@ function ActiveModePage() {
     setUserChoice(data);
   };
 
+  const handleUpdateChoiceValuePair = (choice, value) => {
+    setChoiceValuePair((prevChoiceValuePair) => ({
+      ...prevChoiceValuePair,
+      [choice]: value, // Update the choice-value pair
+    }));
+  };
+
   const handleSortToggle = (data) => {
-    if (data === true) {
-      setChoiceList(shuffleArray(choiceList));
-    } else {
-      setChoiceList(choiceList.sort((a, b) => a.localeCompare(b)));
-    }
+    const values = Object.values(choiceValuePair);
+    const hasNonZeroValue = values.some((value) => value > 0);
+
+    // Randomize the keys first
+    const randomizedKeys = Object.keys(choiceValuePair).sort(
+      () => 0.5 - Math.random()
+    );
+
+    // Then sort by key if all values are 0, otherwise sort by value
+    const sortedKeys = randomizedKeys.sort((a, b) => {
+      if (!hasNonZeroValue) {
+        return a.localeCompare(b); // Sort by key
+      } else {
+        return choiceValuePair[b] - choiceValuePair[a]; // Sort by value
+      }
+    });
+
+    const sortedChoiceValuePair = {};
+    sortedKeys.forEach((key) => {
+      sortedChoiceValuePair[key] = choiceValuePair[key];
+    });
+
+    setChoiceValuePair(sortedChoiceValuePair);
   };
 
   return (
@@ -280,8 +313,10 @@ function ActiveModePage() {
                 <Ring
                   heading={heading}
                   choiceList={choiceList}
+                  choiceValuePair={choiceValuePair}
                   instruction={instruction}
                   onSortToggle={handleSortToggle}
+                  onUpdateChoiceValuePair={handleUpdateChoiceValuePair}
                 />
               ) : widget === "triangle" ? (
                 <Triangle
@@ -291,7 +326,7 @@ function ActiveModePage() {
                   onHaveChoice={handleUpdateChoice}
                 />
               ) : (
-                <Segment/>
+                <Segment />
               )}
             </Queue>
           </div>
