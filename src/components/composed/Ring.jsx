@@ -6,7 +6,7 @@ import "../../css/ring.css";
 const Ring = ({
   heading,
   instruction,
-  choiceList,
+  onGetTotal,
   choiceValuePair,
   onSortToggle,
   onUpdateChoiceValuePair,
@@ -51,10 +51,13 @@ const Ring = ({
       0
     );
     setTotal(newTotal);
+    onGetTotal(newTotal);
 
     // Check if all choices have a value
     setAllChoicesHaveValue(
-      choiceList.every((choice) => choice in choiceValuePair)
+      Object.keys(choiceValuePair).every(
+        (choice) => choiceValuePair[choice] > 0
+      )
     );
   }, [choiceValuePair]);
 
@@ -143,6 +146,8 @@ const Ring = ({
       </tr>
     );
   });
+
+  const isValidTotal = total > 100 || (total < 100 && allChoicesHaveValue);
 
   return (
     <div className="ring-set">
@@ -245,7 +250,7 @@ const Ring = ({
             y="65%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={total > 100 ? "highlight ring-number" : "ring-number"}
+            className={isValidTotal ? "highlight ring-number" : "ring-number"}
           >
             {total}
           </text>
@@ -254,7 +259,7 @@ const Ring = ({
             y="75%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={"ring-label"}
+            className={isValidTotal ? "highlight ring-label" : "ring-label"}
           >
             {"TOTAL"}
           </text>
@@ -263,7 +268,9 @@ const Ring = ({
       <div className="ring-buttons">
         <AnswerQueueButtons
           isFollowUp={isFollowUp}
-          classAddAChoice={"disabled"}
+          classAddAChoice={
+            Object.values(choiceValuePair).length < 6 ? "primary" : "disabled"
+          }
           classContinue={
             (allChoicesHaveValue && total > 94 && total < 100) || total === 100
               ? "primary"

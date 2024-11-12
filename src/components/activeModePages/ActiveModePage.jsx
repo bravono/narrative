@@ -237,6 +237,10 @@ function ActiveModePage() {
     setChoiceValuePair(sortedChoiceValuePair);
   };
 
+  const handleGetTotal = (total) => {
+    setUserChoice(total);
+  };
+
   return (
     <main className="main-container">
       <section className="top-section">
@@ -284,7 +288,9 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                userChoice || userChoice.length
+                widget === "ring" && userChoice === 100
+                  ? ` middle_button primary`
+                  : widget === "bar" || (widget === "triangle" && userChoice)
                   ? ` middle_button primary`
                   : "disabled"
               }
@@ -312,9 +318,9 @@ function ActiveModePage() {
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}
-                  choiceList={choiceList}
                   choiceValuePair={choiceValuePair}
                   instruction={instruction}
+                  onGetTotal={handleGetTotal}
                   onSortToggle={handleSortToggle}
                   onUpdateChoiceValuePair={handleUpdateChoiceValuePair}
                 />
