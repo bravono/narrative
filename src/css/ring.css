@@ -92,12 +92,14 @@ table td:first-child {
 
 .total_below,
 .total_above {
-  background-color: rgba(0, 155, 252, 0.5);
+  background-color: rgba(0, 155, 252, 0.95);
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   position: absolute;
-  top: 60%;
-  left: 45%;
+  top: -70%;
+  left: 0;
   user-select: none;
+  font-size: 1.5rem;
+  color: white;
 }
