@@ -312,6 +312,8 @@ function ActiveModePage() {
                   instruction={instruction}
                   onSortToggle={handleSortToggle}
                   onHaveChoice={handleUpdateChoice}
+                  onAddToChoice={handleTalk}
+                  isRecording={isRecording}
                 />
               ) : widget === "bar" ? (
                 <Bar onHaveChoice={handleUpdateChoice} />
@@ -323,6 +325,8 @@ function ActiveModePage() {
                   onGetTotal={handleGetTotal}
                   onSortToggle={handleSortToggle}
                   onUpdateChoiceValuePair={handleUpdateChoiceValuePair}
+                  onAddToChoice={handleTalk}
+                  isRecording={isRecording}
                 />
               ) : widget === "triangle" ? (
                 <Triangle

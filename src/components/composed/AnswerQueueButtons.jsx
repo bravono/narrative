@@ -5,14 +5,16 @@ import "../../css/button.css";
 
 export default function AnswerQueueButtons({
   isFollowUp,
+  isRecording,
   classAddAChoice,
   classContinue,
   label,
   choiceValuePair,
   onContinueOrRoundup,
+  onAddToChoice,
 }) {
   const handleAddChoice = () => {
-    console.log("Choice Added");
+    onAddToChoice();
   };
   const handleContinueOrRoundup = () => {
     if (label.toLowerCase() === "roundup") {
@@ -64,7 +66,7 @@ export default function AnswerQueueButtons({
         <Button
           onClick={handleAddChoice}
           className={`${classAddAChoice} button-small`}
-          label="ADD A CHOICE"
+          label={isRecording ? "Transcribing..." : "ADD A CHOICE"}
         />
         <Button
           onClick={handleContinueOrRoundup}

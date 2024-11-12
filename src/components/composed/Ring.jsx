@@ -10,6 +10,8 @@ const Ring = ({
   choiceValuePair,
   onSortToggle,
   onUpdateChoiceValuePair,
+  onAddToChoice,
+  isRecording,
 }) => {
   const size = 150;
   const strokeWidth = 23;
@@ -121,6 +123,8 @@ const Ring = ({
   const handleContinueOrRoundup = (updatedChoiceValuePair) => {
     setChoiceValuePair(updatedChoiceValuePair);
   };
+
+  
 
   const tableRows = Object.keys(choiceValuePair).map((choiceList, rowIndex) => {
     useEffect(() => {
@@ -268,6 +272,7 @@ const Ring = ({
       <div className="ring-buttons">
         <AnswerQueueButtons
           isFollowUp={isFollowUp}
+          isRecording={isRecording}
           classAddAChoice={
             Object.values(choiceValuePair).length < 6 ? "primary" : "disabled"
           }
@@ -283,6 +288,7 @@ const Ring = ({
           }
           choiceValuePair={choiceValuePair}
           onContinueOrRoundup={handleContinueOrRoundup}
+          onAddToChoice={onAddToChoice}
         />
       </div>
       {total > 100 && (
