@@ -12,7 +12,7 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
-  const [activeCell, setActiveCell] = useState(null);
+  const [activeRow, setActiveRow] = useState(null);
   const [choiceValuePair, setChoiceValuePair] = useState({});
   const [total, setTotal] = useState(0);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
@@ -20,6 +20,7 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (segmentValue / 100) * circumference;
+  
 
   // Function to calculate SegmentValue based on angle
   const updateSegmentValue = (clientX, clientY) => {
@@ -37,12 +38,6 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
 
     setSegmentValue(Math.max(0, Math.min(100, newSegmentValue))); // Clamp between 0 and 100
   };
-
-  useEffect(() => {
-    if (activeCell != null) {
-      console.log("Value : Pair", choiceValuePair);
-    }
-  }, [activeCell, choiceValuePair]);
 
   useEffect(() => {
     // Calculate the total whenever choiceValuePair changes
@@ -96,7 +91,9 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
   };
 
   const decrementSegmentValue = () => {
-    setSegmentValue(segmentValue - 1);
+    if (segmentValue > 0) {
+      setSegmentValue(segmentValue - 1);
+    }
   };
 
   const handleSortToggle = () => {
@@ -104,8 +101,9 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
     onSortToggle(isSorted);
   };
 
-  const handleItemSelect = (choice, rowIndex, colIndex) => {
-    setActiveCell(`${rowIndex}-${colIndex}`);
+  const handleItemSelect = (choice) => {
+    console.log("Current choice:", choice);
+    setActiveRow(choice);
 
     setChoiceValuePair((prevChoiceValuePair) => ({
       ...prevChoiceValuePair,
@@ -119,34 +117,25 @@ const Ring = ({ onSortToggle, heading, choiceList, instruction }) => {
     setChoiceValuePair(updatedChoiceValuePair);
   };
 
-  const tableRows = choiceList.map((choice, rowIndex) => {
+  const tableRows = choiceList.map((choiceList, rowIndex) => {
     useEffect(() => {
-      if (choice === activeCell) {
-        // Only update the selected choice
-        setChoiceValuePair((prevChoiceValuePair) => ({
-          ...prevChoiceValuePair,
-          [choice]: Math.round(segmentValue),
-        }));
-      }
-    }, [segmentValue, choice, activeCell, choiceValuePair]); // Include activeCell as a dependency
+      console.log(choiceList);
+    }, [choiceList]);
 
     return (
-      <tr key={rowIndex}>
-        {[choice].map((cellData, colIndex) => (
-          <td
-            key={colIndex}
-            onClick={() => handleItemSelect(choice, rowIndex, colIndex)}
-            style={{
-              backgroundColor:
-                activeCell === `${rowIndex}-${colIndex}` ? "lightblue" : "",
-            }}
-          >
-            {cellData || ""}
-          </td>
+      <tr
+        key={rowIndex}
+        onClick={() => handleItemSelect(choiceList)}
+        style={{
+          backgroundColor: activeRow === choiceList ? "lightblue" : "",
+        }}
+      >
+        {[choiceList].map((cellData, colIndex) => (
+          <td key={colIndex}>{cellData || ""}</td>
         ))}
         <td>
-          {choiceValuePair[choice] !== undefined
-            ? choiceValuePair[choice]
+          {choiceValuePair[choiceList] !== undefined
+            ? choiceValuePair[choiceList]
             : null}
         </td>
       </tr>

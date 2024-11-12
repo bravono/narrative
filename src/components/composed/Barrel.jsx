@@ -22,7 +22,7 @@ const Barrel = ({
 }) => {
   const isFollowUp = true;
   const [isChecked, setIsChecked] = useState(false);
-  const [activeRow, setActiveCell] = useState(null);
+  const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
   const [choiceValuePair, setChoiceValuePair] = useState({});
@@ -35,7 +35,7 @@ const Barrel = ({
   };
 
   const handleItemSelect = (choice, index) => {
-    setActiveCell(index);
+    setActiveRow(index);
 
     setRank(0);
 
