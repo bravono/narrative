@@ -8,7 +8,7 @@ export default function BottomButton({
   classNameB,
   classNameC,
   classNameD,
-  onClick
+  onClick,
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,13 +19,25 @@ export default function BottomButton({
   const isExitActive = location.pathname === "/LearnModeExit";
 
   const myClick = (label) => {
-    if (label === "COMPARE") {
+    if (
+      label === "COMPARE" &&
+      (location.pathname.includes("LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModeCompare");
-    } else if (label === "TALK") {
+    } else if (
+      label === "TALK" &&
+      (location.pathname.includes("LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModeTalk");
-    } else if (label === "PDF IT") {
+    } else if (
+      label === "PDF IT" &&
+      (location.pathname.includes("LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModePdfIt");
-    } else if (label === "EXIT") {
+    } else if (
+      label === "EXIT" &&
+      (location.pathname.includes("LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModeExit");
     }
   };
