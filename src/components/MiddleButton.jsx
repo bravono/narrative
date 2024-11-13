@@ -11,9 +11,15 @@ export default function MiddleButton({ classNameA, classNameB }) {
   const isPreviewActive = location.pathname === "/LearnModePreview";
 
   const myClick = (label) => {
-    if (label === "ADD TO STORY") {
+    if (
+      label === "ADD TO STORY" &&
+      (location.pathname.includes("/LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModeAddToStory");
-    } else if (label === "PREVIEW") {
+    } else if (
+      label === "PREVIEW" &&
+      (location.pathname.includes("/LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModePreview");
     }
   };

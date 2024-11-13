@@ -11,9 +11,15 @@ export default function TopButton({ classNameA, classNameB }) {
   const isPauseActive = location.pathname === "/LearnModePause";
 
   const myClick = (label) => {
-    if (label === "START") {
+    if (
+      label === "START" &&
+      (location.pathname.includes("/LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModeStart");
-    } else if (label === "PAUSE") {
+    } else if (
+      label === "PAUSE" &&
+      (location.pathname.includes("/LearnMode") || location.pathname === "/")
+    ) {
       navigate("/LearnModePause");
     }
   };
