@@ -201,38 +201,7 @@ html {
   font-weight: 700;
 }
 
-.rank-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
-}
 
-.rank-card {
-  font-size: 24px;
-  font-weight: bold;
-  background-color: #0ed1c7;
-  color: #000000;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #000000;
-}
-
-.rank-button {
-  font-size: 10px;
-  background-color: #0a0101;
-  color: whitesmoke;
-  border: none;
-  cursor: pointer;
-}
-
-.rank-button-container {
-  display: flex;
-  margin-top: -16px;
-  justify-content: space-evenly;
-}
 
 /* .star-container {
   width: 100px; 

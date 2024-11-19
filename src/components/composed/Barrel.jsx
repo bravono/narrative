@@ -6,7 +6,7 @@ import "../../css/Barrel.css";
 import Checkbox from "../standalone/CheckBox";
 import Radio from "../standalone/Radio";
 import Rank from "../standalone/Rank";
-import RankControl from "../standalone/RankControl";
+import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
@@ -161,6 +161,7 @@ const Barrel = ({
         label={"CONTINUE"}
         onAddToChoice={onAddToChoice}
       />
+      {/* <Control /> */}
     </div>
   );
 };

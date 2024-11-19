@@ -14,6 +14,7 @@ import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Segment from "../standalone/segment";
+import Control from "../standalone/Control";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -337,7 +338,7 @@ function ActiveModePage() {
                   onHaveChoice={handleUpdateChoice}
                 />
               ) : (
-                <Segment />
+                <Control />
               )}
             </Queue>
           </div>

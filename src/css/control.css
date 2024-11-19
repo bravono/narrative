@@ -1,0 +1,30 @@
+.control-container {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid tomato;
+  flex-direction: column;
+  user-select: none;
+  position: absolute;
+  left: 100%;
+  top: 30%;
+}
+
+.control-button {
+  font-size: 10px;
+  background-color: #0a0101;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  margin: 5px;
+}
+
+.control-button-container {
+  display: flex;
+  margin-top: -16px;
+  justify-content: space-evenly;
+}
+
+.control-buttons {
+    display: flex;
+}
