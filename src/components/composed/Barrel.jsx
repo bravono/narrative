@@ -80,7 +80,16 @@ const Barrel = ({
     }
   };
 
-  const handleRanking = () => {};
+  const handleRank = (choice) => {
+    if (choice.value < 6) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((item) => ({
+          ...item, // Copy all other properties
+          value: item.name === choice.name ? item.value + 1 : item.value,
+        }));
+      });
+    }
+  };
 
   useEffect(() => {
     onHaveChoice(userChoice);
@@ -96,31 +105,44 @@ const Barrel = ({
           border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
-        <td><p className="choice__list">{capitalizeWords(choice.name)}</p></td> {/* Access the name property */}
         <td>
-          {type === "radioButton" ? (
-            <Checkbox
-              onCheckToggle={() => handleCheckToggle(choice)}
-              isChecked={choice.value}
-            />
+          <p className="choice__list">{capitalizeWords(choice.name)}</p>
+        </td>{" "}
+        {/* Access the name property */}
+        <td>
+          {type === "checkbox" ? (
+            <span className="question__type">
+              <Checkbox
+                onCheckToggle={() => handleCheckToggle(choice)}
+                isChecked={choice.value}
+              />
+            </span>
           ) : (
             ""
           )}
         </td>
         <td>
           {type === "radioButton" ? (
-            <RadioButton
-              onRadioToggle={() => handleRadioToggle(choice)}
-              isChecked={choice.value}
-            />
+            <span className="question__type">
+              <RadioButton
+                onRadioToggle={() => handleRadioToggle(choice)}
+                isChecked={choice.value}
+              />
+            </span>
           ) : (
             ""
           )}
         </td>
         <td>
-          <span className="question__type">{<Rate onRate={() => handleRate(choice)} rate={choice.value} />}</span>
+          <span className="question__type">
+            {<Rate onRate={() => handleRate(choice)} rate={choice.value} />}
+          </span>
         </td>
-        <td><span className="question__type--rank">{<Rank onRank={handleRanking} />}</span></td>
+        <td>
+          <span className="question__type--rank">
+            {<Rank onRank={() => handleRank(choice)} rank={choice.value} />}
+          </span>
+        </td>
       </tr>
     );
   });
@@ -130,7 +152,7 @@ const Barrel = ({
       <StickyArrow className={"single_choice"} />
       <div className="barrel">
         <table>
-          <tbody> 
+          <tbody>
             <tr>
               <th>{heading}</th>
               <th></th>
