@@ -25,7 +25,6 @@ const Barrel = ({
   onAddToChoice,
 }) => {
   const isFollowUp = true;
-  const [isChecked, setIsChecked] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
@@ -42,18 +41,17 @@ const Barrel = ({
   };
   const type = questionType.toLowerCase();
 
-  const handleCheckToggle = (data) => {
-    onSortToggle((prevChoiceValuePair) => {
-      const updateChoiceValuePair = { ...prevChoiceValuePair };
-      if (Object.keys(prevChoiceValuePair).length > 0) {
-        const selectedChoice = userChoice;
-        updateChoiceValuePair[selectedChoice] = data;
-      }
-      return updateChoiceValuePair;
+  const handleCheckToggle = (choice) => {
+    onSetChoiceList((prevChoiceList) => {
+      return prevChoiceList.map((item) => ({
+        ...item, // Copy all other properties
+        value:
+          item.name === choice.name ? (item.value === 1 ? 0 : 1) : item.value,
+      }));
     });
   };
 
-  const handleRadioToggle = (choice, index) => {
+  const handleRadioToggle = (choice) => {
     onSetChoiceList((prevChoiceList) => {
       return prevChoiceList.map((item) => ({
         ...item, // Copy all other properties
@@ -106,15 +104,28 @@ const Barrel = ({
           border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
-        <td>{choice.name}</td> {/* Access the name property */}
-        <td>{<Checkbox onCheck={handleCheckToggle} />}</td>
+        <td>
+          {choice.name.charAt(0).toUpperCase() +
+            choice.name.slice(1).toLowerCase()}
+        </td>{" "}
+        {/* Access the name property */}
         <td>
           {
-            <RadioButton
-              onRadioToggle={() => handleRadioToggle(choice, index)}
+            <Checkbox
+              onCheckToggle={() => handleCheckToggle(choice)}
               isChecked={choice.value}
             />
           }
+        </td>
+        <td>
+          {questionType === "radioButton" ? (
+            <RadioButton
+              onRadioToggle={() => handleRadioToggle(choice)}
+              isChecked={choice.value}
+            />
+          ) : (
+            ""
+          )}
         </td>
         <td>{<Rate onRate={handleRating} />}</td>
         <td>{<Rank onRank={handleRanking} />}</td>
