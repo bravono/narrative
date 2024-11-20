@@ -10,6 +10,7 @@ import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
+import capitalizeWords from '../../../capilizeWords';
 
 const Barrel = ({
   isFollowUP,
@@ -105,8 +106,7 @@ const Barrel = ({
         }}
       >
         <td>
-          {choice.name.charAt(0).toUpperCase() +
-            choice.name.slice(1).toLowerCase()}
+          {capitalizeWords(choice.name)}
         </td>{" "}
         {/* Access the name property */}
         <td>
