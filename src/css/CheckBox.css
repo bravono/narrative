@@ -1,18 +1,4 @@
-.check-container {
-  width: 24px;
-  height: 24px;
-}
-
-.checkbox-container input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
-  background-color: #a7e2ee;
-  border: 2px solid #a7e2ee;
-  appearance: none;
-  border-radius: 3px;
-
-  &:checked {
-    background-color: white;
-    border-color: #a7e2ee;
-  }
+.checkbox {
+  width: 9px;
+  padding-top: 2px;
 }

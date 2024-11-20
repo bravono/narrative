@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../../css/rate.css"
 
 function Rate({ rate, onRate }) {
 

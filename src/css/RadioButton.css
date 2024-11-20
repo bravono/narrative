@@ -1,18 +1,5 @@
-.radio-container {
-  width: 24px;
-  height: 24px;
-}
-
-.radio-container input[type="radio"] {
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  border: 2px solid #fa9b7b;
-  appearance: none;
-  border-radius: 9px;
-
-  &:checked {
-    background-color: #fa5451;
-    border-color: #fa9b7b;
-  }
+.radio {
+  width: 9px;
+  padding-top: 2px;
+  cursor: pointer;
 }

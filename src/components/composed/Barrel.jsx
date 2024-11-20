@@ -4,7 +4,6 @@ import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../StickyArrow";
 import "../../css/Barrel.css";
 import Checkbox from "../standalone/CheckBox";
-import Radio from "../standalone/Radio";
 import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
@@ -111,7 +110,7 @@ const Barrel = ({
         {/* Access the name property */}
         <td>
           {type === "checkbox" ? (
-            <span className="question__type">
+            <span>
               <Checkbox
                 onCheckToggle={() => handleCheckToggle(choice)}
                 isChecked={choice.value}
@@ -122,16 +121,12 @@ const Barrel = ({
           )}
         </td>
         <td>
-          {type === "radioButton" ? (
-            <span className="question__type">
-              <RadioButton
-                onRadioToggle={() => handleRadioToggle(choice)}
-                isChecked={choice.value}
-              />
-            </span>
-          ) : (
-            ""
-          )}
+          <span>
+            <RadioButton
+              onRadioToggle={() => handleRadioToggle(choice)}
+              isChecked={choice.value}
+            />
+          </span>
         </td>
         <td>
           <span className="question__type">

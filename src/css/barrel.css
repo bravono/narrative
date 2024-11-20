@@ -67,6 +67,7 @@ td {
 .question__type--rank {
   display: inline-block;
   height: 10px;
+  cursor: pointer;
 }
 .question__type {
   width: 40%;
@@ -74,7 +75,6 @@ td {
 }
 
 .question__type--rank {
-  display: inline-block;
   width: 25%;
   padding-top: 1.3px;
 }
