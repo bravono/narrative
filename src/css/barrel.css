@@ -25,13 +25,10 @@ td {
   border: 1px solid green;
 }
 
-
-
 table {
   position: relative;
   left: 7%;
   height: 99%;
-  
 }
 
 thead th:first-child {
@@ -63,12 +60,21 @@ td {
 
 .choice__list {
   margin: 0;
-  font-size: .5re
+  /* font-size: .5rem */
 }
 
-.question__type {
-  border: 1px solid tomato;
+.question__type,
+.question__type--rank {
   display: inline-block;
-  width: 40%;
   height: 10px;
+}
+.question__type {
+  width: 40%;
+  padding-top: 1px;
+}
+
+.question__type--rank {
+  display: inline-block;
+  width: 25%;
+  padding-top: 1.3px;
 }

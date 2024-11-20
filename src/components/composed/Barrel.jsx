@@ -120,7 +120,7 @@ const Barrel = ({
         <td>
           <span className="question__type">{<Rate onRate={() => handleRate(choice)} rate={choice.value} />}</span>
         </td>
-        {/* <td>{<Rank onRank={handleRanking} />}</td> */}
+        <td><span className="question__type--rank">{<Rank onRank={handleRanking} />}</span></td>
       </tr>
     );
   });
