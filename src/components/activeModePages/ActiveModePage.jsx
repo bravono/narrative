@@ -123,6 +123,10 @@ function ActiveModePage() {
     };
   }, [isRecording]);
 
+  useEffect(() => {
+    console.log("Current choicelist", choiceList);
+  }, [choiceList, choiceValuePair]);
+
   // Function to handle scrolling up
   const scrollUp = () => {
     if (containerRef.current) {
@@ -203,6 +207,10 @@ function ActiveModePage() {
 
   const handleUpdateChoice = (data) => {
     setUserChoice(data);
+  };
+
+  const handleUpdateChoiceList = (data) => {
+    setChoiceList(data);
   };
 
   const handleUpdateChoiceValuePair = (choice, value) => {
@@ -315,6 +323,7 @@ function ActiveModePage() {
                   onSortToggle={handleSortToggle}
                   onHaveChoice={handleUpdateChoice}
                   onAddToChoice={handleTalk}
+                  onSetChoiceList={handleUpdateChoiceList}
                   isRecording={isRecording}
                 />
               ) : widget === "bar" ? (

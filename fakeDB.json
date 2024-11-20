@@ -4,26 +4,10 @@
     "blank": {
       "name": "g",
       "questionType": "",
-      "choiceList": ["Breakfast", "Lunch", "Dinner"],
+      "choiceList": [{"name" : "breakfast", "text" : "item 1", "value" : 0}, {"name" : "lunch", "text" : "item 2", "value" : 0}, {"name" : "dinner", "text" : "item 3", "value" : 0}],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "barrel",
-      "children": [
-        {
-          "name": "a1",
-          "questionType": "singleChoice",
-          "choiceList": ["items 1", "item 2", "item 3"],
-          "heading": "",
-          "instruction": ""
-        },
-        {
-          "name": "a2",
-          "questionType": "singleChoice",
-          "choiceList": ["item 1", "item 2", "item 3"],
-          "heading": "",
-          "instruction": ""
-        }
-      ]
+      "widget": "barrel"
     },
     "redirect": "",
     "durationInMin": "10",

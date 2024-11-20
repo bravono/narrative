@@ -16,6 +16,7 @@ const Barrel = ({
   isRecording,
   heading,
   choiceList,
+  onSetChoiceList,
   choiceValuePair,
   questionType,
   instruction,
@@ -38,20 +39,6 @@ const Barrel = ({
 
   const handleItemSelect = (choice, index) => {
     setActiveRow(index);
-
-    setRank(0);
-
-    if (!userChoice.includes(choice)) {
-      setUserChoice(choice);
-    }
-
-    if (!(choice in choiceValuePair)) {
-      setChoiceValuePair((prevChoiceValuePair) => ({
-        ...prevChoiceValuePair,
-        [choice]: "", // Or any value you want to associate with the choice
-      }));
-    }
-    console.log(choice);
   };
   const type = questionType.toLowerCase();
 
@@ -66,15 +53,12 @@ const Barrel = ({
     });
   };
 
-  const handleRadioToggle = (data) => {
-    onSortToggle((prevChoiceValuePair) => {
-      const updatedChoiceValuePair = {}; // Create a new object
-
-      for (const choice in prevChoiceValuePair) {
-        updatedChoiceValuePair[choice] = choice === userChoice ? data : false;
-      }
-
-      return updatedChoiceValuePair;
+  const handleRadioToggle = (choice, index) => {
+    onSetChoiceList((prevChoiceList) => {
+      return prevChoiceList.map((item) => ({
+        ...item, // Copy all other properties
+        value: item.name === choice.name ? 1 : 0, // Update 'value' conditionally
+      }));
     });
   };
 
@@ -112,24 +96,25 @@ const Barrel = ({
     onHaveChoice(userChoice);
   }, [userChoice]);
 
-  useEffect(() => {
-    console.log(choiceValuePair);
-  }, [choiceValuePair]);
-
-  const tableRows = Object.keys(choiceValuePair).map((choice, index) => {
+  const tableRows = choiceList.map((choice, index) => {
     return (
       <tr
         key={index}
-        onClick={() => handleItemSelect(choice, index)}
+        onClick={() => handleItemSelect(choice.name, index)} // Pass choice.name
         style={{
           backgroundColor: activeRow === index ? "#EBFF00" : "",
           border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
-        <td>{choice}</td>
+        <td>{choice.name}</td> {/* Access the name property */}
         <td>{<Checkbox onCheck={handleCheckToggle} />}</td>
         <td>
-          {<RadioButton onCheck={handleRadioToggle} isChecked={isChecked} />}
+          {
+            <RadioButton
+              onRadioToggle={() => handleRadioToggle(choice, index)}
+              isChecked={choice.value}
+            />
+          }
         </td>
         <td>{<Rate onRate={handleRating} />}</td>
         <td>{<Rank onRank={handleRanking} />}</td>

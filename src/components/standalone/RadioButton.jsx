@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../../css/checkbox.css";
-function RadioButton({ onCheck }) {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleToggle = () => {
-    setIsChecked((prev) => !prev);
-  };
+function RadioButton({ onRadioToggle, isChecked }) {
 
   useEffect(() => {
-    onCheck(isChecked);
   }, [isChecked]);
 
   return (
     <>
       {isChecked ? (
-        <img onClick={handleToggle} src="/assets/RadioChecked.svg" />
+        <img onClick={onRadioToggle} style={{cursor: "pointer"}} src="/assets/RadioChecked.svg" />
       ) : (
-        <img onClick={handleToggle} src="/assets/RadioUnchecked.svg" />
+        <img onClick={onRadioToggle} style={{cursor: "pointer"}} src="/assets/RadioUnchecked.svg" />
       )}
     </>
   );
