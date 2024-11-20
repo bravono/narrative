@@ -10,7 +10,7 @@ import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
-import capitalizeWords from '../../../capilizeWords';
+import capitalizeWords from "../../../capilizeWords";
 
 const Barrel = ({
   isFollowUP,
@@ -18,7 +18,6 @@ const Barrel = ({
   heading,
   choiceList,
   onSetChoiceList,
-  choiceValuePair,
   questionType,
   instruction,
   onSortToggle,
@@ -44,8 +43,17 @@ const Barrel = ({
 
   const handleCheckToggle = (choice) => {
     onSetChoiceList((prevChoiceList) => {
+      const selectedCount = prevChoiceList.filter(
+        (item) => item.value === 1
+      ).length;
+
+      if (choice.value === 0 && selectedCount >= 6) {
+        // Already 6 selected, prevent selecting more
+        return prevChoiceList;
+      }
+
       return prevChoiceList.map((item) => ({
-        ...item, // Copy all other properties
+        ...item,
         value:
           item.name === choice.name ? (item.value === 1 ? 0 : 1) : item.value,
       }));
@@ -105,17 +113,16 @@ const Barrel = ({
           border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
+        <td>{capitalizeWords(choice.name)}</td> {/* Access the name property */}
         <td>
-          {capitalizeWords(choice.name)}
-        </td>{" "}
-        {/* Access the name property */}
-        <td>
-          {
+          {questionType === "radioButton" ? (
             <Checkbox
               onCheckToggle={() => handleCheckToggle(choice)}
               isChecked={choice.value}
             />
-          }
+          ) : (
+            ""
+          )}
         </td>
         <td>
           {questionType === "radioButton" ? (

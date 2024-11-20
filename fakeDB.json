@@ -8,7 +8,10 @@
         { "name": "breakfast", "text": "item 1", "value": 0 },
         { "name": "lunch", "text": "item 2", "value": 0 },
         { "name": "dinner", "text": "item 3", "value": 0 },
-        { "name": "supper man", "text": "item 4", "value": 0 }
+        { "name": "supper", "text": "item 4", "value": 0 },
+        { "name": "dessert", "text": "item 5", "value": 0 },
+        { "name": "brunch", "text": "item 6", "value": 0 },
+        { "name": "appetizer", "text": "item 7", "value": 0 }
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
