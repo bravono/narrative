@@ -16,6 +16,7 @@
   background: url(/assets/Barrel_skeleton.svg);
   display: flex;
   justify-content: center;
+  background-size: cover;
 }
 
 table,
@@ -24,9 +25,13 @@ td {
   border: 1px solid green;
 }
 
+
+
 table {
   position: relative;
   left: 7%;
+  height: 99%;
+  
 }
 
 thead th:first-child {
@@ -54,4 +59,16 @@ td {
   font-weight: 900;
   font-size: 13px;
   margin-bottom: 5px;
+}
+
+.choice__list {
+  margin: 0;
+  font-size: .5re
+}
+
+.question__type {
+  border: 1px solid tomato;
+  display: inline-block;
+  width: 40%;
+  height: 10px;
 }

@@ -11,6 +11,9 @@
         { "name": "supper", "text": "item 4", "value": 0 },
         { "name": "dessert", "text": "item 5", "value": 0 },
         { "name": "brunch", "text": "item 6", "value": 0 },
+        { "name": "appetizer", "text": "item 7", "value": 0 },
+        { "name": "appetizer", "text": "item 7", "value": 0 },
+        { "name": "appetizer", "text": "item 7", "value": 0 },
         { "name": "appetizer", "text": "item 7", "value": 0 }
       ],
       "heading": "MEAL TYPE",

@@ -29,7 +29,7 @@ const Barrel = ({
   const [isSorted, setIsSorted] = useState(false);
   const [userChoice, setUserChoice] = useState([]);
   const [rank, setRank] = useState("");
-  const [rate, setRate] = useState("");
+  const [rate, setRate] = useState(0);
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -69,35 +69,18 @@ const Barrel = ({
     });
   };
 
-  const handleRating = (data) => {
-    setRate(data); // Update the rate state first
-    // Update the selected choice with the new rate
-    if (type === "rating") {
-      setChoiceValuePair((prevChoiceValuePair) => {
-        const updateChoiceValuePair = { ...prevChoiceValuePair };
-        if (Object.keys(prevChoiceValuePair).length > 0) {
-          const selectedChoice = userChoice;
-          updateChoiceValuePair[selectedChoice] = data;
-        }
-        return updateChoiceValuePair;
+  const handleRate = (choice) => {
+    if (choice.value < 5) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((item) => ({
+          ...item, // Copy all other properties
+          value: item.name === choice.name ? item.value + 1 : item.value,
+        }));
       });
     }
   };
 
-  const handleRanking = (data) => {
-    setRank(data); // Update the rank state first
-    // Update the selected choice with the new rank
-    if (type === "ranking") {
-      setChoiceValuePair((prevChoiceValuePair) => {
-        const updateChoiceValuePair = { ...prevChoiceValuePair };
-        if (Object.keys(prevChoiceValuePair).length > 0) {
-          const selectedChoice = userChoice;
-          updateChoiceValuePair[selectedChoice] = data;
-        }
-        return updateChoiceValuePair;
-      });
-    }
-  };
+  const handleRanking = () => {};
 
   useEffect(() => {
     onHaveChoice(userChoice);
@@ -113,9 +96,9 @@ const Barrel = ({
           border: activeRow === index ? "1px solid #44CEEC" : "",
         }}
       >
-        <td>{capitalizeWords(choice.name)}</td> {/* Access the name property */}
+        <td><p className="choice__list">{capitalizeWords(choice.name)}</p></td> {/* Access the name property */}
         <td>
-          {questionType === "radioButton" ? (
+          {type === "radioButton" ? (
             <Checkbox
               onCheckToggle={() => handleCheckToggle(choice)}
               isChecked={choice.value}
@@ -125,7 +108,7 @@ const Barrel = ({
           )}
         </td>
         <td>
-          {questionType === "radioButton" ? (
+          {type === "radioButton" ? (
             <RadioButton
               onRadioToggle={() => handleRadioToggle(choice)}
               isChecked={choice.value}
@@ -134,8 +117,10 @@ const Barrel = ({
             ""
           )}
         </td>
-        <td>{<Rate onRate={handleRating} />}</td>
-        <td>{<Rank onRank={handleRanking} />}</td>
+        <td>
+          <span className="question__type">{<Rate onRate={() => handleRate(choice)} rate={choice.value} />}</span>
+        </td>
+        {/* <td>{<Rank onRank={handleRanking} />}</td> */}
       </tr>
     );
   });
@@ -145,7 +130,7 @@ const Barrel = ({
       <StickyArrow className={"single_choice"} />
       <div className="barrel">
         <table>
-          <tbody>
+          <tbody> 
             <tr>
               <th>{heading}</th>
               <th></th>
