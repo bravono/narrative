@@ -82,9 +82,23 @@ const Barrel = ({
   const handleRank = (choice) => {
     if (choice.value < 6) {
       onSetChoiceList((prevChoiceList) => {
+        // 1. Get all existing values
+        const existingValues = prevChoiceList.map(item => item.value);
+  
+        // 2. Find the next available value
+        let newValue = choice.value + 1;
+        while (existingValues.includes(newValue)) {
+          newValue++;
+          if (newValue > 6) { 
+            // Prevent infinite loop if no values are available
+            return prevChoiceList; 
+          }
+        }
+  
+        // 3. Update the choiceList
         return prevChoiceList.map((item) => ({
-          ...item, // Copy all other properties
-          value: item.name === choice.name ? item.value + 1 : item.value,
+          ...item,
+          value: item.name === choice.name ? newValue : item.value,
         }));
       });
     }
