@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/triangle.css";
 
-const Triangle = ({ onHaveChoice, ...props }) => {
-  const { heading, choiceList, instruction } = props;
+const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [circlePosition, setCirclePosition] = useState({ x: 150, y: 180 });
-  const [userChoice, setUserChoice] = useState("");
 
   const corners = [
     { x: 150, y: 20 }, // Point 1
@@ -26,7 +25,10 @@ const Triangle = ({ onHaveChoice, ...props }) => {
       if (distance({ x: cx, y: cy }, corner) < 50) {
         const corner = index + 1;
         if (corner) {
-          setUserChoice(choiceList[corner - 1]);
+          onSetChoiceList(prevChoiceList => choiceList.map((choice, index) => ({
+            ...choice,
+            value: corner === index +1 ? 1 : 0
+          })));
         }
       }
     });
@@ -66,11 +68,6 @@ const Triangle = ({ onHaveChoice, ...props }) => {
     document.addEventListener("mouseup", handleMouseUp);
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, []);
-
-  useEffect(() => {
-    onHaveChoice(userChoice);
-    console.log(userChoice);
-  }, [userChoice]);
 
   return (
     <div className="triangle-set">
@@ -112,7 +109,7 @@ const Triangle = ({ onHaveChoice, ...props }) => {
           transform="rotate(0 140,10)"
           textAnchor="middle"
         >
-          {choiceList[0]}
+          {capitalizeWords(choiceList[0].name)}
         </text>
         <text
           className="corner-text"
@@ -121,7 +118,7 @@ const Triangle = ({ onHaveChoice, ...props }) => {
           transform="rotate(0 10,290)"
           textAnchor="middle"
         >
-          {choiceList[1]}
+          {capitalizeWords(choiceList[1].name)}
         </text>
         <text
           className="corner-text"
@@ -130,7 +127,7 @@ const Triangle = ({ onHaveChoice, ...props }) => {
           transform="rotate(0 290,290)"
           textAnchor="middle"
         >
-          {choiceList[2]}
+          {capitalizeWords(choiceList[2].name)}
         </text>
       </svg>
       <AnswerQueueButtons classAddAChoice="disabled" />

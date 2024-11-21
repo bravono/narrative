@@ -8,4 +8,3 @@ export default function capitalizeWords(str) {
 }
 
 
-console.log(capitalizeWords("Supper man"));

@@ -9,7 +9,7 @@ import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
-import capitalizeWords from "../../../capilizeWords";
+import capitalizeWords from "../../utilities/capilizeWords";
 
 const Barrel = ({
   isFollowUP,

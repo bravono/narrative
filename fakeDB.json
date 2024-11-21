@@ -11,7 +11,7 @@
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "bar"
+      "widget": "triangle"
     },
     "redirect": "",
     "durationInMin": "10",

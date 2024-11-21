@@ -35,7 +35,6 @@ function ActiveModePage() {
   const [userChoice, setUserChoice] = useState("");
   const [blankName, setBlankName] = useState("");
 
-
   useEffect(() => {
     const fetchSurvey = async () => {
       try {
@@ -202,8 +201,6 @@ function ActiveModePage() {
     navigate("/exit");
   };
 
- 
-
   const handleUpdateChoiceList = (data) => {
     setChoiceList(data);
   };
@@ -321,7 +318,10 @@ function ActiveModePage() {
                   isRecording={isRecording}
                 />
               ) : widget === "bar" ? (
-                <Bar onSetChoice={handleUpdateChoiceList} choiceList={choiceList} />
+                <Bar
+                  onSetChoice={handleUpdateChoiceList}
+                  choiceList={choiceList}
+                />
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}
@@ -338,7 +338,7 @@ function ActiveModePage() {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
-                  onHaveChoice={handleUpdateChoice}
+                  onSetChoiceList={handleUpdateChoiceList}
                 />
               ) : (
                 <Control />
