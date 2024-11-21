@@ -123,32 +123,28 @@ const Barrel = ({
         </td>{" "}
         {/* Access the name property */}
         <td>
-          {type === "checkbox" ? (
-            <span>
+          {type ? (
               <Checkbox
                 onCheckToggle={() => handleCheckToggle(choice)}
                 isChecked={choice.value}
               />
-            </span>
           ) : (
             ""
           )}
         </td>
         <td>
-          <span>
             <RadioButton
               onRadioToggle={() => handleRadioToggle(choice)}
               isChecked={choice.value}
             />
-          </span>
         </td>
         <td>
-          <span className="question__type">
+          <div className="rate">
             {<Rate onRate={() => handleRate(choice)} rate={choice.value} />}
-          </span>
+          </div>
         </td>
         <td>
-          <span className="question__type--rank">
+          <span className="rank">
             {<Rank onRank={() => handleRank(choice)} rank={choice.value} />}
           </span>
         </td>

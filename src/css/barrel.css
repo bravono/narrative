@@ -25,7 +25,7 @@ td {
   border: 1px solid green;
 }
 
-table {
+.barrel > table {
   position: relative;
   left: 7%;
   height: 99%;
@@ -45,9 +45,9 @@ th {
 }
 
 td {
-  text-align: center;
+ 
   padding: 0;
-  min-width: 25px;
+  text-align: center;
 }
 
 .instruction {
@@ -63,18 +63,29 @@ td {
   /* font-size: .5rem */
 }
 
-.question__type,
-.question__type--rank {
+.rate,
+.rank,
+.checkbox,
+.radio {
   display: inline-block;
-  height: 10px;
   cursor: pointer;
+  width: 40px;
+  /* height: 80%; */
 }
-.question__type {
-  width: 40%;
-  padding-top: 1px;
+.rate {
+  /* height: 65%; */
 }
 
-.question__type--rank {
-  width: 25%;
-  padding-top: 1.3px;
+.rank {
+  width: 23px;
+}
+.checkbox,
+.radio {
+
+}
+
+.checkbox {
+}
+
+.radio {
 }
