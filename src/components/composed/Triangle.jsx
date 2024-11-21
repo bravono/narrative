@@ -22,13 +22,15 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   // Check if circle is near a corner
   const checkCornerProximity = (cx, cy) => {
     corners.forEach((corner, index) => {
-      if (distance({ x: cx, y: cy }, corner) < 50) {
+      if (distance({ x: cx, y: cy }, corner) < 75) {
         const corner = index + 1;
         if (corner) {
-          onSetChoiceList(prevChoiceList => choiceList.map((choice, index) => ({
-            ...choice,
-            value: corner === index +1 ? 1 : 0
-          })));
+          onSetChoiceList((prevChoiceList) =>
+            choiceList.map((choice, index) => ({
+              ...choice,
+              value: corner === index + 1 ? 1 : 0,
+            }))
+          );
         }
       }
     });
@@ -58,7 +60,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
       ((p3.y - p1.y) * (x - p3.x) + (p1.x - p3.x) * (y - p3.y)) / denominator;
     const c = 1 - a - b;
 
-    if (a >= 0 && b >= 0 && c >= 0) {
+    if (a >= 0.13 && b >= 0.13 && c >= 0.13) {
       setCirclePosition({ x, y });
       checkCornerProximity(x, y);
     }
@@ -71,7 +73,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
 
   return (
     <div className="triangle-set">
-      <p className="triangle-instruction">{instruction}</p>
+      <p className="triangle-instruction">{heading}</p>
       <svg
         ref={svgRef}
         viewBox="0 0 300 300"
@@ -103,29 +105,44 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           filter={isDragging ? "url(#glow)" : ""}
         ></circle>
         <text
-          className="corner-text"
+          className={
+            choiceList[0].value > 0
+              ? "corner-text animate__animated animate__flash"
+              : "corner-text"
+          }
           x="150"
           y="0"
           transform="rotate(0 140,10)"
           textAnchor="middle"
+          fill={choiceList[0].value > 0 ? "gold" : ""}
         >
           {capitalizeWords(choiceList[0].name)}
         </text>
         <text
-          className="corner-text"
+          className={
+            choiceList[1].value > 0
+              ? "corner-text animate__animated animate__flash"
+              : "corner-text"
+          }
           x="10"
-          y="310"
+          y="315"
           transform="rotate(0 10,290)"
           textAnchor="middle"
+          fill={choiceList[1].value > 0 ? "gold" : ""}
         >
           {capitalizeWords(choiceList[1].name)}
         </text>
         <text
-          className="corner-text"
+          className={
+            choiceList[2].value > 0
+              ? "corner-text animate__animated animate__flash"
+              : "corner-text"
+          }
           x="290"
-          y="310"
+          y="315"
           transform="rotate(0 290,290)"
           textAnchor="middle"
+          fill={choiceList[2].value > 0 ? "gold" : ""}
         >
           {capitalizeWords(choiceList[2].name)}
         </text>
