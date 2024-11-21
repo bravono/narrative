@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import shuffleArray from "../../utilities/shuffleArray";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import Barrel from "../composed/Barrel";
@@ -13,7 +12,6 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import Segment from "../standalone/segment";
 import Control from "../standalone/Control";
 
 function ActiveModePage() {
@@ -37,7 +35,6 @@ function ActiveModePage() {
   const [userChoice, setUserChoice] = useState("");
   const [blankName, setBlankName] = useState("");
 
-  // console.log(duration);
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -205,9 +202,7 @@ function ActiveModePage() {
     navigate("/exit");
   };
 
-  const handleUpdateChoice = (data) => {
-    setUserChoice(data);
-  };
+ 
 
   const handleUpdateChoiceList = (data) => {
     setChoiceList(data);
@@ -321,13 +316,12 @@ function ActiveModePage() {
                   isFollowUP={isFollowUp}
                   instruction={instruction}
                   onSortToggle={handleSortToggle}
-                  onHaveChoice={handleUpdateChoice}
                   onAddToChoice={handleTalk}
                   onSetChoiceList={handleUpdateChoiceList}
                   isRecording={isRecording}
                 />
               ) : widget === "bar" ? (
-                <Bar onHaveChoice={handleUpdateChoice} />
+                <Bar onSetChoice={handleUpdateChoiceList} choiceList={choiceList} />
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}

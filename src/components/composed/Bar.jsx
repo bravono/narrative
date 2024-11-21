@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/bar.css";
 
-const Bar = ({ onHaveChoice }) => {
+const Bar = ({ onSetChoice, choiceList }) => {
   const isFollowUp = false;
   const progressBarRef = useRef(null);
   const isDragging = useRef(false);
@@ -47,7 +47,12 @@ const Bar = ({ onHaveChoice }) => {
 
   useEffect(() => {
     if (progress >= 1) {
-      onHaveChoice(`${Math.round(progress)}%`);
+      onSetChoice((prevChoiceList) => {
+        return choiceList.map((choice) => ({
+          ...choice,
+          value: `${Math.round(progress)}%`,
+        }));
+      });
     }
   }, [progress]);
 

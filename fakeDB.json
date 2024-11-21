@@ -6,12 +6,12 @@
       "questionType": "radio",
       "choiceList": [
         { "name": "breakfast", "text": "item 1", "value": 0 },
-        { "name": "lunch", "text": "item 2", "value": 0 },
+        { "name": "lunch", "text": "item 2", "value": 0 },       
         { "name": "dinner", "text": "item 3", "value": 0 }
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "barrel"
+      "widget": "bar"
     },
     "redirect": "",
     "durationInMin": "10",
