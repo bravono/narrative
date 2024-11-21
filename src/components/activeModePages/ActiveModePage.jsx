@@ -205,12 +205,7 @@ function ActiveModePage() {
     setChoiceList(data);
   };
 
-  const handleUpdateChoiceValuePair = (choice, value) => {
-    setChoiceValuePair((prevChoiceValuePair) => ({
-      ...prevChoiceValuePair,
-      [choice]: value, // Update the choice-value pair
-    }));
-  };
+  
 
   const handleSortToggle = (data) => {
     const values = Object.values(choiceValuePair);
@@ -325,11 +320,12 @@ function ActiveModePage() {
               ) : widget === "ring" ? (
                 <Ring
                   heading={heading}
+                  choiceList={choiceList}
                   choiceValuePair={choiceValuePair}
                   instruction={instruction}
                   onGetTotal={handleGetTotal}
                   onSortToggle={handleSortToggle}
-                  onUpdateChoiceValuePair={handleUpdateChoiceValuePair}
+                  onSetChoiceList={handleUpdateChoiceList}
                   onAddToChoice={handleTalk}
                   isRecording={isRecording}
                 />

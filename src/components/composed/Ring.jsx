@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
+import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/ring.css";
 
 const Ring = ({
   heading,
   instruction,
+  choiceList,
+  onSetChoiceList,
   onGetTotal,
   choiceValuePair,
   onSortToggle,
-  onUpdateChoiceValuePair,
   onAddToChoice,
   isRecording,
 }) => {
@@ -24,6 +26,8 @@ const Ring = ({
   const [activeRow, setActiveRow] = useState(null);
   const [total, setTotal] = useState(0);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
+
+  useEffect(() => {}, [choiceList]);
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -47,7 +51,7 @@ const Ring = ({
   };
 
   useEffect(() => {
-    // Calculate the total whenever choiceValuePair changes
+    // Calculate the total whenever choiceList changes
     const newTotal = Object.values(choiceValuePair).reduce(
       (sum, value) => sum + value,
       0
@@ -73,8 +77,21 @@ const Ring = ({
   const handleMouseMove = (e) => {
     if (isDragging) {
       updateSegmentValue(e.clientX, e.clientY);
+
+      if (activeRow) {
+        onSetChoiceList((prevChoiceList) => {
+          return prevChoiceList.map((choice) => ({
+            ...choice, // Copy all other properties
+            value: activeRow.name === choice.name ? `${Math.round(segmentValue)}` : choice.value, // Update 'value' conditionally
+          }));
+        });
+      }
     }
   };
+
+  useEffect(() => {
+    console.log(activeRow);
+  }, [activeRow]);
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -114,39 +131,23 @@ const Ring = ({
   const handleItemSelect = (choice) => {
     console.log("Current choice:", choice);
     setActiveRow(choice);
-
-    onUpdateChoiceValuePair(choice, Math.round(segmentValue));
-
-    setSegmentValue(0); // Reset segmentValue to 0
   };
 
   const handleContinueOrRoundup = (updatedChoiceValuePair) => {
     setChoiceValuePair(updatedChoiceValuePair);
   };
 
-  
-
-  const tableRows = Object.keys(choiceValuePair).map((choiceList, rowIndex) => {
-    useEffect(() => {
-      console.log(choiceValuePair);
-    }, [choiceValuePair]);
-
+  const tableRow = choiceList.map((choice, rowIndex) => {
     return (
       <tr
         key={rowIndex}
-        onClick={() => handleItemSelect(choiceList)}
+        onClick={() => handleItemSelect(choice)}
         style={{
-          backgroundColor: activeRow === choiceList ? "lightblue" : "",
+          backgroundColor: activeRow === choice ? "lightblue" : "",
         }}
       >
-        {[choiceList].map((cellData, colIndex) => (
-          <td key={colIndex}>{cellData || ""}</td>
-        ))}
-        <td>
-          {choiceValuePair[choiceList] !== undefined
-            ? choiceValuePair[choiceList]
-            : null}
-        </td>
+        <td>{capitalizeWords(choice.name)}</td>
+        <td>{choice.value}</td>
       </tr>
     );
   });
@@ -161,7 +162,7 @@ const Ring = ({
         <div>
           <div className="ring-list-container">
             <table className="ring-table">
-              <tbody>{tableRows}</tbody>
+              <tbody>{tableRow}</tbody>
             </table>
           </div>
           <p className="ring-instruction">
