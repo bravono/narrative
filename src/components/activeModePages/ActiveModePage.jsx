@@ -61,7 +61,7 @@ function ActiveModePage() {
         }
       } catch (error) {
         setError("Error with POST request");
-        toast("Something Failed");
+        
       }
     };
 

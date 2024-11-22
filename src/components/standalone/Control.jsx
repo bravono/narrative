@@ -39,7 +39,7 @@ function Control({ type = "rank" }) {
               rx="4.75"
               fill="#44CEEC"
               stroke="black"
-              stroke-width="0.5"
+              strokeWidth="0.5"
             />
 
             <text
