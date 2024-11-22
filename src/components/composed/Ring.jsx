@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
+import Checkbox from "../standalone/CheckBox";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -10,7 +11,6 @@ const Ring = ({
   choiceList,
   onSetChoiceList,
   onGetTotal,
-  choiceValuePair,
   onSortToggle,
   onAddToChoice,
   isRecording,
@@ -24,7 +24,8 @@ const Ring = ({
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
-  const [total, setTotal] = useState(0);
+  const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
+  const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
 
   useEffect(() => {}, [choiceList]);
@@ -51,22 +52,21 @@ const Ring = ({
   };
 
   useEffect(() => {
-    // Calculate the total whenever choiceList changes
-    const newTotal = Object.values(choiceValuePair).reduce(
-      (sum, value) => sum + value,
-      0
-    );
-    setTotal(newTotal);
-    onGetTotal(newTotal);
+    // Does all item has a weight greater than 0
+    setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
 
-    // Check if all choices have a value
-    setAllChoicesHaveValue(
-      Object.keys(choiceValuePair).every(
-        (choice) => choiceValuePair[choice] > 0
-      )
-    );
-  }, [choiceValuePair]);
+    if (setAllChoicesHaveValue) {
+      let total = 0;
+      choiceList.map((choice) => {
+        total += Number(choice.value);
+      });
+      setTotal(total);
+    }
+  }, [choiceList]);
 
+  useEffect(() => {
+    console.log(total);
+  }, [total]);
   // Mouse/touch event handlers
 
   const handleMouseDown = (e) => {
@@ -82,7 +82,10 @@ const Ring = ({
         onSetChoiceList((prevChoiceList) => {
           return prevChoiceList.map((choice) => ({
             ...choice, // Copy all other properties
-            value: activeRow.name === choice.name ? `${Math.round(segmentValue)}` : choice.value, // Update 'value' conditionally
+            value:
+              activeRow.name === choice.name
+                ? `${Math.round(segmentValue)}`
+                : choice.value, // Update 'value' conditionally
           }));
         });
       }
@@ -106,6 +109,18 @@ const Ring = ({
   const handleTouchMove = (e) => {
     if (isDragging) {
       updateSegmentValue(e.touches[0].clientX, e.touches[0].clientY);
+
+      if (activeRow) {
+        onSetChoiceList((prevChoiceList) => {
+          return prevChoiceList.map((choice) => ({
+            ...choice, // Copy all other properties
+            value:
+              activeRow.name === choice.name
+                ? `${Math.round(segmentValue)}`
+                : choice.value, // Update 'value' conditionally
+          }));
+        });
+      }
     }
   };
 
@@ -129,12 +144,15 @@ const Ring = ({
   };
 
   const handleItemSelect = (choice) => {
-    console.log("Current choice:", choice);
     setActiveRow(choice);
-  };
 
-  const handleContinueOrRoundup = (updatedChoiceValuePair) => {
-    setChoiceValuePair(updatedChoiceValuePair);
+    const newCurrentTotal = choiceList.reduce(
+      (sum, obj) => parseInt(sum) + parseInt(obj.value),
+      0
+    );
+
+    setCurrentTotal(newCurrentTotal);
+    onGetTotal(newCurrentTotal);
   };
 
   const tableRow = choiceList.map((choice, rowIndex) => {
@@ -146,13 +164,15 @@ const Ring = ({
           backgroundColor: activeRow === choice ? "lightblue" : "",
         }}
       >
-        <td>{capitalizeWords(choice.name)}</td>
+        <td id="ring-checkbox"><input type="checkbox" /></td>
+        <td id="ring-list">{capitalizeWords(choice.name)}</td>
         <td>{choice.value}</td>
       </tr>
     );
   });
 
-  const isValidTotal = total > 100 || (total < 100 && allChoicesHaveValue);
+  const isValidTotal =
+    currentTotal > 100 || (currentTotal < 100 && allChoicesHaveValue);
 
   return (
     <div className="ring-set">
@@ -274,35 +294,35 @@ const Ring = ({
         <AnswerQueueButtons
           isFollowUp={isFollowUp}
           isRecording={isRecording}
-          classAddAChoice={
-            Object.values(choiceValuePair).length < 6 ? "primary" : "disabled"
-          }
+          classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
           classContinue={
-            (allChoicesHaveValue && total > 94 && total < 100) || total === 100
-              ? "primary"
-              : "disabled"
+            allChoicesHaveValue && total > 94 && total < 100 ? "accent" : "disabled"
           }
           label={
             allChoicesHaveValue && total > 94 && total < 100
               ? "ROUNDUP"
               : "CONTINUE"
           }
-          choiceValuePair={choiceValuePair}
-          onContinueOrRoundup={handleContinueOrRoundup}
+          choiceList={choiceList}
+          onSetChoiceList={onSetChoiceList}
           onAddToChoice={onAddToChoice}
         />
       </div>
-      {total > 100 && (
+      {total > 100 ? (
         <div className="total_above">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.
         </div>
+      ) : (
+        ""
       )}
-      {allChoicesHaveValue && total < 100 && (
+      {total < 100 && allChoicesHaveValue ? (
         <div className="total_below">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

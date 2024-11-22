@@ -9,8 +9,8 @@ export default function AnswerQueueButtons({
   classAddAChoice,
   classContinue,
   label,
-  choiceValuePair,
-  onContinueOrRoundup,
+  choiceList,
+  onSetChoiceList,
   onAddToChoice,
 }) {
   const handleAddChoice = () => {
@@ -18,31 +18,53 @@ export default function AnswerQueueButtons({
   };
   const handleContinueOrRoundup = () => {
     if (label.toLowerCase() === "roundup") {
-      const choices = Object.keys(choiceValuePair);
-      const values = Object.values(choiceValuePair);
+      const choices = choiceList.map((choice) => {
+        return choice.name;
+      });
+      const values = choiceList.map((choice) => {
+        return Number(choice.value);
+      });
 
       // Calculate the total
-      const total = values.reduce((sum, value) => sum + value, 0);
-
+      const total = values.reduce(
+        (sum, value) => Number(sum) + Number(value),
+        0
+      );
+      
       // Calculate the amount to distribute
       const amountToDistribute = Math.min(5, 100 - total); // Distribute up to 5 or the remaining amount to reach 100
-
+      
       if (amountToDistribute > 0) {
         // Calculate proportions
         const proportions = values.map((value) => value / total);
-
+        
         // Calculate the distribution for each choice
         const distribution = proportions.map((proportion) =>
           Math.round(proportion * amountToDistribute)
-        );
+      );
 
-        // Update the choice-value pairs
-        const updatedChoiceValuePair = {};
-        choices.forEach((choice, index) => {
-          updatedChoiceValuePair[choice] =
-            choiceValuePair[choice] + distribution[index];
-        });
-        onContinueOrRoundup(updatedChoiceValuePair);
+      onSetChoiceList((prevChoiceList) => {
+        const updatedChoiceList = prevChoiceList.map((choice, index) => ({
+          ...choice,
+          value: Number(choice.value) + distribution[index],
+        }));
+      
+        const total = updatedChoiceList.reduce((sum, choice) => sum + choice.value, 0);
+      
+        if (total !== 100) {
+          // Find the index of the choice with the highest value
+          const highestValueIndex = updatedChoiceList.reduce(
+            (maxIndex, choice, index, arr) =>
+              choice.value > arr[maxIndex].value ? index : maxIndex,
+            0
+          );
+      
+          // Add 1 to the highest value
+          updatedChoiceList[highestValueIndex].value += 1;
+        }
+      
+        return updatedChoiceList;
+      });
       }
     }
   };
