@@ -55,19 +55,14 @@ const Ring = ({
     // Does all item has a weight greater than 0
     onSetAllChoiceHaveValue(choiceList.every((choice) => choice.value > 0));
 
-    
-      let total = 0;
-      choiceList.map((choice) => {
-        total += Number(choice.value);
-      });
-      setTotal(total);
+    let total = 0;
+    choiceList.map((choice) => {
+      total += Number(choice.value);
+    });
+    setTotal(total);
   }, [choiceList]);
 
-  useEffect(() => {
-    console.log(total, "They have", allChoicesHaveValue);
-  }, [total, allChoicesHaveValue]);
   // Mouse/touch event handlers
-
   const handleMouseDown = (e) => {
     setIsDragging(true);
     updateSegmentValue(e.clientX, e.clientY);
@@ -212,7 +207,9 @@ const Ring = ({
     );
   });
 
-  const isValidTotal = allChoicesHaveValue && total === 100;
+  const isValidTotal = (total < 100 && allChoicesHaveValue) || total > 100;
+  const canContinue = allChoicesHaveValue && total == 100;
+  const canRoundup = allChoicesHaveValue && total > 94 && total < 100;
 
   return (
     <div className="ring-set">
@@ -315,7 +312,7 @@ const Ring = ({
             y="65%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={!isValidTotal ? "highlight ring-number" : "ring-number"}
+            className={isValidTotal ? "highlight ring-number" : "ring-number"}
           >
             {total}
           </text>
@@ -324,7 +321,7 @@ const Ring = ({
             y="75%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={!isValidTotal ? "highlight ring-label" : "ring-label"}
+            className={isValidTotal ? "highlight ring-label" : "ring-label"}
           >
             {"TOTAL"}
           </text>
@@ -335,30 +332,17 @@ const Ring = ({
           isFollowUp={isFollowUp}
           isRecording={isRecording}
           classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
-          classContinue={
-            allChoicesHaveValue && total > 94 && total < 100
-              ? "accent"
-              : "disabled"
-          }
-          label={
-            allChoicesHaveValue && total > 94 && total < 100
-              ? "ROUNDUP"
-              : "CONTINUE"
-          }
+          classContinue={canContinue ? "accent" : "disabled"}
+          classRoundup={canRoundup ? "accent" : "disabled"}
           choiceList={choiceList}
           onSetChoiceList={onSetChoiceList}
           onAddToChoice={onAddToChoice}
+          canContinue={canContinue }
+          canRoundup={canRoundup }
         />
       </div>
-      {total > 100 ? (
-        <div className="total_above">
-          Your total does not sum to the required number. Adjust your values or
-          if within 5% of required sum you can press Round Up.
-        </div>
-      ) : (
-        ""
-      )}
-      {total < 100 && allChoicesHaveValue ? (
+
+      {(total < 100 && allChoicesHaveValue) || total > 100 ? (
         <div className="total_below">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.
