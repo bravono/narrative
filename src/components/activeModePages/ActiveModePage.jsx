@@ -166,11 +166,9 @@ function ActiveModePage() {
 
   const handleAddToStory = () => {
     // Add user's choice to the story;
-    if (userChoice) {
-      console.log("This is user's choice", userChoice);
-      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(story.replace(regex, `[${userChoice}]`));
-    }
+    console.log("This is user's choice", userChoice);
+    const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+    setStory(story.replace(regex, `[${userChoice}]`));
   };
 
   const handlePreview = () => {
@@ -274,7 +272,8 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                widget === "ring" && userChoice === 100
+                widget === "ring" &&
+                choiceList.reduce((sum, choice) => sum + choice.value, 0) === 100
                   ? ` middle_button primary`
                   : widget === "bar" || (widget === "triangle" && userChoice)
                   ? ` middle_button primary`
