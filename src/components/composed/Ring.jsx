@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
-import { updateChoiceList } from "../../utilities/choiceListRing";
+import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -10,6 +10,8 @@ const Ring = ({
   instruction,
   choiceList,
   onSetChoiceList,
+  onSetAllChoiceHaveValue,
+  allChoicesHaveValue,
   onSortToggle,
   onAddToChoice,
   isRecording,
@@ -25,7 +27,6 @@ const Ring = ({
   const [activeRow, setActiveRow] = useState({});
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
-  const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
 
   useEffect(() => {}, [choiceList]);
 
@@ -52,20 +53,19 @@ const Ring = ({
 
   useEffect(() => {
     // Does all item has a weight greater than 0
-    setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
+    onSetAllChoiceHaveValue(choiceList.every((choice) => choice.value > 0));
 
-    if (setAllChoicesHaveValue) {
+    
       let total = 0;
       choiceList.map((choice) => {
         total += Number(choice.value);
       });
       setTotal(total);
-    }
   }, [choiceList]);
 
   useEffect(() => {
-    console.log(total);
-  }, [total]);
+    console.log(total, "They have", allChoicesHaveValue);
+  }, [total, allChoicesHaveValue]);
   // Mouse/touch event handlers
 
   const handleMouseDown = (e) => {
@@ -194,10 +194,6 @@ const Ring = ({
     setActiveRow(choice);
   };
 
-  useEffect(() => {
-    console.log("This is the active row", activeRow);
-  }, [activeRow]);
-
   const tableRow = choiceList.map((choice, rowIndex) => {
     return (
       <tr
@@ -216,7 +212,7 @@ const Ring = ({
     );
   });
 
-  const isValidTotal = allChoicesHaveValue && total === 100
+  const isValidTotal = allChoicesHaveValue && total === 100;
 
   return (
     <div className="ring-set">

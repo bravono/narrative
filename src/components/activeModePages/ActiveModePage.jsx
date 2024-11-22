@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  sortChoiceListByValue,
+  sortChoiceListByName,
+} from "../../utilities/choiceListSorter";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import Barrel from "../composed/Barrel";
@@ -34,6 +38,8 @@ function ActiveModePage() {
   const [transcript, setTranscript] = useState("");
   const [userChoice, setUserChoice] = useState("");
   const [blankName, setBlankName] = useState("");
+  const [isDescending, setIsDescending] = useState(true);
+  const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -61,7 +67,6 @@ function ActiveModePage() {
         }
       } catch (error) {
         setError("Error with POST request");
-        
       }
     };
 
@@ -205,37 +210,22 @@ function ActiveModePage() {
     setChoiceList(data);
   };
 
-  
+  const handleSortToggle = () => {
+    setIsDescending((prevIsDescending) => !prevIsDescending);
 
-  const handleSortToggle = (data) => {
-    const values = Object.values(choiceValuePair);
-    const hasNonZeroValue = values.some((value) => value > 0);
-
-    // Randomize the keys first
-    const randomizedKeys = Object.keys(choiceValuePair).sort(
-      () => 0.5 - Math.random()
-    );
-
-    // Then sort by key if all values are 0, otherwise sort by value
-    const sortedKeys = randomizedKeys.sort((a, b) => {
-      if (!hasNonZeroValue) {
-        return a.localeCompare(b); // Sort by key
-      } else {
-        return choiceValuePair[b] - choiceValuePair[a]; // Sort by value
-      }
+    if (allChoicesHaveValue) {
+      setChoiceList((prevChoiceList) => {
+        return sortChoiceListByValue(prevChoiceList, isDescending);
+      });
+    }
+    setChoiceList((prevChoiceList) => {
+      return sortChoiceListByName(prevChoiceList, isDescending);
     });
-
-    const sortedChoiceValuePair = {};
-    sortedKeys.forEach((key) => {
-      sortedChoiceValuePair[key] = choiceValuePair[key];
-    });
-
-    setChoiceValuePair(sortedChoiceValuePair);
   };
 
-  const handleGetTotal = (total) => {
-    setUserChoice(total);
-  };
+  useEffect(() => {
+    console.log("Sorted ChoiceList", choiceList);
+  }, [choiceList]);
 
   return (
     <main className="main-container">
@@ -323,9 +313,10 @@ function ActiveModePage() {
                   choiceList={choiceList}
                   choiceValuePair={choiceValuePair}
                   instruction={instruction}
-                  onGetTotal={handleGetTotal}
+                  allChoicesHaveValue={allChoicesHaveValue}
                   onSortToggle={handleSortToggle}
                   onSetChoiceList={handleUpdateChoiceList}
+                  onSetAllChoiceHaveValue={setAllChoicesHaveValue}
                   onAddToChoice={handleTalk}
                   isRecording={isRecording}
                 />
