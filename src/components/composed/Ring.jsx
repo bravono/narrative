@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
-import Checkbox from "../standalone/CheckBox";
+import { updateChoiceList } from "../../utilities/choiceListRing";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -10,7 +10,6 @@ const Ring = ({
   instruction,
   choiceList,
   onSetChoiceList,
-  onGetTotal,
   onSortToggle,
   onAddToChoice,
   isRecording,
@@ -23,7 +22,7 @@ const Ring = ({
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
-  const [activeRow, setActiveRow] = useState(null);
+  const [activeRow, setActiveRow] = useState({});
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
@@ -72,6 +71,18 @@ const Ring = ({
   const handleMouseDown = (e) => {
     setIsDragging(true);
     updateSegmentValue(e.clientX, e.clientY);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -104,6 +115,18 @@ const Ring = ({
   const handleTouchStart = (e) => {
     setIsDragging(true);
     updateSegmentValue(e.touches[0].clientX, e.touches[0].clientY);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const handleTouchMove = (e) => {
@@ -130,11 +153,35 @@ const Ring = ({
 
   const incrementSegmentValue = () => {
     setSegmentValue(segmentValue + 1);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const decrementSegmentValue = () => {
     if (segmentValue > 0) {
       setSegmentValue(segmentValue - 1);
+
+      if (activeRow) {
+        onSetChoiceList((prevChoiceList) => {
+          return prevChoiceList.map((choice) => ({
+            ...choice, // Copy all other properties
+            value:
+              activeRow.name === choice.name
+                ? `${Math.round(segmentValue)}`
+                : choice.value, // Update 'value' conditionally
+          }));
+        });
+      }
     }
   };
 
@@ -145,15 +192,11 @@ const Ring = ({
 
   const handleItemSelect = (choice) => {
     setActiveRow(choice);
-
-    const newCurrentTotal = choiceList.reduce(
-      (sum, obj) => parseInt(sum) + parseInt(obj.value),
-      0
-    );
-
-    setCurrentTotal(newCurrentTotal);
-    onGetTotal(newCurrentTotal);
   };
+
+  useEffect(() => {
+    console.log("This is the active row", activeRow);
+  }, [activeRow]);
 
   const tableRow = choiceList.map((choice, rowIndex) => {
     return (
@@ -161,18 +204,19 @@ const Ring = ({
         key={rowIndex}
         onClick={() => handleItemSelect(choice)}
         style={{
-          backgroundColor: activeRow === choice ? "lightblue" : "",
+          backgroundColor: activeRow.name === choice.name ? "lightblue" : "",
         }}
       >
-        <td id="ring-checkbox"><input type="checkbox" /></td>
+        <td>
+          <input type="checkbox" />
+        </td>
         <td id="ring-list">{capitalizeWords(choice.name)}</td>
         <td>{choice.value}</td>
       </tr>
     );
   });
 
-  const isValidTotal =
-    currentTotal > 100 || (currentTotal < 100 && allChoicesHaveValue);
+  const isValidTotal = allChoicesHaveValue && total === 100
 
   return (
     <div className="ring-set">
@@ -275,7 +319,7 @@ const Ring = ({
             y="65%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={isValidTotal ? "highlight ring-number" : "ring-number"}
+            className={!isValidTotal ? "highlight ring-number" : "ring-number"}
           >
             {total}
           </text>
@@ -284,7 +328,7 @@ const Ring = ({
             y="75%"
             dominantBaseline="middle"
             textAnchor="middle"
-            className={isValidTotal ? "highlight ring-label" : "ring-label"}
+            className={!isValidTotal ? "highlight ring-label" : "ring-label"}
           >
             {"TOTAL"}
           </text>
@@ -296,7 +340,9 @@ const Ring = ({
           isRecording={isRecording}
           classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
           classContinue={
-            allChoicesHaveValue && total > 94 && total < 100 ? "accent" : "disabled"
+            allChoicesHaveValue && total > 94 && total < 100
+              ? "accent"
+              : "disabled"
           }
           label={
             allChoicesHaveValue && total > 94 && total < 100
