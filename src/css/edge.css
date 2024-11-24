@@ -5,6 +5,7 @@
 
 .edge-container img {
   display: block; /* Prevents space below the edge */
+  cursor: pointer;AZ
 }
 
 .click-me-box {
