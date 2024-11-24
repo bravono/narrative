@@ -24,21 +24,22 @@
 }
 
 .completion-message {
-  display: none; /* Hidden by default */
-  position: fixed; /* Or absolute, depending on your layout */
-  top: 77.5%;
-  left: 33.5%;
-  transform: translate(-50%, -50%);
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 10px;
   border-radius: 5px;
+  border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  display: none; /* Hidden by default */
   font-size: 12px;
-  z-index: 100;
+  left: 33.5%;
+  opacity: 0.95;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  left: 15%;
+  transform: translate(-50%, -50%);
   width: 100px;
-  opacity: 0.95; /* Add this line to make it 80% transparent */
+  z-index: 100;
 }
 
 .completion-message.show {
