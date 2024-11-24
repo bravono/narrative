@@ -96,13 +96,4 @@ button {
   top: 5px;
 }
 
-.top_button-group {
-  display: flex;
-  width: 50%;
-  justify-content: space-between;
-}
 
-.top_button {
-  margin: 0 0 0 19px;
-  align-self: flex-end;
-}
