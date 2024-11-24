@@ -14,6 +14,7 @@ const Ring = ({
   allChoicesHaveValue,
   onSortToggle,
   onAddToChoice,
+  onAddToStory,
   isRecording,
 }) => {
   const size = 150;
@@ -337,8 +338,9 @@ const Ring = ({
           choiceList={choiceList}
           onSetChoiceList={onSetChoiceList}
           onAddToChoice={onAddToChoice}
-          canContinue={canContinue }
-          canRoundup={canRoundup }
+          onAddToStory={onAddToStory}
+          canContinue={canContinue}
+          canRoundup={canRoundup}
         />
       </div>
 

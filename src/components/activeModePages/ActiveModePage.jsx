@@ -30,7 +30,7 @@ function ActiveModePage() {
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
-  const [choiceList, setChoiceList] = useState("");
+  const [choiceList, setChoiceList] = useState([]);
   const [choiceValuePair, setChoiceValuePair] = useState("");
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
@@ -40,6 +40,7 @@ function ActiveModePage() {
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
+  const [canContinue, setCanContinue] = useState(0);
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -126,7 +127,10 @@ function ActiveModePage() {
 
   useEffect(() => {
     console.log("Current choicelist", choiceList);
-  }, [choiceList, choiceValuePair]);
+    setCanContinue(
+      choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
+    );
+  }, [choiceList, canContinue]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -166,9 +170,17 @@ function ActiveModePage() {
 
   const handleAddToStory = () => {
     // Add user's choice to the story;
-    console.log("This is user's choice", userChoice);
-    const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-    setStory(story.replace(regex, `[${userChoice}]`));
+    if (canContinue) {
+      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+      setStory(
+        story.replace(
+          regex,
+          `[${choiceList
+            .map((choice) => `${choice.name} (${choice.value})`)
+            .join(", ")}]`
+        )
+      );
+    }
   };
 
   const handlePreview = () => {
@@ -221,10 +233,6 @@ function ActiveModePage() {
     });
   };
 
-  useEffect(() => {
-    console.log("Sorted ChoiceList", choiceList);
-  }, [choiceList]);
-
   return (
     <main className="main-container">
       <section className="top-section">
@@ -272,8 +280,7 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                widget === "ring" &&
-                choiceList.reduce((sum, choice) => sum + choice.value, 0) === 100
+                widget === "ring" && canContinue == 100
                   ? ` middle_button primary`
                   : widget === "bar" || (widget === "triangle" && userChoice)
                   ? ` middle_button primary`
@@ -317,6 +324,7 @@ function ActiveModePage() {
                   onSetChoiceList={handleUpdateChoiceList}
                   onSetAllChoiceHaveValue={setAllChoicesHaveValue}
                   onAddToChoice={handleTalk}
+                  onAddToStory={handleAddToStory}
                   isRecording={isRecording}
                 />
               ) : widget === "triangle" ? (

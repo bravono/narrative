@@ -12,6 +12,7 @@ export default function AnswerQueueButtons({
   choiceList,
   onSetChoiceList,
   onAddToChoice,
+  onAddToStory,
   canContinue,
   canRoundup,
 }) {
@@ -22,6 +23,7 @@ export default function AnswerQueueButtons({
   const handleContinue = () => {
     if (canContinue) {
       console.log("continue", canContinue);
+      onAddToStory
     }
   };
   const handleRoundup = () => {
@@ -100,17 +102,19 @@ export default function AnswerQueueButtons({
           onClick={handleAddChoice}
           className={`${classAddAChoice} button-small`}
           label={isRecording ? "Transcribing..." : "ADD A CHOICE"}
-        />
+        />{
+          canRoundup ?
         <Button
           onClick={handleRoundup}
           className={`${classRoundup} button-small`}
           label={"ROUNDUP"}
-        />
+        /> :
         <Button
-          onClick={handleContinue}
+          onClick={canContinue ? onAddToStory : handleContinue}
           className={`${classContinue} button-small`}
           label={"CONTINUE"}
         />
+        }
       </div>
     </>
   );
