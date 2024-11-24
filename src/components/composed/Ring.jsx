@@ -261,7 +261,7 @@ const Ring = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          style={{ pointerEvents: "stroke", userSelect: "none" }}
+          className="ring-svg"
         >
           {/* Background Circle */}
           <circle
