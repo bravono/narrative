@@ -4,7 +4,7 @@ import Button from "./Button";
 import BottomButton from "./BottomButton";
 import FooterButton from "./FooterButton";
 
-function FinishedStory() {
+function Preview(classNameA) {
   return (
     <main className="main-container">
       <Queue className={"queue story"}>
@@ -40,11 +40,12 @@ function FinishedStory() {
           iure accusamus eum molestiae doloremque magnam.
         </p>
       </Queue>
-      <section className="bottom-section">
-        <FooterButton />
-      </section>
+      <Button
+        label="RETURN TO THE STORY"
+        className={`${classNameA} footer_button`}
+      />
     </main>
   );
 }
 
-export default FinishedStory;
+export default Preview;
