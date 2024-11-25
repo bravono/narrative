@@ -6,7 +6,6 @@ import Checkbox from "../standalone/Checkbox";
 import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
-import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
 import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/barrel.css";
@@ -20,15 +19,12 @@ const Barrel = ({
   questionType,
   instruction,
   onSortToggle,
-  onHaveChoice,
   onAddToChoice,
 }) => {
   const isFollowUp = true;
   const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
-  const [userChoice, setUserChoice] = useState([]);
-  const [rank, setRank] = useState("");
-  const [rate, setRate] = useState(0);
+
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
