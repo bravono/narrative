@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Control from "./Control";
-import "../../css/rank.css";
+import "../../css/Rank.css";
 
 function Rank({ rank, onRank }) {
   
