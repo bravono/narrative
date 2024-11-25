@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
-import StickyArrow from "../StickyArrow";
-import "../../css/Barrel.css";
-import Checkbox from "../standalone/CheckBox";
+import StickyArrow from "../standalone/StickyArrow";
+import Checkbox from "../standalone/Checkbox";
 import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RateControl from "../standalone/RateControl";
 import RadioButton from "../standalone/RadioButton";
 import capitalizeWords from "../../utilities/capilizeWords";
+import "../../css/barrel.css";
 
 const Barrel = ({
   isFollowUP,
@@ -104,9 +104,7 @@ const Barrel = ({
     }
   };
 
-  useEffect(() => {
-    onHaveChoice(userChoice);
-  }, [userChoice]);
+  
 
   const tableRows = choiceList.map((choice, index) => {
     return (

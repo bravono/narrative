@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
-import Checkbox from "../standalone/CheckBox";
+import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -10,9 +10,11 @@ const Ring = ({
   instruction,
   choiceList,
   onSetChoiceList,
-  onGetTotal,
+  onSetAllChoiceHaveValue,
+  allChoicesHaveValue,
   onSortToggle,
   onAddToChoice,
+  onAddToStory,
   isRecording,
 }) => {
   const size = 150;
@@ -23,10 +25,9 @@ const Ring = ({
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
-  const [activeRow, setActiveRow] = useState(null);
+  const [activeRow, setActiveRow] = useState({});
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
-  const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
 
   useEffect(() => {}, [choiceList]);
 
@@ -53,25 +54,31 @@ const Ring = ({
 
   useEffect(() => {
     // Does all item has a weight greater than 0
-    setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
+    onSetAllChoiceHaveValue(choiceList.every((choice) => choice.value > 0));
 
-    if (setAllChoicesHaveValue) {
-      let total = 0;
-      choiceList.map((choice) => {
-        total += Number(choice.value);
-      });
-      setTotal(total);
-    }
+    let total = 0;
+    choiceList.map((choice) => {
+      total += Number(choice.value);
+    });
+    setTotal(total);
   }, [choiceList]);
 
-  useEffect(() => {
-    console.log(total);
-  }, [total]);
   // Mouse/touch event handlers
-
   const handleMouseDown = (e) => {
     setIsDragging(true);
     updateSegmentValue(e.clientX, e.clientY);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -104,6 +111,18 @@ const Ring = ({
   const handleTouchStart = (e) => {
     setIsDragging(true);
     updateSegmentValue(e.touches[0].clientX, e.touches[0].clientY);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const handleTouchMove = (e) => {
@@ -130,11 +149,35 @@ const Ring = ({
 
   const incrementSegmentValue = () => {
     setSegmentValue(segmentValue + 1);
+
+    if (activeRow) {
+      onSetChoiceList((prevChoiceList) => {
+        return prevChoiceList.map((choice) => ({
+          ...choice, // Copy all other properties
+          value:
+            activeRow.name === choice.name
+              ? `${Math.round(segmentValue)}`
+              : choice.value, // Update 'value' conditionally
+        }));
+      });
+    }
   };
 
   const decrementSegmentValue = () => {
     if (segmentValue > 0) {
       setSegmentValue(segmentValue - 1);
+
+      if (activeRow) {
+        onSetChoiceList((prevChoiceList) => {
+          return prevChoiceList.map((choice) => ({
+            ...choice, // Copy all other properties
+            value:
+              activeRow.name === choice.name
+                ? `${Math.round(segmentValue)}`
+                : choice.value, // Update 'value' conditionally
+          }));
+        });
+      }
     }
   };
 
@@ -145,14 +188,6 @@ const Ring = ({
 
   const handleItemSelect = (choice) => {
     setActiveRow(choice);
-
-    const newCurrentTotal = choiceList.reduce(
-      (sum, obj) => parseInt(sum) + parseInt(obj.value),
-      0
-    );
-
-    setCurrentTotal(newCurrentTotal);
-    onGetTotal(newCurrentTotal);
   };
 
   const tableRow = choiceList.map((choice, rowIndex) => {
@@ -161,18 +196,21 @@ const Ring = ({
         key={rowIndex}
         onClick={() => handleItemSelect(choice)}
         style={{
-          backgroundColor: activeRow === choice ? "lightblue" : "",
+          backgroundColor: activeRow.name === choice.name ? "lightblue" : "",
         }}
       >
-        <td id="ring-checkbox"><input type="checkbox" /></td>
+        <td>
+          <input type="checkbox" />
+        </td>
         <td id="ring-list">{capitalizeWords(choice.name)}</td>
         <td>{choice.value}</td>
       </tr>
     );
   });
 
-  const isValidTotal =
-    currentTotal > 100 || (currentTotal < 100 && allChoicesHaveValue);
+  const isValidTotal = (total < 100 && allChoicesHaveValue) || total > 100;
+  const canContinue = allChoicesHaveValue && total == 100;
+  const canRoundup = allChoicesHaveValue && total > 94 && total < 100;
 
   return (
     <div className="ring-set">
@@ -223,7 +261,7 @@ const Ring = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          style={{ pointerEvents: "stroke", userSelect: "none" }}
+          className="ring-svg"
         >
           {/* Background Circle */}
           <circle
@@ -295,28 +333,18 @@ const Ring = ({
           isFollowUp={isFollowUp}
           isRecording={isRecording}
           classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
-          classContinue={
-            allChoicesHaveValue && total > 94 && total < 100 ? "accent" : "disabled"
-          }
-          label={
-            allChoicesHaveValue && total > 94 && total < 100
-              ? "ROUNDUP"
-              : "CONTINUE"
-          }
+          classContinue={canContinue ? "accent" : "disabled"}
+          classRoundup={canRoundup ? "accent" : "disabled"}
           choiceList={choiceList}
           onSetChoiceList={onSetChoiceList}
           onAddToChoice={onAddToChoice}
+          onAddToStory={onAddToStory}
+          canContinue={canContinue}
+          canRoundup={canRoundup}
         />
       </div>
-      {total > 100 ? (
-        <div className="total_above">
-          Your total does not sum to the required number. Adjust your values or
-          if within 5% of required sum you can press Round Up.
-        </div>
-      ) : (
-        ""
-      )}
-      {total < 100 && allChoicesHaveValue ? (
+
+      {(total < 100 && allChoicesHaveValue) || total > 100 ? (
         <div className="total_below">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.

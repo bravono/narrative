@@ -2,7 +2,9 @@ import "../css/edge.css";
 
 const Edge = ({ type, onClick }) => {
   return type === "standing" ? (
-    <img src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+    <img
+      src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+    />
   ) : (
     <div className="edge-container">
       <div className="click-me-box">Click Me</div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../css/checkbox.css";
+
 function Checkbox({ onCheckToggle, isChecked }) {
 
 

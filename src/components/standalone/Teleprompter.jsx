@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/teleprompter.css";
+import "../../css/Teleprompter.css";
 
 const Teleprompter = ({ textLines, containerRef }) => {
   return (

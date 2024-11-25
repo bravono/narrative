@@ -3,7 +3,7 @@ import WelcomePageAM from "./components/activeModePages/WelcomePageAM";
 import ActiveModePage from "./components/activeModePages/ActiveModePage";
 import Preview from "./components/activeModePages/Preview";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
-import Compare from "./components/activeModePages/compare";
+import Compare from "./components/activeModePages/Compare";
 import Exit from "./components/activeModePages/ExitPage";
 import LearnModeTimer from "./components/learnmodepages/LearnModeTimer";
 import LearnModeStart from "./components/learnmodepages/LearnModeStart";

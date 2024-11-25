@@ -2,10 +2,11 @@
   display: flex;
   width: 50%;
   justify-content: space-between;
+  margin-left: 8px;
 }
 
 .top_button {
-  margin: 0 0 0 19px;
-  align-self: flex-end;
   background: var(--color-disabled);
+  margin: 0;
+  align-self: flex-end;
 }
