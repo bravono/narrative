@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../standalone/StickyArrow";
-import Checkbox from "../standalone/CheckBox";
+import Checkbox from "../standalone/Checkbox";
 import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
