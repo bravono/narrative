@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/StickyArrow.css";
+import "../../css/StickyArrow.css";
 
 const StickyArrow = ({ className }) => {
   return (
@@ -15,14 +15,14 @@ const StickyArrow = ({ className }) => {
           d="M0.77002 0.309998H6.50002V15.2484L3.6355 19.31L0.77002 15.2484V0.309998Z"
         />
         <text
-          x="50%"
-          y="34%"
-          dominantBaseline="middle"
-          textAnchor="middle"
-          fontSize="5px"
+          x="0"
+          y="9"
+          fontSize="2px"
           fontWeight={900}
           style={{}}
           fill="black"
+          width="1"
+          transform="rotate(90, 5, 7)"
           onMouseEnter={(e) => {
             e.target.style.opacity = 1;
           }}
@@ -30,7 +30,8 @@ const StickyArrow = ({ className }) => {
             e.target.style.opacity = 0;
           }}
         >
-          {`SINGLE CHOICE`}
+          {`SINGLE
+          CHOICE`}
         </text>
       </svg>
     </div>

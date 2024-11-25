@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
-import StickyArrow from "../StickyArrow";
+import StickyArrow from "../standalone/StickyArrow";
 import "../../css/Barrel.css";
 import Checkbox from "../standalone/CheckBox";
 import Rank from "../standalone/Rank";
@@ -104,9 +104,7 @@ const Barrel = ({
     }
   };
 
-  useEffect(() => {
-    onHaveChoice(userChoice);
-  }, [userChoice]);
+  
 
   const tableRows = choiceList.map((choice, index) => {
     return (
