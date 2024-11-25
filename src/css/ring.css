@@ -18,8 +18,8 @@
 
 .ring-svg {
   
-    pointerEvents: stroke;
-    userSelect: none;
+    pointer-events: stroke;
+    user-select: none;
     cursor: pointer;
   
 }
@@ -51,7 +51,7 @@ width: 50px;
 
 .ring-label {
   font-size: 1.2rem;
-  pointerevents: "none";
+  pointer-events: "none";
   font-weight: 600;
 }
 
@@ -61,7 +61,7 @@ width: 50px;
 
 .ring-number {
   font-size: 1.5rem;
-  pointerevents: "none";
+  pointer-events: "none";
   font-weight: 900;
 }
 
@@ -78,7 +78,7 @@ width: 50px;
 
 .polygon {
   cursor: pointer;
-  pointerevents: auto;
+  pointer-events: auto;
   width: 1.5rem;
 }
 .polygon:hover {
