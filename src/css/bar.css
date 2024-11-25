@@ -64,7 +64,7 @@
 .counter-arrow {
   width: 20px;
   cursor: pointer;
-  pointerevents: auto;
+  pointer-events: auto;
 }
 
 .up {
