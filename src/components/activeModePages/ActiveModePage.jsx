@@ -21,8 +21,10 @@ import Control from "../standalone/Control";
 function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
-  const initialDuration = location.state?.timeLeft || 60;
+  const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
+  const [arrowColor, setArrowColor] = useState("green"); // Initial SVG color
+  const [timerLabel, setTimerLabel] = useState("pending");
   const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
@@ -33,6 +35,8 @@ function ActiveModePage() {
   const [choiceList, setChoiceList] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
+  const [pauseDuration, setPauseDuration] = useState(10)
+  const [timeLeft, setTimeLeft] = useState(duration);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
@@ -57,6 +61,7 @@ function ActiveModePage() {
         setChoiceList(data.blank.choiceList);
         setInstruction(data.blank.instruction);
         setDuration(data.durationInMin * 60);
+        setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
         if (data.blank.children.length) {
           setIsFollowUp(true);
@@ -83,6 +88,21 @@ function ActiveModePage() {
       }, 1000);
 
       return () => clearInterval(timerId);
+    }
+    
+    if (!isRunning) {
+      const timerId = setInterval(() => {
+        setPauseDuration((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timerId);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+  
+      return () => clearInterval(timerId);
+      
     }
   }, [duration, isRunning]);
 
@@ -190,6 +210,43 @@ function ActiveModePage() {
   };
   useEffect(() => {}, [story]);
 
+  useEffect(() => {
+    const timerInterval = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        const newTime = prevTime - 1;
+
+        // Calculate percentage of time remaining
+        const percentage = (newTime / 100) * 100;
+
+        // Change SVG color based on percentage
+        if (percentage <= 1) {
+          setArrowColor("#9BAAEF");
+          setTimerLabel("DANDY");
+        } else if (percentage <= 20) {
+          setArrowColor("#9BAAEF");
+          setTimerLabel("TOAST");
+        } else if (percentage <= 40) {
+          setArrowColor("#FFF400");
+          setTimerLabel("ARCHETYPE");
+        } else if (percentage <= 70) {
+          setArrowColor("#845300");
+          setTimerLabel("LAGGARD");
+        } else if (percentage <= 99) {
+          setArrowColor("#5DFFA2");
+          setTimerLabel("MOVER");
+        }
+        if (newTime <= 0) {
+          clearInterval(timerInterval); // Stop the timer when it reaches 0
+          return 0;
+        }
+        return newTime;
+      });
+    }, 1000); // Update every 1 second (1000 milliseconds)
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timerInterval);
+  }, []); // Empty dependency array ensures this runs once on mount
+
   const handleAddToStory = () => {
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
     if (canContinue || allChoicesHaveValue) {
@@ -237,7 +294,7 @@ function ActiveModePage() {
   };
 
   const handlePreview = () => {
-    navigate("/preview", { state: { story, timeLeft: duration } });
+    navigate("/preview", { state: { story, duration } });
   };
   const handleCompare = () => {
     navigate("/compare");
@@ -294,7 +351,15 @@ function ActiveModePage() {
         </div>
         <div className="header">
           <Edge onClick={handleEdge} />
-          <Timer duration={duration} label={"PENDING"} />
+          {isRunning ? <Timer
+            duration={duration}
+            label={timerLabel.toUpperCase()}
+            arrowColor={arrowColor}
+          />: <Timer
+          duration={pauseDuration}
+          label={"BACK IN"}
+          arrowColor={arrowColor}
+        />}
           <div className="top_button-group">
             <Button
               label="START"
