@@ -23,7 +23,7 @@ function ActiveModePage() {
   const location = useLocation();
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
-  const [arrowColor, setArrowColor] = useState("#AFABAB"); // Initial SVG color
+  const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
   const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
@@ -355,12 +355,13 @@ function ActiveModePage() {
               duration={duration}
               label={timerLabel.toUpperCase()}
               arrowColor={arrowColor}
+              isRunning={isRunning}
             />
           ) : (
             <Timer
               duration={pauseDuration}
               label={"BACK IN"}
-              arrowColor={"gray"}
+              arrowColor={"grey"}
             />
           )}
           <div className="top_button-group">

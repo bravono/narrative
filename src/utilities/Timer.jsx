@@ -2,7 +2,7 @@ import React from "react";
 import TimerArrow from "../components/TimerArrow";
 import "../css/timer.css";
 
-function Timer({ label, duration, arrowColor, isPaused, }) {
+function Timer({ label, duration, arrowColor, isRunning, }) {
   // console.log("Initional duration", timeLeft);
 
   const minutes = Math.floor(duration / 60)
@@ -12,7 +12,7 @@ function Timer({ label, duration, arrowColor, isPaused, }) {
   return (
     <>
       <div className="timer-group">
-        <div className="timer">{`${minutes}:${seconds}`}</div>
+        <div className={isRunning ? "timer" : " timer timer-pause"}>{`${minutes}:${seconds}`}</div>
         <span className="label">{label}</span>
       </div>
       <TimerArrow arrowColor={arrowColor} />

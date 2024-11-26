@@ -20,6 +20,11 @@
   width: 7.5rem;
 }
 
+.timer-pause {
+  background-color: black;
+  color: white;
+}
+
 .timer-arrow {
   width: 20px;
   align-self: flex-start;
