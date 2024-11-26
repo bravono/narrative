@@ -169,8 +169,8 @@ function ActiveModePage() {
   useEffect(() => {}, [story]);
 
   const handleAddToStory = () => {
-    // Add user's choice to the story;
-    if (canContinue) {
+    // canContinue handles ring and allChoicesHaveValue handles rank and rate
+    if (canContinue || allChoicesHaveValue) {
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
       setStory(
         story.replace(
@@ -280,7 +280,7 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                widget === "ring" && canContinue == 100
+                 canContinue == 100 || allChoicesHaveValue
                   ? ` middle_button primary`
                   : widget === "bar" || (widget === "triangle" && userChoice)
                   ? ` middle_button primary`
