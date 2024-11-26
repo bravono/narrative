@@ -11,7 +11,7 @@ function Compare() {
         <p>COMING SOON</p>
       </Queue>
       <section className="bottom-section">
-        <FooterButton />
+        <FooterButton classNameB={"primary"}/>
       </section>
     </main>
   );
