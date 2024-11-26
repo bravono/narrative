@@ -39,7 +39,10 @@ function ActiveModePage() {
   const [isDescending, setIsDescending] = useState(true);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
   const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
-  const [chooseOne, setChooseOne] = useState(false)
+  const [chooseOne, setChooseOne] = useState(false);
+  const [noSelectedChoices, setNoSelectedChoices] = useState(0); // Use for checkboxes
+  const [oneItemInChoiceList, setOneItemInChoiceList] = useState(0); // Only bar can have one item in the choice list
+  const [percentage, setPercentage] = useState(false); // Check if the only item
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -119,12 +122,37 @@ function ActiveModePage() {
 
   useEffect(() => {
     console.log("Current choicelist", choiceList);
-    setCanContinue(
-      choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
-    );
-    setChooseOne(choiceList.filter(choice => choice.value == 1).length == 1) //handles when only one choice is selected
-    console.log("One value", chooseOne)
-  }, [choiceList, canContinue]);
+
+    if (choiceList.length) {
+      console.log("Current percentage", choiceList[0].value > 0);
+    }
+
+    if (widget == "ring") {
+      setCanContinue(
+        choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
+      );
+    }
+
+    if (questionType == "radio" || widget == "triangle") {
+      setChooseOne(
+        choiceList.filter((choice) => choice.value == 1).length == 1
+      ); //handles when only one choice is selected and exclude checkbox
+    }
+
+    if (questionType === "checkbox") {
+      setNoSelectedChoices(
+        choiceList.filter((choice) => choice.value == 1).length
+      );
+    }
+
+    if (widget == "bar") {
+      setOneItemInChoiceList(choiceList.length == 1);
+    }
+
+    if (choiceList.length) {
+      setPercentage(choiceList[0].value > 0);
+    }
+  }, [choiceList, canContinue, percentage]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -182,12 +210,30 @@ function ActiveModePage() {
       setStory(
         story.replace(
           regex,
-          `[${choiceList.filter(choice => choice.value == 1)[0].name}]`
+          `[${choiceList.filter((choice) => choice.value == 1)[0].name}]`
         )
       );
     }
 
-    // onlyOne choice handle bar
+    // Handle checkbox case
+    if (noSelectedChoices >= 3) {
+      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+      setStory(
+        story.replace(
+          regex,
+          `[${choiceList
+            .filter((choice) => choice.value == 1)
+            .map((choice) => `${choice.name}`)
+            .join(", ")}]`
+        )
+      );
+    }
+
+    // This handle bar
+    if (oneItemInChoiceList) {
+      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+      setStory(story.replace(regex, `[${choiceList[0].value}]`));
+    }
   };
 
   const handlePreview = () => {
@@ -287,9 +333,11 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                 canContinue == 100 || allChoicesHaveValue || chooseOne
-                  ? ` middle_button primary`
-                  : widget === "bar" || (widget === "triangle" )
+                canContinue == 100 ||
+                allChoicesHaveValue ||
+                chooseOne ||
+                noSelectedChoices >= 3 ||
+                percentage
                   ? ` middle_button primary`
                   : "disabled"
               }
