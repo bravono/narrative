@@ -230,9 +230,9 @@ function ActiveModePage() {
     }
 
     // This handle bar
-    if (oneItemInChoiceList) {
+    if (oneItemInChoiceList && choiceList[0].value > 0) {
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(story.replace(regex, `[${choiceList[0].value}]`));
+      setStory(story.replace(regex, `[${choiceList[0].value}%]`));
     }
   };
 

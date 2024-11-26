@@ -50,7 +50,7 @@ const Bar = ({ onSetChoice, choiceList }) => {
       onSetChoice((prevChoiceList) => {
         return choiceList.map((choice) => ({
           ...choice,
-          value: `${Math.round(progress)}%`,
+          value: Math.round(progress),
         }));
       });
     }
@@ -96,14 +96,10 @@ const Bar = ({ onSetChoice, choiceList }) => {
           onMouseLeave={handleMouseUp} // Ensures drag stops if mouse leaves the bar
           onMouseDown={handleMouseDown}
         >
-          <p id="progress-label">Drag to add value</p>
+          {Math.round(progress) < 1 ? <p id="progress-label">Drag to add value</p> : ""}
           <div className="progress_bar" style={{ width: `${progress}%` }}></div>
         </div>
       </div>
-      <AnswerQueueButtons
-        isFollowUp={isFollowUp}
-        classAddAChoice={"disabled"}
-      />
     </div>
   );
 };
