@@ -31,16 +31,15 @@ function ActiveModePage() {
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
   const [choiceList, setChoiceList] = useState([]);
-  const [choiceValuePair, setChoiceValuePair] = useState("");
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [userChoice, setUserChoice] = useState("");
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
-  const [canContinue, setCanContinue] = useState(0);
+  const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
+  const [chooseOne, setChooseOne] = useState(false)
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -53,13 +52,6 @@ function ActiveModePage() {
         setWidget(data.blank.widget);
         setHeading(data.blank.heading);
         setChoiceList(data.blank.choiceList);
-        setChoiceValuePair((prevChoiceValuePair) => {
-          const newChoiceValuePair = {};
-          data.blank.choiceList.forEach((choice) => {
-            newChoiceValuePair[choice] = 0;
-          });
-          return newChoiceValuePair;
-        });
         setInstruction(data.blank.instruction);
         setDuration(data.durationInMin * 60);
         setBlankName(data.blank.name);
@@ -130,6 +122,8 @@ function ActiveModePage() {
     setCanContinue(
       choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
     );
+    setChooseOne(choiceList.filter(choice => choice.value == 1).length == 1) //handles when only one choice is selected
+    console.log("One value", chooseOne)
   }, [choiceList, canContinue]);
 
   // Function to handle scrolling up
@@ -181,6 +175,19 @@ function ActiveModePage() {
         )
       );
     }
+
+    // choseOne handle radio and triangle
+    if (chooseOne) {
+      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
+      setStory(
+        story.replace(
+          regex,
+          `[${choiceList.filter(choice => choice.value == 1)[0].name}]`
+        )
+      );
+    }
+
+    // onlyOne choice handle bar
   };
 
   const handlePreview = () => {
@@ -280,9 +287,9 @@ function ActiveModePage() {
               onClick={handleAddToStory}
               label="ADD TO STORY"
               className={
-                 canContinue == 100 || allChoicesHaveValue
+                 canContinue == 100 || allChoicesHaveValue || chooseOne
                   ? ` middle_button primary`
-                  : widget === "bar" || (widget === "triangle" && userChoice)
+                  : widget === "bar" || (widget === "triangle" )
                   ? ` middle_button primary`
                   : "disabled"
               }
@@ -299,7 +306,6 @@ function ActiveModePage() {
                 <Barrel
                   heading={heading}
                   choiceList={choiceList}
-                  choiceValuePair={choiceValuePair}
                   questionType={questionType}
                   isFollowUP={isFollowUp}
                   instruction={instruction}
@@ -317,7 +323,6 @@ function ActiveModePage() {
                 <Ring
                   heading={heading}
                   choiceList={choiceList}
-                  choiceValuePair={choiceValuePair}
                   instruction={instruction}
                   allChoicesHaveValue={allChoicesHaveValue}
                   onSortToggle={handleSortToggle}
