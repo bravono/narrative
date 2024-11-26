@@ -25,7 +25,6 @@ const Barrel = ({
   const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
 
-
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
     onSortToggle(isSorted);
@@ -79,18 +78,18 @@ const Barrel = ({
     if (choice.value < 6) {
       onSetChoiceList((prevChoiceList) => {
         // 1. Get all existing values
-        const existingValues = prevChoiceList.map(item => item.value);
-  
+        const existingValues = prevChoiceList.map((item) => item.value);
+
         // 2. Find the next available value
         let newValue = choice.value + 1;
         while (existingValues.includes(newValue)) {
           newValue++;
-          if (newValue > 6) { 
+          if (newValue > 6) {
             // Prevent infinite loop if no values are available
-            return prevChoiceList; 
+            return prevChoiceList;
           }
         }
-  
+
         // 3. Update the choiceList
         return prevChoiceList.map((item) => ({
           ...item,
@@ -99,8 +98,6 @@ const Barrel = ({
       });
     }
   };
-
-  
 
   const tableRows = choiceList.map((choice, index) => {
     return (
@@ -114,34 +111,33 @@ const Barrel = ({
       >
         <td>
           <p className="choice__list">{capitalizeWords(choice.name)}</p>
-        </td>{" "}
-        {/* Access the name property */}
-        <td>
-          {type ? (
-              <Checkbox
-                onCheckToggle={() => handleCheckToggle(choice)}
-                isChecked={choice.value}
-              />
-          ) : (
-            ""
-          )}
         </td>
         <td>
+          {type == "checkbox" ? (
+            <Checkbox
+              onCheckToggle={() => handleCheckToggle(choice)}
+              isChecked={choice.value}
+            />
+          ) : type == "radio" ? (
             <RadioButton
               onRadioToggle={() => handleRadioToggle(choice)}
               isChecked={choice.value}
             />
+          ) : type == "rate" ? (
+            <span className="rate">
+              {<Rate onRate={() => handleRate(choice)} rate={choice.value} />}
+            </span>
+          ) : type == "rank" ? (
+            <span className="rank">
+              {<Rank onRank={() => handleRank(choice)} rank={choice.value} />}
+            </span>
+          ) : (
+            ""
+          )}
         </td>
-        <td>
-          <div className="rate">
-            {<Rate onRate={() => handleRate(choice)} rate={choice.value} />}
-          </div>
-        </td>
-        <td>
-          <span className="rank">
-            {<Rank onRank={() => handleRank(choice)} rank={choice.value} />}
-          </span>
-        </td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     );
   });
@@ -159,7 +155,6 @@ const Barrel = ({
             {tableRows}
           </tbody>
         </table>
-        {/* <img src="/assets/Column_dotted.svg" className="column_dotted" /> */}
       </div>
       <p className="instruction">{instruction}</p>
       <AnswerQueueButtons
