@@ -23,7 +23,7 @@ function ActiveModePage() {
   const location = useLocation();
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
-  const [arrowColor, setArrowColor] = useState("green"); // Initial SVG color
+  const [arrowColor, setArrowColor] = useState("#AFABAB"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
   const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
@@ -35,8 +35,8 @@ function ActiveModePage() {
   const [choiceList, setChoiceList] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
-  const [pauseDuration, setPauseDuration] = useState(10)
-  const [timeLeft, setTimeLeft] = useState(duration);
+  const [pauseDuration, setPauseDuration] = useState(100);
+  const [timeLeft, setTimeLeft] = useState(100);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
@@ -89,7 +89,7 @@ function ActiveModePage() {
 
       return () => clearInterval(timerId);
     }
-    
+
     if (!isRunning) {
       const timerId = setInterval(() => {
         setPauseDuration((prevTime) => {
@@ -100,9 +100,8 @@ function ActiveModePage() {
           return prevTime - 1;
         });
       }, 1000);
-  
+
       return () => clearInterval(timerId);
-      
     }
   }, [duration, isRunning]);
 
@@ -219,21 +218,21 @@ function ActiveModePage() {
         const percentage = (newTime / 100) * 100;
 
         // Change SVG color based on percentage
-        if (percentage <= 1) {
-          setArrowColor("#9BAAEF");
-          setTimerLabel("DANDY");
+        if (percentage <= 100) {
+          setArrowColor("#5DFFA2");
+          setTimerLabel("MOVER");
+        } else if (percentage <= 95) {
+          setArrowColor("#845300");
+          setTimerLabel("LAGGARD");
+        } else if (percentage <= 70) {
+          setArrowColor("#FFF400");
+          setTimerLabel("ARCHETYPE");
         } else if (percentage <= 20) {
           setArrowColor("#9BAAEF");
           setTimerLabel("TOAST");
-        } else if (percentage <= 40) {
-          setArrowColor("#FFF400");
-          setTimerLabel("ARCHETYPE");
-        } else if (percentage <= 70) {
-          setArrowColor("#845300");
-          setTimerLabel("LAGGARD");
-        } else if (percentage <= 99) {
-          setArrowColor("#5DFFA2");
-          setTimerLabel("MOVER");
+        } else if (percentage <= 1) {
+          setArrowColor("#9BAAEF");
+          setTimerLabel("DANDY");
         }
         if (newTime <= 0) {
           clearInterval(timerInterval); // Stop the timer when it reaches 0
@@ -245,7 +244,7 @@ function ActiveModePage() {
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(timerInterval);
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, [duration]); // Empty dependency array ensures this runs once on mount
 
   const handleAddToStory = () => {
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
@@ -351,15 +350,19 @@ function ActiveModePage() {
         </div>
         <div className="header">
           <Edge onClick={handleEdge} />
-          {isRunning ? <Timer
-            duration={duration}
-            label={timerLabel.toUpperCase()}
-            arrowColor={arrowColor}
-          />: <Timer
-          duration={pauseDuration}
-          label={"BACK IN"}
-          arrowColor={arrowColor}
-        />}
+          {isRunning ? (
+            <Timer
+              duration={duration}
+              label={timerLabel.toUpperCase()}
+              arrowColor={arrowColor}
+            />
+          ) : (
+            <Timer
+              duration={pauseDuration}
+              label={"BACK IN"}
+              arrowColor={"gray"}
+            />
+          )}
           <div className="top_button-group">
             <Button
               label="START"
