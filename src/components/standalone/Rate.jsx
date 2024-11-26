@@ -10,7 +10,6 @@ function Rate({ rate, onRate }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onRate}
-      className="rate__icon"
     >
       <path
         d="M30.67 36.05L18.96 29.89L7.24 36.05L9.48 23L0 13.77L13.1 11.86L18.96 0L24.81 11.87L37.91 13.77L28.43 23L30.67 36.05Z"
