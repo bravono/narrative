@@ -52,7 +52,7 @@ const Queue = ({ className, children }) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onTouchTouch={handleTouch}
+      onTouchStart={handleTouch}
       onTouchEnd={handleEnd}
       onTouchMove={handleMove}
       className={className}
