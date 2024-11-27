@@ -1,4 +1,4 @@
-.talk-group {
+.talk-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -7,6 +7,27 @@
   background-size: 250px;
   background-repeat: no-repeat;
   background-position: -10px -35px;
+}
+
+.choice-group {
+  width: 150px;
+  max-height: 100px;
+}
+
+.choice-group > p,
+.added-choice {
+  padding: 0;
+  margin: 0;
+}
+
+.choice-container {
+  display: flex;
+}
+.talk-wave {
+  margin-right: 10px;
+}
+
+.added-choice-container {
 }
 
 .talk-group__table {
@@ -23,12 +44,11 @@
   border-radius: 3px;
 }
 
-
 .talk-controls {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
-  grid-column: 1 /  span 2;
+  grid-column: 1 / span 2;
 }
 
 .talk-edge {
@@ -41,7 +61,7 @@
   display: grid;
   grid-template-columns: 205px 1fr;
   grid-template-rows: 80% auto;
-  justify-content:center;
+  justify-content: center;
   justify-items: center;
   column-gap: 10px;
 }

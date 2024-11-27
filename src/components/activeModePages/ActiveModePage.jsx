@@ -39,6 +39,7 @@ function ActiveModePage() {
   const [pauseDuration, setPauseDuration] = useState(100);
   const [timeLeft, setTimeLeft] = useState(100);
   const [isRecording, setIsRecording] = useState(false);
+  const [wantsToTalk, setWantsToTalk] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
@@ -74,6 +75,12 @@ function ActiveModePage() {
 
     fetchSurvey();
   }, []); // Empty dependency array to run only on mount
+
+  useEffect(() => {}, [story]);
+
+  useEffect(() => {
+    console.log("Our transcript:", transcript);
+  }, [transcript]);
 
   useEffect(() => {
     if (isRunning) {
@@ -174,42 +181,6 @@ function ActiveModePage() {
     }
   }, [choiceList, canContinue, percentage]);
 
-  // Function to handle scrolling up
-  const scrollUp = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({
-        top: -50, // Adjust scroll amount as needed
-        behavior: "smooth",
-      });
-    }
-  };
-
-  // Function to handle scrolling down
-  const scrollDown = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({
-        top: 50, // Adjust scroll amount as needed
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const navigate = useNavigate();
-
-  const handleStart = () => {
-    console.log("Started");
-  };
-  const handlePause = () => {
-    console.log("Paused");
-    setIsRunning((prevIsRunning) => !prevIsRunning);
-  };
-
-  const handleEdge = () => {
-    setIsRunning((prevIsRunning) => !prevIsRunning);
-    navigate("/");
-  };
-  useEffect(() => {}, [story]);
-
   useEffect(() => {
     const timerInterval = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -246,6 +217,41 @@ function ActiveModePage() {
     // Clean up the interval when the component unmounts
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
+
+  // Function to handle scrolling up
+  const scrollUp = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        top: -50, // Adjust scroll amount as needed
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // Function to handle scrolling down
+  const scrollDown = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        top: 50, // Adjust scroll amount as needed
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    console.log("Started");
+  };
+  const handlePause = () => {
+    console.log("Paused");
+    setIsRunning((prevIsRunning) => !prevIsRunning);
+  };
+
+  const handleEdge = () => {
+    setIsRunning((prevIsRunning) => !prevIsRunning);
+    navigate("/");
+  };
 
   const handleAddToStory = () => {
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
@@ -300,10 +306,35 @@ function ActiveModePage() {
     navigate("/compare");
   };
   const handleTalk = () => {
+    setWantsToTalk(true);
+
+    if (isRecording) {
+      setIsRecording(false);
+    }
+  };
+
+  const handleRecord = () => {
+    setTranscript("")
     setIsRecording((prevIsRecording) => !prevIsRecording); // Toggle recording state
-    console.log(transcript);
+  };
+
+  const handleErase = () => {
     setTranscript("");
   };
+
+  const handleCancel = () => {
+    setIsRecording(false);
+    setWantsToTalk(false);
+    setTranscript("");
+  };
+
+  const handleDone = () => {
+    if (transcript.length) {
+      setIsRecording(false);
+      setWantsToTalk(false);
+    }
+  };
+
   const handlePDF = () => {
     // Check if the story is complete (replace with your actual logic)
     const isStoryComplete = false;
@@ -395,8 +426,15 @@ function ActiveModePage() {
               />
             </div>
             <Queue className={"queue question"}>
-              {isRecording ? (
-                <Talk />
+              {wantsToTalk ? (
+                <Talk
+                  onRecord={handleRecord}
+                  onErase={handleErase}
+                  onCancel={handleCancel}
+                  onDone={handleDone}
+                  isRecording={isRecording}
+                  transcript={transcript}
+                />
               ) : (
                 <Teleprompter textLines={story} containerRef={containerRef} />
               )}
