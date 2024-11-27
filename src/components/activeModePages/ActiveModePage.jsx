@@ -17,6 +17,7 @@ import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Control from "../standalone/Control";
+import Talk from "../composed/Talk";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -394,7 +395,11 @@ function ActiveModePage() {
               />
             </div>
             <Queue className={"queue question"}>
-              <Teleprompter textLines={story} containerRef={containerRef} />
+              {isRecording ? (
+                <Talk />
+              ) : (
+                <Teleprompter textLines={story} containerRef={containerRef} />
+              )}
             </Queue>
           </div>
           <div className="middle_buttons-group">
