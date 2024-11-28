@@ -1,4 +1,4 @@
 {
-  "apiEndpoint": "",
+  "apiEndpoint": "https://dev.nsdbsurveys.com/narrative-php/index.php?survey_id=justDeserts&panel_id=id123&language_id=en_en",
   "testEndpoint": "http://localhost:3000/survey"
 }
