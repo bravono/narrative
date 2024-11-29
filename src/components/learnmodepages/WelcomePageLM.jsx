@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import queryString from "query-string";
 import "../../css/LearnModePage.css";
+import "../../css/LearnModePage.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
