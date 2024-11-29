@@ -15,9 +15,9 @@ import LearnButton from "./LearnButton";
 import queryString from "query-string";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
-  // const result = queryString.parse("Query String", location.search);
+  const result = queryString.parse(location.search);
 
-  console.log(location.search);
+  console.log(result);
   const navigate = useNavigate();
 
   const handleExit = () => {
