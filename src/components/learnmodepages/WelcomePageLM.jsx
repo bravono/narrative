@@ -21,9 +21,11 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
   async function getSurvey() {
     const result = location.search;
+    const url = apiEndpoint + result;
 
-    const survey = await http.get(apiEndpoint + result);
+    const survey = await http.get(url);
     console.log("My Survey", survey);
+    console.log("New Url", url);
   }
 
   getSurvey();
