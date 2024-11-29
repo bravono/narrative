@@ -1,7 +1,6 @@
 import http from "./httpServices";
 import { apiEndpoint, testEndpoint } from "../config.json";
 import { session } from "../components/learnmodepages/WelcomePageLM";
-import { session } from "../components/learnmodepages/WelcomePageLM";
 
 export async function getSurvey() {
   const result = session();
