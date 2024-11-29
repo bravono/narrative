@@ -3,10 +3,10 @@ import { apiEndpoint, testEndpoint } from "../config.json";
 import { session } from "../components/learnmodepages/WelcomePageLM";
 
 export async function getSurvey() {
-  const result = session();
+  // const result = session();
 
-  console.log("Result",  apiEndpoint + result);
-  const survey = await http.get(apiEndpoint + result);
+  // console.log("Result",  apiEndpoint + result);
+  const survey = await http.get(apiEndpoint);
 
 
   return survey;

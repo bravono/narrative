@@ -10,12 +10,23 @@ import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
+import http from "../../services/httpServices";
+import { apiEndpoint, testEndpoint } from "../../config.json";
 import queryString from "query-string";
 import "../../css/LearnModePage.css";
 import "../../css/LearnModePage.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
+
+  async function getSurvey() {
+    const result = location.search;
+
+    const survey = await http.get(apiEndpoint + result);
+    console.log("My Survey", survey);
+  }
+
+  getSurvey();
 
   const handleExit = () => {
     navigate("/welcomeactivemode");
@@ -42,7 +53,6 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
-                
                 <div className="talkbubble-btn">
                   <Button
                     onClick={handleLearn}
