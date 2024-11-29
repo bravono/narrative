@@ -12,8 +12,12 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButton from "./LearnButton";
+import queryString from "query-string";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
+  // const result = queryString.parse("Query String", location.search);
+
+  console.log(location.search);
   const navigate = useNavigate();
 
   const handleExit = () => {
