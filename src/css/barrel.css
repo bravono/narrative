@@ -13,41 +13,60 @@
 .barrel {
   width: 215px;
   height: 177px;
-  background: url(/assets/Barrel_skeleton.svg);
+  background: url(/assets/Barrel_template.png);
   display: flex;
   justify-content: center;
   background-size: cover;
 }
 
-table,
-td {
+.barrel__table {
+  position: absolute;
+  left: 15%;
+  height: 176px;
+  max-width: 200px;
   border-collapse: collapse;
-  border: 1px solid green;
+  border-bottom: 1px solid grey;
+  user-select: none;
 }
 
-.barrel > table {
-  position: relative;
-  left: 7%;
-  height: 99%;
+.active-row {
+  background: rgb(225, 255, 0);
+  background: radial-gradient(
+    circle,
+    rgba(225, 255, 0, 0.7130620985010707) 21%,
+    rgba(0, 212, 255, 0.0813704496788008) 100%
+  );
 }
 
-thead th:first-child {
+.barrel__table td {
+  border-collapse: collapse;
+  border-bottom: 1px solid grey;
+  user-select: none;
+}
+
+.barrel__table th:first-child {
   font-size: 13px;
   width: 72.6px;
-  /* border: 1px solid red; */
   text-align: start;
 }
 
-th {
-  padding-top: 5px;
-  line-height: 1;
-  height: 25px;
+.barrel__table td:first-child {
+  min-width: 85px;
+  text-align: start;
 }
 
-td {
- 
-  padding: 0;
+.barrel__table th {
+  line-height: 1;
+  height: 30px;
+}
+
+.barrel__table td {
+  width: 20px;
   text-align: center;
+}
+
+.barrel__table tr:last-child {
+  border-bottom: 0;
 }
 
 .instruction {
@@ -69,23 +88,14 @@ td {
 .radio {
   display: inline-block;
   cursor: pointer;
-  width: 40px;
+  min-width: 10px;
+  max-width: 20px;
   /* height: 80%; */
 }
-.rate {
-  /* height: 65%; */
-}
 
-.rank {
-  width: 23px;
-}
-.checkbox,
-.radio {
-
-}
-
-.checkbox {
-}
-
-.radio {
-}
+background: rgb(225, 255, 0);
+background: radial-gradient(
+  circle,
+  rgba(225, 255, 0, 1) 0%,
+  rgba(0, 212, 255, 0.291220556745182) 100%
+);

@@ -24,6 +24,14 @@ const Barrel = ({
   const isFollowUp = true;
   const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
+  const [currentValue, setCurrentValue] = useState("?");
+
+  useEffect(() => {
+    if (activeRow != null) {
+      setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
+      console.log(currentValue);
+    }
+  }, [currentValue]);
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -74,6 +82,51 @@ const Barrel = ({
     }
   };
 
+  const handleIncrement = () => {
+    if (activeRow != null) {
+      const choice = choiceList[activeRow];
+      if (type == "rank") {
+        handleRank(choice);
+      } else {
+        handleRate(choice);
+      }
+    }
+  };
+  const handleDecrement = () => {
+    if (activeRow != null) {
+      const choice = choiceList[activeRow];
+      if (type == "rank") {
+        onSetChoiceList((prevChoiceList) => {
+          // 1. Get all existing values
+          const existingValues = prevChoiceList.map((item) => item.value);
+
+          // 2. Find the next available value
+          let newValue = choice.value - 1;
+          while (existingValues.includes(newValue)) {
+            newValue--;
+            if (newValue < 0) {
+              // Prevent infinite loop if no values are available
+              return prevChoiceList;
+            }
+          }
+
+          // 3. Update the choiceList
+          return prevChoiceList.map((item) => ({
+            ...item,
+            value: item.name === choice.name ? newValue : item.value,
+          }));
+        });
+      } else {
+        onSetChoiceList((prevChoiceList) => {
+          return prevChoiceList.map((item) => ({
+            ...item, // Copy all other properties
+            value: item.name === choice.name ? item.value - 1 : item.value,
+          }));
+        });
+      }
+    }
+  };
+
   const handleRank = (choice) => {
     if (choice.value < 6) {
       onSetChoiceList((prevChoiceList) => {
@@ -104,10 +157,7 @@ const Barrel = ({
       <tr
         key={index}
         onClick={() => handleItemSelect(choice.name, index)} // Pass choice.name
-        style={{
-          backgroundColor: activeRow === index ? "#EBFF00" : "",
-          border: activeRow === index ? "1px solid #44CEEC" : "",
-        }}
+        className={activeRow === index ? "active-row" : ""}
       >
         <td>
           <p className="choice__list">{capitalizeWords(choice.name)}</p>
@@ -146,7 +196,7 @@ const Barrel = ({
       <Lever sorted={isSorted} onClick={handleSortToggle} />
       <StickyArrow className={"single_choice"} />
       <div className="barrel">
-        <table>
+        <table className="barrel__table">
           <tbody>
             <tr>
               <th>{heading}</th>
@@ -165,7 +215,12 @@ const Barrel = ({
         label={"CONTINUE"}
         onAddToChoice={onAddToChoice}
       />
-      {/* <Control /> */}
+      <Control
+        type={type} //question type
+        currentValue={currentValue}
+        onIncrement={handleIncrement}
+        onDecrement={handleDecrement}
+      />
     </div>
   );
 };

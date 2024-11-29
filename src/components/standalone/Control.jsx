@@ -1,24 +1,7 @@
 import React, { useState } from "react";
 import "../../css/control.css";
 
-function Control({ type = "rank" }) {
-  const [number, setNumber] = useState(0);
-
-  const handleIncrement = () => {
-    if (type === "rank" && number < 6) {
-      setNumber(number + 1);
-    }
-
-    if (number < 5) {
-      setNumber(number + 1);
-    }
-  };
-
-  const handleDecrement = () => {
-    if (number > 1) {
-      setNumber(number - 1);
-    }
-  };
+function Control({ type, currentValue, onIncrement, onDecrement }) {
 
   return (
     <>
@@ -51,7 +34,7 @@ function Control({ type = "rank" }) {
               fontSize="70"
               fontWeight="100"
             >
-              {number > 1 ? number : "?"}
+              {currentValue}
             </text>
           </svg>
         ) : (
@@ -83,16 +66,16 @@ function Control({ type = "rank" }) {
               fontSize="20"
               fontWeight="100"
             >
-              {number > 1 ? number : "?"}
+              {currentValue}
             </text>
           </svg>
         )}
 
         <div className="control-buttons">
-          <button className="control-button" onClick={handleDecrement}>
-            -
+          <button className="control-button" onClick={onDecrement}>
+            --
           </button>
-          <button className="control-button" onClick={handleIncrement}>
+          <button className="control-button" onClick={onIncrement}>
             +
           </button>
         </div>

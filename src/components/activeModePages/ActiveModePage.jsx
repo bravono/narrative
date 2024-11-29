@@ -55,6 +55,8 @@ function ActiveModePage() {
       try {
         const survey = await getSurvey();
         const data = survey.data;
+        let savedTimerValue = localStorage.getItem("timerValue");
+        console.log("My Survey:", data);
 
         setStory(data.story);
         setQuestionType(data.blank.questionType);
@@ -62,7 +64,12 @@ function ActiveModePage() {
         setHeading(data.blank.heading);
         setChoiceList(data.blank.choiceList);
         setInstruction(data.blank.instruction);
-        setDuration(data.durationInMin * 60);
+        {
+          savedTimerValue != null
+            ? setDuration(data.durationInMin * 60)
+            : setDuration(savedTimerValue / 60);
+        }
+
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
         if (data.blank.children.length) {
@@ -84,6 +91,16 @@ function ActiveModePage() {
 
   useEffect(() => {
     if (isRunning) {
+      // Store the timer value every second
+      localStorage.setItem("timerValue", duration);
+
+      let savedTimerValue = localStorage.getItem("timerValue");
+
+      if (savedTimerValue) {
+        let currentTimerValue = parseInt(duration, 10);
+        // console.log("", currentTimerValue);
+      }
+      // console.log("Local time", localStorage.getItem("timerValue"));
       const timerId = setInterval(() => {
         setDuration((prevTime) => {
           if (prevTime <= 1) {
@@ -300,6 +317,7 @@ function ActiveModePage() {
   };
 
   const handlePreview = () => {
+    setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/preview", { state: { story, duration } });
   };
   const handleCompare = () => {
@@ -314,7 +332,7 @@ function ActiveModePage() {
   };
 
   const handleRecord = () => {
-    setTranscript("")
+    setTranscript("");
     setIsRecording((prevIsRecording) => !prevIsRecording); // Toggle recording state
   };
 
@@ -500,7 +518,7 @@ function ActiveModePage() {
                   onSetChoiceList={handleUpdateChoiceList}
                 />
               ) : (
-                <Control />
+                ""
               )}
             </Queue>
           </div>
