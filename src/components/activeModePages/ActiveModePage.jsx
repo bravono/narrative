@@ -56,7 +56,6 @@ function ActiveModePage() {
         const survey = await getSurvey();
         const data = survey.data;
         let savedTimerValue = localStorage.getItem("timerValue");
-        console.log("My Survey:", data);
 
         setStory(data.story);
         setQuestionType(data.blank.questionType);
@@ -84,10 +83,6 @@ function ActiveModePage() {
   }, []); // Empty dependency array to run only on mount
 
   useEffect(() => {}, [story]);
-
-  useEffect(() => {
-    console.log("Our transcript:", transcript);
-  }, [transcript]);
 
   useEffect(() => {
     if (isRunning) {
@@ -165,12 +160,6 @@ function ActiveModePage() {
   }, [isRecording]);
 
   useEffect(() => {
-    console.log("Current choicelist", choiceList);
-
-    if (choiceList.length) {
-      console.log("Current percentage", choiceList[0].value > 0);
-    }
-
     if (widget == "ring") {
       setCanContinue(
         choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
