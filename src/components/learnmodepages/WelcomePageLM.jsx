@@ -6,18 +6,14 @@ import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
-import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
-import LearnButton from "./LearnButton";
 import queryString from "query-string";
+import "../../css/LearnModePage.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
-  const result = queryString.parse(location.search);
-
-  console.log(result);
   const navigate = useNavigate();
 
   const handleExit = () => {
@@ -45,17 +41,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={handleRoute}
-                    label="LEARN"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    label="EXIT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
+                
                 <div className="talkbubble-btn">
                   <Button
                     onClick={handleLearn}
@@ -102,4 +88,12 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
       </section>
     </main>
   );
+}
+
+export function session() {
+  // queryString.parse(location.search);
+  const result = location.search;
+
+  console.log("Result Welcome Page:", result)
+  return result;
 }
