@@ -194,7 +194,7 @@ const Barrel = ({
   return (
     <div className="barrel-set">
       <Lever sorted={isSorted} onClick={handleSortToggle} />
-      <StickyArrow className={"single_choice"} />
+      <StickyArrow className={type} />
       <div className="barrel">
         <table className="barrel__table">
           <tbody>

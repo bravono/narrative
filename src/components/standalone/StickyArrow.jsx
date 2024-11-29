@@ -1,11 +1,11 @@
 import React from "react";
 import "../../css/StickyArrow.css";
 
-const StickyArrow = ({ className }) => {
+const StickyArrow = ({ type, className }) => {
   return (
-    <div className="sticky_arrow">
+    <div className="sticky-arrow">
       <svg
-        className={` ${className}`}
+        className={"multipleChoice"}
         viewBox="0 0 7 20"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -19,7 +19,6 @@ const StickyArrow = ({ className }) => {
           y="9"
           fontSize="2px"
           fontWeight={900}
-          style={{}}
           fill="black"
           width="1"
           transform="rotate(90, 5, 7)"

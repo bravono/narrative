@@ -2,31 +2,31 @@
   position: relative;
 }
 
-.sticky_arrow {
+.sticky-arrow {
   width: 10px;
   position: absolute;
-  left: 115px;
+  left: 120px;
   top: -25px;
 }
 
-.sticky_arrow:hover {
+.sticky-arrow:hover {
   width: 30px;
-  left: 107px;
+  left: 115px;
   top: -50px;
 }
 
-.single_choice {
+.singleChoice {
   fill: #fec7a5;
 }
 
-.multiple_choice {
+.multipleChoice {
   fill: #a7e2ee;
 }
 
-.ranking {
+.rank {
   fill: #f1c06c;
 }
 
-.rating {
+.rate {
   fill: #5dffa2;
 }

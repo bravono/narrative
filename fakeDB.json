@@ -3,18 +3,19 @@
     "story": "I eat breakfast, lunch, or dinner each day ___a___, unless I’m eating __b__ I skip meals about __c__% of the time during any given week and eat alone ___d___. % of the time. My biggest meal of the day is a versatile affair, which I call ___e___. It can be a simple, comforting dish or a grand feast with multiple courses that I rank from most to least favorite as __f__. Now, I’ll focus on the sweetness of dessert. Some people suggest that you eat a meal to get to dessert. In my view, dessert foods include __g__ and consider my top three favorites as ___h___ and eat each one ___j___ and enjoy it most often __k___. They’re my favorites because of ___m___, A saying many of us have heard is that you scream, and I scream; we all scream for ice cream. I like ice cream, and I favor brands with ___n___. In overall quality, I rate local brands as ___n2___ and national brands as ___n3___. When I put toppings on my ice cream, I like to include ___p___. I include more or less of each one as ___p2___ and that adds up to quite a sundae! After telling my story about food, I’d like to say Let’s Eat!.",
     "blank": {
       "name": "g",
-      "questionType": "radio",
+      "questionType": "rate",
       "choiceList": [
-        { "name": "breakfast", "text": "item 1", "value": 0 },
-        { "name": "lunch", "text": "item 2", "value": 0 },
-        { "name": "dinner", "text": "item 3", "value": 0 }
+        { "name": "dinner", "text": "item 3", "value": 0 },
+        { "name": "lunch", "text": "item 3", "value": 0 },
+        { "name": "breakfast", "text": "item 3", "value": 0 }
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "triangle"
+      "widget": "barrel"
     },
     "redirect": "",
     "durationInMin": "10",
+    "pauseDuration": "5",
     "timeCounter": "down",
     "sessionId": "123abc"
   }
