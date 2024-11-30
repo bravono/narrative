@@ -24,8 +24,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
     const url = apiEndpoint + result;
 
     const survey = await http.get(url);
-    console.log("My Survey", survey);
-    console.log("New Url", url);
+    console.log("My Survey", survey.data);
   }
 
   getSurvey();
