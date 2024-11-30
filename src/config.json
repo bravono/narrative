@@ -1,5 +1,5 @@
 {
-  "apiEndpoint": "https://dev.nsdbsurveys.com/narrative-php/natr.php?",
+  "apiEndpoint": "https://dev.nsdbsurveys.com/narrative-php/natr.php",
   "testEndpoint": "http://localhost:3000/survey"
 }
 
