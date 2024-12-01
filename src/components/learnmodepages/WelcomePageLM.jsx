@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+import { apiEndpoint, testEndpoint } from "../../config.json";
+import { getSurvey } from "../../services/surveyServices";
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
@@ -8,26 +11,63 @@ import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
-import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import http from "../../services/httpServices";
-import { apiEndpoint, testEndpoint } from "../../config.json";
 import queryString from "query-string";
 import "../../css/LearnModePage.css";
 import "../../css/LearnModePage.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
+  const initialDuration = 60;
+  const [counterComplete, setCounterComplete] = useState(false);
+  const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
+  const [timerLabel, setTimerLabel] = useState("pending");
+  const [isRunning, setIsRunning] = useState(true);
+  const [isFollowUp, setIsFollowUp] = useState(false);
+  const [error, setError] = useState("");
+  const [story, setStory] = useState("");
+  const [questionType, setQuestionType] = useState("");
+  const [widget, setWidget] = useState("");
+  const [heading, setHeading] = useState("");
+  const [choiceList, setChoiceList] = useState([]);
+  const [instruction, setInstruction] = useState("");
+  const [duration, setDuration] = useState(initialDuration);
+  const [pauseDuration, setPauseDuration] = useState(100);
+  const [timeLeft, setTimeLeft] = useState(100);
+  const [isRecording, setIsRecording] = useState(false);
+  const [wantsToTalk, setWantsToTalk] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const [blankName, setBlankName] = useState("");
+  const [isDescending, setIsDescending] = useState(true);
+  const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
+  const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
+  const [chooseOne, setChooseOne] = useState(false);
+  const [noSelectedChoices, setNoSelectedChoices] = useState(0); // Use for checkboxes
+  const [oneItemInChoiceList, setOneItemInChoiceList] = useState(0); // Only bar can have one item in the choice list
+  const [percentage, setPercentage] = useState(false); // Check if the only item
 
-  async function getSurvey() {
-    const result = location.search;
-    const url = apiEndpoint + result;
 
-    const survey = await http.get(url);
-    console.log("My Survey", survey.data);
+
+
+
+
+  const fetchSurvey = async () => {
+    // try {
+      const session = location.search;
+      const survey = await getSurvey(session);
+      const data = survey.data.reply;
+  
+      console.log(data)
+     
+      
+    // } catch (error) {
+    //   setError("Error with POST request");
+    // }
   }
 
-  getSurvey();
+  fetchSurvey()
+
 
   const handleExit = () => {
     navigate("/welcomeactivemode");

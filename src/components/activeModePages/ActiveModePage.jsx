@@ -19,7 +19,7 @@ import Button from "../Button";
 import Control from "../standalone/Control";
 import Talk from "../composed/Talk";
 
-function ActiveModePage() {
+function ActiveModePage({}) {
   const containerRef = useRef(null);
   const location = useLocation();
   const initialDuration = 60;
