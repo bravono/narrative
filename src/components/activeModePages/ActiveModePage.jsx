@@ -16,12 +16,13 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import Control from "../standalone/Control";
 import Talk from "../composed/Talk";
 
-function ActiveModePage({}) {
+function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
+  const { data } = location.state;
+  console.log("Data in ActiveMode:", data);
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
@@ -50,37 +51,33 @@ function ActiveModePage({}) {
   const [oneItemInChoiceList, setOneItemInChoiceList] = useState(0); // Only bar can have one item in the choice list
   const [percentage, setPercentage] = useState(false); // Check if the only item
 
-  useEffect(() => {
-    const fetchSurvey = async () => {
-      try {
-        const survey = await getSurvey();
-        const data = survey.data;
-        let savedTimerValue = localStorage.getItem("timerValue");
+  const fetchSurvey = async () => {
+    try {
+      const survey = await getSurvey();
+      const data = survey.data;
+      let savedTimerValue = localStorage.getItem("timerValue");
 
-        setStory(data.story);
-        setQuestionType(data.blank.questionType);
-        setWidget(data.blank.widget);
-        setHeading(data.blank.heading);
-        setChoiceList(data.blank.choiceList);
-        setInstruction(data.blank.instruction);
-        {
-          savedTimerValue != null
-            ? setDuration(data.durationInMin * 60)
-            : setDuration(savedTimerValue / 60);
-        }
-
-        setPauseDuration(data.pauseDuration * 60);
-        setBlankName(data.blank.name);
-        if (data.blank.children.length) {
-          setIsFollowUp(true);
-        }
-      } catch (error) {
-        setError("Error with POST request");
+      setStory(data.story);
+      setQuestionType(data.blank.questionType);
+      setWidget(data.blank.widget);
+      setHeading(data.blank.heading);
+      setChoiceList(data.blank.choiceList);
+      setInstruction(data.blank.instruction);
+      {
+        savedTimerValue != null
+          ? setDuration(data.durationInMin * 60)
+          : setDuration(savedTimerValue / 60);
       }
-    };
 
-    fetchSurvey();
-  }, []); // Empty dependency array to run only on mount
+      setPauseDuration(data.pauseDuration * 60);
+      setBlankName(data.blank.name);
+      if (data.blank.children.length) {
+        setIsFollowUp(true);
+      }
+    } catch (error) {
+      setError("Error with POST request");
+    }
+  };
 
   useEffect(() => {}, [story]);
 
@@ -303,6 +300,8 @@ function ActiveModePage({}) {
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
       setStory(story.replace(regex, `[${choiceList[0].value}%]`));
     }
+
+    fetchSurvey(); // Call the backend after adding to story
   };
 
   const handlePreview = () => {
