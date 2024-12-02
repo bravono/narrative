@@ -71,17 +71,17 @@ function ActiveModePage() {
     }
   };
 
-  // useEffect(() => {
-  //   setStory(data.story);
-  //   setQuestionType(data.questionType);
-  //   setWidget(data.widget);
-  //   setHeading(data.heading);
-  //   setChoiceList(data.choiceList);
-  //   setInstruction(data.instruction);
-  //   setDuration(data.durationInMin * 60);
-  //   setPauseDuration(data.pauseDuration * 60);
-  //   setBlankName(data.name);
-  // }, []);
+  useEffect(() => {
+    setStory(data.story);
+    setQuestionType(data.questionType);
+    setWidget(data.widget);
+    setHeading(data.heading);
+    setChoiceList(data.choiceList);
+    setInstruction(data.instruction);
+    setDuration(data.durationInMin * 60);
+    setPauseDuration(data.pauseDuration * 60);
+    setBlankName(data.name);
+  }, []);
 
   useEffect(() => {
     console.log("Is running", isRunning);
