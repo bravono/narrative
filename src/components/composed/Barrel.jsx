@@ -94,34 +94,36 @@ const Barrel = ({
   const handleDecrement = () => {
     if (activeRow != null) {
       const choice = choiceList[activeRow];
-      if (type == "rank") {
-        onSetChoiceList((prevChoiceList) => {
-          // 1. Get all existing values
-          const existingValues = prevChoiceList.map((item) => item.value);
+      if (choice.value > 0) {
+        if (type == "rank") {
+          onSetChoiceList((prevChoiceList) => {
+            // 1. Get all existing values
+            const existingValues = prevChoiceList.map((item) => item.value);
 
-          // 2. Find the next available value
-          let newValue = choice.value - 1;
-          while (existingValues.includes(newValue)) {
-            newValue--;
-            if (newValue < 0) {
-              // Prevent infinite loop if no values are available
-              return prevChoiceList;
+            // 2. Find the next available value
+            let newValue = choice.value - 1;
+            while (existingValues.includes(newValue)) {
+              newValue--;
+              if (newValue < 0) {
+                // Prevent infinite loop if no values are available
+                return prevChoiceList;
+              }
             }
-          }
 
-          // 3. Update the choiceList
-          return prevChoiceList.map((item) => ({
-            ...item,
-            value: item.name === choice.name ? newValue : item.value,
-          }));
-        });
-      } else {
-        onSetChoiceList((prevChoiceList) => {
-          return prevChoiceList.map((item) => ({
-            ...item, // Copy all other properties
-            value: item.name === choice.name ? item.value - 1 : item.value,
-          }));
-        });
+            // 3. Update the choiceList
+            return prevChoiceList.map((item) => ({
+              ...item,
+              value: item.name === choice.name ? newValue : item.value,
+            }));
+          });
+        } else {
+          onSetChoiceList((prevChoiceList) => {
+            return prevChoiceList.map((item) => ({
+              ...item, // Copy all other properties
+              value: item.name === choice.name ? item.value - 1 : item.value,
+            }));
+          });
+        }
       }
     }
   };
