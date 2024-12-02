@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "../../css/control.css";
 
 function Control({ type, currentValue, onIncrement, onDecrement }) {
-
   return (
     <>
       <div className="control-container">
-        {type === "rank" ? (
+        {/* {type === "rank" ? (
           <svg
             width="40"
             height="87"
@@ -69,14 +68,14 @@ function Control({ type, currentValue, onIncrement, onDecrement }) {
               {currentValue}
             </text>
           </svg>
-        )}
+        )} */}
 
         <div className="control-buttons">
-          <button className="control-button" onClick={onDecrement}>
-            --
-          </button>
           <button className="control-button" onClick={onIncrement}>
             +
+          </button>
+          <button className="control-button" onClick={onDecrement}>
+            --
           </button>
         </div>
       </div>
