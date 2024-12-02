@@ -22,7 +22,7 @@ function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
   // const { data } = location.state || {};
-  console.log("Data in ActiveMode:", data);
+  // console.log("Data in ActiveMode:", data);
   console.log("What is in location:", location.state);
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
