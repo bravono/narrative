@@ -38,7 +38,8 @@ function WelcomePageAM() {
   };
 
   const handleStart = () => {
-    const data = useLocation().state.data;
+    const location = useLocation();
+    const data = location.state.data;
     console.log("Data in WelcomePageAM:", data);
     navigate("/activemode", { state: { data } });
   };
