@@ -17,10 +17,7 @@ import queryString from "query-string";
 import "../../css/LearnModePage.css";
 import "../../css/LearnModePage.css";
 
-export default function WelcomePageLM({
-  classNameA,
-  classNameB,
-}) {
+export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
 
   const fetchSurvey = async () => {
@@ -29,7 +26,7 @@ export default function WelcomePageLM({
     const survey = await getSurvey(session);
     const data = survey.data.reply;
 
-    console.log(data);
+    // console.log(data);
 
     return data;
 
@@ -38,11 +35,9 @@ export default function WelcomePageLM({
     // }
   };
 
-  
-
   const handleExit = async () => {
     const data = await fetchSurvey();
-    navigate("/activemode", {state: {data}});
+    navigate("/activemode", { state: { data } });
   };
   const handleLearn = () => {
     navigate("/LearnModeTimer");
