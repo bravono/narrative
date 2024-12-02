@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import Footer from "../Footer";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
@@ -13,6 +13,8 @@ import Timer from "../../utilities/Timer";
 import Button from "../Button";
 
 function WelcomePageAM() {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const [duration, setDuration] = useState(600);
 
   // Function to handle scrolling up
@@ -35,10 +37,10 @@ function WelcomePageAM() {
     }
   };
 
-  const navigate = useNavigate(); // Initialize useNavigate
-
   const handleStart = () => {
-    navigate("/activemode");
+    const data = useLocation().state.data;
+    console.log("Data in WelcomePageAM:", data);
+    navigate("/activemode", { state: { data } });
   };
 
   return (
