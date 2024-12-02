@@ -183,9 +183,9 @@ function ActiveModePage() {
       setOneItemInChoiceList(choiceList.length == 1);
     }
 
-    if (choiceList.length) {
-      setPercentage(choiceList[0].value > 0);
-    }
+    // if (choiceList.length) {
+    //   setPercentage(choiceList[0].value > 0);
+    // }
   }, [choiceList, canContinue, percentage]);
 
   useEffect(() => {
