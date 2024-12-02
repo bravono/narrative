@@ -53,9 +53,6 @@ const Ring = ({
   };
 
   useEffect(() => {
-    // Does all item has a weight greater than 0
-    onSetAllChoiceHaveValue(choiceList.every((choice) => choice.value > 0));
-
     let total = 0;
     choiceList.map((choice) => {
       total += Number(choice.value);

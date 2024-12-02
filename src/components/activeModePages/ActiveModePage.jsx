@@ -52,40 +52,42 @@ function ActiveModePage() {
   const [oneItemInChoiceList, setOneItemInChoiceList] = useState(0); // Only bar can have one item in the choice list
   const [percentage, setPercentage] = useState(false); // Check if the only item
 
-  const fetchSurvey = async () => {
-    try {
-      const survey = await getSurvey();
-      const data = survey.data;
-
-      setStory(data.story);
-      setQuestionType(data.blank.questionType);
-      setWidget(data.blank.widget);
-      setHeading(data.blank.heading);
-      setChoiceList(data.blank.choiceList);
-      setInstruction(data.blank.instruction);
-      setDuration(data.durationInMin * 60);
-      setPauseDuration(data.pauseDuration * 60);
-      setBlankName(data.blank.name);
-    } catch (error) {
-      setError("Error with POST request");
-    }
-  };
-
   useEffect(() => {
-    setStory(data.story);
-    setQuestionType(data.questionType);
-    setWidget(data.widget);
-    setHeading(data.heading);
-    setChoiceList(data.choiceList);
-    setInstruction(data.instruction);
-    setDuration(data.durationInMin * 60);
-    setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.name);
+    const fetchSurvey = async () => {
+      try {
+        const survey = await getSurvey();
+        const data = survey.data;
+
+        setStory(data.story);
+        setQuestionType(data.blank.questionType);
+        setWidget(data.blank.widget);
+        setHeading(data.blank.heading);
+        setChoiceList(data.blank.choiceList);
+        setInstruction(data.blank.instruction);
+        setDuration(data.durationInMin * 60);
+        setPauseDuration(data.pauseDuration * 60);
+        setBlankName(data.blank.name);
+      } catch (error) {
+        setError("Error with POST request");
+      }
+    };
+
+    fetchSurvey();
   }, []);
 
-  useEffect(() => {
-    console.log("Is running", isRunning);
-  }, [story, isRunning]);
+  // useEffect(() => {
+  //   setStory(data.story);
+  //   setQuestionType(data.questionType);
+  //   setWidget(data.widget);
+  //   setHeading(data.heading);
+  //   setChoiceList(data.choiceList);
+  //   setInstruction(data.instruction);
+  //   setDuration(data.durationInMin * 60);
+  //   setPauseDuration(data.pauseDuration * 60);
+  //   setBlankName(data.name);
+  // }, []);
+
+ 
 
   useEffect(() => {
     if (isRunning) {
@@ -178,7 +180,7 @@ function ActiveModePage() {
     // if (choiceList.length) {
     //   setPercentage(choiceList[0].value > 0);
     // }
-  }, [choiceList, canContinue, percentage]);
+  }, [ canContinue, percentage]);
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -216,6 +218,10 @@ function ActiveModePage() {
     // Clean up the interval when the component unmounts
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
+
+  useEffect(() => {
+    setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0))
+  }, [choiceList])
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -255,6 +261,7 @@ function ActiveModePage() {
     setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/");
   };
+
 
   const handleAddToStory = () => {
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
@@ -301,7 +308,7 @@ function ActiveModePage() {
       setStory(story.replace(regex, `[${choiceList[0].value}%]`));
     }
 
-    fetchSurvey(); // Call the backend after adding to story
+    // fetchSurvey(); // Call the backend after adding to story
   };
 
   const handlePreview = () => {
@@ -489,8 +496,8 @@ function ActiveModePage() {
             />
           </div>
           <div className="story_queue-single">
-            <Queue className={"queue answer"}>
-              {widget === "barrel" ? (
+            <Queue className={"queue answer"} handleAddToStory={handleAddToStory}>
+              {widget === "barrel" && !isWelcome ? (
                 <Barrel
                   heading={heading}
                   choiceList={choiceList}
@@ -500,14 +507,15 @@ function ActiveModePage() {
                   onSortToggle={handleSortToggle}
                   onAddToChoice={handleTalk}
                   onSetChoiceList={handleUpdateChoiceList}
+                  onSetAllChoiceHaveValue={setAllChoicesHaveValue}
                   isRecording={isRecording}
                 />
-              ) : widget === "bar" ? (
+              ) : widget === "bar" && !isWelcome ? (
                 <Bar
                   onSetChoice={handleUpdateChoiceList}
                   choiceList={choiceList}
                 />
-              ) : widget === "ring" ? (
+              ) : widget === "ring" && !isWelcome ? (
                 <Ring
                   heading={heading}
                   choiceList={choiceList}
@@ -520,7 +528,7 @@ function ActiveModePage() {
                   onAddToStory={handleAddToStory}
                   isRecording={isRecording}
                 />
-              ) : widget === "triangle" ? (
+              ) : widget === "triangle" && !isWelcome ? (
                 <Triangle
                   heading={heading}
                   choiceList={choiceList}
