@@ -55,7 +55,6 @@ function ActiveModePage() {
     try {
       const survey = await getSurvey();
       const data = survey.data;
-      let savedTimerValue = localStorage.getItem("timerValue");
 
       setStory(data.story);
       setQuestionType(data.blank.questionType);
@@ -63,21 +62,26 @@ function ActiveModePage() {
       setHeading(data.blank.heading);
       setChoiceList(data.blank.choiceList);
       setInstruction(data.blank.instruction);
-      {
-        savedTimerValue != null
-          ? setDuration(data.durationInMin * 60)
-          : setDuration(savedTimerValue / 60);
-      }
-
+      setDuration(data.durationInMin * 60);
       setPauseDuration(data.pauseDuration * 60);
       setBlankName(data.blank.name);
-      if (data.blank.children.length) {
-        setIsFollowUp(true);
-      }
+
     } catch (error) {
       setError("Error with POST request");
     }
   };
+
+  useEffect(() => {
+    setStory(data.story);
+    setQuestionType(data.questionType);
+    setWidget(data.widget);
+    setHeading(data.heading);
+    setChoiceList(data.choiceList);
+    setInstruction(data.instruction);
+    setDuration(data.durationInMin * 60);
+    setPauseDuration(data.pauseDuration * 60);
+    setBlankName(data.name);
+  }, []);
 
   useEffect(() => {}, [story]);
 

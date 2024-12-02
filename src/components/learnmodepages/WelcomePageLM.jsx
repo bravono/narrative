@@ -40,8 +40,8 @@ export default function WelcomePageLM({
 
   
 
-  const handleExit = () => {
-    const data = fetchSurvey();
+  const handleExit = async () => {
+    const data = await fetchSurvey();
     navigate("/welcomeactivemode", {state: {data}});
   };
   const handleLearn = () => {
