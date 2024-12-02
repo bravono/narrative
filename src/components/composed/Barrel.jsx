@@ -11,7 +11,6 @@ import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/barrel.css";
 
 const Barrel = ({
-  isFollowUP,
   isRecording,
   heading,
   choiceList,
