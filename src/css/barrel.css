@@ -25,7 +25,6 @@
   height: 176px;
   max-width: 200px;
   border-collapse: collapse;
-  border-bottom: 1px solid grey;
   user-select: none;
 }
 
@@ -38,11 +37,11 @@
   );
 }
 
-.barrel__table td {
-  border-collapse: collapse;
-  border-bottom: 1px solid grey;
-  user-select: none;
-}
+/* .barrel tr:nth-child(odd) {
+  background-color: #f2f2f2; 
+} */
+
+
 
 .barrel__table th:first-child {
   font-size: 13px;
@@ -64,10 +63,6 @@
 .barrel__table td {
   width: 20px;
   text-align: center;
-}
-
-.barrel__table tr:last-child {
-  border-bottom: 0;
 }
 
 .instruction {

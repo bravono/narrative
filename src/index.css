@@ -28,6 +28,12 @@ button {
   user-select: none;
 }
 
+tr:not(:last-child) td {
+  border-collapse: collapse;
+  border-bottom: 1px solid grey;
+  user-select: none;
+}
+
 
 .primary {
   background: var(--color-primary);
