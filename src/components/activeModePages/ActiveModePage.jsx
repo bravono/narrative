@@ -14,6 +14,7 @@ import Ring from "../composed/Ring";
 import Triangle from "../composed/Triangle";
 import Logo from "../Logo";
 import Edge from "../Edge";
+import EdgeChair from "../EdgeChair";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
@@ -22,12 +23,12 @@ function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
   const { data } = location.state || {};
-  console.log("Data in ActiveMode:", data);
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
-  const [isRunning, setIsRunning] = useState(true);
+  const [isWelcome, setIsWelcome] = useState(true);
+  const [isRunning, setIsRunning] = useState(false);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
@@ -65,38 +66,29 @@ function ActiveModePage() {
       setDuration(data.durationInMin * 60);
       setPauseDuration(data.pauseDuration * 60);
       setBlankName(data.blank.name);
-
     } catch (error) {
       setError("Error with POST request");
     }
   };
 
-  useEffect(() => {
-    setStory(data.story);
-    setQuestionType(data.questionType);
-    setWidget(data.widget);
-    setHeading(data.heading);
-    setChoiceList(data.choiceList);
-    setInstruction(data.instruction);
-    setDuration(data.durationInMin * 60);
-    setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.name);
-  }, []);
+  // useEffect(() => {
+  //   setStory(data.story);
+  //   setQuestionType(data.questionType);
+  //   setWidget(data.widget);
+  //   setHeading(data.heading);
+  //   setChoiceList(data.choiceList);
+  //   setInstruction(data.instruction);
+  //   setDuration(data.durationInMin * 60);
+  //   setPauseDuration(data.pauseDuration * 60);
+  //   setBlankName(data.name);
+  // }, []);
 
-  useEffect(() => {}, [story]);
+  useEffect(() => {
+    console.log("Is running", isRunning);
+  }, [story, isRunning]);
 
   useEffect(() => {
     if (isRunning) {
-      // Store the timer value every second
-      localStorage.setItem("timerValue", duration);
-
-      let savedTimerValue = localStorage.getItem("timerValue");
-
-      if (savedTimerValue) {
-        let currentTimerValue = parseInt(duration, 10);
-        // console.log("", currentTimerValue);
-      }
-      // console.log("Local time", localStorage.getItem("timerValue"));
       const timerId = setInterval(() => {
         setDuration((prevTime) => {
           if (prevTime <= 1) {
@@ -124,7 +116,7 @@ function ActiveModePage() {
 
       return () => clearInterval(timerId);
     }
-  }, [duration, isRunning]);
+  }, [isRunning]);
 
   useEffect(() => {
     let recognition;
@@ -248,11 +240,15 @@ function ActiveModePage() {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    console.log("Started");
+    if (!isRunning) {
+      setIsRunning(true);
+      setIsWelcome(false);
+    }
   };
   const handlePause = () => {
-    console.log("Paused");
-    setIsRunning((prevIsRunning) => !prevIsRunning);
+    if (!isWelcome) {
+      setIsRunning((prevIsRunning) => !prevIsRunning);
+    }
   };
 
   const handleEdge = () => {
@@ -391,12 +387,17 @@ function ActiveModePage() {
           <Logo />
         </div>
         <div className="header">
-          <Edge onClick={handleEdge} />
-          {isRunning ? (
+          {isRunning || (!isRunning && !isWelcome) ? (
+            <Edge onClick={handleEdge} />
+          ) : (
+            <EdgeChair />
+          )}
+          {isWelcome || isRunning ? (
             <Timer
               duration={duration}
               label={timerLabel.toUpperCase()}
               arrowColor={arrowColor}
+              isWelcome={isWelcome}
               isRunning={isRunning}
             />
           ) : (
@@ -406,15 +407,20 @@ function ActiveModePage() {
               arrowColor={"grey"}
             />
           )}
+
           <div className="top_button-group">
             <Button
               label="START"
-              className={"top_button"}
+              className={
+                isWelcome ? "primary top_button" : "disabled top_button"
+              }
               onClick={handleStart}
             />
             <Button
-              label={isRunning ? "PAUSE" : "RESUME"}
-              className={duration ? "primary top_button" : " top_button"}
+              label={isWelcome ? "PAUSE" : isRunning ? "PAUSE" : "RESUME"}
+              className={
+                isWelcome ? "disabled top_button" : "primary top_button "
+              }
               onClick={handlePause}
             />
           </div>
@@ -435,20 +441,32 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            <Queue className={"queue question"}>
-              {wantsToTalk ? (
-                <Talk
-                  onRecord={handleRecord}
-                  onErase={handleErase}
-                  onCancel={handleCancel}
-                  onDone={handleDone}
-                  isRecording={isRecording}
-                  transcript={transcript}
+            {isWelcome && !isRunning ? (
+              <Queue className={"queue welcome"}>
+                <Teleprompter
+                  textLines={`Welcome.
+                This is a narrative survey
+                mehtod and your story will
+                appear here`}
                 />
-              ) : (
-                <Teleprompter textLines={story} containerRef={containerRef} />
-              )}
-            </Queue>
+                <Edge type={"standing"} />
+              </Queue>
+            ) : (
+              <Queue className={"queue question"}>
+                {wantsToTalk ? (
+                  <Talk
+                    onRecord={handleRecord}
+                    onErase={handleErase}
+                    onCancel={handleCancel}
+                    onDone={handleDone}
+                    isRecording={isRecording}
+                    transcript={transcript}
+                  />
+                ) : (
+                  <Teleprompter textLines={story} containerRef={containerRef} />
+                )}
+              </Queue>
+            )}
           </div>
           <div className="middle_buttons-group">
             <Button
