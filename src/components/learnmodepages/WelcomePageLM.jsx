@@ -42,7 +42,7 @@ export default function WelcomePageLM({
 
   const handleExit = async () => {
     const data = await fetchSurvey();
-    navigate("/welcomeactivemode", {state: {data}});
+    navigate("/activemode", {state: {data}});
   };
   const handleLearn = () => {
     navigate("/LearnModeTimer");
