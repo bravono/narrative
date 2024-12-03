@@ -40,7 +40,7 @@ const Barrel = ({
   const handleItemSelect = (choice, index) => {
     setActiveRow(index);
   };
-  const type = questionType.toLowerCase();
+  const type = questionType;
 
   const handleCheckToggle = (choice) => {
     onSetChoiceList((prevChoiceList) => {
@@ -164,12 +164,12 @@ const Barrel = ({
           <p className="choice__list">{capitalizeWords(choice.name)}</p>
         </td>
         <td>
-          {type == "checkbox" ? (
+          {type == "multipleChoice" ? (
             <Checkbox
               onCheckToggle={() => handleCheckToggle(choice)}
               isChecked={choice.value}
             />
-          ) : type == "radio" ? (
+          ) : type == "singleChoice" ? (
             <RadioButton
               onRadioToggle={() => handleRadioToggle(choice)}
               isChecked={choice.value}
@@ -194,7 +194,7 @@ const Barrel = ({
   return (
     <div className="barrel-set">
       <Lever sorted={isSorted} onClick={handleSortToggle} />
-      <StickyArrow className={type} />
+      <StickyArrow type={type} />
       <div className="barrel">
         <table className="barrel__table">
           <tbody>

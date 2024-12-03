@@ -5,28 +5,28 @@
 .sticky-arrow {
   width: 10px;
   position: absolute;
-  left: 120px;
+  left: 125px;
   top: -25px;
 }
 
 .sticky-arrow:hover {
   width: 30px;
-  left: 115px;
+  left: 120px;
   top: -50px;
 }
 
-.singleChoice {
+.singleChoice-sticky {
   fill: #fec7a5;
 }
 
-.multipleChoice {
+.multipleChoice-sticky {
   fill: #a7e2ee;
 }
 
-.rank {
+.rank-sticky {
   fill: #f1c06c;
 }
 
-.rate {
+.rate-sticky {
   fill: #5dffa2;
 }
