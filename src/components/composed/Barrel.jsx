@@ -215,12 +215,13 @@ const Barrel = ({
         label={"CONTINUE"}
         onAddToChoice={onAddToChoice}
       />
-      <Control
+      {type == "rank" || type == "rate" ? <Control
         type={type} //question type
         currentValue={currentValue}
         onIncrement={handleIncrement}
         onDecrement={handleDecrement}
-      />
+      /> : ""}
+      
     </div>
   );
 };
