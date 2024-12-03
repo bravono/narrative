@@ -56,7 +56,7 @@ const Barrel = ({
       return prevChoiceList.map((item) => ({
         ...item,
         value:
-          item.name === choice.name ? (item.value === 1 ? 0 : 1) : item.value,
+          item.name === choice.text ? (item.value === 1 ? 0 : 1) : item.value,
       }));
     });
   };
@@ -65,7 +65,7 @@ const Barrel = ({
     onSetChoiceList((prevChoiceList) => {
       return prevChoiceList.map((item) => ({
         ...item, // Copy all other properties
-        value: item.name === choice.name ? 1 : 0, // Update 'value' conditionally
+        value: item.name === choice.text ? 1 : 0, // Update 'value' conditionally
       }));
     });
   };
@@ -75,7 +75,7 @@ const Barrel = ({
       onSetChoiceList((prevChoiceList) => {
         return prevChoiceList.map((item) => ({
           ...item, // Copy all other properties
-          value: item.name === choice.name ? item.value + 1 : item.value,
+          value: item.name === choice.text ? item.value + 1 : item.value,
         }));
       });
     }
@@ -113,14 +113,14 @@ const Barrel = ({
             // 3. Update the choiceList
             return prevChoiceList.map((item) => ({
               ...item,
-              value: item.name === choice.name ? newValue : item.value,
+              value: item.name === choice.text ? newValue : item.value,
             }));
           });
         } else {
           onSetChoiceList((prevChoiceList) => {
             return prevChoiceList.map((item) => ({
               ...item, // Copy all other properties
-              value: item.name === choice.name ? item.value - 1 : item.value,
+              value: item.name === choice.text ? item.value - 1 : item.value,
             }));
           });
         }
@@ -147,7 +147,7 @@ const Barrel = ({
         // 3. Update the choiceList
         return prevChoiceList.map((item) => ({
           ...item,
-          value: item.name === choice.name ? newValue : item.value,
+          value: item.name === choice.text ? newValue : item.value,
         }));
       });
     }
@@ -157,11 +157,11 @@ const Barrel = ({
     return (
       <tr
         key={index}
-        onClick={() => handleItemSelect(choice.name, index)} // Pass choice.name
+        onClick={() => handleItemSelect(choice.text, index)} // Pass choice.text
         className={activeRow === index ? "active-row" : ""}
       >
         <td>
-          <p className="choice__list">{capitalizeWords(choice.name)}</p>
+          <p className="choice__list">{capitalizeWords(choice.text)}</p>
         </td>
         <td>
           {type == "multipleChoice" ? (

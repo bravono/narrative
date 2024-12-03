@@ -38,6 +38,7 @@ function ActiveModePage() {
   const [choiceList, setChoiceList] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
+  const [countDirection, setCountDirection] = useState("")
   const [pauseDuration, setPauseDuration] = useState(100);
   const [timeLeft, setTimeLeft] = useState(100);
   const [isRecording, setIsRecording] = useState(false);
@@ -72,22 +73,21 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
-  // useEffect(() => {
-  //   setStory(data.story);
-  //   setQuestionType(data.questionType);
-  //   setWidget(data.widget);
-  //   setHeading(data.heading);
-  //   setChoiceList(data.choiceList);
-  //   setInstruction(data.instruction);
-  //   setDuration(data.durationInMin * 60);
-  //   setPauseDuration(data.pauseDuration * 60);
-  //   setBlankName(data.name);
-  // }, []);
-
- 
+  useEffect(() => {
+    setStory(data.story);
+    setQuestionType(data.blanks[0].questionType);
+    setWidget(data.blanks[0].widget);
+    // setHeading(data.heading);
+    setChoiceList(data.blanks[0].choiceList);
+    // setInstruction(data.instruction);
+    setDuration(data.durationInMin * 60);
+    setCountDirection(data.countDirection);
+    setPauseDuration(data.pauseDuration * 60);
+    setBlankName(data.blanks[0].choiceList);
+  }, []);
 
   useEffect(() => {
     if (isRunning) {
@@ -180,7 +180,7 @@ function ActiveModePage() {
     // if (choiceList.length) {
     //   setPercentage(choiceList[0].value > 0);
     // }
-  }, [ canContinue, percentage]);
+  }, [canContinue, percentage]);
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -220,8 +220,9 @@ function ActiveModePage() {
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
   useEffect(() => {
-    setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0))
-  }, [choiceList])
+    if (choiceList.length)
+      setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
+  }, [choiceList]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -261,7 +262,6 @@ function ActiveModePage() {
     setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/");
   };
-
 
   const handleAddToStory = () => {
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
@@ -496,7 +496,10 @@ function ActiveModePage() {
             />
           </div>
           <div className="story_queue-single">
-            <Queue className={"queue answer"} handleAddToStory={handleAddToStory}>
+            <Queue
+              className={"queue answer"}
+              handleAddToStory={handleAddToStory}
+            >
               {widget === "barrel" && !isWelcome ? (
                 <Barrel
                   heading={heading}

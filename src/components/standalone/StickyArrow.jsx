@@ -3,7 +3,6 @@ import "../../css/StickyArrow.css";
 
 const StickyArrow = ({ type, className }) => {
   function renderResult() {
-    console.log(type);
     if (type == "singleChoice") return "SINGLE CHOICE";
     if (type == "multipleChoice") return "MULTI CHOICE";
     if (type == "rank") return "RANK";
