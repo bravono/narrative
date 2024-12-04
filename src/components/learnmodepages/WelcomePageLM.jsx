@@ -21,7 +21,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
 
   const fetchSurvey = async () => {
-    // try {
+    try {
     const session = location.search;
     const survey = await getSurvey(session);
     const data = survey.data.reply;
@@ -30,9 +30,9 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
     return data;
 
-    // } catch (error) {
-    //   setError("Error with POST request");
-    // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleExit = async () => {
