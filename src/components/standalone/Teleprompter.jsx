@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../css/Teleprompter.css";
 
-const Teleprompter = ({ textLines, containerRef }) => {
+const Teleprompter = ({ story, storyBuild, containerRef }) => {
+
+  useEffect(() => {
+    console.log("Telepromter Story", story)
+  }, [story]);
+
   return (
     <div className="teleprompter-container">
       <div ref={containerRef} className="teleprompter-text-container">
-        {textLines}
+        {story}
       </div>
     </div>
   );

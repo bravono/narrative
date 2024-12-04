@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { getSurvey } from "../../services/surveyServices";
+import { getNextBlank, getSurvey } from "../../services/surveyServices";
 import { Toastify as toast } from "toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -31,14 +31,16 @@ function ActiveModePage() {
   const [isRunning, setIsRunning] = useState(false);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
+
   const [story, setStory] = useState("");
+  const [storyBuild, setStoryBuild] = useState("");
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
   const [choiceList, setChoiceList] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
-  const [countDirection, setCountDirection] = useState("")
+  const [countDirection, setCountDirection] = useState("");
   const [pauseDuration, setPauseDuration] = useState(100);
   const [timeLeft, setTimeLeft] = useState(100);
   const [isRecording, setIsRecording] = useState(false);
@@ -53,6 +55,7 @@ function ActiveModePage() {
   const [oneItemInChoiceList, setOneItemInChoiceList] = useState(0); // Only bar can have one item in the choice list
   const [percentage, setPercentage] = useState(false); // Check if the only item
 
+  // Fake backend for testing
   useEffect(() => {
     const fetchSurvey = async () => {
       try {
@@ -73,7 +76,7 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+  // fetchSurvey();
   }, []);
 
   useEffect(() => {
@@ -88,6 +91,20 @@ function ActiveModePage() {
     setPauseDuration(data.pauseDuration * 60);
     setBlankName(data.blanks[0].choiceList);
   }, []);
+
+  // Get the next blank
+  const fetchNextBlank = async () => {
+    try {
+    const session = location.search;
+    const newBlank = await getNextBlank();
+    const data = newBlank;
+
+    return data;
+
+    } catch (error) {
+      setError("Error with POST request");
+    }
+  };
 
   useEffect(() => {
     if (isRunning) {
@@ -263,7 +280,9 @@ function ActiveModePage() {
     navigate("/");
   };
 
-  const handleAddToStory = () => {
+  const handleAddToStory = async () => {
+    
+
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
     if (canContinue || allChoicesHaveValue) {
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
@@ -308,8 +327,32 @@ function ActiveModePage() {
       setStory(story.replace(regex, `[${choiceList[0].value}%]`));
     }
 
-    // fetchSurvey(); // Call the backend after adding to story
+    // Get the next question
+    const newTask = await fetchNextBlank();
+    const response = newTask.reply;
+
+    console.log("Response:", response);
+
+    if (response.story) {
+      setStory(response.story);
+      setStoryBuild((prev) => {
+        return `${prev} ${response.story}`;
+      });
+      setQuestionType(response.blanks[0].questionType);
+      setWidget(response.blanks[0].widget);
+      // setHeading(response.heading);
+      setChoiceList(response.blanks[0].choiceList);
+      // setInstruction(response.instruction);
+      setDuration(response.durationInMin * 60);
+      setCountDirection(response.countDirection);
+      setPauseDuration(response.pauseDuration * 60);
+      setBlankName(response.blanks[0].choiceList);
+    }
   };
+
+  useEffect(() => {
+    console.log(story);
+  }, [story, questionType, widget, choiceList, blankName]);
 
   const handlePreview = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
@@ -451,7 +494,7 @@ function ActiveModePage() {
             {isWelcome && !isRunning ? (
               <Queue className={"queue welcome"}>
                 <Teleprompter
-                  textLines={`Welcome.
+                  story={`Welcome.
                 This is a narrative survey
                 mehtod and your story will
                 appear here`}
@@ -470,7 +513,7 @@ function ActiveModePage() {
                     transcript={transcript}
                   />
                 ) : (
-                  <Teleprompter textLines={story} containerRef={containerRef} />
+                  <Teleprompter story={story} containerRef={containerRef} />
                 )}
               </Queue>
             )}
