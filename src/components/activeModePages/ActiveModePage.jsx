@@ -193,9 +193,9 @@ function ActiveModePage() {
      
     }
 
-    if (questionType === "checkbox") {
+    if (questionType === "multipleChoice") {
       setNoSelectedChoices(
-        choiceList.filter((choice) => choice.value == 1).length
+        choiceList.filter((choice) => choice.value === 1).length
       );
     }
 
@@ -211,7 +211,7 @@ function ActiveModePage() {
     console.log("Only one choose?", chooseOne);
     console.log("All choices is given a value?", allChoicesHaveValue);
     console.log("Can we continue", canContinue == 100);
-    console.log("Selected choices is greater than 3", noSelectedChoices >= 3);
+    console.log("Selected choices is greater than 3", noSelectedChoices);
     console.log("It is a bar", isBar);
     console.log("Choice List", choiceList);
   }, [
@@ -349,6 +349,7 @@ function ActiveModePage() {
     setAllChoicesHaveValue(false);
     setChooseOne(false);
     setIsBar(false);
+    setNoSelectedChoices(0)
 
     // Get the next question
     const newTask = await fetchNextBlank();
@@ -516,10 +517,7 @@ function ActiveModePage() {
             {isWelcome && !isRunning ? (
               <Queue className={"queue welcome"}>
                 <Teleprompter
-                  story={`Welcome.
-                This is a narrative survey
-                mehtod and your story will
-                appear here`}
+                  
                 />
                 <Edge type={"standing"} />
               </Queue>
