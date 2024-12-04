@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/bar.css";
 
 const Bar = ({ onSetChoice, choiceList }) => {
@@ -56,6 +55,11 @@ const Bar = ({ onSetChoice, choiceList }) => {
     }
   }, [progress]);
 
+  // This always referesh the bar progress on new blanks
+  useEffect(() => {
+    if (choiceList.length === 1 && choiceList[0].value === 0) setProgress(0);
+  }, [choiceList]);
+
   return (
     <div className="bar-set">
       <div className="bar">
@@ -96,7 +100,11 @@ const Bar = ({ onSetChoice, choiceList }) => {
           onMouseLeave={handleMouseUp} // Ensures drag stops if mouse leaves the bar
           onMouseDown={handleMouseDown}
         >
-          {Math.round(progress) < 1 ? <p id="progress-label">Drag to add value</p> : ""}
+          {Math.round(progress) < 1 ? (
+            <p id="progress-label">Drag to add value</p>
+          ) : (
+            ""
+          )}
           <div className="progress_bar" style={{ width: `${progress}%` }}></div>
         </div>
       </div>
