@@ -56,7 +56,7 @@ const Barrel = ({
       return prevChoiceList.map((item) => ({
         ...item,
         value:
-          item.name === choice.text ? (item.value === 1 ? 0 : 1) : item.value,
+          item.text === choice.text ? (item.value === 1 ? 0 : 1) : item.value,
       }));
     });
   };
@@ -65,7 +65,7 @@ const Barrel = ({
     onSetChoiceList((prevChoiceList) => {
       return prevChoiceList.map((item) => ({
         ...item, // Copy all other properties
-        value: item.name === choice.text ? 1 : 0, // Update 'value' conditionally
+        value: item.text === choice.text ? 1 : 0, // Update 'value' conditionally
       }));
     });
   };
@@ -75,7 +75,7 @@ const Barrel = ({
       onSetChoiceList((prevChoiceList) => {
         return prevChoiceList.map((item) => ({
           ...item, // Copy all other properties
-          value: item.name === choice.text ? item.value + 1 : item.value,
+          value: item.text === choice.text ? item.value + 1 : item.value,
         }));
       });
     }
@@ -113,14 +113,14 @@ const Barrel = ({
             // 3. Update the choiceList
             return prevChoiceList.map((item) => ({
               ...item,
-              value: item.name === choice.text ? newValue : item.value,
+              value: item.text === choice.text ? newValue : item.value,
             }));
           });
         } else {
           onSetChoiceList((prevChoiceList) => {
             return prevChoiceList.map((item) => ({
               ...item, // Copy all other properties
-              value: item.name === choice.text ? item.value - 1 : item.value,
+              value: item.text === choice.text ? item.value - 1 : item.value,
             }));
           });
         }
@@ -147,7 +147,7 @@ const Barrel = ({
         // 3. Update the choiceList
         return prevChoiceList.map((item) => ({
           ...item,
-          value: item.name === choice.text ? newValue : item.value,
+          value: item.text === choice.text ? newValue : item.value,
         }));
       });
     }
