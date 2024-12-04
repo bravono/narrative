@@ -76,7 +76,7 @@ function ActiveModePage() {
       }
     };
 
-  // fetchSurvey();
+    // fetchSurvey();
   }, []);
 
   useEffect(() => {
@@ -84,7 +84,11 @@ function ActiveModePage() {
     setQuestionType(data.blanks[0].questionType);
     setWidget(data.blanks[0].widget);
     // setHeading(data.heading);
-    setChoiceList(data.blanks[0].choiceList);
+    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({ // Reinitializing value to 0
+      ...choice,
+      value: 0,
+    }));
+    setChoiceList(newChoiceList);
     // setInstruction(data.instruction);
     setDuration(data.durationInMin * 60);
     setCountDirection(data.countDirection);
@@ -95,12 +99,11 @@ function ActiveModePage() {
   // Get the next blank
   const fetchNextBlank = async () => {
     try {
-    const session = location.search;
-    const newBlank = await getNextBlank();
-    const data = newBlank;
+      const session = location.search;
+      const newBlank = await getNextBlank();
+      const data = newBlank;
 
-    return data;
-
+      return data;
     } catch (error) {
       setError("Error with POST request");
     }
@@ -281,8 +284,6 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = async () => {
-    
-
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
     if (canContinue || allChoicesHaveValue) {
       const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
@@ -331,7 +332,6 @@ function ActiveModePage() {
     const newTask = await fetchNextBlank();
     const response = newTask.reply;
 
-    console.log("Response:", response);
 
     if (response.story) {
       setStory(response.story);
@@ -341,7 +341,11 @@ function ActiveModePage() {
       setQuestionType(response.blanks[0].questionType);
       setWidget(response.blanks[0].widget);
       // setHeading(response.heading);
-      setChoiceList(response.blanks[0].choiceList);
+      const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
+        ...choice,
+        value: 0,
+      }));
+      setChoiceList(newChoiceList);
       // setInstruction(response.instruction);
       setDuration(response.durationInMin * 60);
       setCountDirection(response.countDirection);
@@ -351,7 +355,7 @@ function ActiveModePage() {
   };
 
   useEffect(() => {
-    console.log(story);
+    console.log(choiceList);
   }, [story, questionType, widget, choiceList, blankName]);
 
   const handlePreview = () => {
