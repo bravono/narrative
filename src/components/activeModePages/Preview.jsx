@@ -7,7 +7,7 @@ import "../../css/preview.css";
 function Preview() {
   const navigate = useNavigate();
   const location = useLocation();
-  const story = location.state?.story; // Access data from location state
+  const story = location.state?.storyBuild; // Access data from location state
   const handleGoBack = () => {
     navigate(-1);
   };

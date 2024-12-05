@@ -59,6 +59,18 @@ function ActiveModePage() {
     allChoicesHaveValue ||
     chooseOne ||
     noSelectedChoices >= 3;
+  
+    useEffect(() => {
+      const storedIsWelcome = localStorage.getItem('isWelcome');
+      console.log(storedIsWelcome)
+      if (storedIsWelcome) {
+        setIsWelcome(JSON.parse(storedIsWelcome));
+      } else {
+        // Set initial value or fetch from backend
+        setIsWelcome(true); // Assuming first visit
+        localStorage.setItem('isWelcome', JSON.stringify(true));
+      }
+    }, []);
 
   // Fake backend for testing
   useEffect(() => {
@@ -207,7 +219,6 @@ function ActiveModePage() {
       setIsBar(choiceList.length == 1 && choiceList[0].value > 1);
     }
 
-    console.log("Selected Item", choiceList)
   }, [choiceList]);
 
  
@@ -253,8 +264,6 @@ function ActiveModePage() {
     if (choiceList.length)
       setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
 
-    console.log("Story:", story);
-    console.log("Building My Story:", storyBuild);
   }, [choiceList, story]);
 
   // Function to handle scrolling up
@@ -371,7 +380,7 @@ function ActiveModePage() {
 
   const handlePreview = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
-    navigate("/preview", { state: { story, duration } });
+    navigate("/preview", { state: { storyBuild, duration } });
   };
   const handleCompare = () => {
     navigate("/compare");
