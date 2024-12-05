@@ -2,28 +2,44 @@ import React, { useState, useRef, useEffect } from "react";
 import "../../css/bar.css";
 
 const Bar = ({ onSetChoice, choiceList }) => {
-  const isFollowUp = false;
   const progressBarRef = useRef(null);
   const isDragging = useRef(false);
   const [progress, setProgress] = useState(0); // Initial progress (in %)
 
-  // Handle mouse down on the handle
+  // Handle desktop version
   const handleMouseDown = (event) => {
     isDragging.current = true;
     updateProgress(event);
   };
 
-  // Handle mouse move when dragging
+
   const handleMouseMove = (event) => {
     if (isDragging.current) {
+      console.log("Event in Destop", event)
       updateProgress(event);
     }
   };
 
-  // Handle mouse up to stop dragging
   const handleMouseUp = () => {
     isDragging.current = false;
   };
+
+  // Handle mobile version
+  const handleTouchStart = (event) => {
+    isDragging.current = true;
+    updateProgress(event);
+  }
+  const handleTouchMove = (event) => {
+    if (!isDragging.current) return
+
+    console.log("Event in Mobile", event)
+
+      updateProgress(event);
+    
+  }
+  const handleTouchEnd = () => {
+    isDragging.current = false;
+  }
 
   const incrementProgress = () => {
     setProgress(progress + 1);
@@ -39,12 +55,17 @@ const Bar = ({ onSetChoice, choiceList }) => {
   const updateProgress = (event) => {
     if (progressBarRef.current) {
       const rect = progressBarRef.current.getBoundingClientRect();
-      const newProgress = ((event.clientX - rect.left) / rect.width) * 100;
-      setProgress(Math.max(0, Math.min(newProgress, 100))); // Keep progress between 0 and 100
+  
+      // Get the x-coordinate, considering both mouse and touch events
+      const x = event.clientX || (event.touches && event.touches[0].clientX);
+  
+      const newProgress = ((x - rect.left) / rect.width) * 100;
+      setProgress(Math.max(0, Math.min(newProgress, 100)));
     }
   };
 
   useEffect(() => {
+    console.log("Progress", Math.round(progress))
     if (progress >= 1) {
       onSetChoice((prevChoiceList) => {
         return choiceList.map((choice) => ({
@@ -99,6 +120,9 @@ const Bar = ({ onSetChoice, choiceList }) => {
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp} // Ensures drag stops if mouse leaves the bar
           onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {Math.round(progress) < 1 ? (
             <p id="progress-label">Drag to add value</p>
