@@ -32,6 +32,7 @@ function ActiveModePage() {
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
+  const [storyBuild, setStoryBuild] = useState()
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
@@ -46,13 +47,15 @@ function ActiveModePage() {
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
+  const [activeRow, setActiveRow] = useState()
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
   const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
   const [chooseOne, setChooseOne] = useState(false);
   const [noSelectedChoices, setNoSelectedChoices] = useState(0); // Use for checkboxes
   const [isBar, setIsBar] = useState(false); // Only bar can have one item in the choice list
-  // const [meetOneCondition, setMeetOneCondition] = useState(false);
-  const meetOneCondition = isBar || canContinue == 100 ||
+  const meetOneCondition =
+    isBar ||
+    canContinue == 100 ||
     allChoicesHaveValue ||
     chooseOne ||
     noSelectedChoices >= 3;
@@ -83,6 +86,7 @@ function ActiveModePage() {
 
   useEffect(() => {
     setStory(data.story);
+    setStoryBuild(data.story)
     setQuestionType(data.blanks[0].questionType);
     setWidget(data.blanks[0].widget);
     // setHeading(data.heading);
@@ -96,7 +100,8 @@ function ActiveModePage() {
     setDuration(data.durationInMin * 60);
     setCountDirection(data.countDirection);
     setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.blanks[0].choiceList);
+    setBlankName(data.blanks[0].blank);
+
   }, []);
 
   // Get the next blank
@@ -189,8 +194,6 @@ function ActiveModePage() {
       setChooseOne(
         choiceList.filter((choice) => choice.value === 1).length === 1
       ); //handles when only one choice is selected and exclude checkbox
-
-     
     }
 
     if (questionType === "multipleChoice") {
@@ -199,29 +202,15 @@ function ActiveModePage() {
       );
     }
 
-    console.log("Number of Selected Choices", noSelectedChoices)
 
     if (widget == "bar") {
       setIsBar(choiceList.length == 1 && choiceList[0].value > 1);
     }
+
+    console.log("Selected Item", choiceList)
   }, [choiceList]);
 
-  useEffect(() => {
-    console.log("A condition is met?", meetOneCondition);
-    console.log("Only one choose?", chooseOne);
-    console.log("All choices is given a value?", allChoicesHaveValue);
-    console.log("Can we continue", canContinue == 100);
-    console.log("Selected choices is greater than 3", noSelectedChoices);
-    console.log("It is a bar", isBar);
-    console.log("Choice List", choiceList);
-  }, [
-    isBar,
-    canContinue,
-    allChoicesHaveValue,
-    chooseOne,
-    noSelectedChoices,
-    choiceList,
-  ]);
+ 
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -263,7 +252,10 @@ function ActiveModePage() {
   useEffect(() => {
     if (choiceList.length)
       setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
-  }, [choiceList]);
+
+    console.log("Story:", story);
+    console.log("Building My Story:", storyBuild);
+  }, [choiceList, story]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -305,11 +297,12 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = async () => {
+    const regex = new RegExp(`_{1,}[a-z][1-9]?_{1,}`);
+
     // canContinue handles ring and allChoicesHaveValue handles rank and rate
     if (canContinue || allChoicesHaveValue) {
-      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(
-        story.replace(
+      setStoryBuild(
+        storyBuild.replace(
           regex,
           `[${choiceList
             .map((choice) => `${choice.text} (${choice.value})`)
@@ -318,30 +311,28 @@ function ActiveModePage() {
       );
     }
 
-    // This handle bar
-    if (isBar) {
-      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(story.replace(regex, `[${choiceList[0].value}]`));
-    }
-
     // choseOne handle radio and triangle
     if (chooseOne && !isBar) {
-      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(story.replace(regex, `[${choiceList[0].text}]`));
+      setStoryBuild(storyBuild.replace(regex, `[${choiceList[activeRow].text}]`));
     }
 
     // Handle checkbox case
     if (noSelectedChoices >= 3) {
-      const regex = new RegExp(`_{1,}${blankName}[1-9]?_{1,}`);
-      setStory(
-        story.replace(
+      
+      setStoryBuild(
+        storyBuild.replace(
           regex,
           `[${choiceList
-            .filter((choice) => choice.value == 1)
-            .map((choice) => `${choice.text}`)
+            .filter((choice) => choice.value === 1)
+            .map((choice) => choice.text)
             .join(", ")}]`
         )
       );
+    }
+
+    // This handle bar
+    if (isBar) {
+      setStoryBuild(storyBuild.replace(regex, `[${choiceList[0].value}]`));
     }
 
     // Set all conditions to false
@@ -349,7 +340,8 @@ function ActiveModePage() {
     setAllChoicesHaveValue(false);
     setChooseOne(false);
     setIsBar(false);
-    setNoSelectedChoices(0)
+    setNoSelectedChoices(0);
+    setActiveRow(null)
 
     // Get the next question
     const newTask = await fetchNextBlank();
@@ -358,6 +350,7 @@ function ActiveModePage() {
     if (meetOneCondition) {
       if (response.story) {
         setStory(response.story);
+        setStoryBuild(prevStory => {return prevStory + response.story})
         setQuestionType(response.blanks[0].questionType);
         setWidget(response.blanks[0].widget);
         // setHeading(response.heading);
@@ -370,12 +363,11 @@ function ActiveModePage() {
         setDuration(response.durationInMin * 60);
         setCountDirection(response.countDirection);
         setPauseDuration(response.pauseDuration * 60);
-        setBlankName(response.blanks[0].choiceList);
+        setBlankName(response.blanks[0].blank);
+
       }
     }
   };
-
-  
 
   const handlePreview = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
@@ -516,9 +508,7 @@ function ActiveModePage() {
             </div>
             {isWelcome && !isRunning ? (
               <Queue className={"queue welcome"}>
-                <Teleprompter
-                  
-                />
+                <Teleprompter />
                 <Edge type={"standing"} />
               </Queue>
             ) : (
@@ -533,7 +523,7 @@ function ActiveModePage() {
                     transcript={transcript}
                   />
                 ) : (
-                  <Teleprompter story={story} containerRef={containerRef} />
+                      <Teleprompter story={story} storyBuild={storyBuild} containerRef={containerRef} />
                 )}
               </Queue>
             )}
@@ -562,11 +552,14 @@ function ActiveModePage() {
                   questionType={questionType}
                   isFollowUP={isFollowUp}
                   instruction={instruction}
+                  isRecording={isRecording}
                   onSortToggle={handleSortToggle}
                   onAddToChoice={handleTalk}
                   onSetChoiceList={handleUpdateChoiceList}
                   onSetAllChoiceHaveValue={setAllChoicesHaveValue}
-                  isRecording={isRecording}
+                  onSetActiveRow={(row) => {
+                    setActiveRow(row);
+                  }}
                 />
               ) : widget === "bar" && !isWelcome ? (
                 <Bar

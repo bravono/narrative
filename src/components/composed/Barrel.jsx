@@ -19,6 +19,7 @@ const Barrel = ({
   instruction,
   onSortToggle,
   onAddToChoice,
+  onSetActiveRow,
 }) => {
   const isFollowUp = true;
   const [activeRow, setActiveRow] = useState(null);
@@ -29,8 +30,10 @@ const Barrel = ({
     if (activeRow != null) {
       setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
       console.log(currentValue);
+      onSetActiveRow(activeRow)
     }
-  }, [currentValue]);
+
+  }, [currentValue, activeRow]);
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);

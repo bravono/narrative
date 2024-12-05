@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/Teleprompter.css";
 
 const Teleprompter = ({ story, storyBuild, containerRef }) => {
 
-  useEffect(() => {
-    console.log("Telepromter Story", story)
-  }, [story]);
-
+  // Continue From Setting Story Build
   return (
     <div className="teleprompter-container">
       <div ref={containerRef} className="teleprompter-text-container">
-        {story}
+        {storyBuild
+          ? storyBuild 
+          : `Welcome.
+                This is a narrative survey
+                mehtod and your story will
+                appear here`}
       </div>
     </div>
   );

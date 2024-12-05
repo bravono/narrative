@@ -26,7 +26,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
     const survey = await getSurvey(session);
     const data = survey.data.reply;
 
-    console.log(data.blanks);
+    console.log("Response", data);
 
     return data;
 
