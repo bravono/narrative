@@ -1,59 +1,37 @@
 import React, { useState, useRef, useEffect } from "react";
+import _ from "lodash";
 import "../css/Queue.css";
 
-const Queue = ({ handleAddToStory, className, children }) => {
+const Queue = ({className,  widget, handleAddToStory,  children }) => {
   const [count, setCount] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const ref = useRef(null);
   const draggable = className.split(" ").includes("answer");
+  const allowSwipeToAdd = count > 2 && widget !== "ring"
 
-  // Handle drag on desktop
-  const handleMouseDown = (e) => {
+
+  // Handle swipe to add to story
+  const handleTouchORMouseDown = (e) => {
     if (draggable) {
       setIsDragging(true);
     }
   };
 
-  const handleMouseMove = (e) => {
+  const handleTouchOrMouseMove = (e) => {
     if (draggable) {
       if (!isDragging) return;
-      e.preventDefault();
+      // e.preventDefault();
       setCount((prev) => {
         return prev + 1;
       });
     }
-  };
+  }; // Adjust the delay as needed
 
-  const handleMouseUp = (e) => {
+  const handleTouchOrMouseUp = (e) => {
     if (draggable) {
       setIsDragging(false);
-      
-      if (count > 2) {
-        handleAddToStory();
-      }
-      setCount(0);
-    }
-  };
 
-  // Handle drag on mobile
-  const handleTouchStart = (e) => {
-    if (draggable) {
-      setIsDragging(true);
-    }
-  };
-  const handleTouchMove = (e) => {
-    if (draggable) {
-      if (!isDragging) return;
-      setCount((prev) => {
-        return prev + 1;
-      });
-    }
-  };
-  const handleTouchEnd = (e) => {
-    if (draggable) {
-      setIsDragging(false);
-      
-      if (count > 2) {
+      if (allowSwipeToAdd) {
         handleAddToStory();
       }
       setCount(0);
@@ -63,13 +41,13 @@ const Queue = ({ handleAddToStory, className, children }) => {
   return (
     <div
       ref={ref}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={handleMouseMove}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onTouchMove={handleTouchMove}
       className={className}
+      onMouseDown={handleTouchORMouseDown}
+      onMouseUp={handleTouchOrMouseUp}
+      onMouseMove={handleTouchOrMouseMove}
+      onTouchStart={handleTouchORMouseDown}
+      onTouchEnd={handleTouchOrMouseUp}
+      onTouchMove={handleTouchOrMouseMove}
     >
       {children}
     </div>
