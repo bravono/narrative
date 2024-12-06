@@ -4,7 +4,6 @@ import "../../css/answerQueueButtons.css";
 import "../../css/button.css";
 
 export default function AnswerQueueButtons({
-  isFollowUp,
   isRecording,
   classAddAChoice,
   classContinue,
@@ -23,7 +22,7 @@ export default function AnswerQueueButtons({
   const handleContinue = () => {
     if (canContinue) {
       console.log("continue", canContinue);
-      onAddToStory
+      onAddToStory;
     }
   };
   const handleRoundup = () => {
@@ -82,19 +81,6 @@ export default function AnswerQueueButtons({
     }
   };
 
-  if (!isFollowUp) {
-    return (
-      <>
-        <div className="answer_queue_buttons">
-          <Button
-            onClick={handleAddChoice}
-            className={`${classAddAChoice} button-small`}
-            label="ADD A CHOICE"
-          />
-        </div>
-      </>
-    );
-  }
   return (
     <>
       <div className="answer_queue_buttons">
@@ -102,19 +88,20 @@ export default function AnswerQueueButtons({
           onClick={handleAddChoice}
           className={`${classAddAChoice} button-small`}
           label={isRecording ? "Transcribing..." : "ADD A CHOICE"}
-        />{
-          canRoundup ?
-        <Button
-          onClick={handleRoundup}
-          className={`${classRoundup} button-small`}
-          label={"ROUNDUP"}
-        /> :
-        <Button
-          onClick={canContinue ? onAddToStory : handleContinue}
-          className={`${classContinue} button-small`}
-          label={"CONTINUE"}
         />
-        }
+        {canRoundup ? (
+          <Button
+            onClick={handleRoundup}
+            className={`${classRoundup} button-small`}
+            label={"ROUNDUP"}
+          />
+        ) : (
+          <Button
+            onClick={canContinue ? onAddToStory : handleContinue}
+            className={`${classContinue} button-small`}
+            label={"CONTINUE"}
+          />
+        )}
       </div>
     </>
   );

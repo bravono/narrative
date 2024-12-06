@@ -226,7 +226,7 @@ const Ring = ({
       <RingLever sorted={isSorted} onClick={handleSortToggle} />
       <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
       <div className="ring">
-        {
+        
           <RingSegment
             className="ring-segment"
             size={size}
@@ -234,7 +234,7 @@ const Ring = ({
             colors={colors}
             choiceList={choiceList}
           />
-        }
+        
         <div>
           <div className="ring-list-container">
             <table className="ring-table">
