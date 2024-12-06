@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, act } from "react";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
+import RingSegment from "../standalone/RingSegment";
 import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import "../../css/ring.css";
 
@@ -9,18 +10,24 @@ const Ring = ({
   heading,
   instruction,
   choiceList,
-  onSetChoiceList,
-  onSetAllChoiceHaveValue,
+  isRecording,
   allChoicesHaveValue,
+  onSetChoiceList,
   onSortToggle,
   onAddToChoice,
   onAddToStory,
-  isRecording,
 }) => {
   const size = 150;
   const strokeWidth = 23;
   const color = "#4caf50";
-  const isFollowUp = true;
+  const colors = [
+    "#9747FF",
+    "#00659B",
+    "#B1D348",
+    "#5E3660",
+    "#E84560",
+    "#FFE600",
+  ];
   const [segmentValue, setSegmentValue] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const circleRef = useRef(null);
@@ -70,7 +77,7 @@ const Ring = ({
         return prevChoiceList.map((choice) => ({
           ...choice, // Copy all other properties
           value:
-            activeRow.name === choice.name
+            activeRow.text === choice.text
               ? `${Math.round(segmentValue)}`
               : choice.value, // Update 'value' conditionally
         }));
@@ -87,7 +94,7 @@ const Ring = ({
           return prevChoiceList.map((choice) => ({
             ...choice, // Copy all other properties
             value:
-              activeRow.name === choice.name
+              activeRow.text === choice.text
                 ? `${Math.round(segmentValue)}`
                 : choice.value, // Update 'value' conditionally
           }));
@@ -97,8 +104,8 @@ const Ring = ({
   };
 
   useEffect(() => {
-    console.log(activeRow);
-  }, [activeRow]);
+    console.log("Active Row Value", activeRow.value);
+  }, [activeRow, choiceList]);
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -114,7 +121,7 @@ const Ring = ({
         return prevChoiceList.map((choice) => ({
           ...choice, // Copy all other properties
           value:
-            activeRow.name === choice.name
+            activeRow.text === choice.text
               ? `${Math.round(segmentValue)}`
               : choice.value, // Update 'value' conditionally
         }));
@@ -131,7 +138,7 @@ const Ring = ({
           return prevChoiceList.map((choice) => ({
             ...choice, // Copy all other properties
             value:
-              activeRow.name === choice.name
+              activeRow.text === choice.text
                 ? `${Math.round(segmentValue)}`
                 : choice.value, // Update 'value' conditionally
           }));
@@ -152,7 +159,7 @@ const Ring = ({
         return prevChoiceList.map((choice) => ({
           ...choice, // Copy all other properties
           value:
-            activeRow.name === choice.name
+            activeRow.text === choice.text
               ? `${Math.round(segmentValue)}`
               : choice.value, // Update 'value' conditionally
         }));
@@ -169,7 +176,7 @@ const Ring = ({
           return prevChoiceList.map((choice) => ({
             ...choice, // Copy all other properties
             value:
-              activeRow.name === choice.name
+              activeRow.text === choice.text
                 ? `${Math.round(segmentValue)}`
                 : choice.value, // Update 'value' conditionally
           }));
@@ -187,19 +194,26 @@ const Ring = ({
     setActiveRow(choice);
   };
 
+
   const tableRow = choiceList.map((choice, rowIndex) => {
     return (
       <tr
         key={rowIndex}
         onClick={() => handleItemSelect(choice)}
         style={{
-          backgroundColor: activeRow.name === choice.name ? "lightblue" : "",
+          backgroundColor: activeRow.text === choice.text ? "lightblue" : "",
         }}
       >
         <td>
-          <input type="checkbox" />
+          <div
+            className="ring-checker"
+            style={{
+              background:
+                 choice.value > 0 ? colors[rowIndex] : "white",
+            }}
+          ></div>
         </td>
-        <td id="ring-list">{capitalizeWords(choice.name)}</td>
+        <td id="ring-list">{capitalizeWords(choice.text)}</td>
         <td>{choice.value}</td>
       </tr>
     );
@@ -214,6 +228,15 @@ const Ring = ({
       <RingLever sorted={isSorted} onClick={handleSortToggle} />
       <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
       <div className="ring">
+        {
+          <RingSegment
+            className="ring-segment"
+            size={size}
+            strokeWidth={strokeWidth - 3}
+            colors={colors}
+            choiceList={choiceList}
+          />
+        }
         <div>
           <div className="ring-list-container">
             <table className="ring-table">
@@ -261,29 +284,37 @@ const Ring = ({
           className="ring-svg"
         >
           {/* Background Circle */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="#e6e6e6"
-            strokeWidth={strokeWidth}
-            style={{ pointerEvents: "none" }}
-          />
+          {isDragging ? (
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke="#e6e6e6"
+              strokeWidth={strokeWidth}
+              style={{ pointerEvents: "none" }}
+            />
+          ) : (
+            ""
+          )}
           {/* SegmentValue Circle */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            strokeLinecap="round"
-            transform={`rotate(-90 ${size / 2} ${size / 2})`} // Start at 12 o'clock
-            style={{ cursor: "pointer", pointerEvents: "stroke" }}
-          />
+          {isDragging ? (
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke={color}
+              strokeWidth={strokeWidth}
+              strokeDasharray={circumference}
+              strokeDashoffset={offset}
+              strokeLinecap="round"
+              transform={`rotate(-90 ${size / 2} ${size / 2})`} // Start at 12 o'clock
+              style={{ cursor: "pointer", pointerEvents: "stroke" }}
+            />
+          ) : (
+            ""
+          )}
           {/* Text Label */}
 
           <text
@@ -327,7 +358,6 @@ const Ring = ({
       </div>
       <div className="ring-buttons">
         <AnswerQueueButtons
-          isFollowUp={isFollowUp}
           isRecording={isRecording}
           classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
           classContinue={canContinue ? "accent" : "disabled"}

@@ -14,6 +14,7 @@
   align-items: center;
   padding: 0.1rem 0;
   margin-bottom: 2.5rem;
+  position: relative;
 }
 
 .ring-svg {
@@ -21,7 +22,13 @@
     pointer-events: stroke;
     user-select: none;
     cursor: pointer;
-  
+    z-index: 100;
+}
+
+.ring-segment {
+  position: absolute;
+  left: 51%;
+  /* opacity: .5; */
 }
 
 .ring-list-container {
@@ -38,11 +45,17 @@
 
 .ring-table {
   font-size: 1.5rem;
+  position: relative;
 }
 
-#ring-chechbox {
-width: 50px;
+.ring-checker {
+width: 10px;
+height: 10px;
+border-radius: 1px;
+border: 1px solid ;
 }
+
+.checker-fill {}
 
 #ring-list {
   text-align: start;
