@@ -166,24 +166,32 @@ const Barrel = ({
         <td>
           <p className="choice__list">{capitalizeWords(choice.text)}</p>
         </td>
-        <td>
+        <td >
           {type == "multipleChoice" ? (
-            <Checkbox
-              onCheckToggle={() => handleCheckToggle(choice)}
-              isChecked={choice.value}
+          <span className="type-container">
+          
+          <Checkbox
+            onCheckToggle={() => handleCheckToggle(choice)}
+            isChecked={choice.value}
+            
             />
+            </span>
           ) : type == "singleChoice" ? (
-            <RadioButton
-              onRadioToggle={() => handleRadioToggle(choice)}
-              isChecked={choice.value}
+          <span className="type-container">
+          
+          <RadioButton className={"radio"}
+            onRadioToggle={() => handleRadioToggle(choice)}
+            isChecked={choice.value}
+            
             />
+            </span>
           ) : type == "rate" ? (
-            <span className="rate">
-              {<Rate onRate={() => handleRate(choice)} rate={choice.value} />}
+            <span className="type-container">
+              {<Rate className={"rate"}onRate={() => handleRate(choice)} rate={choice.value} />}
             </span>
           ) : type == "rank" ? (
-            <span className="rank">
-              {<Rank onRank={() => handleRank(choice)} rank={choice.value} />}
+            <span className="type-container">
+              {<Rank className="rank" onRank={() => handleRank(choice)} rank={choice.value} />}
             </span>
           ) : (
             ""

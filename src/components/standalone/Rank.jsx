@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Control from "./Control";
 import "../../css/Rank.css";
 
-function Rank({ rank, onRank }) {
+function Rank({ rank, onRank, className }) {
   
   return (
     <>
@@ -11,6 +11,7 @@ function Rank({ rank, onRank }) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         onClick={onRank}
+        className={className}
       >
         <rect
           x="10.25"

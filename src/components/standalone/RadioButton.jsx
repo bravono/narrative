@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../css/RadioButton.css";
-function RadioButton({ onRadioToggle, isChecked }) {
+function RadioButton({ onRadioToggle, isChecked, className }) {
 
   useEffect(() => {
   }, [isChecked]);
@@ -8,9 +8,9 @@ function RadioButton({ onRadioToggle, isChecked }) {
   return (
     <>
       {isChecked ? (
-        <img className= "radio" onClick={onRadioToggle} src="/assets/RadioChecked.svg" />
+        <img className={className} onClick={onRadioToggle} src="/assets/RadioChecked.svg" />
       ) : (
-        <img className= "radio" onClick={onRadioToggle} src="/assets/RadioUnchecked.svg" />
+        <img className={className} onClick={onRadioToggle} src="/assets/RadioUnchecked.svg" />
       )}
     </>
   );

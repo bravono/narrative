@@ -79,13 +79,21 @@
 }
 
 .rate,
-.rank,
-.checkbox,
 .radio {
-  display: inline-block;
   cursor: pointer;
-  width: 30px;
-  /* height: 80%; */
+  width: 23px;
+}
+
+.checkbox,
+.rank {
+  cursor: pointer;
+  width: 15px
+}
+
+.type-container {
+  display: inline-block;
+  width: 100%;
+  min-height: 13px;
 }
 
 background: rgb(225, 255, 0);
