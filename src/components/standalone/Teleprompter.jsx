@@ -11,7 +11,7 @@ const Teleprompter = ({ story, storyBuild, containerRef }) => {
           ? storyBuild 
           : `Welcome.
                 This is a narrative survey
-                mehtod and your story will
+                method and your story will
                 appear here`}
       </div>
     </div>
