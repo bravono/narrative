@@ -104,7 +104,7 @@ const Ring = ({
   };
 
   useEffect(() => {
-    console.log("Active Row Value", activeRow.value);
+    // console.log("Active Row Value", activeRow.value);
   }, [activeRow, choiceList]);
 
   const handleMouseUp = () => {
@@ -200,9 +200,7 @@ const Ring = ({
       <tr
         key={rowIndex}
         onClick={() => handleItemSelect(choice)}
-        style={{
-          backgroundColor: activeRow.text === choice.text ? "lightblue" : "",
-        }}
+        className={activeRow.text === choice.text ? "active-row" : ""}
       >
         <td>
           <div
