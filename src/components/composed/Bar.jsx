@@ -15,7 +15,6 @@ const Bar = ({ onSetChoice, choiceList }) => {
 
   const handleMouseMove = (event) => {
     if (isDragging.current) {
-      console.log("Event in Destop", event)
       updateProgress(event);
     }
   };
@@ -32,7 +31,6 @@ const Bar = ({ onSetChoice, choiceList }) => {
   const handleTouchMove = (event) => {
     if (!isDragging.current) return
 
-    console.log("Event in Mobile", event)
 
       updateProgress(event);
     
@@ -65,7 +63,6 @@ const Bar = ({ onSetChoice, choiceList }) => {
   };
 
   useEffect(() => {
-    console.log("Progress", Math.round(progress))
     if (progress >= 1) {
       onSetChoice((prevChoiceList) => {
         return choiceList.map((choice) => ({

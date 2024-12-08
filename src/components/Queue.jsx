@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import _ from "lodash";
 import "../css/Queue.css";
 
 const Queue = ({className,  widget, handleAddToStory,  children }) => {
