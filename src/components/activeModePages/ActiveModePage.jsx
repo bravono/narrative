@@ -32,7 +32,7 @@ function ActiveModePage() {
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
-  const [storyBuild, setStoryBuild] = useState()
+  const [storyBuild, setStoryBuild] = useState();
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("");
@@ -47,7 +47,7 @@ function ActiveModePage() {
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
-  const [activeRow, setActiveRow] = useState()
+  const [activeRow, setActiveRow] = useState();
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
   const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
   const [chooseOne, setChooseOne] = useState(false);
