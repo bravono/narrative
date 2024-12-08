@@ -19,6 +19,8 @@
   flex-direction: column;
   align-items: center;
   font-size: 1.6rem;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .table-row {
@@ -33,10 +35,16 @@
   text-align: center;
   padding: 5px 0;
   border-bottom: 1px solid #444;
+  vertical-align: middle; /* Aligns content vertically */
+  overflow-wrap: break-word;
 }
 
 .first-column {
-  max-width: 70%;
+  width: 80%;
   text-align: start;
-  padding-left: 10px;
+  padding-left: 5px;
+}
+
+.table-cell:not(.first-column) {
+  width: 20%; /* Remaining columns divide the rest */
 }

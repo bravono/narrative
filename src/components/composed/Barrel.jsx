@@ -21,32 +21,26 @@ const Barrel = ({
   onSortToggle,
   onAddToChoice,
   onSetActiveRow,
+  onSetCurrentValue,
 }) => {
   const isFollowUp = true;
-  const [activeRow, setActiveRow] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
-  const [currentValue, setCurrentValue] = useState("?");
+  const [currentValue, setCurrentValue] = useState("?")
 
-  useEffect(() => {
-    if (activeRow != null) {
-      setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
-      console.log(currentValue);
-      onSetActiveRow(activeRow);
-    }
-  }, [currentValue, activeRow]);
+  const handleUpdateCurrentValue = (data) => {
+  setCurrentValue(data)
+}
+
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
     onSortToggle(isSorted);
   };
 
-  const handleItemSelect = (choice, index) => {
-    setActiveRow(index);
-  };
+
   const type = questionType;
 
   const handleCheckToggle = (choice) => {
-
     onSetChoiceList((prevChoiceList) => {
       const selectedCount = prevChoiceList.filter(
         (item) => item.value === 1
@@ -157,84 +151,20 @@ const Barrel = ({
     }
   };
 
-  const tableRows = choiceList.map((choice, index) => {
-    return (
-      <tr
-        key={index}
-        onClick={() => handleItemSelect(choice.text, index)} // Pass choice.text
-        className={activeRow === index ? "active-row" : ""}
-      >
-        <td>
-          <p className="choice__list">{capitalizeWords(choice.text)}</p>
-        </td>
-        <td>
-          {type == "multipleChoice" ? (
-            <span className="type-container">
-              <Checkbox
-                onCheckToggle={() => handleCheckToggle(choice)}
-                isChecked={choice.value}
-              />
-            </span>
-          ) : type == "singleChoice" ? (
-            <span className="type-container">
-              <RadioButton
-                className={"radio"}
-                onRadioToggle={() => handleRadioToggle(choice)}
-                isChecked={choice.value}
-              />
-            </span>
-          ) : type == "rate" ? (
-            <span className="type-container">
-              {
-                <Rate
-                  className={"rate"}
-                  onRate={() => handleRate(choice)}
-                  rate={choice.value}
-                />
-              }
-            </span>
-          ) : type == "rank" ? (
-            <span className="type-container">
-              {
-                <Rank
-                  className="rank"
-                  onRank={() => handleRank(choice)}
-                  rank={choice.value}
-                />
-              }
-            </span>
-          ) : (
-            ""
-          )}
-        </td>
-        <td></td>
-        <td></td>
-      </tr>
-    );
-  });
+  
   return (
     <div className="barrel-set">
       <Lever sorted={isSorted} onClick={handleSortToggle} />
       <StickyArrow type={type} />
       <div className="barrel">
-        {/* <table className="barrel__table">
-          <tbody>
-            <tr>
-              <th>{heading}</th>
-              <th></th>
-            </tr>
-            {tableRows}
-          </tbody>
-        </table> */}
         <BarrelTable
           choiceList={choiceList}
-          activeRow={activeRow}
           type={type}
           onRadioToggle={handleRadioToggle}
           onCheckToggle={handleCheckToggle}
           onRank={handleRank}
           onRate={handleRate}
-         
+          onSetCurrentValue={handleUpdateCurrentValue}
         />
       </div>
       <p className="instruction">{instruction}</p>

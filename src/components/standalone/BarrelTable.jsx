@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import capitalizeWords from "../../utilities/capilizeWords";
 import RadioButton from "./RadioButton";
 import Checkbox from "./Checkbox";
 import Rank from "./Rank";
@@ -7,15 +8,18 @@ import "../../css/BarrelTable.css";
 
 const BarrelTable = ({
   choiceList,
-  activeRow,
   type,
   onRadioToggle,
   onCheckToggle,
   onRank,
   onRate,
+  onSetActiveRow,
+  onSetCurrentValue,
 }) => {
   const containerRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [activeRow, setActiveRow] = useState(null);
+  const [currentValue, setCurrentValue] = useState("?");
 
   const visibleRows = 5; // Display exactly 5 rows
   const rowHeight = 177 / visibleRows; // Calculate height for each row
@@ -33,6 +37,15 @@ const BarrelTable = ({
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (activeRow != null) {
+      setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
+      console.log(currentValue);
+      onSetActiveRow(activeRow);
+      onSetCurrentValue(choiceList[activeRow].value);
+    }
+  }, [currentValue, activeRow]);
+
   useEffect(() => {}, [choiceList, type]);
 
   const handleRadioToggle = (choice) => {
@@ -48,6 +61,9 @@ const BarrelTable = ({
     onRate(choice);
   };
 
+  const handleItemSelect = (choice, index) => {
+    setActiveRow(index);
+  };
   return (
     <>
       <div className="barrel-table__heading">Heading </div>
@@ -58,23 +74,25 @@ const BarrelTable = ({
             return (
               <div
                 key={rowIndex}
+                onClick={() => handleItemSelect(choice.text, index)}
                 className="table-row"
                 style={{
-                  transform: `scale(${1 - prominenceFactor * -0.03}) rotateX(${
+                  transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
                     prominenceFactor * 15
                   }deg)`,
                   opacity: `${1 - prominenceFactor * 0.05}`,
                 }}
               >
-                {[...Array(5)].map((_, colIndex) => (
+                {[...Array(2)].map((_, colIndex) => (
                   <div
                     key={colIndex}
+                    
                     className={`table-cell ${
                       colIndex === 0 ? "first-column" : ""
                     }`}
                   >
                     {colIndex === 0 ? (
-                      choice.text
+                      capitalizeWords(choice.text)
                     ) : colIndex === 1 ? (
                       type === "singleChoice" ? (
                         <RadioButton
