@@ -7,6 +7,7 @@ import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
 import Rate from "../standalone/Rate";
 import RadioButton from "../standalone/RadioButton";
+import BarrelTable from "../standalone/BarrelTable";
 import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/barrel.css";
 
@@ -207,7 +208,7 @@ const Barrel = ({
       <Lever sorted={isSorted} onClick={handleSortToggle} />
       <StickyArrow type={type} />
       <div className="barrel">
-        <table className="barrel__table">
+        {/* <table className="barrel__table">
           <tbody>
             <tr>
               <th>{heading}</th>
@@ -215,7 +216,8 @@ const Barrel = ({
             </tr>
             {tableRows}
           </tbody>
-        </table>
+        </table> */}
+        <BarrelTable choiceList={choiceList}/>
       </div>
       <p className="instruction">{instruction}</p>
       <AnswerQueueButtons

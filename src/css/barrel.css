@@ -13,7 +13,7 @@
 .barrel {
   width: 215px;
   height: 177px;
-  background: url(/assets/Barrel_template.png);
+  background: url(/assets/Barrel.png);
   display: flex;
   justify-content: center;
   background-size: cover;
