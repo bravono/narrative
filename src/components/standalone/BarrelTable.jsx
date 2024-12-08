@@ -1,8 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
+import RadioButton from "./RadioButton";
+import Checkbox from "./Checkbox";
+import Rank from "./Rank";
+import Rate from "./Rate";
 import "../../css/BarrelTable.css";
-import RadioButton from "../standalone/RadioButton";
 
-const BarrelTable = ({ choiceList, activeRow, onRadioToggle }) => {
+const BarrelTable = ({
+  choiceList,
+  activeRow,
+  type,
+  onRadioToggle,
+  onCheckToggle,
+  onRank,
+  onRate,
+}) => {
   const containerRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
 
@@ -22,13 +33,19 @@ const BarrelTable = ({ choiceList, activeRow, onRadioToggle }) => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
+  useEffect(() => {}, [choiceList, type]);
 
-    console.log("Updated ChoiceList:", choiceList);
-  }, [choiceList])
-
-  const hanldeRadioToggle = (choice) => {
+  const handleRadioToggle = (choice) => {
     onRadioToggle(choice);
+  };
+  const handleCheckToggle = (choice) => {
+    onCheckToggle(choice);
+  };
+  const handleRank = (choice) => {
+    onRank(choice);
+  };
+  const handleRate = (choice) => {
+    onRate(choice);
   };
 
   return (
@@ -59,11 +76,33 @@ const BarrelTable = ({ choiceList, activeRow, onRadioToggle }) => {
                     {colIndex === 0 ? (
                       choice.text
                     ) : colIndex === 1 ? (
+                      type === "singleChoice" ? (
                         <RadioButton
-                        isChecked={choice.value}
-                        onRadioToggle={() => hanldeRadioToggle(choice)}
-                        className="radio"
-                      />
+                          className="radio"
+                          isChecked={choice.value}
+                          onRadioToggle={() => handleRadioToggle(choice)}
+                        />
+                      ) : type === "multipleChoice" ? (
+                        <Checkbox
+                          className="checkbox"
+                          isChecked={choice.value}
+                          onCheckToggle={() => handleCheckToggle(choice)}
+                        />
+                      ) : type === "rank" ? (
+                        <Rank
+                          className="rank"
+                          onRank={() => handleRank(choice)}
+                          rank={choice.value}
+                        />
+                      ) : type === "rate" ? (
+                        <Rate
+                          className={"rate"}
+                          onRate={() => handleRate(choice)}
+                          rate={choice.value}
+                        />
+                      ) : (
+                        ""
+                      )
                     ) : (
                       ""
                     )}

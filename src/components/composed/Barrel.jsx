@@ -46,6 +46,7 @@ const Barrel = ({
   const type = questionType;
 
   const handleCheckToggle = (choice) => {
+
     onSetChoiceList((prevChoiceList) => {
       const selectedCount = prevChoiceList.filter(
         (item) => item.value === 1
@@ -228,7 +229,12 @@ const Barrel = ({
         <BarrelTable
           choiceList={choiceList}
           activeRow={activeRow}
+          type={type}
           onRadioToggle={handleRadioToggle}
+          onCheckToggle={handleCheckToggle}
+          onRank={handleRank}
+          onRate={handleRate}
+         
         />
       </div>
       <p className="instruction">{instruction}</p>

@@ -1,41 +1,42 @@
 .barrel-table-container {
-    width: 175px;
-    height: 145px;
-    overflow-y: auto;
-    perspective: 500px;
-    scroll-snap-type: y mandatory;
-    /* border: 1px solid tomato; */
-    margin-left: 10px;
-    align-self: end;
-  }
+  width: 175px;
+  height: 145px;
+  overflow-y: auto;
+  perspective: 500px;
+  scroll-snap-type: y mandatory;
+  margin-left: 10px;
+  align-self: end;
+  scrollbar-width: none; /* For Firefox */
+  ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
 
-  .barrel-table-container::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
-  }
-  
-  .barrel-table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.6rem;
-  }
-  
-  .table-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    transition: transform .1s, opacity .1s;
-    scroll-snap-align: center;
-  }
-  
-  .table-cell {
-    flex: 1;
-    text-align: center;
-    padding: 5px 0;
-    border-bottom: 1px solid #444; 
-  }
-  
-  .first-column {
-    flex: 3; /* First column width is 3 times the other cells */
-  }
-  
+.barrel-table-container::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.barrel-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  transition: transform 0.1s, opacity 0.1s;
+  scroll-snap-align: center;
+}
+
+.table-cell {
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #444;
+}
+
+.first-column {
+  max-width: 70%;
+  text-align: start;
+  padding-left: 10px;
+}
