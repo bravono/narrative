@@ -322,6 +322,7 @@ function ActiveModePage() {
 
     // choseOne handle radio and triangle
     if (chooseOne && !isBar) {
+      if (activeRow)
       setStoryBuild(storyBuild.replace(regex, `[${choiceList[activeRow].text}]`));
     }
 
