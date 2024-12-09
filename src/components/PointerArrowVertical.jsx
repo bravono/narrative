@@ -8,7 +8,7 @@ function PointerArrowVertical({ direction }) {
   return (
     <img
       src="/assets/LeftPointer.svg"
-      className={"LowerPointer-image ${direction}"}
+      className={"LowerPointer-image "}
       style={{ transform: transform[direction] || "rotate(90deg)" }}
     />
   );

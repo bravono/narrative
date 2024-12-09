@@ -41,7 +41,7 @@ const BarrelTable = ({
     if (activeRow != null) {
       setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
       console.log(currentValue);
-      onSetActiveRow(activeRow);
+      // onSetActiveRow(activeRow);
       onSetCurrentValue(choiceList[activeRow].value);
     }
   }, [currentValue, activeRow]);
@@ -74,7 +74,7 @@ const BarrelTable = ({
             return (
               <div
                 key={rowIndex}
-                onClick={() => handleItemSelect(choice.text, index)}
+                onClick={() => handleItemSelect(choice.text, rowIndex)}
                 className="table-row"
                 style={{
                   transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
