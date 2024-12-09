@@ -59,18 +59,18 @@ function ActiveModePage() {
     allChoicesHaveValue ||
     chooseOne ||
     noSelectedChoices >= 3;
-  
-    useEffect(() => {
-      const storedIsWelcome = localStorage.getItem('isWelcome');
-      console.log(storedIsWelcome)
-      if (storedIsWelcome) {
-        setIsWelcome(JSON.parse(storedIsWelcome));
-      } else {
-        // Set initial value or fetch from backend
-        setIsWelcome(true); // Assuming first visit
-        localStorage.setItem('isWelcome', JSON.stringify(true));
-      }
-    }, []);
+
+  useEffect(() => {
+    const storedIsWelcome = localStorage.getItem("isWelcome");
+    console.log(storedIsWelcome);
+    if (storedIsWelcome) {
+      setIsWelcome(JSON.parse(storedIsWelcome));
+    } else {
+      // Set initial value or fetch from backend
+      setIsWelcome(true); // Assuming first visit
+      localStorage.setItem("isWelcome", JSON.stringify(true));
+    }
+  }, []);
 
   // Fake backend for testing
   useEffect(() => {
@@ -78,7 +78,7 @@ function ActiveModePage() {
       try {
         const survey = await getSurvey();
         const data = survey.data;
-
+console.log(data)
         setStory(data.story);
         setQuestionType(data.blank.questionType);
         setWidget(data.blank.widget);
@@ -98,7 +98,7 @@ function ActiveModePage() {
 
   useEffect(() => {
     setStory(data.story);
-    setStoryBuild(data.story)
+    setStoryBuild(data.story);
     setQuestionType(data.blanks[0].questionType);
     setWidget(data.blanks[0].widget);
     // setHeading(data.heading);
@@ -113,7 +113,6 @@ function ActiveModePage() {
     setCountDirection(data.countDirection);
     setPauseDuration(data.pauseDuration * 60);
     setBlankName(data.blanks[0].blank);
-
   }, []);
 
   // Get the next blank
@@ -214,14 +213,10 @@ function ActiveModePage() {
       );
     }
 
-
     if (widget == "bar") {
       setIsBar(choiceList.length == 1 && choiceList[0].value > 1);
     }
-
   }, [choiceList]);
-
- 
 
   useEffect(() => {
     const timerInterval = setInterval(() => {
@@ -263,7 +258,6 @@ function ActiveModePage() {
   useEffect(() => {
     if (choiceList.length)
       setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
-
   }, [choiceList, story]);
 
   // Function to handle scrolling up
@@ -323,12 +317,13 @@ function ActiveModePage() {
     // choseOne handle radio and triangle
     if (chooseOne && !isBar) {
       if (activeRow)
-      setStoryBuild(storyBuild.replace(regex, `[${choiceList[activeRow].text}]`));
+        setStoryBuild(
+          storyBuild.replace(regex, `[${choiceList[activeRow].text}]`)
+        );
     }
 
     // Handle checkbox case
     if (noSelectedChoices >= 3) {
-      
       setStoryBuild(
         storyBuild.replace(
           regex,
@@ -351,16 +346,19 @@ function ActiveModePage() {
     setChooseOne(false);
     setIsBar(false);
     setNoSelectedChoices(0);
-    setActiveRow(null)
+    setActiveRow(null);
 
     // Get the next question
     const newTask = await fetchNextBlank();
     const response = newTask.reply;
+    console.log(response)
 
     if (meetOneCondition) {
       if (response.story) {
         setStory(response.story);
-        setStoryBuild(prevStory => {return prevStory + response.story})
+        setStoryBuild((prevStory) => {
+          return prevStory + response.story;
+        });
         setQuestionType(response.blanks[0].questionType);
         setWidget(response.blanks[0].widget);
         // setHeading(response.heading);
@@ -370,11 +368,10 @@ function ActiveModePage() {
         }));
         setChoiceList(newChoiceList);
         // setInstruction(response.instruction);
-        setDuration(response.durationInMin * 60);
+        // setDuration(response.durationInMin * 60);
         setCountDirection(response.countDirection);
         setPauseDuration(response.pauseDuration * 60);
         setBlankName(response.blanks[0].blank);
-
       }
     }
   };
@@ -533,7 +530,11 @@ function ActiveModePage() {
                     transcript={transcript}
                   />
                 ) : (
-                      <Teleprompter story={story} storyBuild={storyBuild} containerRef={containerRef} />
+                  <Teleprompter
+                    story={story}
+                    storyBuild={storyBuild}
+                    containerRef={containerRef}
+                  />
                 )}
               </Queue>
             )}
@@ -589,7 +590,7 @@ function ActiveModePage() {
                   onAddToStory={handleAddToStory}
                   isRecording={isRecording}
                 />
-              ) : widget === "triangle" && !isWelcome ? (
+              ) : widget === "triade" && !isWelcome ? (
                 <Triangle
                   heading={heading}
                   choiceList={choiceList}
@@ -599,6 +600,14 @@ function ActiveModePage() {
               ) : (
                 ""
               )}
+              {meetOneCondition ? <div className="swipe__add-to-story">
+                <img
+                  src="/assets/PointerArrow.svg"
+                  alt=""
+                  className="animate__animated animate__slideInUp animate__slow animate__infinite"
+                />
+                {/* <p>Swipe Up to Add to Story</p> */}
+              </div> : ""}
             </Queue>
           </div>
         </div>
