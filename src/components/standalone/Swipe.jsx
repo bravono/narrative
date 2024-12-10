@@ -43,7 +43,7 @@ const Swipe = ({ handleAddToStory }) => {
       <img
         src="/assets/PointerArrow.svg"
         alt=""
-        className="animate__animated animate__slideInUp animate__slow animate__infinite"
+        className="swipe__arrow animate__animated animate__slideInUp animate__slow animate__infinite"
       />
     </div>
   );
