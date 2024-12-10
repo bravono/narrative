@@ -18,6 +18,7 @@ import EdgeChair from "../EdgeChair";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
+import Swipe from "../standalone/Swipe";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -78,7 +79,7 @@ function ActiveModePage() {
       try {
         const survey = await getSurvey();
         const data = survey.data;
-console.log(data)
+        console.log(data);
         setStory(data.story);
         setQuestionType(data.blank.questionType);
         setWidget(data.blank.widget);
@@ -351,7 +352,7 @@ console.log(data)
     // Get the next question
     const newTask = await fetchNextBlank();
     const response = newTask.reply;
-    console.log(response)
+    console.log(response);
 
     if (meetOneCondition) {
       if (response.story) {
@@ -554,7 +555,6 @@ console.log(data)
           <div className="story_queue-single">
             <Queue
               className={"queue answer"}
-              handleAddToStory={handleAddToStory}
             >
               {widget === "barrel" && !isWelcome ? (
                 <Barrel
@@ -600,14 +600,7 @@ console.log(data)
               ) : (
                 ""
               )}
-              {meetOneCondition ? <div className="swipe__add-to-story">
-                <img
-                  src="/assets/PointerArrow.svg"
-                  alt=""
-                  className="animate__animated animate__slideInUp animate__slow animate__infinite"
-                />
-                {/* <p>Swipe Up to Add to Story</p> */}
-              </div> : ""}
+              {meetOneCondition ? <Swipe handleAddToStory={handleAddToStory}/> : ""}
             </Queue>
           </div>
         </div>

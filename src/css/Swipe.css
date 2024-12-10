@@ -1,0 +1,7 @@
+.swipe__add-to-story {
+    position: absolute;
+    left: 17%;
+    border: 1px solid gold;
+    height: 240px;
+    width: 30px;
+  }
