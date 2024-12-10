@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { getNextBlank, getSurvey } from "../../services/surveyServices";
-import { Toastify as toast } from "toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   sortChoiceListByValue,
@@ -89,7 +89,7 @@ console.log(data)
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
       } catch (error) {
-        setError("Error with POST request");
+        toast("Error with POST request");
       }
     };
 
@@ -124,7 +124,7 @@ console.log(data)
 
       return data;
     } catch (error) {
-      setError("Error with POST request");
+      toast("Error with POST request");
     }
   };
 

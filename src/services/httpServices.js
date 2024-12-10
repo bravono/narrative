@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Toastify as toast } from "toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
