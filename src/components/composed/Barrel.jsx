@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../standalone/StickyArrow";
-import Checkbox from "../standalone/Checkbox";
-import Rank from "../standalone/Rank";
 import Control from "../standalone/Control";
-import Rate from "../standalone/Rate";
-import RadioButton from "../standalone/RadioButton";
 import BarrelTable from "../standalone/BarrelTable";
-import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/barrel.css";
 
 const Barrel = ({
@@ -19,22 +14,24 @@ const Barrel = ({
   questionType,
   instruction,
   onSortToggle,
-  onAddToChoice
+  onAddToChoice,
 }) => {
   const isFollowUp = true;
   const [isSorted, setIsSorted] = useState(false);
-  const [currentValue, setCurrentValue] = useState("?")
+  const [activeRow, setActiveRow] = useState();
 
-  const handleUpdateCurrentValue = (data) => {
-  setCurrentValue(data)
-}
+  useEffect(() => {
+    console.log("Up in the sky active row", activeRow)
+  }, [activeRow])
 
+  const handleUpdateActiveRow = (data) => {
+    setActiveRow(data);
+  };
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
     onSortToggle(isSorted);
   };
-
 
   const type = questionType;
 
@@ -149,20 +146,19 @@ const Barrel = ({
     }
   };
 
-  
   return (
     <div className="barrel-set">
       <Lever sorted={isSorted} onClick={handleSortToggle} />
       <StickyArrow type={type} />
       <div className="barrel">
         <BarrelTable
-          choiceList={choiceList}
           type={type}
-          onRadioToggle={handleRadioToggle}
-          onCheckToggle={handleCheckToggle}
+          choiceList={choiceList}
           onRank={handleRank}
           onRate={handleRate}
-          onSetCurrentValue={handleUpdateCurrentValue}
+          onRadioToggle={handleRadioToggle}
+          onCheckToggle={handleCheckToggle}
+          onSetActiveRow={handleUpdateActiveRow}
         />
       </div>
       <p className="instruction">{instruction}</p>
@@ -177,7 +173,6 @@ const Barrel = ({
       {type == "rank" || type == "rate" ? (
         <Control
           type={type} //question type
-          currentValue={currentValue}
           onIncrement={handleIncrement}
           onDecrement={handleDecrement}
         />

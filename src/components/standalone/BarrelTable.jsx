@@ -13,14 +13,11 @@ const BarrelTable = ({
   onCheckToggle,
   onRank,
   onRate,
-  onSetActiveRow,
-  onSetCurrentValue,
+  onSetActiveRow
 }) => {
   const containerRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
   const [activeRow, setActiveRow] = useState(null);
-  const [currentValue, setCurrentValue] = useState("?");
-
   const visibleRows = 5; // Display exactly 5 rows
   const rowHeight = 177 / visibleRows; // Calculate height for each row
   const centerIndex = Math.floor(scrollOffset / rowHeight) + 2;
@@ -37,13 +34,11 @@ const BarrelTable = ({
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (activeRow != null) {
-      setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
 
-      onSetCurrentValue(choiceList[activeRow].value);
-    }
-  }, [currentValue, activeRow]);
+  useEffect(() => {
+    console.log("Active Row", activeRow)
+    onSetActiveRow(activeRow)
+  }, [activeRow])
 
   useEffect(() => {}, [choiceList, type]);
 
@@ -60,8 +55,8 @@ const BarrelTable = ({
     onRate(choice);
   };
 
-  const handleItemSelect = (choice, index) => {
-    setActiveRow(index);
+  const handleItemSelect = (choice, rowIndex) => {
+    setActiveRow(rowIndex);
   };
   return (
     <>
@@ -74,7 +69,7 @@ const BarrelTable = ({
               <div
                 key={rowIndex}
                 onClick={() => handleItemSelect(choice.text, rowIndex)}
-                className="table-row"
+                className={rowIndex === activeRow ? "active-row table-row" : "table-row"}
                 style={{
                   transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
                     prominenceFactor * 15
