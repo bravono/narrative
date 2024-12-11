@@ -40,8 +40,7 @@ const BarrelTable = ({
   useEffect(() => {
     if (activeRow != null) {
       setCurrentValue(choiceList[activeRow].value); // What to display on the control componet
-      console.log(currentValue);
-      // onSetActiveRow(activeRow);
+
       onSetCurrentValue(choiceList[activeRow].value);
     }
   }, [currentValue, activeRow]);
@@ -86,7 +85,6 @@ const BarrelTable = ({
                 {[...Array(2)].map((_, colIndex) => (
                   <div
                     key={colIndex}
-                    
                     className={`table-cell ${
                       colIndex === 0 ? "first-column" : ""
                     }`}

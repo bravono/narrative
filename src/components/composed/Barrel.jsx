@@ -19,9 +19,7 @@ const Barrel = ({
   questionType,
   instruction,
   onSortToggle,
-  onAddToChoice,
-  onSetActiveRow,
-  onSetCurrentValue,
+  onAddToChoice
 }) => {
   const isFollowUp = true;
   const [isSorted, setIsSorted] = useState(false);
