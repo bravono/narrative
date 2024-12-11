@@ -4,16 +4,16 @@ export default function Lever({ sorted, onClick }) {
   if (sorted) {
     return (
       <img
-        src="/assets/ring-sort.svg"
-        className={sorted ? className + "sort" : ""}
+        src="/assets/ring-unsort.png"
+        className={sorted ? className + "unsort" : ""}
         onClick={onClick}
       />
     );
   }
   return (
     <img
-      src="/assets/ring-unsort.svg"
-      className={!sorted ? className + "unsort" : ""}
+      src="/assets/ring-sort.png"
+      className={!sorted ? className + "sort" : ""}
       onClick={onClick}
     />
   );
