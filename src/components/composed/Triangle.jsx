@@ -3,7 +3,7 @@ import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/triangle.css";
 
-const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
+const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -116,7 +116,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           textAnchor="middle"
           fill={choiceList[0].value > 0 ? "gold" : ""}
         >
-          {capitalizeWords(choiceList[0].name)}
+          {capitalizeWords(choiceList[0].text)}
         </text>
         <text
           className={
@@ -130,7 +130,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           textAnchor="middle"
           fill={choiceList[1].value > 0 ? "gold" : ""}
         >
-          {capitalizeWords(choiceList[1].name)}
+          {capitalizeWords(choiceList[1].text)}
         </text>
         <text
           className={
@@ -144,10 +144,9 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           textAnchor="middle"
           fill={choiceList[2].value > 0 ? "gold" : ""}
         >
-          {capitalizeWords(choiceList[2].name)}
+          {capitalizeWords(choiceList[2].text)}
         </text>
       </svg>
-      <AnswerQueueButtons classAddAChoice="disabled" />
     </div>
   );
 };
