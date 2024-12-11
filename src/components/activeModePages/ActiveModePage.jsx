@@ -50,20 +50,18 @@ function ActiveModePage() {
   const [isDescending, setIsDescending] = useState(true);
   const [activeRow, setActiveRow] = useState();
   const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
-  const [canContinue, setCanContinue] = useState(0); // Decide when the Continue button can be used
+  const [canContinue, setCanContinue] = useState(false); // Decide when the Continue button can be used
   const [chooseOne, setChooseOne] = useState(false);
-  const [noSelectedChoices, setNoSelectedChoices] = useState(0); // Use for checkboxes
+  const [selectEnoughChoice, setSelectEnoughChoice] = useState(false); // Use for checkboxes
   const [isBar, setIsBar] = useState(false); // Only bar can have one item in the choice list
   const meetOneCondition =
     isBar ||
-    canContinue == 100 ||
-    (allChoicesHaveValue && canContinue == 100) ||
+    canContinue ||
+    allChoicesHaveValue ||
     chooseOne ||
-    noSelectedChoices >= 3;
+    selectEnoughChoice;
 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   // Fake backend for testing
   useEffect(() => {
@@ -190,7 +188,8 @@ function ActiveModePage() {
   useEffect(() => {
     if (widget == "ring") {
       setCanContinue(
-        choiceList.reduce((sum, choice) => sum + Number(choice.value), 0)
+        choiceList.reduce((sum, choice) => sum + Number(choice.value), 0) ===
+          100 && allChoicesHaveValue
       );
     }
 
@@ -201,8 +200,8 @@ function ActiveModePage() {
     }
 
     if (questionType === "multipleChoice") {
-      setNoSelectedChoices(
-        choiceList.filter((choice) => choice.value === 1).length
+      setSelectEnoughChoice(
+        choiceList.filter((choice) => choice.value === 1).length >= 3
       );
     }
 
@@ -321,7 +320,7 @@ function ActiveModePage() {
     }
 
     // Handle checkbox case
-    if (noSelectedChoices >= 3) {
+    if (selectEnoughChoice) {
       setStoryBuild(
         storyBuild.replace(
           regex,
@@ -343,13 +342,13 @@ function ActiveModePage() {
     setAllChoicesHaveValue(false);
     setChooseOne(false);
     setIsBar(false);
-    setNoSelectedChoices(0);
+    setSelectEnoughChoice(0);
     setActiveRow(null);
 
     // Get the next question
     const newTask = await fetchNextBlank();
     const response = newTask.reply;
-    console.log(response);
+    // console.log(response);
 
     if (meetOneCondition) {
       if (response.story) {
