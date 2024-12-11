@@ -10,10 +10,9 @@
 }
 
 .teleprompter-text-container {
-  border: 1px solid tomato;
   position: relative;
   padding: 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   line-height: 1.4;
   font-size: 2rem;
   mask-image: linear-gradient(
