@@ -57,20 +57,12 @@ function ActiveModePage() {
   const meetOneCondition =
     isBar ||
     canContinue == 100 ||
-    allChoicesHaveValue ||
+    (allChoicesHaveValue && canContinue == 100) ||
     chooseOne ||
     noSelectedChoices >= 3;
 
   useEffect(() => {
-    const storedIsWelcome = localStorage.getItem("isWelcome");
-    console.log(storedIsWelcome);
-    if (storedIsWelcome) {
-      setIsWelcome(JSON.parse(storedIsWelcome));
-    } else {
-      // Set initial value or fetch from backend
-      setIsWelcome(true); // Assuming first visit
-      localStorage.setItem("isWelcome", JSON.stringify(true));
-    }
+    
   }, []);
 
   // Fake backend for testing
@@ -317,10 +309,15 @@ function ActiveModePage() {
 
     // choseOne handle radio and triangle
     if (chooseOne && !isBar) {
-      if (activeRow)
-        setStoryBuild(
-          storyBuild.replace(regex, `[${choiceList[activeRow].text}]`)
-        );
+      setStoryBuild(
+        storyBuild.replace(
+          regex,
+          `[${choiceList
+            .filter((choice) => choice.value === 1)
+            .map((choice) => choice.text)
+            .join(", ")}]`
+        )
+      );
     }
 
     // Handle checkbox case
@@ -553,9 +550,7 @@ function ActiveModePage() {
             />
           </div>
           <div className="story_queue-single">
-            <Queue
-              className={"queue answer"}
-            >
+            <Queue className={"queue answer"}>
               {widget === "barrel" && !isWelcome ? (
                 <Barrel
                   heading={heading}
@@ -600,7 +595,11 @@ function ActiveModePage() {
               ) : (
                 ""
               )}
-              {meetOneCondition ? <Swipe handleAddToStory={handleAddToStory}/> : ""}
+              {meetOneCondition ? (
+                <Swipe handleAddToStory={handleAddToStory} />
+              ) : (
+                ""
+              )}
             </Queue>
           </div>
         </div>
