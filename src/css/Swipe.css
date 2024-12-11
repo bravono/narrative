@@ -10,4 +10,5 @@
   position: absolute;
   width: 100%;
   top: 40%;
+  user-select: none;
 }
