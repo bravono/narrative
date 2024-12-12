@@ -13,7 +13,7 @@
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "ring"
+      "widget": "triade"
     },
     "redirect": "",
     "durationInMin": "10",

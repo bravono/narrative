@@ -6,10 +6,11 @@
 }
 .triangle-svg {
   overflow: visible;
-  width: 17.5rem;
-  height: 15.1rem;
-  margin: 1.4rem;
+  width: 14rem;
+  height: 14rem;
+  margin-bottom: 3rem;
   user-select: none;
+  /* border: 2px solid tomato */
 }
 
 .triangle {

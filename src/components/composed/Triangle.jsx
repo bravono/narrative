@@ -1,40 +1,66 @@
 import React, { useState, useEffect, useRef } from "react";
 import capitalizeWords from "../../utilities/capilizeWords";
-import AnswerQueueButtons from "./AnswerQueueButtons";
 import "../../css/triangle.css";
 
-const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
+const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [circlePosition, setCirclePosition] = useState({ x: 150, y: 180 });
+  const [selectedCorner, setSelectedCorner] = useState(0);
+  const [closeEnough, setCloseEnough] = useState(false);
 
+  const centerPoint = { x: 150, y: 150 };
   const corners = [
-    { x: 150, y: 20 }, // Point 1
-    { x: 20, y: 280 }, // Point 2
-    { x: 280, y: 280 }, // Point 3
+    { x: 150, y: 0 }, // Point 1
+    { x: 0, y: 300 }, // Point 2
+    { x: 300, y: 300 }, // Point 3
   ];
 
+  const threshold = 90;
+
   // Calculate distance between two points
-  const distance = (p1, p2) =>
-    Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+  const isClose = (circle, corner, threshold) => {
+    const distance = Math.sqrt(
+      Math.pow(corner.x - circle.x, 2) + Math.pow(corner.y - circle.y, 2)
+    );
+
+    console.log(
+      `Distance from circle (${circle.x}, ${circle.y}) to point (${corner.x}, ${corner.y}) is: ${distance}`
+    );
+    console.log("Distance is <= 80", distance <= threshold);
+    return distance <= threshold;
+  };
 
   // Check if circle is near a corner
   const checkCornerProximity = (cx, cy) => {
+    let isCloseToAnyCorner = false;
+  
     corners.forEach((corner, index) => {
-      if (distance({ x: cx, y: cy }, corner) < 75) {
-        const corner = index + 1;
-        if (corner) {
-          onSetChoiceList((prevChoiceList) =>
-            choiceList.map((choice, index) => ({
-              ...choice,
-              value: corner === index + 1 ? 1 : 0,
-            }))
-          );
-        }
+      const isNearby = isClose({ x: cx, y: cy }, corner, threshold);
+      if (isNearby) {
+        isCloseToAnyCorner = true;
+        setSelectedCorner(index + 1);
+        onSetChoiceList((prevChoiceList) =>
+          prevChoiceList.map((choice, idx) => ({
+            ...choice,
+            value: index === idx ? 1 : 0, // Set value to 1 if it's the matched corner, otherwise 0
+          }))
+        );
       }
     });
+  
+    if (!isCloseToAnyCorner) {
+      // If not close to any corner, set all values to 0
+      setSelectedCorner(0); // Reset the selected corner
+      onSetChoiceList((prevChoiceList) =>
+        prevChoiceList.map((choice) => ({ ...choice, value: 0 }))
+      );
+    }
+  
+    setCloseEnough(isCloseToAnyCorner); // Update closeEnough based on proximity
   };
+  
 
   const handleMouseDown = () => setIsDragging(true);
 
@@ -71,6 +97,10 @@ const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
     return () => document.removeEventListener("mouseup", handleMouseUp);
   }, []);
 
+  useEffect(() => {
+    console.log(choiceList, closeEnough)
+  }, [choiceList, closeEnough])
+
   return (
     <div className="triangle-set">
       <p className="triangle-instruction">{heading}</p>
@@ -93,11 +123,13 @@ const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
         <polygon
           id="triangle"
           className="triangle"
-          points="150,20 20,280 280,280"
+          points="150,0 0,300 300,300"
         ></polygon>
         <circle
           ref={circleRef}
-          className={`draggable-circle ${isDragging ? "glow" : ""}`}
+          className={`draggable-circle ${
+            isDragging || closeEnough ? "glow" : ""
+          }`}
           cx={circlePosition.x}
           cy={circlePosition.y}
           r="30"
@@ -111,7 +143,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
               : "corner-text"
           }
           x="150"
-          y="0"
+          y="-20"
           transform="rotate(0 140,10)"
           textAnchor="middle"
           fill={choiceList[0].value > 0 ? "gold" : ""}
@@ -125,7 +157,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
               : "corner-text"
           }
           x="10"
-          y="315"
+          y="340"
           transform="rotate(0 10,290)"
           textAnchor="middle"
           fill={choiceList[1].value > 0 ? "gold" : ""}
@@ -139,7 +171,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList,  instruction }) => {
               : "corner-text"
           }
           x="290"
-          y="315"
+          y="340"
           transform="rotate(0 290,290)"
           textAnchor="middle"
           fill={choiceList[2].value > 0 ? "gold" : ""}
