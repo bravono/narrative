@@ -71,8 +71,8 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
 
     const svg = svgRef.current;
     const point = svg.createSVGPoint();
-    point.x = event.clientX;
-    point.y = event.clientY;
+    point.x = event.clientX || event.touches[0].clientX;
+    point.y = event.clientY || event.touches[0].clientY;
     const svgCoords = point.matrixTransform(svg.getScreenCTM().inverse());
 
     // Calculate constrained position within the triangle
@@ -98,6 +98,11 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   }, []);
 
   useEffect(() => {
+    document.addEventListener("touchend", handleMouseUp);
+    return () => document.removeEventListener("touchend", handleMouseUp);
+  }, []);
+
+  useEffect(() => {
     console.log(choiceList, closeEnough)
   }, [choiceList, closeEnough])
 
@@ -108,6 +113,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         ref={svgRef}
         viewBox="0 0 300 300"
         onMouseMove={handleMouseMove}
+        onTouchMove={handleMouseMove}
         className="triangle-svg"
       >
         {/* Define SVG Filter for Glow Effect */}
@@ -134,6 +140,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           cy={circlePosition.y}
           r="30"
           onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
           filter={isDragging ? "url(#glow)" : ""}
         ></circle>
         <text
