@@ -33,10 +33,13 @@ const Ring = ({
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState({});
+  const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
 
-  useEffect(() => {}, [choiceList]);
+  useEffect(() => {
+    console.log("Index of active row:", activeRowIndex);
+  }, [activeRow, choiceList, activeRowIndex]);
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -102,10 +105,6 @@ const Ring = ({
       }
     }
   };
-
-  useEffect(() => {
-    // console.log("Active Row Value", activeRow.value);
-  }, [activeRow, choiceList]);
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -194,20 +193,22 @@ const Ring = ({
     setActiveRow(choice);
   };
 
-
   const tableRow = choiceList.map((choice, rowIndex) => {
+
     return (
       <tr
         key={rowIndex}
-        onClick={() => handleItemSelect(choice)}
+        onClick={() => {
+          setActiveRowIndex(rowIndex); // Store the clicked row index
+          handleItemSelect(choice);
+        }}
         className={activeRow.text === choice.text ? "active-row" : ""}
       >
         <td>
           <div
             className="ring-checker"
             style={{
-              background:
-                 choice.value > 0 ? colors[rowIndex] : "white",
+              background: choice.value > 0 ? colors[rowIndex] : "white",
             }}
           ></div>
         </td>
@@ -226,15 +227,15 @@ const Ring = ({
       <RingLever sorted={isSorted} onClick={handleSortToggle} />
       <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
       <div className="ring">
-        
-          <RingSegment
-            className="ring-segment"
-            size={size}
-            strokeWidth={strokeWidth - 3}
-            colors={colors}
-            choiceList={choiceList}
-          />
-        
+        <RingSegment
+          className="ring-segment"
+          size={size}
+          strokeWidth={strokeWidth - 3}
+          colors={colors}
+          choiceList={choiceList}
+          total={total}
+        />
+
         <div>
           <div className="ring-list-container">
             <table className="ring-table">
@@ -302,7 +303,7 @@ const Ring = ({
               cy={size / 2}
               r={radius}
               fill="none"
-              stroke={color}
+              stroke={activeRowIndex != null ? colors[activeRowIndex] : color}
               strokeWidth={strokeWidth}
               strokeDasharray={circumference}
               strokeDashoffset={offset}

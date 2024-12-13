@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
 
-const RingSegment = ({ choiceList, strokeWidth, size, colors, className }) => {
+const RingSegment = ({
+  className,
+  choiceList,
+  strokeWidth,
+  size,
+  colors,
+  total,
+}) => {
   const radius = 50;
   const circumference = 2 * Math.PI * radius;
 
   // Add the color property
-    choiceList.map((choice, index) => {
-      choice.color = colors[index];
-    })
+  choiceList.map((choice, index) => {
+    choice.color = colors[index];
+  });
 
   // Sort data by `value` in descending order
   const sortedData = [...choiceList].sort((a, b) => b.value - a.value);
@@ -31,7 +38,9 @@ const RingSegment = ({ choiceList, strokeWidth, size, colors, className }) => {
         strokeWidth={strokeWidth}
       />
       {sortedData.map((item, index) => {
-        const segmentLength = (item.value / 100) * circumference; // Segment proportional to percentage
+        const segmentLength =
+          (total <= 100 ? item.value / 100 : item.value / total) *
+          circumference; // Segment proportional to percentage
         const circleElement = (
           <circle
             key={index}
