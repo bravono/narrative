@@ -109,6 +109,19 @@ tr:not(:last-child) td {
   top: 5px;
 }
 
+.at-least-three {
+  position: absolute;
+  left: 18%;
+  top: 0;
+  z-index: 100;
+  background: var(--color-accent);
+  height: 20px;
+  border: 1px solid;
+  font-size: 15px;
+  color: white;
+  padding: 10px;
+}
+
 
 
 

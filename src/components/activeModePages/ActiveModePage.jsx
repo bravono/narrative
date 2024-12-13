@@ -50,31 +50,19 @@ function ActiveModePage() {
   const [isDescending, setIsDescending] = useState(true);
   const [activeRow, setActiveRow] = useState();
   const [rankRatePass, setRankRatePass] = useState(false);
-  const [ringPass, setRingPass] = useState(false); 
+  const [ringPass, setRingPass] = useState(false);
   const [radioPass, setRadioPass] = useState(false);
   const [checkboxPass, setCheckboxPass] = useState(false);
-  const [barPass, setBarPass] = useState(false); 
+  const [selectUptoThree, setSelectUptoThree] = useState(0)
+  const [barPass, setBarPass] = useState(false);
   const meetOneCondition =
-    barPass ||
-    ringPass ||
-    rankRatePass ||
-    radioPass ||
-    checkboxPass;
+    barPass || ringPass || rankRatePass || radioPass || checkboxPass;
 
   useEffect(() => {
     console.log(
-      "Is bar",
-      barPass,
-      "Can continue",
-      ringPass,
-      "All have choice",
-      rankRatePass,
-      "Choose one",
-      radioPass,
-      "Selected Enought",
-      checkboxPass
+      selectUptoThree
     );
-  }, [barPass, ringPass, rankRatePass, radioPass, checkboxPass]);
+  }, [selectUptoThree]);
 
   // Fake backend for testing
   useEffect(() => {
@@ -97,27 +85,27 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
-  // useEffect(() => {
-  //   setStory(data.story);
-  //   setStoryBuild(data.story);
-  //   setQuestionType(data.blanks[0].questionType);
-  //   setWidget(data.blanks[0].widget);
-  //   // setHeading(data.heading);
-  //   const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-  //     // Reinitializing value to 0
-  //     ...choice,
-  //     value: 0,
-  //   }));
-  //   setChoiceList(newChoiceList);
-  //   // setInstruction(data.instruction);
-  //   setDuration(data.durationInMin * 60);
-  //   setCountDirection(data.countDirection);
-  //   setPauseDuration(data.pauseDuration * 60);
-  //   setBlankName(data.blanks[0].blank);
-  // }, []);
+  useEffect(() => {
+    setStory(data.story);
+    setStoryBuild(data.story);
+    setQuestionType(data.blanks[0].questionType);
+    setWidget(data.blanks[0].widget);
+    // setHeading(data.heading);
+    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+      // Reinitializing value to 0
+      ...choice,
+      value: 0,
+    }));
+    setChoiceList(newChoiceList);
+    // setInstruction(data.instruction);
+    setDuration(data.durationInMin * 60);
+    setCountDirection(data.countDirection);
+    setPauseDuration(data.pauseDuration * 60);
+    setBlankName(data.blanks[0].blank);
+  }, []);
 
   // Get the next blank
   const fetchNextBlank = async () => {
@@ -202,7 +190,7 @@ function ActiveModePage() {
     if (widget == "ring") {
       setRingPass(
         choiceList.reduce((sum, choice) => sum + Number(choice.value), 0) ===
-          100 && choiceList.every(choice => choice.value > 0)
+          100 && choiceList.every((choice) => choice.value > 0)
       );
     }
 
@@ -213,9 +201,11 @@ function ActiveModePage() {
     }
 
     if (questionType === "multipleChoice") {
+      const list = choiceList.filter((choice) => choice.value === 1).length
       setCheckboxPass(
-        choiceList.filter((choice) => choice.value === 1).length >= 3
+        list >= 3
       );
+      setSelectUptoThree(list < 3 && list >= 1)
     }
 
     if (widget == "bar") {
@@ -262,7 +252,9 @@ function ActiveModePage() {
 
   useEffect(() => {
     if (choiceList.length)
-      setRankRatePass(choiceList.every((choice) => choice.value > 0 && choice.value <= 6));
+      setRankRatePass(
+        choiceList.every((choice) => choice.value > 0 && choice.value <= 6)
+      );
   }, [choiceList, story]);
 
   // Function to handle scrolling up
@@ -564,21 +556,26 @@ function ActiveModePage() {
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
               {widget === "barrel" && !isWelcome ? (
-                <Barrel
-                  heading={heading}
-                  choiceList={choiceList}
-                  questionType={questionType}
-                  isFollowUP={isFollowUp}
-                  instruction={instruction}
-                  isRecording={isRecording}
-                  onSortToggle={handleSortToggle}
-                  onAddToChoice={handleTalk}
-                  onSetChoiceList={handleUpdateChoiceList}
-                  onSetAllChoiceHaveValue={setRankRatePass}
-                  onSetActiveRow={(row) => {
-                    setActiveRow(row);
-                  }}
-                />
+                <>
+                  {!checkboxPass && selectUptoThree ? <div className="at-least-three">
+                    Select at least 3 to proceed
+                  </div> : ""}
+                  <Barrel
+                    heading={heading}
+                    choiceList={choiceList}
+                    questionType={questionType}
+                    isFollowUP={isFollowUp}
+                    instruction={instruction}
+                    isRecording={isRecording}
+                    onSortToggle={handleSortToggle}
+                    onAddToChoice={handleTalk}
+                    onSetChoiceList={handleUpdateChoiceList}
+                    onSetAllChoiceHaveValue={setRankRatePass}
+                    onSetActiveRow={(row) => {
+                      setActiveRow(row);
+                    }}
+                  />
+                </>
               ) : widget === "bar" && !isWelcome ? (
                 <Bar
                   onSetChoice={handleUpdateChoiceList}
