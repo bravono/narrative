@@ -36,7 +36,6 @@ const BarrelTable = ({
 
 
   useEffect(() => {
-    console.log("Active Row", activeRow)
     onSetActiveRow(activeRow)
   }, [activeRow])
 

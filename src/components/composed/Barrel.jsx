@@ -20,10 +20,6 @@ const Barrel = ({
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState();
 
-  useEffect(() => {
-    console.log("Up in the sky active row", activeRow)
-  }, [activeRow])
-
   const handleUpdateActiveRow = (data) => {
     setActiveRow(data);
   };

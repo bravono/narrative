@@ -24,11 +24,6 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
     const distance = Math.sqrt(
       Math.pow(corner.x - circle.x, 2) + Math.pow(corner.y - circle.y, 2)
     );
-
-    console.log(
-      `Distance from circle (${circle.x}, ${circle.y}) to point (${corner.x}, ${corner.y}) is: ${distance}`
-    );
-    console.log("Distance is <= 80", distance <= threshold);
     return distance <= threshold;
   };
 
@@ -101,10 +96,6 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
     document.addEventListener("touchend", handleMouseUp);
     return () => document.removeEventListener("touchend", handleMouseUp);
   }, []);
-
-  useEffect(() => {
-    console.log(choiceList, closeEnough)
-  }, [choiceList, closeEnough])
 
   return (
     <div className="triangle-set">

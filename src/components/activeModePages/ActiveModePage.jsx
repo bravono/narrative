@@ -58,11 +58,6 @@ function ActiveModePage() {
   const meetOneCondition =
     barPass || ringPass || rankRatePass || radioPass || checkboxPass;
 
-  useEffect(() => {
-    console.log(
-      selectUptoThree
-    );
-  }, [selectUptoThree]);
 
   // Fake backend for testing
   useEffect(() => {
@@ -586,7 +581,7 @@ function ActiveModePage() {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
-                  allChoicesHaveValue={rankRatePass}
+                  ringPass={ringPass}
                   onSortToggle={handleSortToggle}
                   onSetChoiceList={handleUpdateChoiceList}
                   onSetAllChoiceHaveValue={setRankRatePass}
