@@ -72,7 +72,7 @@ const BarrelTable = ({
                 className={rowIndex === activeRow ? "active-row table-row" : "table-row"}
                 style={{
                   transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
-                    prominenceFactor * 15
+                    prominenceFactor * 5
                   }deg)`,
                   opacity: `${1 - prominenceFactor * 0.05}`,
                 }}

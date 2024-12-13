@@ -9,11 +9,15 @@
         { "name": "item 2", "text": "Lagos", "value": 0 },
         { "name": "item 3", "text": "Port hacort", "value": 0 },
         { "name": "item 4", "text": "Kaduna", "value": 0 },
+       { "name": "item 1", "text": "Kano", "value": 0 },
+        { "name": "item 2", "text": "Lagos", "value": 0 },
+        { "name": "item 3", "text": "Port hacort", "value": 0 },
+        { "name": "item 4", "text": "Kaduna", "value": 0 },
         { "name": "item 5", "text": "Abuja", "value": 0 }
       ],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "triade"
+      "widget": "barrel"
     },
     "redirect": "",
     "durationInMin": "10",
