@@ -49,19 +49,32 @@ function ActiveModePage() {
   const [blankName, setBlankName] = useState("");
   const [isDescending, setIsDescending] = useState(true);
   const [activeRow, setActiveRow] = useState();
-  const [allChoicesHaveValue, setAllChoicesHaveValue] = useState(false);
-  const [canContinue, setCanContinue] = useState(false); // Decide when the Continue button can be used
-  const [chooseOne, setChooseOne] = useState(false);
-  const [selectEnoughChoice, setSelectEnoughChoice] = useState(false); // Use for checkboxes
-  const [isBar, setIsBar] = useState(false); // Only bar can have one item in the choice list
+  const [rankRatePass, setRankRatePass] = useState(false);
+  const [ringPass, setRingPass] = useState(false); 
+  const [radioPass, setRadioPass] = useState(false);
+  const [checkboxPass, setCheckboxPass] = useState(false);
+  const [barPass, setBarPass] = useState(false); 
   const meetOneCondition =
-    isBar ||
-    canContinue ||
-    allChoicesHaveValue ||
-    chooseOne ||
-    selectEnoughChoice;
+    barPass ||
+    ringPass ||
+    rankRatePass ||
+    radioPass ||
+    checkboxPass;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(
+      "Is bar",
+      barPass,
+      "Can continue",
+      ringPass,
+      "All have choice",
+      rankRatePass,
+      "Choose one",
+      radioPass,
+      "Selected Enought",
+      checkboxPass
+    );
+  }, [barPass, ringPass, rankRatePass, radioPass, checkboxPass]);
 
   // Fake backend for testing
   useEffect(() => {
@@ -84,27 +97,27 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
-  useEffect(() => {
-    setStory(data.story);
-    setStoryBuild(data.story);
-    setQuestionType(data.blanks[0].questionType);
-    setWidget(data.blanks[0].widget);
-    // setHeading(data.heading);
-    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-      // Reinitializing value to 0
-      ...choice,
-      value: 0,
-    }));
-    setChoiceList(newChoiceList);
-    // setInstruction(data.instruction);
-    setDuration(data.durationInMin * 60);
-    setCountDirection(data.countDirection);
-    setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.blanks[0].blank);
-  }, []);
+  // useEffect(() => {
+  //   setStory(data.story);
+  //   setStoryBuild(data.story);
+  //   setQuestionType(data.blanks[0].questionType);
+  //   setWidget(data.blanks[0].widget);
+  //   // setHeading(data.heading);
+  //   const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+  //     // Reinitializing value to 0
+  //     ...choice,
+  //     value: 0,
+  //   }));
+  //   setChoiceList(newChoiceList);
+  //   // setInstruction(data.instruction);
+  //   setDuration(data.durationInMin * 60);
+  //   setCountDirection(data.countDirection);
+  //   setPauseDuration(data.pauseDuration * 60);
+  //   setBlankName(data.blanks[0].blank);
+  // }, []);
 
   // Get the next blank
   const fetchNextBlank = async () => {
@@ -187,26 +200,26 @@ function ActiveModePage() {
   // Setting individual condition
   useEffect(() => {
     if (widget == "ring") {
-      setCanContinue(
+      setRingPass(
         choiceList.reduce((sum, choice) => sum + Number(choice.value), 0) ===
-          100 && allChoicesHaveValue
+          100 && choiceList.every(choice => choice.value > 0)
       );
     }
 
     if (questionType == "singleChoice" || widget == "triangle") {
-      setChooseOne(
+      setRadioPass(
         choiceList.filter((choice) => choice.value === 1).length === 1
       ); //handles when only one choice is selected and exclude checkbox
     }
 
     if (questionType === "multipleChoice") {
-      setSelectEnoughChoice(
+      setCheckboxPass(
         choiceList.filter((choice) => choice.value === 1).length >= 3
       );
     }
 
     if (widget == "bar") {
-      setIsBar(choiceList.length == 1 && choiceList[0].value > 1);
+      setBarPass(choiceList.length == 1 && choiceList[0].value > 1);
     }
   }, [choiceList]);
 
@@ -249,7 +262,7 @@ function ActiveModePage() {
 
   useEffect(() => {
     if (choiceList.length)
-      setAllChoicesHaveValue(choiceList.every((choice) => choice.value > 0));
+      setRankRatePass(choiceList.every((choice) => choice.value > 0 && choice.value <= 6));
   }, [choiceList, story]);
 
   // Function to handle scrolling up
@@ -294,8 +307,8 @@ function ActiveModePage() {
   const handleAddToStory = async () => {
     const regex = new RegExp(`_{1,}[a-z][1-9]?_{1,}`);
 
-    // canContinue handles ring and allChoicesHaveValue handles rank and rate
-    if (canContinue || allChoicesHaveValue) {
+    //  handles ring, rank and rate
+    if (ringPass || rankRatePass) {
       setStoryBuild(
         storyBuild.replace(
           regex,
@@ -307,7 +320,7 @@ function ActiveModePage() {
     }
 
     // choseOne handle radio and triangle
-    if (chooseOne && !isBar) {
+    if (radioPass && !barPass) {
       setStoryBuild(
         storyBuild.replace(
           regex,
@@ -320,7 +333,7 @@ function ActiveModePage() {
     }
 
     // Handle checkbox case
-    if (selectEnoughChoice) {
+    if (checkboxPass) {
       setStoryBuild(
         storyBuild.replace(
           regex,
@@ -333,16 +346,16 @@ function ActiveModePage() {
     }
 
     // This handle bar
-    if (isBar) {
+    if (barPass) {
       setStoryBuild(storyBuild.replace(regex, `[${choiceList[0].value}]`));
     }
 
     // Set all conditions to false
-    setCanContinue(false);
-    setAllChoicesHaveValue(false);
-    setChooseOne(false);
-    setIsBar(false);
-    setSelectEnoughChoice(0);
+    setRingPass(false);
+    setRankRatePass(false);
+    setRadioPass(false);
+    setBarPass(false);
+    setCheckboxPass(0);
     setActiveRow(null);
 
     // Get the next question
@@ -439,7 +452,7 @@ function ActiveModePage() {
   const handleSortToggle = () => {
     setIsDescending((prevIsDescending) => !prevIsDescending);
 
-    if (allChoicesHaveValue) {
+    if (rankRatePass) {
       setChoiceList((prevChoiceList) => {
         return sortChoiceListByValue(prevChoiceList, isDescending);
       });
@@ -561,7 +574,7 @@ function ActiveModePage() {
                   onSortToggle={handleSortToggle}
                   onAddToChoice={handleTalk}
                   onSetChoiceList={handleUpdateChoiceList}
-                  onSetAllChoiceHaveValue={setAllChoicesHaveValue}
+                  onSetAllChoiceHaveValue={setRankRatePass}
                   onSetActiveRow={(row) => {
                     setActiveRow(row);
                   }}
@@ -576,10 +589,10 @@ function ActiveModePage() {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
-                  allChoicesHaveValue={allChoicesHaveValue}
+                  allChoicesHaveValue={rankRatePass}
                   onSortToggle={handleSortToggle}
                   onSetChoiceList={handleUpdateChoiceList}
-                  onSetAllChoiceHaveValue={setAllChoicesHaveValue}
+                  onSetAllChoiceHaveValue={setRankRatePass}
                   onAddToChoice={handleTalk}
                   onAddToStory={handleAddToStory}
                   isRecording={isRecording}
