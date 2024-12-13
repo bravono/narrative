@@ -11,7 +11,7 @@ const Ring = ({
   instruction,
   choiceList,
   isRecording,
-  allChoicesHaveValue,
+  ringPass,
   onSetChoiceList,
   onSortToggle,
   onAddToChoice,
@@ -36,10 +36,6 @@ const Ring = ({
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
-
-  useEffect(() => {
-    console.log("Index of active row:", activeRowIndex);
-  }, [activeRow, choiceList, activeRowIndex]);
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -194,7 +190,6 @@ const Ring = ({
   };
 
   const tableRow = choiceList.map((choice, rowIndex) => {
-
     return (
       <tr
         key={rowIndex}
@@ -218,9 +213,9 @@ const Ring = ({
     );
   });
 
-  const isValidTotal = (total < 100 && allChoicesHaveValue) || total > 100;
-  const canContinue = allChoicesHaveValue && total == 100;
-  const canRoundup = allChoicesHaveValue && total > 94 && total < 100;
+  const isValidTotal = (total < 100 ) || total > 100;
+  const canContinue =  total == 100;
+  const canRoundup = total > 94 && total < 100;
 
   return (
     <div className="ring-set">
@@ -370,7 +365,7 @@ const Ring = ({
         />
       </div>
 
-      {(total < 100 && allChoicesHaveValue) || total > 100 ? (
+      {(total < 100 && ringPass) || total > 100 ? (
         <div className="total_below">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.
