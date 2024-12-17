@@ -59,6 +59,21 @@ const Barrel = ({
     });
   };
 
+  const handleScaleToggle = (choice, rowIndex, colIndex) => {
+    onSetChoiceList((prevChoiceList) =>
+      prevChoiceList.map((item, index) => {
+        if (index === rowIndex) {
+          // Update the current row's scales
+          return {
+            ...item,
+            scales: item.scales.map((scale, idx) => (idx === colIndex ? 1 : 0)), // Only the clicked column is active in the row
+          };
+        }
+        return item; // Other rows remain unchanged
+      })
+    );
+  };
+
   const handleRate = (choice) => {
     if (choice.value < 5) {
       onSetChoiceList((prevChoiceList) => {
@@ -145,7 +160,7 @@ const Barrel = ({
   return (
     <div className="barrel-set">
       <Lever sorted={isSorted} onClick={handleSortToggle} />
-      <StickyArrow type={type} />
+      {type !== "scale" ? <StickyArrow type={type} /> : ""}
       <div className="barrel">
         <BarrelTable
           type={type}
@@ -153,6 +168,7 @@ const Barrel = ({
           onRank={handleRank}
           onRate={handleRate}
           onRadioToggle={handleRadioToggle}
+          onScaleToggle={handleScaleToggle}
           onCheckToggle={handleCheckToggle}
           onSetActiveRow={handleUpdateActiveRow}
         />

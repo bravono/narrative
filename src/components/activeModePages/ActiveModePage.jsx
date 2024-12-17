@@ -53,11 +53,11 @@ function ActiveModePage() {
   const [ringPass, setRingPass] = useState(false);
   const [radioPass, setRadioPass] = useState(false);
   const [checkboxPass, setCheckboxPass] = useState(false);
-  const [selectUptoThree, setSelectUptoThree] = useState(0)
+  const [selectUptoThree, setSelectUptoThree] = useState(0);
   const [barPass, setBarPass] = useState(false);
+  const [scalePass, setScalePass] = useState(false);
   const meetOneCondition =
-    barPass || ringPass || rankRatePass || radioPass || checkboxPass;
-
+    barPass || ringPass || rankRatePass || radioPass || checkboxPass || scalePass;
 
   // Fake backend for testing
   useEffect(() => {
@@ -80,27 +80,27 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
-  useEffect(() => {
-    setStory(data.story);
-    setStoryBuild(data.story);
-    setQuestionType(data.blanks[0].questionType);
-    setWidget(data.blanks[0].widget);
-    // setHeading(data.heading);
-    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-      // Reinitializing value to 0
-      ...choice,
-      value: 0,
-    }));
-    setChoiceList(newChoiceList);
-    // setInstruction(data.instruction);
-    setDuration(data.durationInMin * 60);
-    setCountDirection(data.countDirection);
-    setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.blanks[0].blank);
-  }, []);
+  // useEffect(() => {
+  //   setStory(data.story);
+  //   setStoryBuild(data.story);
+  //   setQuestionType(data.blanks[0].questionType);
+  //   setWidget(data.blanks[0].widget);
+  //   // setHeading(data.heading);
+  //   const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+  //     // Reinitializing value to 0
+  //     ...choice,
+  //     value: 0,
+  //   }));
+  //   setChoiceList(newChoiceList);
+  //   // setInstruction(data.instruction);
+  //   setDuration(data.durationInMin * 60);
+  //   setCountDirection(data.countDirection);
+  //   setPauseDuration(data.pauseDuration * 60);
+  //   setBlankName(data.blanks[0].blank);
+  // }, []);
 
   // Get the next blank
   const fetchNextBlank = async () => {
@@ -196,15 +196,24 @@ function ActiveModePage() {
     }
 
     if (questionType === "multipleChoice") {
-      const list = choiceList.filter((choice) => choice.value === 1).length
-      setCheckboxPass(
-        list >= 3
-      );
-      setSelectUptoThree(list < 3 && list >= 1)
+      const list = choiceList.filter((choice) => choice.value === 1).length;
+      setCheckboxPass(list >= 3);
+      setSelectUptoThree(list < 3 && list >= 1);
     }
 
     if (widget == "bar") {
       setBarPass(choiceList.length == 1 && choiceList[0].value > 1);
+    }
+
+    if (choiceList.length)
+      setRankRatePass(
+        choiceList.every((choice) => choice.value > 0 && choice.value <= 6)
+      );
+
+    if (questionType === "scale") {
+      setScalePass(
+        choiceList.every((choice) => choice.scales.some((scale) => scale === 1))
+      );
     }
   }, [choiceList]);
 
@@ -246,11 +255,8 @@ function ActiveModePage() {
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
   useEffect(() => {
-    if (choiceList.length)
-      setRankRatePass(
-        choiceList.every((choice) => choice.value > 0 && choice.value <= 6)
-      );
-  }, [choiceList, story]);
+    console.log("Scale Pass", scalePass)
+  }, [choiceList, scalePass]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -552,9 +558,13 @@ function ActiveModePage() {
             <Queue className={"queue answer"}>
               {widget === "barrel" && !isWelcome ? (
                 <>
-                  {!checkboxPass && selectUptoThree ? <div className="at-least-three">
-                    Select at least 3 to proceed
-                  </div> : ""}
+                  {!checkboxPass && selectUptoThree ? (
+                    <div className="at-least-three">
+                      Select at least 3 to proceed
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <Barrel
                     heading={heading}
                     choiceList={choiceList}

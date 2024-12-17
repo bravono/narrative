@@ -10,10 +10,11 @@ const BarrelTable = ({
   choiceList,
   type,
   onRadioToggle,
+  onScaleToggle,
   onCheckToggle,
   onRank,
   onRate,
-  onSetActiveRow
+  onSetActiveRow,
 }) => {
   const containerRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -34,15 +35,17 @@ const BarrelTable = ({
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   useEffect(() => {
-    onSetActiveRow(activeRow)
-  }, [activeRow])
+    onSetActiveRow(activeRow);
+  }, [activeRow]);
 
   useEffect(() => {}, [choiceList, type]);
 
   const handleRadioToggle = (choice) => {
     onRadioToggle(choice);
+  };
+  const handleScaleToggle = (choice, rowIndex, colIndex) => {
+    onScaleToggle(choice, rowIndex, colIndex);
   };
   const handleCheckToggle = (choice) => {
     onCheckToggle(choice);
@@ -68,7 +71,9 @@ const BarrelTable = ({
               <div
                 key={rowIndex}
                 onClick={() => handleItemSelect(choice.text, rowIndex)}
-                className={rowIndex === activeRow ? "active-row table-row" : "table-row"}
+                className={
+                  rowIndex === activeRow ? "active-row table-row" : "table-row"
+                }
                 style={{
                   transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
                     prominenceFactor * 5
@@ -76,7 +81,7 @@ const BarrelTable = ({
                   opacity: `${1 - prominenceFactor * 0.05}`,
                 }}
               >
-                {[...Array(2)].map((_, colIndex) => (
+                {[...Array(type === "scale" ? 6 : 2)].map((_, colIndex) => (
                   <div
                     key={colIndex}
                     className={`table-cell ${
@@ -85,10 +90,11 @@ const BarrelTable = ({
                   >
                     {colIndex === 0 ? (
                       capitalizeWords(choice.text)
-                    ) : colIndex === 1 ? (
+                    ) : colIndex === 1 && type !== "scale" ? (
                       type === "singleChoice" ? (
                         <RadioButton
                           className="radio"
+                          type={type}
                           isChecked={choice.value}
                           onRadioToggle={() => handleRadioToggle(choice)}
                         />
@@ -114,7 +120,14 @@ const BarrelTable = ({
                         ""
                       )
                     ) : (
-                      ""
+                      <RadioButton
+                        className="radio"
+                        type={type}
+                        isChecked={choice.scales[colIndex] === 1}
+                        onScaleToggle={() =>
+                          handleScaleToggle(choice, rowIndex, colIndex)
+                        }
+                      />
                     )}
                   </div>
                 ))}
