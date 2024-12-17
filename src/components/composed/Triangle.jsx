@@ -120,7 +120,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         <polygon
           id="triangle"
           className="triangle"
-          points="150,0 0,300 300,300"
+          points="150,10 0,300 300,300"
         ></polygon>
         <circle
           ref={circleRef}
