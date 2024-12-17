@@ -6,7 +6,7 @@ export async function getSurvey(session) {
   return survey;
 }
 
-export async function getNextBlank() {
+export async function getNextBlank(formData) {
   const nextBlank = await http.post(remoteTestEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

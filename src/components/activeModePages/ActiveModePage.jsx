@@ -57,7 +57,12 @@ function ActiveModePage() {
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
   const meetOneCondition =
-    barPass || ringPass || rankRatePass || radioPass || checkboxPass || scalePass;
+    barPass ||
+    ringPass ||
+    rankRatePass ||
+    radioPass ||
+    checkboxPass ||
+    scalePass;
 
   // Fake backend for testing
   useEffect(() => {
@@ -67,6 +72,7 @@ function ActiveModePage() {
         const data = survey.data;
         console.log(data);
         setStory(data.story);
+        setStoryBuild(data.story);
         setQuestionType(data.blank.questionType);
         setWidget(data.blank.widget);
         setHeading(data.blank.heading);
@@ -80,27 +86,28 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
-  // useEffect(() => {
-  //   setStory(data.story);
-  //   setStoryBuild(data.story);
-  //   setQuestionType(data.blanks[0].questionType);
-  //   setWidget(data.blanks[0].widget);
-  //   // setHeading(data.heading);
-  //   const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-  //     // Reinitializing value to 0
-  //     ...choice,
-  //     value: 0,
-  //   }));
-  //   setChoiceList(newChoiceList);
-  //   // setInstruction(data.instruction);
-  //   setDuration(data.durationInMin * 60);
-  //   setCountDirection(data.countDirection);
-  //   setPauseDuration(data.pauseDuration * 60);
-  //   setBlankName(data.blanks[0].blank);
-  // }, []);
+  // Initial backend call
+  useEffect(() => {
+    setStory(data.story);
+    setStoryBuild(data.story);
+    setQuestionType(data.blanks[0].questionType);
+    setWidget(data.blanks[0].widget);
+    // setHeading(data.heading);
+    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+      // Reinitializing value to 0
+      ...choice,
+      value: 0,
+    }));
+    setChoiceList(newChoiceList);
+    // setInstruction(data.instruction);
+    setDuration(data.durationInMin * 60);
+    setCountDirection(data.countDirection);
+    setPauseDuration(data.pauseDuration * 60);
+    setBlankName(data.blanks[0].blank);
+  }, []);
 
   // Get the next blank
   const fetchNextBlank = async () => {
@@ -255,7 +262,7 @@ function ActiveModePage() {
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
   useEffect(() => {
-    console.log("Scale Pass", scalePass)
+    console.log("Scale Pass", scalePass);
   }, [choiceList, scalePass]);
 
   // Function to handle scrolling up
@@ -299,6 +306,7 @@ function ActiveModePage() {
 
   const handleAddToStory = async () => {
     const regex = new RegExp(`_{1,}[a-z][1-9]?_{1,}`);
+    let formData = {};
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
@@ -343,6 +351,29 @@ function ActiveModePage() {
       setStoryBuild(storyBuild.replace(regex, `[${choiceList[0].value}]`));
     }
 
+    // Handle scale
+    if (scalePass) {
+      setStoryBuild(
+        storyBuild.replace(
+          regex,
+          `[${choiceList
+            .map((choice) => choice.text)
+            .join(", ")}]`
+        )
+      );
+
+      formData = choiceList.map((choice) => {
+        // Find the index of the scale that is equal to 1
+        const scaleIndex = choice.scales.findIndex((scale) => scale === 1);
+    
+        return {
+          ...choice, // Copy all other properties
+          value: scaleIndex !== -1 ? scaleIndex : null, // Set value to index or null
+        };
+      });
+      console.log("Form Data",formData)
+    }
+
     // Set all conditions to false
     setRingPass(false);
     setRankRatePass(false);
@@ -352,7 +383,7 @@ function ActiveModePage() {
     setActiveRow(null);
 
     // Get the next question
-    const newTask = await fetchNextBlank();
+    const newTask = await fetchNextBlank(formData);
     const response = newTask.reply;
     // console.log(response);
 
