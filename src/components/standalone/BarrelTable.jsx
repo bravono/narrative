@@ -38,7 +38,7 @@ const BarrelTable = ({
   useEffect(() => {
     onSetActiveRow(activeRow);
   }, [activeRow]);
-
+    
   useEffect(() => {}, [choiceList, type]);
 
   const handleRadioToggle = (choice) => {
@@ -75,10 +75,10 @@ const BarrelTable = ({
                   rowIndex === activeRow ? "active-row table-row" : "table-row"
                 }
                 style={{
-                  transform: `scale(${1 - prominenceFactor * 0.01}) rotateX(${
-                    prominenceFactor * 5
+                  transform: `scale(${1 - prominenceFactor * 0.001}) rotateX(${
+                    prominenceFactor * 1
                   }deg)`,
-                  opacity: `${1 - prominenceFactor * 0.05}`,
+                  // opacity: `${1 - prominenceFactor * 0.05}`,
                 }}
               >
                 {[...Array(type === "scale" ? 6 : 2)].map((_, colIndex) => (
