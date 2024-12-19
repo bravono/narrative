@@ -304,7 +304,7 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = async () => {
-    const regex = new RegExp(`_{1,}[a-z][1-9]?_{1,}`);
+    const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
 
     //  handles ring, rank and rate
