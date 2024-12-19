@@ -19,9 +19,10 @@ const BarrelTable = ({
   const containerRef = useRef(null);
   const [scrollOffset, setScrollOffset] = useState(0);
   const [activeRow, setActiveRow] = useState(null);
-  const visibleRows = 5; // Display exactly 5 rows
+  const visibleRows = 10; // Display exactly 5 rows
   const rowHeight = 177 / visibleRows; // Calculate height for each row
   const centerIndex = Math.floor(scrollOffset / rowHeight) + 2;
+  const isScrollable = choiceList.length > visibleRows;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +39,7 @@ const BarrelTable = ({
   useEffect(() => {
     onSetActiveRow(activeRow);
   }, [activeRow]);
-    
+
   useEffect(() => {}, [choiceList, type]);
 
   const handleRadioToggle = (choice) => {
@@ -64,7 +65,12 @@ const BarrelTable = ({
     <>
       <div className="barrel-table__heading">Heading </div>
       <div className="barrel-table-container" ref={containerRef}>
-        <div className="barrel-table">
+        <div
+          className="barrel-table"
+          style={{
+            overflowY: isScrollable ? "auto" : "hidden",
+          }}
+        >
           {choiceList.map((choice, rowIndex) => {
             const prominenceFactor = Math.abs(centerIndex - rowIndex);
             return (
@@ -81,7 +87,7 @@ const BarrelTable = ({
                   // opacity: `${1 - prominenceFactor * 0.05}`,
                 }}
               >
-                {[...Array(type === "scale" ? 6 : 2)].map((_, colIndex) => (
+                {[...Array(type === "scale" ? 4 : 2)].map((_, colIndex) => (
                   <div
                     key={colIndex}
                     className={`table-cell ${
@@ -97,12 +103,16 @@ const BarrelTable = ({
                           type={type}
                           isChecked={choice.value}
                           onRadioToggle={() => handleRadioToggle(choice)}
+                          isScrollable={isScrollable}
+                          visibleRows={visibleRows}
                         />
                       ) : type === "multipleChoice" ? (
                         <Checkbox
                           className="checkbox"
                           isChecked={choice.value}
-                          onCheckToggle={() => handleCheckToggle(choice)}
+                              onCheckToggle={() => handleCheckToggle(choice)}
+                              isScrollable={isScrollable}
+                              visibleRows={visibleRows}
                         />
                       ) : type === "rank" ? (
                         <Rank
@@ -115,6 +125,7 @@ const BarrelTable = ({
                           className={"rate"}
                           onRate={() => handleRate(choice)}
                           rate={choice.value}
+                          style={{ width: isScrollable ? "10" : "10" }}
                         />
                       ) : (
                         ""
