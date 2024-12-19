@@ -36,7 +36,7 @@ function ActiveModePage() {
   const [storyBuild, setStoryBuild] = useState();
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
-  const [heading, setHeading] = useState("");
+  const [heading, setHeading] = useState("Select Up to Six");
   const [choiceList, setChoiceList] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
@@ -100,7 +100,9 @@ function ActiveModePage() {
       // Reinitializing value to 0
       ...choice,
       value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
     }));
+    console.log("My choice list", data.blanks[0].choiceList)
     setChoiceList(newChoiceList);
     // setInstruction(data.instruction);
     setDuration(data.durationInMin * 60);
@@ -115,7 +117,6 @@ function ActiveModePage() {
       const session = location.search;
       const newBlank = await getNextBlank();
       const data = newBlank;
-
       return data;
     } catch (error) {
       toast("Error with POST request");
@@ -261,9 +262,7 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {
-    console.log("Scale Pass", scalePass);
-  }, [choiceList, scalePass]);
+  useEffect(() => {}, [questionType]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -306,7 +305,7 @@ function ActiveModePage() {
 
   const handleAddToStory = async () => {
     const regex = new RegExp(`_{1,}[a-z][1-9]?_{1,}`);
-    let formData = {};
+    let formData = [];
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
@@ -318,6 +317,8 @@ function ActiveModePage() {
             .join(", ")}]`
         )
       );
+      formData = [...choiceList];
+      console.log("Form Data", formData);
     }
 
     // choseOne handle radio and triangle
@@ -331,6 +332,9 @@ function ActiveModePage() {
             .join(", ")}]`
         )
       );
+      formData = [...choiceList
+        .filter((choice) => choice.value === 1)];
+      console.log("Form Data", formData);
     }
 
     // Handle checkbox case
@@ -344,11 +348,17 @@ function ActiveModePage() {
             .join(", ")}]`
         )
       );
+      formData = [...choiceList
+        .filter((choice) => choice.value === 1)];
+      console.log("Form Data", formData);
     }
 
     // This handle bar
     if (barPass) {
       setStoryBuild(storyBuild.replace(regex, `[${choiceList[0].value}]`));
+
+      formData = [...choiceList];
+      console.log("Form Data", formData);
     }
 
     // Handle scale
@@ -356,22 +366,20 @@ function ActiveModePage() {
       setStoryBuild(
         storyBuild.replace(
           regex,
-          `[${choiceList
-            .map((choice) => choice.text)
-            .join(", ")}]`
+          `[${choiceList.map((choice) => choice.text).join(", ")}]`
         )
       );
 
       formData = choiceList.map((choice) => {
         // Find the index of the scale that is equal to 1
         const scaleIndex = choice.scales.findIndex((scale) => scale === 1);
-    
+
         return {
           ...choice, // Copy all other properties
           value: scaleIndex !== -1 ? scaleIndex : null, // Set value to index or null
         };
       });
-      console.log("Form Data",formData)
+      console.log("Form Data", formData);
     }
 
     // Set all conditions to false
@@ -380,12 +388,13 @@ function ActiveModePage() {
     setRadioPass(false);
     setBarPass(false);
     setCheckboxPass(0);
+    setScalePass(false);
     setActiveRow(null);
 
     // Get the next question
     const newTask = await fetchNextBlank(formData);
     const response = newTask.reply;
-    // console.log(response);
+    console.log("Response", response.blanks[0].choiceList);
 
     if (meetOneCondition) {
       if (response.story) {
@@ -399,6 +408,7 @@ function ActiveModePage() {
         const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
           ...choice,
           value: 0,
+          scales: [0, 0, 0, 0, 0, 0],
         }));
         setChoiceList(newChoiceList);
         // setInstruction(response.instruction);

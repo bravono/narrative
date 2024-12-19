@@ -22,14 +22,13 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
   const fetchSurvey = async () => {
     try {
-    const session = location.search;
-    const survey = await getSurvey(session);
-    const data = survey.data.reply;
+      const session = location.search;
+      const survey = await getSurvey(session);
+      const data = survey.data.reply;
 
-    console.log("Response", data);
+      console.log("Response", data);
 
-    return data;
-
+      return data;
     } catch (error) {
       console.log(error);
     }
