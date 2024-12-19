@@ -34,7 +34,7 @@ button {
 
 tr:not(:last-child) td {
   border-collapse: collapse;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid dodgerblue;
   user-select: none;
 }
 
