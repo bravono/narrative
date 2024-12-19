@@ -50,6 +50,22 @@
 .talk-btn-exit {
   left: 140px;
 }
+.learnwelcome {
+  left: -102px;
+  bottom: -51px;
+}
+.exitwelcome {
+  left: 0px;
+  bottom: -51px;
+}
+.learn-welcome-text {
+  position: absolute;
+  margin-left: 2px;
+  left: 60px;
+  line-height: 25px;
+  right: 80px;
+  top: 90px;
+}
 .color {
   background: var(--color-disabled);
 }

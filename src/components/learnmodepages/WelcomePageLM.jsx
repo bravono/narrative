@@ -6,7 +6,7 @@ import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
-import TalkBubble from "../TalkBubble";
+// import TalkBubble from "../TalkBubble";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
@@ -22,14 +22,13 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
   const fetchSurvey = async () => {
     try {
-    const session = location.search;
-    const survey = await getSurvey(session);
-    const data = survey.data.reply;
+      const session = location.search;
+      const survey = await getSurvey(session);
+      const data = survey.data.reply;
 
-    console.log("Response", data);
+      console.log("Response", data);
 
-    return data;
-
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -65,22 +64,22 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
                   <Button
                     onClick={handleLearn}
                     label="LEARN"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
+                    className={`${classNameA} bottom_button talk-btn-learn learnwelcome`}
                   />
                   <Button
                     onClick={handleExit}
                     label="EXIT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
+                    className={`${classNameB} bottom_button talk-btn-exit exitwelcome`}
                   />
                 </div>
 
-                <TalkBubble
-                  props={`Welcome to the opportunity to
+                <h2 className="learn-welcome-text">
+                  {`Welcome to the opportunity to
                     compare taking the same survey 
                     using a traditional question/list 
                     methd and a narrative sentence 
                     with a blank/list method.`}
-                />
+                </h2>
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
