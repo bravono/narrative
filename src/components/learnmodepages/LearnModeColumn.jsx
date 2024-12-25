@@ -12,8 +12,16 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Barrel from "../composed/Barrel";
+import PointerArrowVertical from "../PointerArrowVertical";
 
-export default function LearnModeColumn({ classNameA, classNameB }) {
+export default function LearnModeColumn({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -35,7 +43,7 @@ export default function LearnModeColumn({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -78,7 +86,16 @@ export default function LearnModeColumn({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <div className="column_arrow ">
+                <PointerArrowVertical />
+              </div>
+              <Barrel
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+            </Queue>
           </div>
         </div>
       </section>

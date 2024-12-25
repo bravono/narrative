@@ -7,9 +7,9 @@ import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import "../../css/ring.css";
 
 const Ring = ({
-  heading,
-  instruction,
-  choiceList,
+  // heading,
+  // instruction,
+  // choiceList,
   isRecording,
   ringPass,
   onSetChoiceList,
@@ -41,6 +41,35 @@ const Ring = ({
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (segmentValue / 100) * circumference;
 
+  const heading = "heading";
+  const choiceList = [
+    {
+      name: "item 1",
+      text: "Kano",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 2",
+      text: "Lagos",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 3",
+      text: "Port hacort",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+  ];
+  const questionType = [
+    "multipleChoice",
+    "singleChoice",
+    "rating",
+    "ranking",
+    "scale",
+  ];
+  const instruction = "Your instruction";
   // Function to calculate SegmentValue based on angle
   const updateSegmentValue = (clientX, clientY) => {
     const { x, y, width, height } = circleRef.current.getBoundingClientRect();

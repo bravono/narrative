@@ -12,8 +12,7 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import PointerArrowVertical from "../PointerArrowVertical"
-
+import RightPointerArrow from "../RightPointerArrow";
 
 export default function LearnModeStart({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -37,9 +36,11 @@ export default function LearnModeStart({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-      
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
-          <div className="start_vertical_arrow"><PointerArrowVertical /></div>
+          <div className="start_right_arrow">
+            <RightPointerArrow />
+          </div>
         </div>
       </section>
 

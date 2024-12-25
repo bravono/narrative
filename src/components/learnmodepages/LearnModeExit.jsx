@@ -12,7 +12,7 @@ import Timer from "../../utilities/Timer";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import RightPointerArrow from "../RightPointerArrow";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeExit({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function LearnModeExit({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -77,8 +77,8 @@ export default function LearnModeExit({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-          <div className="exit_right_arrow">
-            <RightPointerArrow />
+          <div className="exit_horizontal_arrow">
+            <PointerArrowHorizontal />
           </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 

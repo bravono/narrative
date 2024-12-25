@@ -12,8 +12,16 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Barrel from "../composed/Barrel";
+import PointerArrowVertical from "../PointerArrowVertical";
 
-export default function LearnModeRadio({ classNameA, classNameB }) {
+export default function LearnModeRadio({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -79,7 +87,16 @@ export default function LearnModeRadio({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <div className="radio-checkbox_arrow ">
+                <PointerArrowVertical />
+              </div>
+              <Barrel
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+            </Queue>
           </div>
         </div>
       </section>

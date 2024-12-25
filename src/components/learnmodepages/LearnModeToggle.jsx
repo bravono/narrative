@@ -14,8 +14,16 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Barrel from "../composed/Barrel";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeToggle({ classNameA, classNameB }) {
+export default function LearnModeToggle({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -81,7 +89,16 @@ export default function LearnModeToggle({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <div className="toggle_horizontal_arrow">
+                <PointerArrowHorizontal />
+              </div>
+              <Barrel
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+            </Queue>
           </div>
         </div>
       </section>
