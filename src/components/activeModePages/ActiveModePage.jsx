@@ -28,8 +28,8 @@ function ActiveModePage() {
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
-  const [isWelcome, setIsWelcome] = useState(true);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isWelcome, setIsWelcome] = useState();
+  const [isRunning, setIsRunning] = useState();
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
@@ -92,20 +92,21 @@ function ActiveModePage() {
 
   // Initial backend call
   useEffect(() => {
+    setIsRunning(data.isRunning);
+    setIsWelcome(data.isWelcome);
     setStory(data.story);
     setStoryBuild(data.story);
     setQuestionType(data.blanks[0].questionType);
     setWidget(data.blanks[0].widget);
-    // setHeading(data.heading);
+    setHeading(data.heading);
     const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
       // Reinitializing value to 0
       ...choice,
       value: 0,
       scales: [0, 0, 0, 0, 0, 0],
     }));
-    console.log("My choice list", data.blanks[0].choiceList);
     setChoiceList(newChoiceList);
-    // setInstruction(data.instruction);
+    setInstruction(data.instruction);
     setDuration(data.durationInMin * 60);
     setCountDirection(data.countDirection);
     setPauseDuration(data.pauseDuration * 60);
@@ -261,8 +262,7 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {
-  }, [choiceList, newChoice]);
+  useEffect(() => {}, [isRunning, isWelcome, newChoice]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -287,10 +287,8 @@ function ActiveModePage() {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    if (!isRunning) {
       setIsRunning(true);
       setIsWelcome(false);
-    }
   };
   const handlePause = () => {
     if (!isWelcome) {
@@ -396,21 +394,23 @@ function ActiveModePage() {
 
     if (meetOneCondition) {
       if (response.story) {
+        // setIsRunning(response.isRunning);
+        // setIsWelcome(response.isWelcome);
         setStory(response.story);
         setStoryBuild((prevStory) => {
           return prevStory + response.story;
         });
         setQuestionType(response.blanks[0].questionType);
         setWidget(response.blanks[0].widget);
-        // setHeading(response.heading);
+        setHeading(response.heading);
         const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
           ...choice,
           value: 0,
           scales: [0, 0, 0, 0, 0, 0],
         }));
         setChoiceList(newChoiceList);
-        // setInstruction(response.instruction);
-        // setDuration(response.durationInMin * 60);
+        setInstruction(response.instruction);
+        setDuration(response.durationInSec);
         setCountDirection(response.countDirection);
         setPauseDuration(response.pauseDuration * 60);
         setBlankName(response.blanks[0].blank);
@@ -419,7 +419,7 @@ function ActiveModePage() {
   };
 
   const handlePreview = () => {
-    setIsRunning((prevIsRunning) => !prevIsRunning);
+    // setIsRunning((prevIsRunning) => !prevIsRunning);
     navigate("/preview", { state: { storyBuild, duration } });
   };
   const handleCompare = () => {
@@ -452,14 +452,20 @@ function ActiveModePage() {
     if (transcript.length) {
       setIsRecording(false);
       setWantsToTalk(false);
-      const respondentChoiceList = newChoice.map((choice) => choice.length && ({
-        name: "",
-        text: choice,
-        value: 0,
-        scales: [0, 0, 0, 0, 0, 0],
-      }));
+      const respondentChoiceList = newChoice.map(
+        (choice) =>
+          choice.length && {
+            name: "",
+            text: choice,
+            value: 0,
+            scales: [0, 0, 0, 0, 0, 0],
+          }
+      );
       respondentChoiceList.pop(); // Remove the empty item in the array
-      setChoiceList((prevChoiceList) => ([...respondentChoiceList, ...prevChoiceList]))
+      setChoiceList((prevChoiceList) => [
+        ...respondentChoiceList,
+        ...prevChoiceList,
+      ]);
     }
   };
 
@@ -567,7 +573,7 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            {isWelcome && !isRunning ? (
+            {isWelcome && isRunning !== false ?  (
               <Queue className={"queue welcome"}>
                 <Teleprompter />
                 <Edge type={"standing"} />
