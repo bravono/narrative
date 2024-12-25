@@ -193,7 +193,8 @@ function ActiveModePage() {
     if (widget == "ring") {
       setRingPass(
         choiceList.reduce((sum, choice) => sum + Number(choice.value), 0) ===
-          100 && choiceList.every((choice) => choice.value > 0)
+        100 
+        // && choiceList.every((choice) => choice.value > 0)
       );
     }
 
