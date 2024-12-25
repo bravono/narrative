@@ -17,6 +17,9 @@ html {
   height: 100%;
   overflow: hidden;
   overscroll-behavior-y: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body {
