@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./../Button";
 import "../../css/Talk.css";
 
@@ -9,15 +9,20 @@ export default function Talk({
   onDone,
   isRecording,
   transcript,
+  onSetNewChoices,
 }) {
   const isLengthy = transcript.length;
   const newChoices = transcript.split(".");
-  const newChoiceList = newChoices.map((newChoice) => (
-    <p className="added-choice">
+  const addedChoiceList = newChoices.map((newChoice, index) => (
+    <p key={index} className="added-choice">
       <img src="/assets/Bullet.svg" alt="" />
       {newChoice}
     </p>
   ));
+
+  useEffect(() => {
+    onSetNewChoices(newChoices);
+  }, [transcript]);
 
   return (
     <div className="talk-container grid-2x2">
@@ -28,13 +33,13 @@ export default function Talk({
             <div className="added-choice-container">
               {newChoices.length > 4 ? (
                 <div>
-                  {newChoiceList[0]}
-                  {newChoiceList[1]}
-                  {newChoiceList[2]}
+                  {addedChoiceList[0]}
+                  {addedChoiceList[1]}
+                  {addedChoiceList[2]}
                   <p>Can't add more than 3 items. </p>
                 </div>
               ) : (
-                newChoiceList
+                addedChoiceList
               )}
             </div>
           </div>

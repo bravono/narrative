@@ -38,6 +38,7 @@ function ActiveModePage() {
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("Select Up to Six");
   const [choiceList, setChoiceList] = useState([]);
+  const [newChoice, setNewChoice] = useState([]);
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
   const [countDirection, setCountDirection] = useState("");
@@ -102,7 +103,7 @@ function ActiveModePage() {
       value: 0,
       scales: [0, 0, 0, 0, 0, 0],
     }));
-    console.log("My choice list", data.blanks[0].choiceList)
+    console.log("My choice list", data.blanks[0].choiceList);
     setChoiceList(newChoiceList);
     // setInstruction(data.instruction);
     setDuration(data.durationInMin * 60);
@@ -162,9 +163,7 @@ function ActiveModePage() {
         window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
 
-      recognition.onstart = () => {
-        console.log("Recording started...");
-      };
+      recognition.onstart = () => {};
 
       recognition.onresult = (event) => {
         const current = event.resultIndex;
@@ -173,7 +172,6 @@ function ActiveModePage() {
       };
 
       recognition.onend = () => {
-        console.log("Recording stopped.");
         setIsRecording(false);
       };
 
@@ -193,7 +191,7 @@ function ActiveModePage() {
     if (widget == "ring") {
       setRingPass(
         choiceList.reduce((sum, choice) => sum + Number(choice.value), 0) ===
-        100 
+          100
         // && choiceList.every((choice) => choice.value > 0)
       );
     }
@@ -263,7 +261,8 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {}, [questionType]);
+  useEffect(() => {
+  }, [choiceList, newChoice]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -333,8 +332,7 @@ function ActiveModePage() {
             .join(", ")}]`
         )
       );
-      formData = [...choiceList
-        .filter((choice) => choice.value === 1)];
+      formData = [...choiceList.filter((choice) => choice.value === 1)];
       console.log("Form Data", formData);
     }
 
@@ -349,8 +347,7 @@ function ActiveModePage() {
             .join(", ")}]`
         )
       );
-      formData = [...choiceList
-        .filter((choice) => choice.value === 1)];
+      formData = [...choiceList.filter((choice) => choice.value === 1)];
       console.log("Form Data", formData);
     }
 
@@ -455,7 +452,19 @@ function ActiveModePage() {
     if (transcript.length) {
       setIsRecording(false);
       setWantsToTalk(false);
+      const respondentChoiceList = newChoice.map((choice) => choice.length && ({
+        name: "",
+        text: choice,
+        value: 0,
+        scales: [0, 0, 0, 0, 0, 0],
+      }));
+      respondentChoiceList.pop(); // Remove the empty item in the array
+      setChoiceList((prevChoiceList) => ([...respondentChoiceList, ...prevChoiceList]))
     }
+  };
+
+  const handleNewChoices = (respondentChoiceList) => {
+    setNewChoice(respondentChoiceList);
   };
 
   const handlePDF = () => {
@@ -571,6 +580,7 @@ function ActiveModePage() {
                     onErase={handleErase}
                     onCancel={handleCancel}
                     onDone={handleDone}
+                    onSetNewChoices={handleNewChoices}
                     isRecording={isRecording}
                     transcript={transcript}
                   />
