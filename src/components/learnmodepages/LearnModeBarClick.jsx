@@ -15,7 +15,8 @@ import LearnButtonState from "./LearnButtonState";
 import Bar from "../composed/Bar";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeBarClick({ classNameA, classNameB }) {
+export default function LearnModeBarClick({ classNameA, classNameB, handleUpdateChoiceList,
+  choiceList, }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -86,7 +87,11 @@ export default function LearnModeBarClick({ classNameA, classNameB }) {
                 <PointerArrowHorizontal />
               </div>
 
-              <Bar />
+             
+              <Bar
+                onSetChoice={handleUpdateChoiceList}
+                choiceList={choiceList}
+              />
             </Queue>
           </div>
         </div>

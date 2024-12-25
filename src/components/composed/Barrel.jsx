@@ -8,11 +8,12 @@ import "../../css/barrel.css";
 
 const Barrel = ({
   isRecording,
-  heading,
-  choiceList,
+  type,
+  // heading,
+  // choiceList,
   onSetChoiceList,
-  questionType,
-  instruction,
+  // questionType,
+  // instruction,
   onSortToggle,
   onAddToChoice,
 }) => {
@@ -28,8 +29,37 @@ const Barrel = ({
     setIsSorted((prevIsSorted) => !prevIsSorted);
     onSortToggle(isSorted);
   };
+  const heading = "heading";
+  const choiceList = [
+    {
+      name: "item 1",
+      text: "Kano",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 2",
+      text: "Lagos",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 3",
+      text: "Port hacort",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+  ];
+  const questionType = [
+    "multipleChoice",
+    "singleChoice",
+    "rating",
+    "ranking",
+    "scale",
+  ];
+  const instruction = "Your instruction";
 
-  const type = questionType;
+  // const type = questionType;
 
   const handleCheckToggle = (choice) => {
     onSetChoiceList((prevChoiceList) => {

@@ -13,8 +13,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import Ring from "../composed/Ring";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeRingTally({ classNameA, classNameB }) {
+export default function LearnModeRingTally({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -78,7 +85,14 @@ export default function LearnModeRingTally({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              {/* <Ring /> */}
+              <Ring
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+              <div className="tally_arrow">
+                <PointerArrowHorizontal />
+              </div>
             </Queue>
           </div>
         </div>
