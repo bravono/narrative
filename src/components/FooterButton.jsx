@@ -6,7 +6,7 @@ import "../css/FooterButton.css";
 export default function FooterButton({ classNameA, classNameB }) {
   const navigate = useNavigate();
   const handleExit = () => {
-    navigate("/activemode");
+    navigate(-1);
   };
   return (
     <div className="footer_buttons">
