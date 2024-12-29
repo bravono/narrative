@@ -14,7 +14,13 @@ import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import Triangle from "../composed/Triangle";
 
-export default function LearnModeSelectAnything({ classNameA, classNameB }) {
+export default function LearnModeSelectAnything({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -82,7 +88,11 @@ export default function LearnModeSelectAnything({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Triangle />
+              <Triangle
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
             </Queue>
           </div>
         </div>

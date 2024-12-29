@@ -12,7 +12,8 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import PointerArrowVertical from "../PointerArrowVertical";
+import RightPointerArrow from "../RightPointerArrow";
+ 
 
 export default function LearnModePause({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -38,8 +39,8 @@ export default function LearnModePause({ classNameA, classNameB }) {
           <Timer duration={600} label={"PENDING"} />
 
           <TopButton classNameA={"learn"} classNameB={"learn"} />
-          <div className="pause_vertical_arrow">
-            <PointerArrowVertical />
+          <div className="pause_right_arrow">
+            <RightPointerArrow />
           </div>
         </div>
       </section>

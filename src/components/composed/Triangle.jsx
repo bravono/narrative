@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/triangle.css";
 
-const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
+const Triangle = ({ onSetChoiceList }) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -10,6 +10,34 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   const [selectedCorner, setSelectedCorner] = useState(0);
   const [closeEnough, setCloseEnough] = useState(false);
 
+  const heading = "heading";
+  const choiceList = [
+    {
+      name: "item 1",
+      text: "Kano",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 2",
+      text: "Lagos",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 3",
+      text: "Port hacort",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+  ];
+  const questionType = [
+    "multipleChoice",
+    "singleChoice",
+    "rating",
+    "ranking",
+    "scale",
+  ];
   const centerPoint = { x: 150, y: 150 };
   const corners = [
     { x: 150, y: 0 }, // Point 1
@@ -30,7 +58,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   // Check if circle is near a corner
   const checkCornerProximity = (cx, cy) => {
     let isCloseToAnyCorner = false;
-  
+
     corners.forEach((corner, index) => {
       const isNearby = isClose({ x: cx, y: cy }, corner, threshold);
       if (isNearby) {
@@ -44,7 +72,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         );
       }
     });
-  
+
     if (!isCloseToAnyCorner) {
       // If not close to any corner, set all values to 0
       setSelectedCorner(0); // Reset the selected corner
@@ -52,10 +80,9 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         prevChoiceList.map((choice) => ({ ...choice, value: 0 }))
       );
     }
-  
+
     setCloseEnough(isCloseToAnyCorner); // Update closeEnough based on proximity
   };
-  
 
   const handleMouseDown = () => setIsDragging(true);
 

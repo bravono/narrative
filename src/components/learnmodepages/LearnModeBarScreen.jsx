@@ -15,7 +15,7 @@ import LearnButtonState from "./LearnButtonState";
 import Bar from "../composed/Bar";
 import PointerArrowVertical from "../PointerArrowVertical";
 
-export default function LearnModeBarScreen({ classNameA, classNameB }) {
+export default function LearnModeBarScreen({ classNameA, classNameB, handleUpdateChoiceList, choiceList }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -81,7 +81,7 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Bar />
+            <Bar onSetChoice={handleUpdateChoiceList} choiceList={choiceList} />
               <div className="bar_screen_arrow ">
                 <PointerArrowVertical />
               </div>

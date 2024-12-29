@@ -12,7 +12,7 @@ import Timer from "../../utilities/Timer";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import RightPointerArrow from "../RightPointerArrow";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeCompare({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -76,8 +76,8 @@ export default function LearnModeCompare({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-          <div className="compare_right_arrow">
-            <RightPointerArrow />
+          <div className="compare_horizontal_arrow">
+            <PointerArrowHorizontal />
           </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 

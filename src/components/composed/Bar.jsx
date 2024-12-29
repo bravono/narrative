@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../css/bar.css";
 
-const Bar = ({ onSetChoice, choiceList }) => {
+const Bar = ({ onSetChoice }) => {
   const progressBarRef = useRef(null);
   const isDragging = useRef(false);
   const [progress, setProgress] = useState(0); // Initial progress (in %)
@@ -48,6 +48,36 @@ const Bar = ({ onSetChoice, choiceList }) => {
       setProgress(progress - 1);
     }
   };
+
+  const heading = "heading";
+  const choiceList = [
+    {
+      name: "item 1",
+      text: "Kano",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 2",
+      text: "Lagos",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+    {
+      name: "item 3",
+      text: "Port hacort",
+      value: 0,
+      scales: [0, 0, 0, 0, 0, 0],
+    },
+  ];
+  const questionType = [
+    "multipleChoice",
+    "singleChoice",
+    "rating",
+    "ranking",
+    "scale",
+  ];
+  const instruction = "Your instruction";
 
   // Calculate and set progress based on mouse position
   const updateProgress = (event) => {

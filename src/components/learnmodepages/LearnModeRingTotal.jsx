@@ -13,8 +13,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import Ring from "../composed/Ring";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeRingTotal({ classNameA, classNameB }) {
+export default function LearnModeRingTotal({
+  classNameA,
+  classNameB,
+  heading,
+  choiceList,
+  instruction,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -77,7 +84,14 @@ export default function LearnModeRingTotal({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              {/* <Ring /> */}
+              <Ring
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+              <div className="total_arrow">
+                <PointerArrowHorizontal />
+              </div>
             </Queue>
           </div>
         </div>
