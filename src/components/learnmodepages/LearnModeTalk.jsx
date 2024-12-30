@@ -12,7 +12,7 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import RightPointerArrow from "../RightPointerArrow";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeTalk({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
         <div className="header">
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
-          
+
           <TopButton classNameA={"learn"} classNameB={"learn"} />
         </div>
       </section>
@@ -77,8 +77,8 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-          <div className="talk_right_arrow">
-            <RightPointerArrow />
+          <div className="talk_horizontal_arrow">
+            <PointerArrowHorizontal />
           </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 

@@ -14,10 +14,15 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
+import Barrel from "../composed/Barrel";
+import LeftPointerArrow from "../LeftPointerArrow";
 
 export default function LearnModeStickyArrowRanking({
   classNameA,
   classNameB,
+  heading,
+  choiceList,
+  instruction,
 }) {
   // const navigate = useNavigate();
 
@@ -83,7 +88,16 @@ export default function LearnModeStickyArrowRanking({
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <div className="sticky_arrow">
+                <LeftPointerArrow />
+              </div>
+              <Barrel
+                heading={heading}
+                choiceList={choiceList}
+                instruction={instruction}
+              />
+            </Queue>
           </div>
         </div>
       </section>

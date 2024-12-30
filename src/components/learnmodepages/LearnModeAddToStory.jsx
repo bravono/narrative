@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import "../../css/header.css";
-import RightPointerArrow from "../RightPointerArrow";
+import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeAddToStory({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -77,8 +77,8 @@ export default function LearnModeAddToStory({ classNameA, classNameB }) {
             </Queue>
           </div>
 
-          <div className="add_story_right_arrow">
-            <RightPointerArrow />
+          <div className="add_story_horizontal_arrow">
+            <PointerArrowHorizontal />
           </div>
 
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
