@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiEndpoint, testEndpoint } from "../../config.json";
 import { getSurvey } from "../../services/surveyServices";
+import { ToastContainer, toast } from "react-toastify";
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
-// import TalkBubble from "../TalkBubble";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import Button from "../Button";
-import http from "../../services/httpServices";
-import queryString from "query-string";
-import "../../css/LearnModePage.css";
+import 'react-toastify/dist/ReactToastify.css';
 import "../../css/LearnModePage.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
@@ -30,7 +27,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
       return data;
     } catch (error) {
-      console.log(error);
+      toast.error("An unexpected error occured");
     }
   };
 
@@ -43,6 +40,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
   };
   return (
     <main className="main-container">
+      <ToastContainer />
       <section className="top-section">
         <div className="logo">
           <Logo />
@@ -68,17 +66,13 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
                   />
                   <Button
                     onClick={handleExit}
-                    label="EXIT"
+                    label="BEGIN"
                     className={`${classNameB} bottom_button talk-btn-exit exitwelcome`}
                   />
                 </div>
 
                 <h2 className="learn-welcome-text">
-                  {`Welcome to the opportunity to
-                    compare taking the same survey 
-                    using a traditional question/list 
-                    methd and a narrative sentence 
-                    with a blank/list method.`}
+                  {`Hello and welcome to Research Libs. Click the LEARN button to learn about this tool or BEGIN to begin your survey.`}
                 </h2>
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"

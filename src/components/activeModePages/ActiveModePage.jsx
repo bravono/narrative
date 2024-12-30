@@ -19,6 +19,8 @@ import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
 import Swipe from "../standalone/Swipe";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -83,7 +85,7 @@ function ActiveModePage() {
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
       } catch (error) {
-        toast("Error with POST request");
+        toast.error("Error with POST request");
       }
     };
 
@@ -287,8 +289,8 @@ function ActiveModePage() {
   const navigate = useNavigate();
 
   const handleStart = () => {
-      setIsRunning(true);
-      setIsWelcome(false);
+    setIsRunning(true);
+    setIsWelcome(false);
   };
   const handlePause = () => {
     if (!isWelcome) {
@@ -514,6 +516,7 @@ function ActiveModePage() {
 
   return (
     <main className="main-container">
+      <ToastContainer />
       <section className="top-section">
         <div className="logo">
           <Logo />
@@ -573,7 +576,7 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            {isWelcome && isRunning !== false ?  (
+            {isWelcome && isRunning !== false ? (
               <Queue className={"queue welcome"}>
                 <Teleprompter />
                 <Edge type={"standing"} />
