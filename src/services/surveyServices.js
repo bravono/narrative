@@ -15,5 +15,3 @@ export async function getNextBlank(formData) {
 
   return nextBlank.data
 }
-
-const formData = [{ name: "a[1][8][1][1][1][v]", text: "Dinner", value: 1 }];
