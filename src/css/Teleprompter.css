@@ -23,11 +23,13 @@
     transparent
   );
 }
-
-/* Hide scrollbar for Chrome, Safari, and Edge */
-/* .teleprompter-text-container::-webkit-scrollbar {
-  display: none;
-} */
+.teleprompter-text-container-welcome {
+  position: relative;
+  padding: 10px;
+  overflow-y: auto;
+  line-height: 1.4;
+  font-size: 1.5rem;
+}
 
 .text-line {
   transition: opacity 0.8s, font-size 0.3s;

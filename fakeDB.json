@@ -48,9 +48,11 @@
       "widget": "barrel"
     },
     "redirect": "",
-    "durationInMin": "10",
-    "pauseDuration": "5",
+    "durationInMin": "0",
+    "pauseDuration": "0",
     "timeCounter": "down",
-    "sessionId": "123abc"
+    "sessionId": "123abc",
+    "isWelcome": "true",
+    "isRunning": "false"
   }
 }

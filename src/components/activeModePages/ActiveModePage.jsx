@@ -19,11 +19,11 @@ import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
 import Swipe from "../standalone/Swipe";
+import "react-toastify/dist/ReactToastify.css";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
-  const { data } = location.state || {};
   const initialDuration = 60;
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
@@ -83,7 +83,7 @@ function ActiveModePage() {
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
       } catch (error) {
-        toast("Error with POST request");
+        toast.error("Error with POST request");
       }
     };
 
@@ -92,36 +92,48 @@ function ActiveModePage() {
 
   // Initial backend call
   useEffect(() => {
-    setIsRunning(data.isRunning);
-    setIsWelcome(data.isWelcome);
-    setStory(data.story);
-    setStoryBuild(data.story);
-    setQuestionType(data.blanks[0].questionType);
-    setWidget(data.blanks[0].widget);
-    setHeading(data.heading);
-    const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-      // Reinitializing value to 0
-      ...choice,
-      value: 0,
-      scales: [0, 0, 0, 0, 0, 0],
-    }));
-    setChoiceList(newChoiceList);
-    setInstruction(data.instruction);
-    setDuration(data.durationInMin * 60);
-    setCountDirection(data.countDirection);
-    setPauseDuration(data.pauseDuration * 60);
-    setBlankName(data.blanks[0].blank);
+    const fetchSurvey = async () => {
+      try {
+        const session = location.search;
+        const survey = await getSurvey(session);
+        const data = survey.data.reply;
+  
+        console.log("Response", data);
+        setIsRunning(data.isRunning);
+        setIsWelcome(data.isWelcome);
+        setStory(data.story);
+        setStoryBuild(data.story);
+        setQuestionType(data.blanks[0].questionType);
+        setWidget(data.blanks[0].widget);
+        setHeading(data.heading);
+        const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+          // Reinitializing value to 0
+          ...choice,
+          value: 0,
+          scales: [0, 0, 0, 0, 0, 0],
+        }));
+        setChoiceList(newChoiceList);
+        setInstruction(data.instruction);
+        setDuration(data.durationInMin * 60);
+        setCountDirection(data.countDirection);
+        setPauseDuration(data.pauseDuration * 60);
+        setBlankName(data.blanks[0].blank);
+      } catch (error) {
+        toast.error("An unexpected error occured");
+      }
+    };
+
+    fetchSurvey();
   }, []);
 
   // Get the next blank
   const fetchNextBlank = async () => {
     try {
-      const session = location.search;
       const newBlank = await getNextBlank();
       const data = newBlank;
       return data;
     } catch (error) {
-      toast("Error with POST request");
+      toast.error("Error with POST request");
     }
   };
 
@@ -287,8 +299,8 @@ function ActiveModePage() {
   const navigate = useNavigate();
 
   const handleStart = () => {
-      setIsRunning(true);
-      setIsWelcome(false);
+    setIsRunning(true);
+    setIsWelcome(false);
   };
   const handlePause = () => {
     if (!isWelcome) {
@@ -514,6 +526,7 @@ function ActiveModePage() {
 
   return (
     <main className="main-container">
+      <ToastContainer />
       <section className="top-section">
         <div className="logo">
           <Logo />
@@ -573,7 +586,7 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            {isWelcome && isRunning !== false ?  (
+            {isWelcome && isRunning !== false ? (
               <Queue className={"queue welcome"}>
                 <Teleprompter />
                 <Edge type={"standing"} />
