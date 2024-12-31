@@ -8,21 +8,28 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [circlePosition, setCirclePosition] = useState({ x: 150, y: 180 });
   const [selectedCorner, setSelectedCorner] = useState(0);
+  const [selectedBorder, setSelectedBorder] = useState(0);
   const [closeEnough, setCloseEnough] = useState(false);
+  const [activeCorner, setActiveCorner] = useState(null); // Track the active glowing corner
 
-  const centerPoint = { x: 150, y: 150 };
   const corners = [
     { x: 150, y: 0 }, // Point 1
     { x: 0, y: 300 }, // Point 2
     { x: 300, y: 300 }, // Point 3
   ];
 
+  const borders = [
+    { x: 72, y: 157.5 }, // left 1
+    { x: 150, y: 295 }, // bottom 2
+    { x: 228, y: 157.5 }, // right 3
+  ];
+
   const threshold = 90;
 
   // Calculate distance between two points
-  const isClose = (circle, corner, threshold) => {
+  const isClose = (circle, point, threshold) => {
     const distance = Math.sqrt(
-      Math.pow(corner.x - circle.x, 2) + Math.pow(corner.y - circle.y, 2)
+      Math.pow(point.x - circle.x, 2) + Math.pow(point.y - circle.y, 2)
     );
     return distance <= threshold;
   };
@@ -30,7 +37,8 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   // Check if circle is near a corner
   const checkCornerProximity = (cx, cy) => {
     let isCloseToAnyCorner = false;
-  
+    let isCloseToAnyBorder = false;
+
     corners.forEach((corner, index) => {
       const isNearby = isClose({ x: cx, y: cy }, corner, threshold);
       if (isNearby) {
@@ -44,18 +52,30 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         );
       }
     });
-  
+
+    borders.forEach((border, index) => {
+      const isNearby = isClose({ x: cx, y: cy }, border, 70);
+      if (isNearby) {
+        isCloseToAnyBorder = true;
+        setSelectedBorder(index + 1);
+      }
+    });
+
     if (!isCloseToAnyCorner) {
       // If not close to any corner, set all values to 0
       setSelectedCorner(0); // Reset the selected corner
       onSetChoiceList((prevChoiceList) =>
         prevChoiceList.map((choice) => ({ ...choice, value: 0 }))
       );
+
+      if (!isCloseToAnyBorder) {
+        setSelectedBorder(0);
+      }
     }
-  
+
     setCloseEnough(isCloseToAnyCorner); // Update closeEnough based on proximity
+    setActiveCorner(closestCorner); // Highlight the closest corner
   };
-  
 
   const handleMouseDown = () => setIsDragging(true);
 
@@ -97,6 +117,13 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
     return () => document.removeEventListener("touchend", handleMouseUp);
   }, []);
 
+  const polylineAttributes = {
+    stroke: "url(#goldGradient)",
+    strokeWidth: "15",
+    fill: "none",
+    filter: "url(#lineGlow)",
+  };
+
   return (
     <div className="triangle-set">
       <p className="triangle-instruction">{heading}</p>
@@ -108,8 +135,9 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         className="triangle-svg"
       >
         {/* Define SVG Filter for Glow Effect */}
+
         <defs>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <filter id="circleGlow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="20" result="coloredBlur" />
             <feMerge>
               <feMergeNode in="coloredBlur" />
@@ -117,11 +145,79 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
             </feMerge>
           </filter>
         </defs>
+
+        {/* Define gradient for border effects */}
+        <defs>
+          <linearGradient id="goldGradient">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="0.3" stop-color="gold" />
+            <stop offset="0.7" stop-color="gold" />
+            <stop offset="100%" stop-color="transparent" />
+          </linearGradient>
+          <filter id="lineGlow">
+            <feGaussianBlur stdDeviation="3" />
+          </filter>
+        </defs>
         <polygon
           id="triangle"
           className="triangle"
           points="150,10 0,300 300,300"
-        ></polygon>
+        />
+
+        {/* Top corner */}
+        <polyline
+          points="153,5 95,120"
+          {...polylineAttributes}
+          display={selectedCorner === 1 ? "block" : "none"}
+        />
+        <polyline
+          points="147,5 205,120"
+          {...polylineAttributes}
+          display={selectedCorner === 1 ? "block" : "none"}
+        />
+
+        {/* Left corner */}
+        <polyline
+          points="0,300 50,200"
+          {...polylineAttributes}
+          display={selectedCorner === 2 ? "block" : "none"}
+        />
+        <polyline
+          points="0,295 100,300"
+          {...polylineAttributes}
+          display={selectedCorner === 2 ? "block" : "none"}
+        />
+
+        {/* Right corner */}
+        <polyline
+          points="300,300 250,200"
+          {...polylineAttributes}
+          display={selectedCorner === 3 ? "block" : "none"}
+        />
+        <polyline
+          points="300,300 200,295"
+          {...polylineAttributes}
+          display={selectedCorner === 3 ? "block" : "none"}
+        />
+
+        {/* Left border */}
+        <polyline
+          points="140,30 10,280"
+          {...polylineAttributes}
+          display={selectedBorder === 1 ? "block" : "none"}
+        />
+        {/* Bottom border */}
+        <polyline
+          points="30,290 270,295"
+          {...polylineAttributes}
+          display={selectedBorder === 2 ? "block" : "none"}
+        />
+        {/* Right border */}
+        <polyline
+          points="160,30 290,280"
+          {...polylineAttributes}
+          display={selectedBorder === 3 ? "block" : "none"}
+        />
         <circle
           ref={circleRef}
           className={`draggable-circle ${
@@ -132,7 +228,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
           r="30"
           onMouseDown={handleMouseDown}
           onTouchStart={handleMouseDown}
-          filter={isDragging ? "url(#glow)" : ""}
+          filter={isDragging ? "url(#circleGlow)" : ""}
         ></circle>
         <text
           className={

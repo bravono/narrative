@@ -10,14 +10,21 @@
   height: 14rem;
   margin-bottom: 3rem;
   user-select: none;
+  padding: 15px;
   /* border: 2px solid tomato */
 }
+
 
 .triangle {
   fill: none;
   stroke: #45546a;
   stroke-width: 1.5rem;
 }
+
+polyline {
+  z-index: 999;
+}
+
 .draggable-circle {
   fill: #45546a;
   cursor: pointer;
