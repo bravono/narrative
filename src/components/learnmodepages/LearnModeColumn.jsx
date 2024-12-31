@@ -12,8 +12,8 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Barrel from "../composed/Barrel";
 import PointerArrowVertical from "../PointerArrowVertical";
+import BarrelWidget from "./LMBarrelWidget";
 
 export default function LearnModeColumn({
   classNameA,
@@ -90,11 +90,7 @@ export default function LearnModeColumn({
               <div className="column_arrow ">
                 <PointerArrowVertical />
               </div>
-              <Barrel
-                heading={heading}
-                choiceList={choiceList}
-                instruction={instruction}
-              />
+              <BarrelWidget />
             </Queue>
           </div>
         </div>
