@@ -19,7 +19,6 @@ import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
 import Swipe from "../standalone/Swipe";
-import "react-toastify/dist/ReactToastify.css";
 
 function ActiveModePage() {
   const containerRef = useRef(null);
@@ -82,12 +81,14 @@ function ActiveModePage() {
         setDuration(data.durationInMin * 60);
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
+        setIsWelcome(data.isWelcome);
+        setIsRunning(data.isRunning);
       } catch (error) {
         toast.error("Error with POST request");
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
   // Initial backend call
@@ -123,7 +124,7 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
   // Get the next blank
