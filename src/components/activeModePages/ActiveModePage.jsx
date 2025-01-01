@@ -89,7 +89,7 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
   // Initial backend call
@@ -125,7 +125,7 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
   // Get the next blank
@@ -403,6 +403,8 @@ function ActiveModePage() {
     setCheckboxPass(0);
     setScalePass(false);
     setActiveRow(null);
+    setWidgetOutAnimation("");
+
 
     // Get the next question
     const newTask = await fetchNextBlank(formData);
