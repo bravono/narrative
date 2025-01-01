@@ -12,15 +12,10 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Bar from "../composed/Bar";
 import LeftPointerArrow from "../LeftPointerArrow";
+import BarWidget from "./LMBarWidget";
 
-export default function LearnModeBarDrag({
-  classNameA,
-  classNameB,
-  handleUpdateChoiceList,
-  choiceList,
-}) {
+export default function LearnModeBarDrag({ classNameA, classNameB, handleUpdateChoiceList}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -86,10 +81,7 @@ export default function LearnModeBarDrag({
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Bar
-                onSetChoice={handleUpdateChoiceList}
-                choiceList={choiceList}
-              />
+              <BarWidget onSetChoice={handleUpdateChoiceList}/>
 
               <div className="bar_drag_arrow ">
                 <LeftPointerArrow />

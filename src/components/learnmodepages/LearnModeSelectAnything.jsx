@@ -12,14 +12,11 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Triangle from "../composed/Triangle";
+import TriangleWidget from "./LMTriangleWidget";
 
 export default function LearnModeSelectAnything({
   classNameA,
-  classNameB,
-  heading,
-  choiceList,
-  instruction,
+  classNameB
 }) {
   // const navigate = useNavigate();
 
@@ -88,11 +85,7 @@ export default function LearnModeSelectAnything({
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <Triangle
-                heading={heading}
-                choiceList={choiceList}
-                instruction={instruction}
-              />
+              <TriangleWidget />
             </Queue>
           </div>
         </div>

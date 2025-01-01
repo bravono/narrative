@@ -13,7 +13,7 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Barrel from "../composed/Barrel";
+import BarrelWidget from "./LMBarrelWidget";
 import LeftPointerArrow from "../LeftPointerArrow";
 
 export default function LearnModeContinue({
@@ -91,11 +91,9 @@ export default function LearnModeContinue({
               <div className="continue_arrow">
                 <LeftPointerArrow />
               </div>
-              <Barrel
-                heading={heading}
-                choiceList={choiceList}
-                instruction={instruction}
-              />
+
+              <BarrelWidget />
+              
             </Queue>
           </div>
         </div>

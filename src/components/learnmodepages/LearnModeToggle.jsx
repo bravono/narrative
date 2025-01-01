@@ -4,25 +4,20 @@ import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
 import TalkBubble from "../TalkBubble";
-// import Timer from "../Timer";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
-
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Barrel from "../composed/Barrel";
+import BarrelWidget from "./LMBarrelWidget";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeToggle({
   classNameA,
-  classNameB,
-  heading,
-  choiceList,
-  instruction,
+  classNameB
 }) {
   // const navigate = useNavigate();
 
@@ -93,11 +88,8 @@ export default function LearnModeToggle({
               <div className="toggle_horizontal_arrow">
                 <PointerArrowHorizontal />
               </div>
-              <Barrel
-                heading={heading}
-                choiceList={choiceList}
-                instruction={instruction}
-              />
+            
+              <BarrelWidget/>
             </Queue>
           </div>
         </div>

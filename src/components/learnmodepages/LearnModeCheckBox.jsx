@@ -12,16 +12,10 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
-import Barrel from "../composed/Barrel";
+import BarrelWidget from "./LMBarrelWidget";
 import PointerArrowVertical from "../PointerArrowVertical";
 
-export default function LearnModeCheckBox({
-  classNameA,
-  classNameB,
-  heading,
-  choiceList,
-  instruction,
-}) {
+export default function LearnModeCheckBox({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -91,11 +85,7 @@ export default function LearnModeCheckBox({
               <div className="radio-checkbox_arrow ">
                 <PointerArrowVertical />
               </div>
-              <Barrel
-                heading={heading}
-                choiceList={choiceList}
-                instruction={instruction}
-              />
+              <BarrelWidget />
             </Queue>
           </div>
         </div>
