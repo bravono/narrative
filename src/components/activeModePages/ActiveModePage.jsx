@@ -10,7 +10,7 @@ import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import Barrel from "../composed/Barrel";
 import Bar from "../composed/Bar";
-import Ring from "../composed/Ring";
+import Ring from "../composed/Ring2";
 import Triangle from "../composed/Triangle";
 import Logo from "../Logo";
 import Edge from "../Edge";
@@ -98,7 +98,7 @@ function ActiveModePage() {
         const session = location.search;
         const survey = await getSurvey(session);
         const data = survey.data.reply;
-  
+
         console.log("Response", data);
         setIsRunning(data.isRunning);
         setIsWelcome(data.isWelcome);

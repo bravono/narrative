@@ -3,7 +3,6 @@ import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
-import RingSegment from "../standalone/RingSegment";
 import DraggableRingSegment from "../standalone/DraggableRingSegment";
 import "../../css/ring.css";
 
@@ -65,15 +64,24 @@ const Ring = ({
       total += Number(choice.value);
     });
     setTotal(total);
+
   }, [choiceList]);
 
-  // Mouse/touch event handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    updateSegmentValue(
-      e.clientX || e.touches[0].clientX,
-      e.clientY || e.touches[0].clientY
-    );
+  useEffect(() => {
+
+  }, [activeRow])
+
+  const handleMouseDown = (index, e) => {
+    if (index) {
+      setIsDragging(index);
+    }
+    console.log("Index:",index, "Event:",e);
+    console.log("Active Row", choiceList[index]);
+    setActiveRow(choiceList[index])
+
+    const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
+    const clientY = e.clientY ? e.clientY : e.touches[0].clientY;
+    updateSegmentValue(clientX, clientY);
 
     if (activeRow) {
       onSetChoiceList((prevChoiceList) => {
@@ -87,12 +95,13 @@ const Ring = ({
     }
   };
 
+  // Handle drag move both mobile and PC
   const handleMouseMove = (e) => {
-    if (isDragging) {
-      updateSegmentValue(
-        e.clientX || e.touches[0].clientX,
-        e.clientY || e.touches[0].clientY
-      );
+    if (isDragging !== null) {
+      const clientX = e.clientX ? e.clientX : e.touches[0].clientX;
+      const clientY = e.clientY ? e.clientY : e.touches[0].clientY;
+
+      updateSegmentValue(clientX, clientY);
 
       if (activeRow) {
         onSetChoiceList((prevChoiceList) => {
@@ -107,8 +116,9 @@ const Ring = ({
     }
   };
 
+  // Handle drag end
   const handleMouseUp = () => {
-    setIsDragging(false);
+    setIsDragging(null);
   };
 
   const incrementSegmentValue = () => {
@@ -149,6 +159,7 @@ const Ring = ({
   };
 
   const handleItemSelect = (choice) => {
+    console.log("Choice", choice)
     setActiveRow(choice);
   };
 
@@ -160,7 +171,7 @@ const Ring = ({
           setActiveRowIndex(rowIndex); // Store the clicked row index
           handleItemSelect(choice);
         }}
-        className={activeRow.text === choice.text ? "active-row" : ""}
+        className={activeRow && activeRow.text === choice.text ? "active-row" : ""}
       >
         <td>
           <div
@@ -192,8 +203,14 @@ const Ring = ({
           colors={colors}
           choiceList={choiceList}
           total={total}
-          activeRow={activeRow}
+          isDragging={isDragging}
           onSetChoiceList={onSetChoiceList}
+          onHandleMouseDown={handleMouseDown}
+          onHandleMouseMove={handleMouseMove}
+          onHandleMouseUp={handleMouseUp}
+          onTouchStart={handleMouseDown}
+          onTouchMove={handleMouseMove}
+          onTouchEnd={handleMouseUp}
         />
         <div>
           <div className="ring-list-container">
