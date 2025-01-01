@@ -6,7 +6,7 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [circlePosition, setCirclePosition] = useState({ x: 150, y: 180 });
+  const [circlePosition, setCirclePosition] = useState({ x: 150, y: 185 });
   const [selectedCorner, setSelectedCorner] = useState(0);
   const [selectedBorder, setSelectedBorder] = useState(0);
   const [closeEnough, setCloseEnough] = useState(false);
