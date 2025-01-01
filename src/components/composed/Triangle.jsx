@@ -74,7 +74,6 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
     }
 
     setCloseEnough(isCloseToAnyCorner); // Update closeEnough based on proximity
-    setActiveCorner(closestCorner); // Highlight the closest corner
   };
 
   const handleMouseDown = () => setIsDragging(true);
@@ -149,10 +148,10 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         {/* Define gradient for border effects */}
         <defs>
           <linearGradient id="goldGradient">
-            <stop offset="0%" stop-color="transparent" />
-            <stop offset="0.3" stop-color="gold" />
-            <stop offset="0.7" stop-color="gold" />
-            <stop offset="100%" stop-color="transparent" />
+            <stop offset="0%" stopColor="transparent" />
+            <stop offset="0.3" stopColor="gold" />
+            <stop offset="0.7" stopColor="gold" />
+            <stop offset="100%" stopColor="transparent" />
           </linearGradient>
           <filter id="lineGlow">
             <feGaussianBlur stdDeviation="3" />
