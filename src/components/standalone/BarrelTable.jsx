@@ -7,6 +7,7 @@ import Rate from "./Rate";
 import "../../css/BarrelTable.css";
 
 const BarrelTable = ({
+  widgetOutAnimation,
   choiceList,
   type,
   onRadioToggle,

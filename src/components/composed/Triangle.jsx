@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import capitalizeWords from "../../utilities/capilizeWords";
 import "../../css/triangle.css";
 
-const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
+const Triangle = ({
+  onSetChoiceList,
+  heading,
+  choiceList,
+  instruction,
+  widgetOutAnimation,
+}) => {
   const svgRef = useRef(null);
   const circleRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -106,6 +112,8 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
     }
   };
 
+  useEffect(() => {}, [widgetOutAnimation]);
+
   useEffect(() => {
     document.addEventListener("mouseup", handleMouseUp);
     return () => document.removeEventListener("mouseup", handleMouseUp);
@@ -131,7 +139,11 @@ const Triangle = ({ onSetChoiceList, heading, choiceList, instruction }) => {
         viewBox="0 0 300 300"
         onMouseMove={handleMouseMove}
         onTouchMove={handleMouseMove}
-        className="triangle-svg"
+        className={`triangle-svg  ${
+          widgetOutAnimation
+            ? widgetOutAnimation
+            : "animate__animated animate__rotateIn"
+        }`}
       >
         {/* Define SVG Filter for Glow Effect */}
 

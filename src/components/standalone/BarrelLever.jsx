@@ -1,6 +1,6 @@
 import "../../css/barrelLever.css";
-export default function Lever({ sorted, onClick }) {
-  const className = "barrel-lever barrel-lever-";
+export default function Lever({ sorted, onClick, widgetInAnimation, widgetOutAnimation }) {
+  const className = `${widgetOutAnimation ? widgetOutAnimation : widgetInAnimation} barrel-lever barrel-lever-`;
   if (sorted) {
     return (
       <img

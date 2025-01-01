@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../../css/StickyArrow.css";
 
-const StickyArrow = ({ type, className }) => {
+const StickyArrow = ({ type, widgetOutAnimation, widgetInAnimation }) => {
   function renderResult() {
     if (type == "singleChoice") return "SINGLE CHOICE";
     if (type == "multipleChoice") return "MULTI CHOICE";
@@ -12,7 +12,7 @@ const StickyArrow = ({ type, className }) => {
   return (
     <div>
       <svg
-        className={`sticky-arrow ${type}-sticky`}
+        className={`sticky-arrow ${type}-sticky ${widgetOutAnimation ? widgetOutAnimation : widgetInAnimation}`}
         viewBox="0 0 7 20"
         xmlns="http://www.w3.org/2000/svg"
       >

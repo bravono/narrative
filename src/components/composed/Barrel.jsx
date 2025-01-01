@@ -10,9 +10,10 @@ const Barrel = ({
   isRecording,
   heading,
   choiceList,
-  onSetChoiceList,
   questionType,
   instruction,
+  widgetOutAnimation,
+  onSetChoiceList,
   onSortToggle,
   onAddToChoice,
 }) => {
@@ -157,12 +158,32 @@ const Barrel = ({
     }
   };
 
+  const widgetInAnimation = `animate__animated  animate__rollIn`;
+
   return (
     <div className="barrel-set">
-      <Lever sorted={isSorted} onClick={handleSortToggle} />
-      {type !== "scale" ? <StickyArrow type={type} /> : ""}
-      <div className="barrel">
+      <Lever
+        sorted={isSorted}
+        onClick={handleSortToggle}
+        widgetInAnimation={widgetInAnimation}
+        widgetOutAnimation={widgetOutAnimation}
+      />
+      {type !== "scale" ? (
+        <StickyArrow
+          type={type}
+          widgetInAnimation={widgetInAnimation}
+          widgetOutAnimation={widgetOutAnimation}
+        />
+      ) : (
+        ""
+      )}
+      <div
+        className={`barrel ${
+          widgetOutAnimation ? widgetOutAnimation : widgetInAnimation
+        }`}
+      >
         <BarrelTable
+          widgetOutAnimation={widgetOutAnimation}
           type={type}
           choiceList={choiceList}
           onRank={handleRank}

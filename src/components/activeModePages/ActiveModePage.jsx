@@ -24,6 +24,7 @@ function ActiveModePage() {
   const containerRef = useRef(null);
   const location = useLocation();
   const initialDuration = 60;
+  const [widgetOutAnimation, setWidgetOutAnimation] = useState("");
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
@@ -98,7 +99,7 @@ function ActiveModePage() {
         const session = location.search;
         const survey = await getSurvey(session);
         const data = survey.data.reply;
-  
+
         console.log("Response", data);
         setIsRunning(data.isRunning);
         setIsWelcome(data.isWelcome);
@@ -275,7 +276,7 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {}, [isRunning, isWelcome, newChoice]);
+  useEffect(() => {}, [isRunning, isWelcome, newChoice, widgetOutAnimation]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -315,6 +316,9 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = async () => {
+    // Animate the outgoing widget
+    setWidgetOutAnimation("animate__bounceOut");
+
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
 
@@ -638,6 +642,7 @@ function ActiveModePage() {
                     ""
                   )}
                   <Barrel
+                    widgetOutAnimation={widgetOutAnimation}
                     heading={heading}
                     choiceList={choiceList}
                     questionType={questionType}
@@ -655,11 +660,13 @@ function ActiveModePage() {
                 </>
               ) : widget === "bar" && !isWelcome ? (
                 <Bar
+                  widgetOutAnimation={widgetOutAnimation}
                   onSetChoice={handleUpdateChoiceList}
                   choiceList={choiceList}
                 />
               ) : widget === "ring" && !isWelcome ? (
                 <Ring
+                  widgetOutAnimation={widgetOutAnimation}
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
@@ -673,6 +680,7 @@ function ActiveModePage() {
                 />
               ) : widget === "triade" && !isWelcome ? (
                 <Triangle
+                  widgetOutAnimation={widgetOutAnimation}
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}

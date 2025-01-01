@@ -12,6 +12,7 @@ const Ring = ({
   choiceList,
   isRecording,
   ringPass,
+  widgetOutAnimation,
   onSetChoiceList,
   onSortToggle,
   onAddToChoice,
@@ -64,7 +65,7 @@ const Ring = ({
       total += Number(choice.value);
     });
     setTotal(total);
-  }, [choiceList]);
+  }, [choiceList, widgetOutAnimation]);
 
   // Mouse/touch event handlers
   const handleMouseDown = (e) => {
@@ -213,17 +214,25 @@ const Ring = ({
     );
   });
 
-  const isValidTotal = (total < 100 ) || total > 100;
-  const canContinue =  total == 100;
+  const isValidTotal = total < 100 || total > 100;
+  const canContinue = total == 100;
   const canRoundup = total > 94 && total < 100;
+  const widgetInAnimationRight = `animate__animated animate__zoomInRight ${widgetOutAnimation}`;
+  const widgetInAnimationLeft = `animate__animated animate__zoomInLeft ${widgetOutAnimation}`;
 
   return (
     <div className="ring-set">
-      <RingLever sorted={isSorted} onClick={handleSortToggle} />
+      <RingLever
+        sorted={isSorted}
+        onClick={handleSortToggle}
+        widgetInAnimationLeft={widgetInAnimationLeft}
+      />
       <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
       <div className="ring">
         <RingSegment
-          className="ring-segment"
+          style={`ring-segment `}
+          widgetOutAnimation={widgetOutAnimation}
+          widgetInAnimationRight={widgetInAnimationRight}
           size={size}
           strokeWidth={strokeWidth - 3}
           colors={colors}
@@ -232,12 +241,20 @@ const Ring = ({
         />
 
         <div>
-          <div className="ring-list-container">
+          <div
+            className={`ring-list-container ${
+              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationLeft
+            }`}
+          >
             <table className="ring-table">
               <tbody>{tableRow}</tbody>
             </table>
           </div>
-          <p className="ring-instruction">
+          <p
+            className={`ring-instruction ${
+              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationLeft
+            }`}
+          >
             {instruction || "Select Up to Six"}
           </p>
         </div>
@@ -246,7 +263,9 @@ const Ring = ({
             width="10"
             height="8"
             viewBox="0 0 10 8"
-            className="polygon"
+            className={`polygon ${
+              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
+            }`}
             onClick={incrementSegmentValue}
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -257,7 +276,9 @@ const Ring = ({
             width="10"
             height="8"
             viewBox="0 0 10 8"
-            className="polygon"
+            className={`polygon ${
+              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
+            }`}
             onClick={decrementSegmentValue}
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -275,7 +296,9 @@ const Ring = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="ring-svg"
+          className={`ring-svg ${
+            widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
+          }`}
         >
           {/* Background Circle */}
           {isDragging ? (

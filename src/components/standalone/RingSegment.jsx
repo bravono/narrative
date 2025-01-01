@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 
 const RingSegment = ({
-  className,
+  style,
+  widgetOutAnimation,
+  widgetInAnimationRight,
   choiceList,
   strokeWidth,
   size,
@@ -27,7 +29,9 @@ const RingSegment = ({
       height={size}
       viewBox="0 0 120 120"
       transform="rotate(-90, 0, 0)"
-      className={className}
+      className={`${style} ${
+        widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
+      }`}
     >
       <circle
         r="50"

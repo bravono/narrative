@@ -1,6 +1,13 @@
 import "../../css/ringLever.css";
-export default function Lever({ sorted, onClick }) {
-  const className = "ring-lever ring-lever-";
+export default function Lever({
+  sorted,
+  onClick,
+  widgetOutAnimation,
+  widgetInAnimationLeft,
+}) {
+  const className = `${
+    widgetOutAnimation ? widgetOutAnimation : widgetInAnimationLeft
+  } ring-lever ring-lever-`;
   if (sorted) {
     return (
       <img

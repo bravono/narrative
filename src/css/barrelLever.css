@@ -2,6 +2,7 @@
   cursor: pointer;
   left: 1%;
   position: absolute;
+  z-index: 999;
 }
 
 .barrel-lever-unsort {

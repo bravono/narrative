@@ -1,10 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../css/bar.css";
 
-const Bar = ({ onSetChoice, choiceList }) => {
+const Bar = ({ onSetChoice, choiceList, widgetOutAnimation }) => {
   const progressBarRef = useRef(null);
   const isDragging = useRef(false);
   const [progress, setProgress] = useState(0); // Initial progress (in %)
+
+  useEffect(() => {
+
+  }, [widgetOutAnimation])
 
   // Handle desktop version
   const handleMouseDown = (event) => {
@@ -80,7 +84,7 @@ const Bar = ({ onSetChoice, choiceList }) => {
 
   return (
     <div className="bar-set">
-      <div className="bar">
+      <div className={`bar ${widgetOutAnimation ? widgetOutAnimation : `animate__animated animate__backInRight`}`}>
         <div className="progress_bar-base">
           <svg
             viewBox="0 0 24 31"
