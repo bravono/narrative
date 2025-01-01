@@ -45,7 +45,7 @@
       "scale": ["poor", "fair", "good", "very good", "excellent"],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "triade"
+      "widget": "ring"
     },
     "redirect": "",
     "durationInMin": "0",

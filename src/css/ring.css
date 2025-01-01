@@ -21,13 +21,12 @@
   pointer-events: stroke;
   user-select: none;
   cursor: pointer;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .ring-segment {
   position: absolute;
   left: 51%;
-  /* opacity: .5; */
 }
 
 .ring-list-container {

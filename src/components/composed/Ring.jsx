@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, act } from "react";
+import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import RingSegment from "../standalone/RingSegment";
-import { updateChoiceList } from "../../utilities/choiceListUpdater";
+import DraggableRingSegment from "../standalone/DraggableRingSegment";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -69,34 +70,38 @@ const Ring = ({
   // Mouse/touch event handlers
   const handleMouseDown = (e) => {
     setIsDragging(true);
-    updateSegmentValue(e.clientX, e.clientY);
+    updateSegmentValue(
+      e.clientX || e.touches[0].clientX,
+      e.clientY || e.touches[0].clientY
+    );
 
     if (activeRow) {
       onSetChoiceList((prevChoiceList) => {
-        return prevChoiceList.map((choice) => ({
-          ...choice, // Copy all other properties
-          value:
-            activeRow.text === choice.text
-              ? `${Math.round(segmentValue)}`
-              : choice.value, // Update 'value' conditionally
-        }));
+        const updatedChoiceList = updateChoiceList(
+          prevChoiceList,
+          activeRow,
+          segmentValue
+        );
+        return updatedChoiceList;
       });
     }
   };
 
   const handleMouseMove = (e) => {
     if (isDragging) {
-      updateSegmentValue(e.clientX, e.clientY);
+      updateSegmentValue(
+        e.clientX || e.touches[0].clientX,
+        e.clientY || e.touches[0].clientY
+      );
 
       if (activeRow) {
         onSetChoiceList((prevChoiceList) => {
-          return prevChoiceList.map((choice) => ({
-            ...choice, // Copy all other properties
-            value:
-              activeRow.text === choice.text
-                ? `${Math.round(segmentValue)}`
-                : choice.value, // Update 'value' conditionally
-          }));
+          const updatedChoiceList = updateChoiceList(
+            prevChoiceList,
+            activeRow,
+            segmentValue
+          );
+          return updatedChoiceList;
         });
       }
     }
@@ -106,58 +111,17 @@ const Ring = ({
     setIsDragging(false);
   };
 
-  // Mobile support
-  const handleTouchStart = (e) => {
-    setIsDragging(true);
-    updateSegmentValue(e.touches[0].clientX, e.touches[0].clientY);
-
-    if (activeRow) {
-      onSetChoiceList((prevChoiceList) => {
-        return prevChoiceList.map((choice) => ({
-          ...choice, // Copy all other properties
-          value:
-            activeRow.text === choice.text
-              ? `${Math.round(segmentValue)}`
-              : choice.value, // Update 'value' conditionally
-        }));
-      });
-    }
-  };
-
-  const handleTouchMove = (e) => {
-    if (isDragging) {
-      updateSegmentValue(e.touches[0].clientX, e.touches[0].clientY);
-
-      if (activeRow) {
-        onSetChoiceList((prevChoiceList) => {
-          return prevChoiceList.map((choice) => ({
-            ...choice, // Copy all other properties
-            value:
-              activeRow.text === choice.text
-                ? `${Math.round(segmentValue)}`
-                : choice.value, // Update 'value' conditionally
-          }));
-        });
-      }
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
   const incrementSegmentValue = () => {
     setSegmentValue(segmentValue + 1);
 
     if (activeRow) {
       onSetChoiceList((prevChoiceList) => {
-        return prevChoiceList.map((choice) => ({
-          ...choice, // Copy all other properties
-          value:
-            activeRow.text === choice.text
-              ? `${Math.round(segmentValue)}`
-              : choice.value, // Update 'value' conditionally
-        }));
+        const updatedChoiceList = updateChoiceList(
+          prevChoiceList,
+          activeRow,
+          segmentValue
+        );
+        return updatedChoiceList;
       });
     }
   };
@@ -168,13 +132,12 @@ const Ring = ({
 
       if (activeRow) {
         onSetChoiceList((prevChoiceList) => {
-          return prevChoiceList.map((choice) => ({
-            ...choice, // Copy all other properties
-            value:
-              activeRow.text === choice.text
-                ? `${Math.round(segmentValue)}`
-                : choice.value, // Update 'value' conditionally
-          }));
+          const updatedChoiceList = updateChoiceList(
+            prevChoiceList,
+            activeRow,
+            segmentValue
+          );
+          return updatedChoiceList;
         });
       }
     }
@@ -213,24 +176,25 @@ const Ring = ({
     );
   });
 
-  const isValidTotal = (total < 100 ) || total > 100;
-  const canContinue =  total == 100;
+  const isValidTotal = total < 100 || total > 100;
+  const canContinue = total == 100;
   const canRoundup = total > 94 && total < 100;
 
   return (
     <div className="ring-set">
       <RingLever sorted={isSorted} onClick={handleSortToggle} />
-      <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
+      <p className="ring-heading">{heading || "PEOPLE OR PLACES"} </p>
       <div className="ring">
-        <RingSegment
+        <DraggableRingSegment
           className="ring-segment"
           size={size}
           strokeWidth={strokeWidth - 3}
           colors={colors}
           choiceList={choiceList}
           total={total}
+          activeRow={activeRow}
+          onSetChoiceList={onSetChoiceList}
         />
-
         <div>
           <div className="ring-list-container">
             <table className="ring-table">
@@ -268,13 +232,13 @@ const Ring = ({
           width={size}
           height={size}
           ref={circleRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp} // Stop dragging if the mouse leaves the SVG area
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          // onMouseDown={handleMouseDown}
+          // onMouseMove={handleMouseMove}
+          // onMouseUp={handleMouseUp}
+          // onMouseLeave={handleMouseUp} // Stop dragging if the mouse leaves the SVG area
+          // onTouchStart={handleMouseDown}
+          // onTouchMove={handleMouseMove}
+          // onTouchEnd={handleMouseUp}
           className="ring-svg"
         >
           {/* Background Circle */}
