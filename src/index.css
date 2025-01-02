@@ -119,10 +119,11 @@ tr:not(:last-child) td {
   z-index: 100;
   background: var(--color-accent);
   height: 20px;
-  border: 1px solid;
   font-size: 15px;
   color: white;
   padding: 10px;
+  z-index: 1000;
+  border-radius: 3px;
 }
 
 
