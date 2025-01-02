@@ -363,7 +363,7 @@ function ActiveModePage() {
 
     // This handle bar
     if (barPass) {
-      const processedRespondentChoice = `<mark>[${choiceList[0].value}]</mark>`;
+      const processedRespondentChoice = `<mark>${choiceList[0].value}</mark>`;
       setStoryBuild(
         addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
       );
