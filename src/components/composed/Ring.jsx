@@ -32,12 +32,16 @@ const Ring = ({
   ];
   const [segmentValue, setSegmentValue] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isPressed, setisPressed] = useState(false)
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState({});
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
+  const incrementIntervalRef = useRef(null); // To store the increment interval ID
+  const decrementIntervalRef = useRef(null); // To store the decrement interval ID
+
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -66,7 +70,7 @@ const Ring = ({
       total += Number(choice.value);
     });
     setTotal(total);
-  }, [choiceList, widgetOutAnimation]);
+  }, [choiceList, segmentValue]);
 
   // Mouse/touch event handlers
   const handleMouseDown = (e) => {
@@ -87,6 +91,7 @@ const Ring = ({
       });
     }
   };
+  
 
   const handleMouseMove = (e) => {
     if (isDragging) {
@@ -105,6 +110,7 @@ const Ring = ({
           return updatedChoiceList;
         });
       }
+
     }
   };
 
@@ -114,37 +120,79 @@ const Ring = ({
 
   
 
-  const incrementSegmentValue = () => {
-    setSegmentValue(segmentValue + 1);
-
-    if (activeRow) {
-      onSetChoiceList((prevChoiceList) => {
-        const updatedChoiceList = updateChoiceList(
-          prevChoiceList,
-          activeRow,
-          segmentValue
-        );
-        return updatedChoiceList;
-      });
-    }
-  };
-
-  const decrementSegmentValue = () => {
-    if (segmentValue > 0) {
-      setSegmentValue(segmentValue - 1);
-
+  const handleIncrement = () => {
+    setSegmentValue((prevValue) => {
+      const newValue = prevValue + 1;
+  
       if (activeRow) {
         onSetChoiceList((prevChoiceList) => {
           const updatedChoiceList = updateChoiceList(
             prevChoiceList,
             activeRow,
-            segmentValue
+            newValue // Use the updated value here
           );
           return updatedChoiceList;
         });
       }
+  
+      return newValue;
+    });
+  };
+
+  const handleDecrement = () => {
+    setSegmentValue((prevValue) => {
+      const newValue = Math.max(prevValue - 1, 0); // Ensure it doesn't go below 0
+  
+      if (activeRow) {
+        onSetChoiceList((prevChoiceList) => {
+          const updatedChoiceList = updateChoiceList(
+            prevChoiceList,
+            activeRow,
+            newValue // Use the updated value here
+          );
+          return updatedChoiceList;
+        });
+      }
+  
+      return newValue;
+    });
+  };
+
+
+  const handlePoligonMouseDownIncrement = () => {
+    // Start incrementing on mouse down
+    incrementIntervalRef.current = setInterval(handleIncrement, 100); // Adjust interval as needed (100ms here)
+  };
+
+  const handlePoligonMouseDownDecrement = () => {
+    // Start decrementing on mouse down
+    decrementIntervalRef.current = setInterval(handleDecrement, 100); // Adjust interval as needed (100ms here)
+  }
+
+    const handlePoligonMouseUp = () => {
+      // Stop both increment and decrement on mouse up
+      if (incrementIntervalRef.current) {
+        clearInterval(incrementIntervalRef.current);
+        incrementIntervalRef.current = null;
+      }
+      if (decrementIntervalRef.current) {
+        clearInterval(decrementIntervalRef.current);
+        decrementIntervalRef.current = null;
+      }
+    };
+ 
+  const handlePoligonMouseLeave = () => {
+    // Stop both increment and decrement if the mouse leaves the button while holding down
+    if (incrementIntervalRef.current) {
+      clearInterval(incrementIntervalRef.current);
+      incrementIntervalRef.current = null;
+    }
+    if (decrementIntervalRef.current) {
+      clearInterval(decrementIntervalRef.current);
+      decrementIntervalRef.current = null;
     }
   };
+
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -153,6 +201,7 @@ const Ring = ({
 
   const handleItemSelect = (choice) => {
     setActiveRow(choice);
+    setSegmentValue(choice.value)
   };
 
   const isValidTotal = total < 100 || total > 100;
@@ -207,8 +256,13 @@ const Ring = ({
             className={`polygon ${
               widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
             }`}
-            onClick={incrementSegmentValue}
             xmlns="http://www.w3.org/2000/svg"
+            onMouseDown={handlePoligonMouseDownIncrement} 
+            onMouseUp={handlePoligonMouseUp} 
+            onMouseLeave={handlePoligonMouseLeave} 
+            onTouchStart={handlePoligonMouseDownIncrement} 
+            onTouchEnd={handlePoligonMouseUp} 
+          
           >
             <path d="M5.00006 0.310303L9.25814 7.68552H0.74198L5.00006 0.310303Z" />
           </svg>
@@ -220,8 +274,12 @@ const Ring = ({
             className={`polygon ${
               widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
             }`}
-            onClick={decrementSegmentValue}
             xmlns="http://www.w3.org/2000/svg"
+            onMouseDown={handlePoligonMouseDownDecrement} 
+            onMouseUp={handlePoligonMouseUp} 
+            onMouseLeave={handlePoligonMouseLeave} 
+            onTouchStart={handlePoligonMouseDownDecrement} 
+            onTouchEnd={handlePoligonMouseUp} 
           >
             <path d="M5.00006 7.97754L9.25814 0.602325H0.74198L5.00006 7.97754Z" />
           </svg>
