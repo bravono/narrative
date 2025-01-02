@@ -188,7 +188,7 @@ const Ring = ({
             }`}
           >
             <table className="ring-table">
-              <tbody>{tableGenerator(choiceList, activeRow, setActiveRowIndex, handleItemSelect)}</tbody>
+              <tbody>{tableGenerator(choiceList, activeRow, colors, setActiveRowIndex, handleItemSelect)}</tbody>
             </table>
           </div>
           <p

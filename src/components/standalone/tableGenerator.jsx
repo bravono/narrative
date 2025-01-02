@@ -1,7 +1,7 @@
 import React from "react";
 import capitalizeWords from "../../utilities/capilizeWords";
 
-export function tableGenerator(choiceList, activeRow, setActiveRowIndex, handleItemSelect) {
+export function tableGenerator(choiceList, activeRow, colors, setActiveRowIndex, handleItemSelect) {
     return choiceList.map((choice, rowIndex) => {
         return (
           <tr
