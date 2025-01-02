@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../../css/Teleprompter.css";
 
 const Teleprompter = ({ story, storyBuild, containerRef }) => {
-  // Continue From Setting Story Build
   return (
     <div className="teleprompter-container">
       <div
@@ -10,11 +9,12 @@ const Teleprompter = ({ story, storyBuild, containerRef }) => {
         className={
           storyBuild
             ? "teleprompter-text-container"
-            : "teleprompter-text-container-welcome"
+            : "teleprompter-text-container-welcome" // Change teleprompter styling for welcome screen
         }
       >
         {storyBuild
-          ? storyBuild
+          ? <div dangerouslySetInnerHTML={{ __html: storyBuild }} />
+
           : `Welcome to the opportunity to
             compare taking the same survey 
             using a traditional 

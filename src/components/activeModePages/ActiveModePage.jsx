@@ -6,6 +6,7 @@ import {
   sortChoiceListByValue,
   sortChoiceListByName,
 } from "../../utilities/choiceListSorter";
+import { addAndHightlightChoice } from "../../utilities/addAndHighlightChoice";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
 import Barrel from "../composed/Barrel";
@@ -324,63 +325,59 @@ function ActiveModePage() {
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
+      const processedRespondentChoice = `<mark>${choiceList
+        .map((choice) => `${choice.text} (${choice.value})`)
+        .join(", ")}</mark>`; // Process respondent choice to be added to story;
+
       setStoryBuild(
-        storyBuild.replace(
-          regex,
-          `[${choiceList
-            .map((choice) => `${choice.text} (${choice.value})`)
-            .join(", ")}]`
-        )
+        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
       );
       formData = [...choiceList];
-      console.log("Form Data", formData);
     }
 
     // choseOne handle radio and triangle
     if (radioPass && !barPass) {
+      const processedRespondentChoice = `<mark>${choiceList
+        .filter((choice) => choice.value === 1)
+        .map((choice) => choice.text)
+        .join(", ")}</mark>`;
+
       setStoryBuild(
-        storyBuild.replace(
-          regex,
-          `[${choiceList
-            .filter((choice) => choice.value === 1)
-            .map((choice) => choice.text)
-            .join(", ")}]`
-        )
+        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
       );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
-      console.log("Form Data", formData);
     }
 
     // Handle checkbox case
     if (checkboxPass) {
+      const processedRespondentChoice = `<mark>${choiceList
+        .filter((choice) => choice.value === 1)
+        .map((choice) => choice.text)
+        .join(", ")}</mark>`;
+
       setStoryBuild(
-        storyBuild.replace(
-          regex,
-          `[${choiceList
-            .filter((choice) => choice.value === 1)
-            .map((choice) => choice.text)
-            .join(", ")}]`
-        )
+        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
       );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
-      console.log("Form Data", formData);
     }
 
     // This handle bar
     if (barPass) {
-      setStoryBuild(storyBuild.replace(regex, `[${choiceList[0].value}]`));
+      const processedRespondentChoice = `<mark>[${choiceList[0].value}]</mark>`;
+      setStoryBuild(
+        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
+      );
 
       formData = [...choiceList];
-      console.log("Form Data", formData);
     }
 
     // Handle scale
     if (scalePass) {
+      const processedRespondentChoice = `<mark>${choiceList
+        .map((choice) => choice.text)
+        .join(", ")}</mark>`;
       setStoryBuild(
-        storyBuild.replace(
-          regex,
-          `[${choiceList.map((choice) => choice.text).join(", ")}]`
-        )
+        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
       );
 
       formData = choiceList.map((choice) => {
@@ -392,7 +389,6 @@ function ActiveModePage() {
           value: scaleIndex !== -1 ? scaleIndex : null, // Set value to index or null
         };
       });
-      console.log("Form Data", formData);
     }
 
     // Set all conditions to false
@@ -404,7 +400,6 @@ function ActiveModePage() {
     setScalePass(false);
     setActiveRow(null);
     setWidgetOutAnimation("");
-
 
     // Get the next question
     const newTask = await fetchNextBlank(formData);

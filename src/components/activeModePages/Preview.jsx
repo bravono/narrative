@@ -15,7 +15,7 @@ function Preview() {
     <main className="main-container">
       <section className="preview-container">
         <Queue className={"queue story preview-queue"}>
-          <div>{story ? <p>{story}</p> : <p>Loading data...</p>}</div>
+          <div>{story ? <div dangerouslySetInnerHTML={{ __html: story }} /> : <p>Loading data...</p>}</div>
         </Queue>
         <div className="preview-buttons">
           <Button
