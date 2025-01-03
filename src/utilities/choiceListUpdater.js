@@ -5,7 +5,7 @@ export function updateChoiceList(choiceList, activeRow, segmentValue) {
     ...choice, // Copy all other properties
     value:
       activeRow.text === choice.text
-        ? `${Math.round(segmentValue)}`
+        ? Math.round(segmentValue)
         : choice.value, // Update 'value' conditionally
   }));
 }

@@ -34,18 +34,13 @@
           "text": "Abuja",
           "value": 0,
           "scales": [0, 0, 0, 0, 0, 0]
-        },
-        {
-          "name": "item 6",
-          "text": "Abuja",
-          "value": 0,
-          "scales": [0, 0, 0, 0, 0, 0]
         }
+        
       ],
       "scale": ["poor", "fair", "good", "very good", "excellent"],
       "heading": "MEAL TYPE",
       "instruction": "Select Up to Six",
-      "widget": "barrel"
+      "widget": "ring"
     },
     "redirect": "",
     "durationInMin": "0",

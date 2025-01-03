@@ -70,6 +70,8 @@ const Ring = ({
       total += Number(choice.value);
     });
     setTotal(total);
+
+    console.log("Choice List", choiceList)
   }, [choiceList, segmentValue]);
 
   // Mouse/touch event handlers
