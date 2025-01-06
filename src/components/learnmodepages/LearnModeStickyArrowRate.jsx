@@ -71,10 +71,10 @@ export default function LearnModeStickyArrowRate({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the sticky arrow which
                     identifies the rate choice.`}
-                />
+                /> */}
 
                 <h2 className="learn-text">
                   {`This is the sticky arrow which
