@@ -126,7 +126,7 @@ const Bar = ({ onSetChoice, choiceList, widgetOutAnimation }) => {
           onTouchEnd={handleTouchEnd}
         >
           {Math.round(progress) < 1 ? (
-            <p id="progress-label">Drag to add value</p>
+            <p id="progress-label">Drag in this direction ➡️ </p>
           ) : (
             ""
           )}
