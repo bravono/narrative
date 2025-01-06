@@ -21,11 +21,6 @@
   justify-content: end;
 }
 
-.question {
-  height: 160px;
-  margin-bottom: 10px;
-}
-
 .contents {
   display: flex;
 }
@@ -70,10 +65,6 @@
   background: var(--color-disabled);
 }
 
-.answer {
-  height: 250px;
-  margin-bottom: 10px;
-}
 
 /* styling for the pointer arrow on Learn Mode */
 .timer_horizontal_arrow {
