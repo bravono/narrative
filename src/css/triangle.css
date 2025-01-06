@@ -1,19 +1,52 @@
 .triangle-set {
   display: grid;
   height: 100%;
+  width: 100%;
   justify-items: center;
   align-items: center;
+  /* border: 2px solid tomato */
 }
 .triangle-svg {
   overflow: visible;
-  width: 14rem;
-  height: 14rem;
+  width: 80%;
+  height: 60%;
   margin-bottom: 3rem;
   user-select: none;
   padding: 15px;
-  /* border: 2px solid tomato */
 }
 
+@media (min-width: 500px) {
+  .triangle-svg {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 700px) {
+  .triangle-svg {
+    width: 50%;
+    height: 50%;
+  }
+}
+@media (min-width: 1024px) {
+  .triangle-svg {
+    max-width: 60%;
+    height: 70%;
+  }
+}
+
+@media (max-height: 732px) {
+  .triangle-svg {
+    width: 50%;
+   
+  }
+}
+
+@media (max-height: 732px) and (min-width:524px){
+  .triangle-svg {
+    width: 40%;
+  }
+}
 
 .triangle {
   fill: none;
