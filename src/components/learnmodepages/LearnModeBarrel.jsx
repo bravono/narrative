@@ -65,10 +65,16 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is a barrel which is used
                     to measure your choice.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is a barrel which is used
+                    to measure your choice.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

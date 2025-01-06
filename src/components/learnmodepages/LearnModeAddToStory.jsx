@@ -65,10 +65,16 @@ export default function LearnModeAddToStory({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`The add to story enables
                     you to add to the survey.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`The add to story enables
+                    you to add to the survey.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

@@ -64,10 +64,16 @@ export default function LearnModeCompare({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`It allows you to compare your
                     survey with other survey.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`It allows you to compare your
+                    survey with other survey.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

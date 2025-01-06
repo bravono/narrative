@@ -65,11 +65,17 @@ export default function LearnModeAddChoice({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the add choice button
                     that allows you to add different
                     choices.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the add choice button
+                    that allows you to add different
+                    choices.`}
+                </h2>
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

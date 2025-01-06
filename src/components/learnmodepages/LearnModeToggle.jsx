@@ -15,10 +15,7 @@ import LearnButtonState from "./LearnButtonState";
 import BarrelWidget from "./LMBarrelWidget";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeToggle({
-  classNameA,
-  classNameB
-}) {
+export default function LearnModeToggle({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -68,11 +65,18 @@ export default function LearnModeToggle({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the toggle button which
                     is used to switch between the
                     sorted and unsorted.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the toggle button which
+                    is used to switch between the
+                    sorted and unsorted.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -88,8 +92,8 @@ export default function LearnModeToggle({
               <div className="toggle_horizontal_arrow">
                 <PointerArrowHorizontal />
               </div>
-            
-              <BarrelWidget/>
+
+              <BarrelWidget />
             </Queue>
           </div>
         </div>

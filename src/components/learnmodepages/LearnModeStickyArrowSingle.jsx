@@ -71,10 +71,16 @@ export default function LearnModeStickyArrowSingle({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the sticky arrow which
                     identifies the single choice.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the sticky arrow which
+                    identifies the single choice.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -90,8 +96,8 @@ export default function LearnModeStickyArrowSingle({
               <div className="sticky_arrow">
                 <LeftPointerArrow />
               </div>
-             
-              <BarrelWidget/>
+
+              <BarrelWidget />
             </Queue>
           </div>
         </div>

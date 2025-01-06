@@ -75,6 +75,12 @@ export default function LearnModeStickyArrowRate({
                   props={`This is the sticky arrow which
                     identifies the rate choice.`}
                 />
+
+                <h2 className="learn-text">
+                  {`This is the sticky arrow which
+                    identifies the rate choice.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

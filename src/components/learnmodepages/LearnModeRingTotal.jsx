@@ -15,10 +15,7 @@ import LearnButtonState from "./LearnButtonState";
 import RingWidget from "./LMRingWidget";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeRingTotal({
-  classNameA,
-  classNameB
-}) {
+export default function LearnModeRingTotal({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -68,7 +65,10 @@ export default function LearnModeRingTotal({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble props={`This is the Ring/Total.`} />
+                {/* <TalkBubble props={`This is the Ring/Total.`} /> */}
+
+                <h2 className="learn-text">{`This is the Ring/Total.`}</h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -81,8 +81,8 @@ export default function LearnModeRingTotal({
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <RingWidget/>
-              
+              <RingWidget />
+
               <div className="total_arrow">
                 <PointerArrowHorizontal />
               </div>

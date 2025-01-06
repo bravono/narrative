@@ -36,7 +36,7 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
           <EdgeChair />
 
           <div className="timer_horizontal_arrow">
-          <PointerArrowHorizontal />
+            <PointerArrowHorizontal />
           </div>
 
           <Timer duration={600} label={"PENDING"} />
@@ -67,11 +67,18 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the timer, it tells you the
                     amount of time which you have
                     elapsed while using the survey.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the timer, it tells you the
+                    amount of time which you have
+                    elapsed while using the survey.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

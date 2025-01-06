@@ -15,7 +15,11 @@ import LearnButtonState from "./LearnButtonState";
 import LeftPointerArrow from "../LeftPointerArrow";
 import BarWidget from "./LMBarWidget";
 
-export default function LearnModeBarDrag({ classNameA, classNameB, handleUpdateChoiceList}) {
+export default function LearnModeBarDrag({
+  classNameA,
+  classNameB,
+  handleUpdateChoiceList,
+}) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -65,10 +69,16 @@ export default function LearnModeBarDrag({ classNameA, classNameB, handleUpdateC
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the Bar. 
                     Drag to increase/decrease Bar.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the Bar. 
+                    Click to increase/decrease Bar.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -81,7 +91,7 @@ export default function LearnModeBarDrag({ classNameA, classNameB, handleUpdateC
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <BarWidget onSetChoice={handleUpdateChoiceList}/>
+              <BarWidget onSetChoice={handleUpdateChoiceList} />
 
               <div className="bar_drag_arrow ">
                 <LeftPointerArrow />

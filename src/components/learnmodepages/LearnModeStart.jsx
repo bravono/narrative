@@ -67,12 +67,20 @@ export default function LearnModeStart({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`When you click the start button 
                     it enables you to start the 
                     survey and your time counts 
                     down.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`When you click the start button 
+                    it enables you to start the 
+                    survey and your time counts 
+                    down.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
