@@ -14,12 +14,19 @@ html, body {
 
 html {
   font-size: 62.5%;
-  height: 100%;
+  min-height: 100vh;
   overflow: hidden;
   overscroll-behavior-y: contain;
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+@media (min-width: 500px) {
+  html {
+    height: 100vh;
+  }
 }
 
 body {
@@ -29,18 +36,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-p,
-button {
-  user-select: none;
-}
-
-tr:not(:last-child) td {
-  border-collapse: collapse;
-  border-bottom: 1px solid dodgerblue;
-  user-select: none;
-}
-
 
 .primary {
   background: var(--color-primary);
@@ -58,11 +53,56 @@ tr:not(:last-child) td {
   background: var(--color-learn);
 }
 
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffbe5a;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 730px) {
+  
+  .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbe5a;
+    width: 40vw;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+  }
+}
+
+p,
+button {
+  user-select: none;
+}
+
 .top-section {
-  position: absolute;
-  top: 10px;
   margin: -1rem;
   width: 100%;
+  margin-bottom: 10px;
+  
+}
+
+@media (min-width: 730px )  {
+  .top-section {
+    margin: -1rem;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+}
+
+@media (max-height: 740px) {
+  .top-section {
+    margin-bottom: 0;
+  }
 }
 
 .middle-section {
@@ -70,8 +110,13 @@ tr:not(:last-child) td {
   width: 100%;
 }
 .bottom-section {
-  position: absolute;
   bottom: 0;
+}
+
+tr:not(:last-child) td {
+  border-collapse: collapse;
+  border-bottom: 1px solid dodgerblue;
+  user-select: none;
 }
 
 .scroll_arrow-group {
@@ -80,7 +125,8 @@ tr:not(:last-child) td {
   width: 25px;
   height: 50%;
   user-select: none;
-  cursor: pointer
+  cursor: pointer;
+  margin-right: 10px;
 }
 .scroll_arrow-up {
   transform: scaleY(-1);
@@ -108,8 +154,8 @@ tr:not(:last-child) td {
 
 .logo {
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: .5rem;
+  top: .3rem;
 }
 
 .at-least-three {
@@ -126,6 +172,75 @@ tr:not(:last-child) td {
   border-radius: 3px;
 }
 
+.time-group {
+  display: flex;
+  border: 1px solid tomato;
+}
+
+.App-logo {
+  font-size: 16px;
+  margin-left: 5px;
+  width: 45.07px;
+  height: 70.11px;
+}
+.arrow {
+  margin-top: 27px;
+  margin-right: 12px;
+}
+
+.animated-image {
+  position: relative;
+  animation: backAndForth 2s infinite linear;
+}
+
+.sideways {
+  transform: rotateY(90deg);
+}
+.bottom-section {
+  width: 100%;
+}
+
+@keyframes backAndForth {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 40px;
+  }
+  80% {
+    left: 40px;
+  }
+  100% {
+    left: 0;
+  }
+
+  
+}
+
+.arrow-up {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  cursor: pointer;
+}
+.arrow-down {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.love-scroll {
+  display: flex;
+  flex-direction: column;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+}
 
 
 

@@ -2,32 +2,37 @@
   background-color: #fffcd1;
   border: 2px solid #000000;
   border-radius: 5px;
-  width: 311px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
 }
 
-.question,
-.welcome {
-  height: 160px;
+.welcome, .question {
   margin-bottom: 10px;
+  height: 25rem;
+  width: 95%;
+  padding: 1rem;
+  font-size: 2rem;
 }
 
 .answer {
-  height: 250px;
   margin-bottom: 10px;
   position: relative;
+  height: 43rem;
 }
 
-.story {
-  height: 570px;
-  margin-bottom: 50px;
-  padding: 5px;
-}
-
-.welcome {
-  padding: 1rem;
-  font-size: 1.5rem;
+@media (max-height: 740px) { 
+  .welcome, .question {
+    height: 18rem;
+    margin: 10px 0;
+  }
+  
+  .answer {
+    margin-bottom: 10px;
+    position: relative;
+    height: 30rem;
+  }
+  
 }

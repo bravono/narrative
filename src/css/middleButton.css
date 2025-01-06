@@ -1,7 +1,7 @@
 .middle_buttons-group {
   display: flex;
   justify-content: space-between;
-  margin-left: 4rem;
+  margin-left: 1px;
 }
 
 .middle_button {

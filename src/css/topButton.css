@@ -1,8 +1,8 @@
 .top_button-group {
   display: flex;
-  width: 50%;
+  width: 80%;
   justify-content: space-between;
-  margin-left: 8px;
+  margin-left: 20px;
 }
 
 .top_button {
