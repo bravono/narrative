@@ -1,4 +1,3 @@
-import "../../css/ringLever.css";
 export default function Lever({
   sorted,
   onClick,
