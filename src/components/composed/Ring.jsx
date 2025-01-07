@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, act } from "react";
-import { updateChoiceList } from "../../utilities/choiceListUpdater";
 import { tableGenerator } from "../standalone/tableGenerator";
+import { getScreenSize } from "../../utilities/getScreenSize";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import RingSegment from "../standalone/RingSegment";
+import RingDraggable from "../standalone/RingDraggable";
+import IncreAndDecrePoly from "../standalone/IncreAndDecrePoly";
 import "../../css/ring.css";
 
 const Ring = ({
@@ -19,8 +21,8 @@ const Ring = ({
   onAddToChoice,
   onAddToStory,
 }) => {
-  const size = 150;
-  const strokeWidth = 23;
+  const size = getScreenSize();
+  const strokeWidth = 20;
   const color = "#4caf50";
   const colors = [
     "#9747FF",
@@ -31,38 +33,17 @@ const Ring = ({
     "#FFE600",
   ];
   const [segmentValue, setSegmentValue] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isPressed, setisPressed] = useState(false)
+  const [isPressed, setisPressed] = useState(false);
   const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState({});
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
-  const incrementIntervalRef = useRef(null); // To store the increment interval ID
-  const decrementIntervalRef = useRef(null); // To store the decrement interval ID
-
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (segmentValue / 100) * circumference;
-
-  // Function to calculate SegmentValue based on angle
-  const updateSegmentValue = (clientX, clientY) => {
-    const { x, y, width, height } = circleRef.current.getBoundingClientRect();
-    const centerX = x + width / 2;
-    const centerY = y + height / 2;
-
-    const dx = clientX - centerX;
-    const dy = clientY - centerY;
-    const angle = Math.atan2(dy, dx) + Math.PI / 2;
-
-    // Calculate SegmentValue from angle
-    const angleDeg = (angle * 180) / Math.PI;
-    const newSegmentValue = ((angleDeg + 360) % 360) / 3.6; // Convert to percentage
-
-    setSegmentValue(Math.max(0, Math.min(100, newSegmentValue))); // Clamp between 0 and 100
-  };
 
   useEffect(() => {
     let total = 0;
@@ -71,130 +52,8 @@ const Ring = ({
     });
     setTotal(total);
 
-    console.log("Choice List", choiceList)
+    console.log("Choice List", choiceList);
   }, [choiceList, segmentValue]);
-
-  // Mouse/touch event handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-
-    const clientX = e.clientX || e.touches[0].clientX;
-    const clientY = e.clientY || e.touches[0].clientY;
-    updateSegmentValue(clientX, clientY);
-
-    if (activeRow) {
-      onSetChoiceList((prevChoiceList) => {
-        const updatedChoiceList = updateChoiceList(
-          prevChoiceList,
-          activeRow,
-          segmentValue
-        );
-        return updatedChoiceList;
-      });
-    }
-  };
-  
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-
-      const clientX = e.clientX || e.touches[0].clientX;
-      const clientY = e.clientY || e.touches[0].clientY;
-      updateSegmentValue(clientX, clientY);
-
-      if (activeRow) {
-        onSetChoiceList((prevChoiceList) => {
-          const updatedChoiceList = updateChoiceList(
-            prevChoiceList,
-            activeRow,
-            segmentValue
-          );
-          return updatedChoiceList;
-        });
-      }
-
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  
-
-  const handleIncrement = () => {
-    setSegmentValue((prevValue) => {
-      const newValue = prevValue + 1;
-  
-      if (activeRow) {
-        onSetChoiceList((prevChoiceList) => {
-          const updatedChoiceList = updateChoiceList(
-            prevChoiceList,
-            activeRow,
-            newValue // Use the updated value here
-          );
-          return updatedChoiceList;
-        });
-      }
-  
-      return newValue;
-    });
-  };
-
-  const handleDecrement = () => {
-    setSegmentValue((prevValue) => {
-      const newValue = Math.max(prevValue - 1, 0); // Ensure it doesn't go below 0
-  
-      if (activeRow) {
-        onSetChoiceList((prevChoiceList) => {
-          const updatedChoiceList = updateChoiceList(
-            prevChoiceList,
-            activeRow,
-            newValue // Use the updated value here
-          );
-          return updatedChoiceList;
-        });
-      }
-  
-      return newValue;
-    });
-  };
-
-
-  const handlePoligonMouseDownIncrement = () => {
-    // Start incrementing on mouse down
-    incrementIntervalRef.current = setInterval(handleIncrement, 100); // Adjust interval as needed (100ms here)
-  };
-
-  const handlePoligonMouseDownDecrement = () => {
-    // Start decrementing on mouse down
-    decrementIntervalRef.current = setInterval(handleDecrement, 100); // Adjust interval as needed (100ms here)
-  }
-
-    const handlePoligonMouseUp = () => {
-      // Stop both increment and decrement on mouse up
-      if (incrementIntervalRef.current) {
-        clearInterval(incrementIntervalRef.current);
-        incrementIntervalRef.current = null;
-      }
-      if (decrementIntervalRef.current) {
-        clearInterval(decrementIntervalRef.current);
-        decrementIntervalRef.current = null;
-      }
-    };
- 
-  const handlePoligonMouseLeave = () => {
-    // Stop both increment and decrement if the mouse leaves the button while holding down
-    if (incrementIntervalRef.current) {
-      clearInterval(incrementIntervalRef.current);
-      incrementIntervalRef.current = null;
-    }
-    if (decrementIntervalRef.current) {
-      clearInterval(decrementIntervalRef.current);
-      decrementIntervalRef.current = null;
-    }
-  };
-
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -203,7 +62,11 @@ const Ring = ({
 
   const handleItemSelect = (choice) => {
     setActiveRow(choice);
-    setSegmentValue(choice.value)
+    setSegmentValue(choice.value);
+  };
+
+  const handleUpdateSegmentVaue = (data) => {
+    setSegmentValue(data);
   };
 
   const isValidTotal = total < 100 || total > 100;
@@ -214,22 +77,14 @@ const Ring = ({
 
   return (
     <div className="ring-set">
-      <RingLever
-        sorted={isSorted}
-        onClick={handleSortToggle}
-        widgetInAnimationLeft={widgetInAnimationLeft}
-      />
-      <p className="ring-heading">{heading || "PEOPLE OR PLACES"}</p>
+      <div className="ring-heading">
+        {"Select an Item then Drag the Ring from 12 O'clock to Add Weight"}
+      </div>
       <div className="ring">
-        <RingSegment
-          style={`ring-segment `}
-          widgetOutAnimation={widgetOutAnimation}
-          widgetInAnimationRight={widgetInAnimationRight}
-          size={size}
-          strokeWidth={strokeWidth - 3}
-          colors={colors}
-          choiceList={choiceList}
-          total={total}
+        <RingLever
+          sorted={isSorted}
+          onClick={handleSortToggle}
+          widgetInAnimationLeft={widgetInAnimationLeft}
         />
 
         <div>
@@ -239,7 +94,15 @@ const Ring = ({
             }`}
           >
             <table className="ring-table">
-              <tbody>{tableGenerator(choiceList, activeRow, colors, setActiveRowIndex, handleItemSelect)}</tbody>
+              <tbody>
+                {tableGenerator(
+                  choiceList,
+                  activeRow,
+                  colors,
+                  setActiveRowIndex,
+                  handleItemSelect
+                )}
+              </tbody>
             </table>
           </div>
           <p
@@ -247,132 +110,43 @@ const Ring = ({
               widgetOutAnimation ? widgetOutAnimation : widgetInAnimationLeft
             }`}
           >
-            {instruction || "Select Up to Six"}
+            {"Select an Item"}
           </p>
         </div>
-        <div className="polygon-container">
-          <svg
-            width="10"
-            height="8"
-            viewBox="0 0 10 8"
-            className={`polygon ${
-              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
-            onMouseDown={handlePoligonMouseDownIncrement} 
-            onMouseUp={handlePoligonMouseUp} 
-            onMouseLeave={handlePoligonMouseLeave} 
-            onTouchStart={handlePoligonMouseDownIncrement} 
-            onTouchEnd={handlePoligonMouseUp} 
-          
-          >
-            <path d="M5.00006 0.310303L9.25814 7.68552H0.74198L5.00006 0.310303Z" />
-          </svg>
 
-          <svg
-            width="10"
-            height="8"
-            viewBox="0 0 10 8"
-            className={`polygon ${
-              widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
-            onMouseDown={handlePoligonMouseDownDecrement} 
-            onMouseUp={handlePoligonMouseUp} 
-            onMouseLeave={handlePoligonMouseLeave} 
-            onTouchStart={handlePoligonMouseDownDecrement} 
-            onTouchEnd={handlePoligonMouseUp} 
-          >
-            <path d="M5.00006 7.97754L9.25814 0.602325H0.74198L5.00006 7.97754Z" />
-          </svg>
-        </div>
-        <svg
-          width={size}
-          height={size}
-          ref={circleRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp} // Stop dragging if the mouse leaves the SVG area
-          onTouchStart={handleMouseDown}
-          onTouchMove={handleMouseMove}
-          onTouchEnd={handleMouseUp}
-          className={`ring-svg ${
-            widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
-          }`}
-        >
-          {/* Background Circle */}
-          {isDragging ? (
-            <circle
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              fill="none"
-              stroke="#e6e6e6"
-              strokeWidth={strokeWidth}
-              style={{ pointerEvents: "none" }}
-            />
-          ) : (
-            ""
-          )}
-          {/* SegmentValue Circle */}
-          {isDragging ? (
-            <circle
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              fill="none"
-              stroke={activeRowIndex != null ? colors[activeRowIndex] : color}
-              strokeWidth={strokeWidth}
-              strokeDasharray={circumference}
-              strokeDashoffset={offset}
-              strokeLinecap="round"
-              transform={`rotate(-90 ${size / 2} ${size / 2})`} // Start at 12 o'clock
-              style={{ cursor: "pointer", pointerEvents: "stroke" }}
-            />
-          ) : (
-            ""
-          )}
-          {/* Text Label */}
-
-          <text
-            x="50%"
-            y="34%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className="ring-number"
-          >
-            {`${Math.round(segmentValue)}`}
-          </text>
-          {/* Decrement Triangle (below text) */}
-          <text
-            x="50%"
-            y="53%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className="ring-label"
-          >
-            {"TALLY"}
-          </text>
-          <text
-            x="50%"
-            y="65%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className={isValidTotal ? "highlight ring-number" : "ring-number"}
-          >
-            {total}
-          </text>
-          <text
-            x="50%"
-            y="75%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            className={isValidTotal ? "highlight ring-label" : "ring-label"}
-          >
-            {"TOTAL"}
-          </text>
-        </svg>
+        <RingDraggable
+          widgetOutAnimation={widgetOutAnimation}
+          widgetInAnimationRight={widgetInAnimationRight}
+          size={size}
+          radius={radius}
+          strokeWidth={strokeWidth}
+          segmentValue={segmentValue}
+          isValidTotal={isValidTotal}
+          total={total}
+          activeRowIndex={activeRowIndex}
+          color={color}
+          circumference={circumference}
+          offset={offset}
+          onSetSegmentValue={handleUpdateSegmentVaue}
+        />
+        <IncreAndDecrePoly
+          widgetOutAnimation={widgetOutAnimation}
+          onSetChoiceList={onSetChoiceList}
+          widgetInAnimationRight={widgetInAnimationRight}
+          onSetSegmentValue={handleUpdateSegmentVaue}
+          activeRow={activeRow}
+        />
+          <RingSegment
+            style={`ring-segment`}
+            widgetOutAnimation={widgetOutAnimation}
+            widgetInAnimationRight={widgetInAnimationRight}
+            size={size}
+            strokeWidth={strokeWidth - 3}
+            colors={colors}
+            choiceList={choiceList}
+            total={total}
+          />
+        
       </div>
       <div className="ring-buttons">
         <AnswerQueueButtons
