@@ -1,26 +1,27 @@
-import React, { useRef, useState} from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { updateChoiceList } from "../../utilities/choiceListUpdater";
+
 
 const RingDraggable = ({
   widgetOutAnimation,
   widgetInAnimationRight,
   size,
-  radius,
   strokeWidth,
   segmentValue,
   isValidTotal,
   total,
-  color,
-  circumference,
-  offset,
   activeRow,
-  onSetSegmentValue
-  
+  onSetSegmentValue,
+  onSetChoiceList,
 }) => {
   const circleRef = useRef(null);
-    const [isDragging, setIsDragging] = useState(false);
-  
-    const [activeRowIndex, setActiveRowIndex] = useState();
-  
+  const color = "#4caf50";
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [activeRowIndex, setActiveRowIndex] = useState();
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (segmentValue / 100) * circumference;
 
   // Function to calculate SegmentValue based on angle
   const updateSegmentValue = (clientX, clientY) => {
@@ -95,7 +96,7 @@ const RingDraggable = ({
         onTouchStart={handleMouseDown}
         onTouchMove={handleMouseMove}
         onTouchEnd={handleMouseUp}
-        className={`ring-svg ${
+        className={`ring-progress ${
           widgetOutAnimation ? widgetOutAnimation : widgetInAnimationRight
         }`}
       >

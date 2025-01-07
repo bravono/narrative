@@ -1,33 +1,59 @@
-.ring-set {
+.ring-container {
   display: flex;
-  border: 1px solid grey;
   flex-direction: column;
   width: 100%;
   height: 100%;
   justify-content: center;
-  position: relative;
 }
 
-.ring {
+.ring-set {
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.1rem 0;
-  margin-bottom: 2.5rem;
+  padding: 5rem 0;
   position: relative;
 }
 
-.ring-svg {
+@media (min-width: 730px) {
+  .ring-set {
+    padding: 0.3rem 0;
+  }
+}
+
+@media (max-height: 732px) {
+  .ring-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+}
+
+.ring-control {
+  position: relative;
+}
+
+.ring-progress {
   pointer-events: stroke;
   user-select: none;
   cursor: pointer;
   z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .ring-segment {
-  position: absolute;
-  left: 51%;
-  /* opacity: .5; */
+  right: 0;
+  top: 50%;
+}
+
+@media (min-width: 730px) {
+  .ring-segment {
+    right: 0;
+    top: 50%;
+  }
 }
 
 .ring-list-container {
@@ -35,16 +61,42 @@
   border-radius: 0 10px 10px 0;
   cursor: pointer;
   display: flex;
-  font-size: 10px;
+  font-size: 1.5rem;
   font-weight: 600;
-  height: 130px;
-  padding: 0.5rem;
-  width: 13.6rem;
+  padding: 2.5rem 1rem;
   user-select: none;
+  border: 1px solid black;
+}
+
+@media (min-width: 730px) {
+  .ring-list-container {
+    background-color: #e0e0e0;
+    border-radius: 0 10px 10px 0;
+    font-size: 1.1rem;
+    padding: 2rem 0.1rem;
+    border: 1px solid black;
+  }
+}
+
+@media (max-height: 732px) {
+  .ring-list-container {
+    font-size: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
 }
 
 .ring-table {
-  position: relative;
+  /* position: relative; */
+}
+
+tr:not(:last-child) td {
+  border-collapse: collapse;
+  border-bottom: 1px solid dodgerblue;
+  user-select: none;
+}
+
+td {
+  padding: 5px;
 }
 
 .ring-checker {
@@ -61,7 +113,7 @@
 }
 
 .ring-label {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   pointer-events: "none";
   font-weight: 600;
 }
@@ -71,7 +123,7 @@
 }
 
 .ring-number {
-  font-size: 1.5rem;
+  font-size: 2rem;
   pointer-events: "none";
   font-weight: 900;
 }
@@ -79,13 +131,24 @@
 .polygon-container {
   display: flex;
   flex-direction: column;
-  align-items: space-between;
-  justify-content: space-between;
   position: absolute;
-  height: 4rem;
-  top: 21%;
-  left: 73.5%;
-  z-index: 100;
+  height: 70px;
+  top: 18%;
+  right: 46%;
+  z-index: 2;
+}
+
+@media (min-width: 730px) {
+  .polygon-container {
+    top: 15%;
+    right: 45%;
+  }
+}
+@media (max-height: 732px) {
+  .polygon-container {
+    top: 15%;
+    right: 45%;
+  }
 }
 
 .polygon {
@@ -97,32 +160,74 @@
   fill: red;
 }
 
-.ring-instruction {
-  margin: 0 0 0 0.5rem;
-  font-size: 1.2rem;
+.ring-lever {
+  position: absolute;
+  width: 7rem;
+  cursor: pointer;
+}
+
+.ring-lever-sort {
+  top: 16px;
+}
+
+.ring-lever-unsort {
+  top: 16px;
+}
+
+@media (min-width: 732px) {
+  .ring-lever-sort {
+    top: -25px;
+  }
+
+  .ring-lever-unsort {
+    top: -25px;
+  }
+}
+
+@media (max-height: 732px) {
+  .ring-lever-sort {
+    top: -25px;
+  }
+
+  .ring-lever-unsort {
+    top: -24px;
+  }
 }
 
 .ring-heading {
-  margin: 0.1rem 0 0.3rem;
+  margin: 1rem 0 1rem;
   font-size: 1.5rem;
   text-align: center;
+  width: 50%;
+  align-self: center;
 }
 
+@media (max-height: 732px) {
+  .ring-heading {
+    margin: 0.5rem 0 0.5rem;
+    font-size: 1.3rem;
+  }
+}
+
+.ring-instruction {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+}
 .ring-buttons {
   align-self: center;
   width: 22.75rem;
 }
 
-.total_below,
-.total_above {
+.total_below {
   background-color: rgba(0, 155, 252, 0.95);
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   position: absolute;
   top: -70%;
-  left: 0;
+  left: 25%;
   user-select: none;
   font-size: 1.5rem;
   color: white;
+  width: 50%;
 }

@@ -23,7 +23,6 @@ const Ring = ({
 }) => {
   const size = getScreenSize();
   const strokeWidth = 20;
-  const color = "#4caf50";
   const colors = [
     "#9747FF",
     "#00659B",
@@ -33,17 +32,11 @@ const Ring = ({
     "#FFE600",
   ];
   const [segmentValue, setSegmentValue] = useState(0);
-  const [isPressed, setisPressed] = useState(false);
-  const circleRef = useRef(null);
   const [isSorted, setIsSorted] = useState(false);
   const [activeRow, setActiveRow] = useState({});
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
   const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
-
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (segmentValue / 100) * circumference;
 
   useEffect(() => {
     let total = 0;
@@ -53,7 +46,7 @@ const Ring = ({
     setTotal(total);
 
     console.log("Choice List", choiceList);
-  }, [choiceList, segmentValue]);
+  }, [choiceList]);
 
   const handleSortToggle = () => {
     setIsSorted((prevIsSorted) => !prevIsSorted);
@@ -76,11 +69,11 @@ const Ring = ({
   const widgetInAnimationLeft = `animate__animated animate__zoomInLeft ${widgetOutAnimation}`;
 
   return (
-    <div className="ring-set">
+    <div className="ring-container">
       <div className="ring-heading">
         {"Select an Item then Drag the Ring from 12 O'clock to Add Weight"}
       </div>
-      <div className="ring">
+      <div className="ring-set">
         <RingLever
           sorted={isSorted}
           onClick={handleSortToggle}
@@ -114,28 +107,28 @@ const Ring = ({
           </p>
         </div>
 
-        <RingDraggable
-          widgetOutAnimation={widgetOutAnimation}
-          widgetInAnimationRight={widgetInAnimationRight}
-          size={size}
-          radius={radius}
-          strokeWidth={strokeWidth}
-          segmentValue={segmentValue}
-          isValidTotal={isValidTotal}
-          total={total}
-          activeRowIndex={activeRowIndex}
-          color={color}
-          circumference={circumference}
-          offset={offset}
-          onSetSegmentValue={handleUpdateSegmentVaue}
-        />
-        <IncreAndDecrePoly
-          widgetOutAnimation={widgetOutAnimation}
-          onSetChoiceList={onSetChoiceList}
-          widgetInAnimationRight={widgetInAnimationRight}
-          onSetSegmentValue={handleUpdateSegmentVaue}
-          activeRow={activeRow}
-        />
+        <div className="ring-control">
+          <RingDraggable
+            widgetOutAnimation={widgetOutAnimation}
+            widgetInAnimationRight={widgetInAnimationRight}
+            size={size}
+            strokeWidth={strokeWidth}
+            segmentValue={segmentValue}
+            isValidTotal={isValidTotal}
+            total={total}
+            activeRowIndex={activeRowIndex}
+            choiceList={choiceList}
+            onSetSegmentValue={handleUpdateSegmentVaue}
+            onSetChoiceList={onSetChoiceList}
+            activeRow={activeRow}
+          />
+          <IncreAndDecrePoly
+            widgetOutAnimation={widgetOutAnimation}
+            onSetChoiceList={onSetChoiceList}
+            widgetInAnimationRight={widgetInAnimationRight}
+            onSetSegmentValue={handleUpdateSegmentVaue}
+            activeRow={activeRow}
+          />
           <RingSegment
             style={`ring-segment`}
             widgetOutAnimation={widgetOutAnimation}
@@ -146,7 +139,7 @@ const Ring = ({
             choiceList={choiceList}
             total={total}
           />
-        
+        </div>
       </div>
       <div className="ring-buttons">
         <AnswerQueueButtons
@@ -163,7 +156,7 @@ const Ring = ({
         />
       </div>
 
-      {(total < 100 && ringPass) || total > 100 ? (
+      {(total < 100 && total > 94) || total > 100 ? (
         <div className="total_below">
           Your total does not sum to the required number. Adjust your values or
           if within 5% of required sum you can press Round Up.
