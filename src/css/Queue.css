@@ -10,29 +10,26 @@
 }
 
 .welcome, .question {
-  margin-bottom: 10px;
-  height: 25rem;
   width: 95%;
   padding: 1rem;
   font-size: 2rem;
+  height: 20vh;
+  margin: 0 0 5px 0;
 }
 
 .answer {
   margin-bottom: 10px;
   position: relative;
-  height: 43rem;
+  height: 45vh;
 }
 
-@media (max-height: 740px) { 
-  .welcome, .question {
-    height: 18rem;
-    margin: 10px 0;
-  }
-  
+@media (max-height: 845px) {
   .answer {
     margin-bottom: 10px;
     position: relative;
-    height: 30rem;
+    height: 49vh;
   }
-  
+
 }
+
+

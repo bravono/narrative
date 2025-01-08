@@ -2,19 +2,13 @@
   align-items: center;
   align-self: end;
   display: flex;
-  height: 245px;
+  height: 82%;
   margin-left: 10px;
-  perspective: 500px;
   width: 100%;
   position: absolute;
-  /* border: 1px solid tomato; */
+  border: 1px solid tomato;
 }
 
-@media (max-height: 740px) {
-  .barrel-table-container {
-    height: 170px;
-  }
-}
 
 .barrel-table-container::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */

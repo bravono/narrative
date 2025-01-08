@@ -58,10 +58,17 @@
 
 .instruction {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
   font-weight: 900;
   font-size: 13px;
   padding-left: 35px;
+}
+@media (max-height: 668px) {
+  .instruction {
+    margin-bottom: .2rem;
+   
+  }
+
 }
 
 @media (min-width: 730px) {
@@ -69,12 +76,7 @@
     padding-left: 50px;
   }
 }
-@media (max-height: 740px) {
-  .instruction {
-    padding-left: 50px;
-    margin-bottom:  0;
-  }
-}
+
 
 .choice__list {
   margin: 0;

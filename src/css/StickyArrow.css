@@ -2,16 +2,9 @@
 .sticky-arrow {
   width: 30px;
   position: absolute;
-  left: 80%;
-  top: -30px;
+  left: 78%;
+  top: -50px;
   z-index: 999;
-}
-
-@media (max-height: 740px) {
-  .sticky-arrow {
-    top: -50px;
-  }
-  
 }
 
 .sticky-arrow:hover {
