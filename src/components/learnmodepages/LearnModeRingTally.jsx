@@ -17,10 +17,7 @@ import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
 export default function LearnModeRingTally({
   classNameA,
-  classNameB,
-  heading,
-  choiceList,
-  instruction,
+  classNameB
 }) {
   // const navigate = useNavigate();
 
@@ -72,7 +69,12 @@ export default function LearnModeRingTally({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble props={`This is the Ring/Tally.`} />
+                {/* <TalkBubble props={`This is the Ring/Tally.`} /> */}
+
+                <h2 className="learn-text">
+                {`This is the Ring/Tally.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

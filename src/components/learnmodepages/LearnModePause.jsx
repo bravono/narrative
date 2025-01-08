@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import RightPointerArrow from "../RightPointerArrow";
- 
 
 export default function LearnModePause({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -68,11 +67,18 @@ export default function LearnModePause({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`The Pause button? it allows you
                     to pause your survey for the
                     time being.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`The Pause button? it allows you
+                    to pause your survey for the
+                    time being.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

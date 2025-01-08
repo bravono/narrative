@@ -72,10 +72,16 @@ export default function LearnModeContinue({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the continue button which
                     allows you to move to the next frame.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the continue button which
+                    allows you to move to the next frame.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -93,7 +99,6 @@ export default function LearnModeContinue({
               </div>
 
               <BarrelWidget />
-              
             </Queue>
           </div>
         </div>

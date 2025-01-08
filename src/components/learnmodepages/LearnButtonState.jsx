@@ -6,6 +6,9 @@ export default function LearnButton({ classNameA }) {
   const navigate = useNavigate();
 
   const myClick = (label) => {
+    if (label === "EXIT") {
+      navigate("/activemode");
+    }
     if (label === "PREVIOUS" && location.pathname === "/LearnModeTimer") {
       navigate("/");
     } else if (label === "NEXT" && location.pathname === "/LearnModeTimer") {
@@ -147,13 +150,10 @@ export default function LearnButton({ classNameA }) {
     ) {
       navigate("/LearnModeContinue");
     } else if (
-      label === "NEXT" &&
+      label === "EXIT" &&
       location.pathname === "/LearnModeSelectAnything"
     ) {
-      alert(
-        "This is the End. Click the previous button to go back to the previous page or Click Home to go back to the beginning."
-      );
-      // navigate("/WelcomePageLM");
+      navigate("/activemode");
     } else if (
       label === "PREVIOUS" &&
       location.pathname === "/LearnModeStart"
@@ -230,12 +230,18 @@ export default function LearnButton({ classNameA }) {
       <Button
         onClick={() => myClick("PREVIOUS")}
         label="PREVIOUS"
-        className={`${classNameA} bottom_button talk-btn-learn`}
+        className={`${classNameA} bottom_button talk-btn-learn learntext`}
       />
       <Button
         onClick={() => myClick("NEXT")}
         label="NEXT"
-        className={`${classNameA} bottom_button talk-btn-exit`}
+        className={`${classNameA} bottom_button talk-btn-next nexttext`}
+      />
+
+      <Button
+        onClick={() => myClick("EXIT")}
+        label="EXIT"
+        className={`${classNameA} bottom_button talk-btn-exit exittext`}
       />
     </div>
   );

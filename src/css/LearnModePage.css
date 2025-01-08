@@ -29,7 +29,8 @@
 }
 
 .talk-btn-learn,
-.talk-btn-exit {
+.talk-btn-exit,
+.talk-btn-next {
   position: absolute;
   bottom: 40px;
   font-size: 8.97px;
@@ -40,10 +41,13 @@
   background: var(--color-secondary);
 }
 .talk-btn-learn {
-  left: 40px;
+  left: 20px;
+}
+.talk-btn-next {
+  left: 100px;
 }
 .talk-btn-exit {
-  left: 140px;
+  left: 180px;
 }
 .learnwelcome {
   left: -102px;
@@ -60,6 +64,26 @@
   line-height: 25px;
   right: 80px;
   top: 90px;
+}
+.learn-text {
+  position: absolute;
+  margin-left: 2px;
+  left: 60px;
+  line-height: 25px;
+  right: 80px;
+  top: 90px;
+}
+.learntext {
+  left: -120px;
+  bottom: -51px;
+}
+.nexttext {
+  left: -40px;
+  bottom: -51px;
+}
+.exittext {
+  left: 40px;
+  bottom: -51px;
 }
 .color {
   background: var(--color-disabled);
@@ -202,5 +226,11 @@ left:
   position: absolute;
   right: 40px;
   bottom: 0px;
+  z-index: 5;
+}
+.select-anything_arrow {
+  position: absolute;
+  right: 120px;
+  top: 130px;
   z-index: 5;
 }

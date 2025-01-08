@@ -65,10 +65,16 @@ export default function LearnModeBarClick({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the Bar. 
                     Click to increase/decrease Bar.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the Bar. 
+                    Click to increase/decrease Bar.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

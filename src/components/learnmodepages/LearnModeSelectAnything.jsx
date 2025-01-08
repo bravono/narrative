@@ -13,11 +13,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import TriangleWidget from "./LMTriangleWidget";
+import LeftPointerArrow from "../LeftPointerArrow";
 
-export default function LearnModeSelectAnything({
-  classNameA,
-  classNameB
-}) {
+export default function LearnModeSelectAnything({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -67,12 +65,20 @@ export default function LearnModeSelectAnything({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`Click on anything on the interface 
                     to learn about it.
                     Press next to find the object if
                     it's not here.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`Click on anything on the interface 
+                    to learn about it.
+                    Press next to find the object if
+                    it's not here.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -85,6 +91,9 @@ export default function LearnModeSelectAnything({
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
+              <div className="select-anything_arrow">
+                <LeftPointerArrow />
+              </div>
               <TriangleWidget />
             </Queue>
           </div>

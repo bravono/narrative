@@ -64,12 +64,20 @@ export default function LearnModePdfIt({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`Pdf it allows you to convert
                     your survey to pdf which can 
                     be viewed or saved for later
                     purpose.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`Pdf it allows you to convert
+                    your survey to pdf which can 
+                    be viewed or saved for later
+                    purpose.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

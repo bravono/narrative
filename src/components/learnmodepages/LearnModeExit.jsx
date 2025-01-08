@@ -64,11 +64,18 @@ export default function LearnModeExit({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`The exit button allows you to
                     leave the survey after you are
                     done with the survey.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`The exit button allows you to
+                    leave the survey after you are
+                    done with the survey.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

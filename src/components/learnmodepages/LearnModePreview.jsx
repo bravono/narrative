@@ -64,11 +64,18 @@ export default function LearnModePreview({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`The preview button allows you
                     to preview the survey you
                     worked on.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`The preview button allows you
+                    to preview the survey you
+                    worked on.`}
+                </h2>
+                
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
@@ -78,7 +85,7 @@ export default function LearnModePreview({ classNameA, classNameB }) {
           </div>
 
           <div className="preview_horizontal_arrow">
-          <PointerArrowHorizontal />
+            <PointerArrowHorizontal />
           </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 

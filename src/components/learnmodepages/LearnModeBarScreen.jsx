@@ -65,10 +65,17 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the Bar progress
                     display screen.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  props=
+                  {`This is the Bar progress
+                    display screen.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

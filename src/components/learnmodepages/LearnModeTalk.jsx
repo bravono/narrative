@@ -64,11 +64,18 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This allows you to engage
                     in conversation using preset
                     phrases or sentences.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This allows you to engage
+                    in conversation using preset
+                    phrases or sentences.`}
+                </h2>
+
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"

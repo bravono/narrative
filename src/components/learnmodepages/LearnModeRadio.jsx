@@ -15,13 +15,7 @@ import LearnButtonState from "./LearnButtonState";
 import BarrelWidget from "./LMBarrelWidget";
 import PointerArrowVertical from "../PointerArrowVertical";
 
-export default function LearnModeRadio({
-  classNameA,
-  classNameB,
-  heading,
-  choiceList,
-  instruction,
-}) {
+export default function LearnModeRadio({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -71,11 +65,18 @@ export default function LearnModeRadio({
                   classNameB={"secondary"}
                 />
 
-                <TalkBubble
+                {/* <TalkBubble
                   props={`This is the radio button
                     column which allows you to
                     select a single choice.`}
-                />
+                /> */}
+
+                <h2 className="learn-text">
+                  {`This is the radio button
+                    column which allows you to
+                    select a single choice.`}
+                </h2>
+                
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
