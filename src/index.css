@@ -23,11 +23,7 @@ html {
 
 }
 
-@media (min-width: 500px) {
-  html {
-    height: 100vh;
-  }
-}
+
 
 body {
   margin: 0;
@@ -64,19 +60,13 @@ body {
   position: relative;
 }
 
-@media (min-width: 730px) {
-  
+
+@media (min-width: 769px) {
   .main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffbe5a;
     width: 40vw;
-    height: 100vh;
-    flex-direction: column;
-    position: relative;
   }
 }
+
 
 p,
 button {
@@ -151,7 +141,7 @@ button {
 .logo {
   position: absolute;
   right: .5rem;
-  top: .3rem;
+  top: -1%;
 }
 
 .at-least-three {
