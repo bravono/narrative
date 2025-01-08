@@ -31,20 +31,20 @@ const StickyArrow = ({ type, widgetOutAnimation, widgetInAnimation }) => {
           <text
             x="0"
             y="9"
-            fontSize="2px"
+            fontSize="20%"
             fontWeight="900"
             fill="black"
             width="10"
             transform="rotate(90, 5, 7)"
-            onMouseEnter={(e) => {
-              e.target.style.opacity = 1;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.opacity = 0;
-            }}
-            onPointerEnter={(e) => {
-              e.target.style.opacity = 1;
-            }}
+            // onMouseEnter={(e) => {
+            //   e.target.style.opacity = 1;
+            // }}
+            // onMouseLeave={(e) => {
+            //   e.target.style.opacity = 0;
+            // }}
+            // onPointerEnter={(e) => {
+            //   e.target.style.opacity = 1;
+            // }}
            
           >
             {renderResult()}

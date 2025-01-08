@@ -1,18 +1,22 @@
-.stickyArrow-container {
-  position: relative;
-}
 
 .sticky-arrow {
-  width: 10px;
+  width: 30px;
   position: absolute;
-  left: 173px;
-  top: -25px;
+  left: 80%;
+  top: -30px;
   z-index: 999;
+}
+
+@media (max-height: 740px) {
+  .sticky-arrow {
+    top: -50px;
+  }
+  
 }
 
 .sticky-arrow:hover {
   width: 30px;
-  left: 165px;
+  left: 80%;
   top: -50px;
   z-index: 100;
 }

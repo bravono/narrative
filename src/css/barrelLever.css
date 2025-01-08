@@ -1,14 +1,63 @@
 .barrel-lever {
   cursor: pointer;
-  left: 1%;
+  left: 3%;
   position: absolute;
   z-index: 999;
 }
 
-.barrel-lever-unsort {
-  top: -13%;
+@media (max-height: 740px) {
+  .barrel-lever {
+    left: 3%;
+  }
+}
+@media (min-width: 730px) {
+  .barrel-lever {
+    left: 0%;
+    width: 120px;
+  }
+}
+@media (max-height: 740px) {
+  .barrel-lever {
+    left: 0%;
+    width: 100px;
+  }
+}
+@media (min-width: 1576px) {
+  .barrel-lever {
+    left: 2%;
+  }
 }
 
 .barrel-lever-sort {
-  top: -11%;
+  top: -9%;
+}
+.barrel-lever-unsort {
+  top: -10%;
+}
+
+@media (min-width: 730px) {
+  .barrel-lever-sort {
+    top: -17%;
+  }
+  .barrel-lever-unsort {
+    top: -19%;
+  }
+}
+
+@media (max-height: 740px) {
+  .barrel-lever-sort {
+    top: -19%;
+  }
+  .barrel-lever-unsort {
+    top: -20%;
+  }
+}
+
+@media (min-width: 730px) and (max-height: 740px) {
+  .barrel-lever-sort {
+    top: -18%;
+  }
+  .barrel-lever-unsort {
+    top: -20%;
+  }
 }

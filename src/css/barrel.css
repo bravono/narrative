@@ -1,26 +1,50 @@
 .barrel-set {
-  position: relative;
-  margin-top: 20px;
   /* border: 1px solid grey; */
+  width: 80%;
+  height: 70%;
 }
 
 .barrel {
-  width: 215px;
-  height: 177px;
-  background: url(/assets/Barrel.png);
+  background-repeat: no-repeat;
   display: flex;
+  height: 100%;
   justify-content: center;
-  background-size: cover;
+  position: relative;
+  width: 100%;
+}
+
+.barrel-img {
+  width: 100%;
+}
+
+@media (min-width: 730px) {
 }
 
 
 .barrel-table__heading {
   font-size: 2rem;
-  left: 0;
+  left: 8px;
   margin-left: 35px;
   max-height: 30px;
-  padding-top: 5px;
+  top: 15px;
   position: absolute;
+}
+
+@media (min-width: 730px) {
+  .barrel-table__heading {
+    left: 40px;
+    top: 18px;
+  
+  }
+  
+}
+@media (max-height: 740px) {
+  .barrel-table__heading {
+    left: 30px;
+    top: 6px;
+  
+  }
+  
 }
 
 .active-row {
@@ -34,10 +58,22 @@
 
 .instruction {
   margin-top: 0;
-  margin: 0 0 0px 20px;
+  margin-bottom: 20px;
   font-weight: 900;
   font-size: 13px;
-  margin-bottom: 5px;
+  padding-left: 35px;
+}
+
+@media (min-width: 730px) {
+  .instruction {
+    padding-left: 50px;
+  }
+}
+@media (max-height: 740px) {
+  .instruction {
+    padding-left: 50px;
+    margin-bottom:  0;
+  }
 }
 
 .choice__list {
@@ -49,18 +85,13 @@
 .checkbox,
 .radio {
   cursor: pointer;
-  width: 20px;
   user-select: none;
+  padding-top: 5px;
 }
 
 .rank {
-  width: 11px;
   user-select: none;
 }
 
-.type-container {
-  display: inline-block;
-  width: 100%;
-  min-height: 13px;
-}
+
 

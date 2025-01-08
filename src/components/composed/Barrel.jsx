@@ -162,26 +162,30 @@ const Barrel = ({
 
   return (
     <div className="barrel-set">
-      <Lever
-        sorted={isSorted}
-        onClick={handleSortToggle}
-        widgetInAnimation={widgetInAnimation}
-        widgetOutAnimation={widgetOutAnimation}
-      />
-      {type !== "scale" ? (
-        <StickyArrow
-          type={type}
-          widgetInAnimation={widgetInAnimation}
-          widgetOutAnimation={widgetOutAnimation}
-        />
-      ) : (
-        ""
-      )}
       <div
         className={`barrel ${
           widgetOutAnimation ? widgetOutAnimation : widgetInAnimation
         }`}
-      >
+        
+        >
+        {type !== "scale" ? (
+            <StickyArrow
+              type={type}
+              widgetInAnimation={widgetInAnimation}
+              widgetOutAnimation={widgetOutAnimation}
+            />
+          ) : (
+            ""
+          )}
+        <img className="barrel-img" src="/assets/Barrel.png" alt="" />
+
+        <Lever
+          sorted={isSorted}
+          onClick={handleSortToggle}
+          widgetInAnimation={widgetInAnimation}
+          widgetOutAnimation={widgetOutAnimation}
+        />
+        
         <BarrelTable
           widgetOutAnimation={widgetOutAnimation}
           type={type}
@@ -192,7 +196,17 @@ const Barrel = ({
           onScaleToggle={handleScaleToggle}
           onCheckToggle={handleCheckToggle}
           onSetActiveRow={handleUpdateActiveRow}
+          heading={heading}
         />
+        {type == "rank" || type == "rate" ? (
+        <Control
+          type={type} //question type
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+        />
+      ) : (
+        ""
+      )}
       </div>
       <p className="instruction">{instruction}</p>
       <AnswerQueueButtons
@@ -203,15 +217,7 @@ const Barrel = ({
         label={"CONTINUE"}
         onAddToChoice={onAddToChoice}
       />
-      {type == "rank" || type == "rate" ? (
-        <Control
-          type={type} //question type
-          onIncrement={handleIncrement}
-          onDecrement={handleDecrement}
-        />
-      ) : (
-        ""
-      )}
+      
     </div>
   );
 };

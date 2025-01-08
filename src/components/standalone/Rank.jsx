@@ -1,8 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Control from "./Control";
-import "../../css/Rank.css";
+import React from "react";
+import { getScreenHeight } from "../../utilities/getScreenSize";
 
-function Rank({ rank, onRank, className }) {
+function Rank({ rank, onRank, className, isScrollable, choiceList }) {
+  
+  const height = getScreenHeight();
+  let width = "15px"; // Default value
+  const length = choiceList.length
+
+  if (length <= 6) {
+    width = "20px";
+  } else if (isScrollable && height === 20) {
+    width = "12px";
+  } else if (isScrollable && height === 15) {
+    width = "10px";
+  } else if (length >= 7 && height === 20) {
+    width = "14px";
+  } else if (length >= 7 && height === 15) {
+    width = "14px";
+  }
+
   
   return (
     <>
@@ -12,6 +28,7 @@ function Rank({ rank, onRank, className }) {
         xmlns="http://www.w3.org/2000/svg"
         onClick={onRank}
         className={className}
+        style={{width: width}}
       >
         <rect
           x="10.25"

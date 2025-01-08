@@ -2,15 +2,18 @@
   align-items: center;
   align-self: end;
   display: flex;
-  height: 145px;
+  height: 245px;
   margin-left: 10px;
   perspective: 500px;
-  width: 175px;
-  /* overflow-y: auto; */
-  /* scroll-snap-type: y mandatory; */
-  /* -ms-overflow-style: none;  */
-  /* scrollbar-width: none; For Firefox */
+  width: 100%;
+  position: absolute;
   /* border: 1px solid tomato; */
+}
+
+@media (max-height: 740px) {
+  .barrel-table-container {
+    height: 170px;
+  }
 }
 
 .barrel-table-container::-webkit-scrollbar {
@@ -25,13 +28,19 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow-y: auto;
   scroll-snap-type: y mandatory;
   scrollbar-width: none; /* For Firefox */
   table-layout: fixed;
   width: 100%;
-  -ms-overflow-style: none; 
-  /* border: 3px solid dodgerblue; */
+  -ms-overflow-style: none;
+  padding: 0% 10%;
+  font-size: 1.7rem;
+}
+
+@media (max-height: 740px) {
+  .barrel-table {
+    font-size: 1.4rem;
+  }
 }
 
 .table-row {
@@ -42,9 +51,12 @@
   transition: transform 0.1s, opacity 0.1s;
   scroll-snap-align: center;
   border-bottom: 1px solid #444;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
+}
+
+@media (max-height: 740px) {
+  .table-row {
+    height: 16px;
+  }
 }
 
 .table-cell {
