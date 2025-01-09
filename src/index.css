@@ -23,8 +23,6 @@ html {
 
 }
 
-
-
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -60,13 +58,11 @@ body {
   position: relative;
 }
 
-
 @media (min-width: 769px) {
   .main-container {
     width: 40vw;
   }
 }
-
 
 p,
 button {
@@ -102,8 +98,6 @@ button {
 .bottom-section {
   bottom: 0;
 }
-
-
 
 .scroll_arrow-group {
   display: flex;
