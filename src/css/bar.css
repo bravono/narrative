@@ -22,9 +22,6 @@
   user-select: none;
   border: 3px solid black;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .progress_bar-base {
   width: 20%;
@@ -58,7 +55,10 @@
 }
 
 #progress-label {
-  font-size: 1.7rem;
+  font-size: 2rem;
+  text-align: center;
+  position: relative;
+  top: 30%;
 }
 
 .counter-arrow {
