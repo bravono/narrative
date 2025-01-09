@@ -1,11 +1,10 @@
-
-export function getScreenWidth(size, stroke) {
-  const isMobile = window.innerWidth <= 500; 
+export function getScreenWidth() {
+  const isMobile = window.innerWidth <= 500;
 
   if (isMobile) {
-    return 230;
+    return 170;
   } else {
-    return 200;
+    return 230;
   }
 }
 

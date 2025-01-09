@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, act } from "react";
 import { tableGenerator } from "../standalone/tableGenerator";
-import {  getScreenWidth } from "../../utilities/getScreenSize";
+import { getScreenWidth } from "../../utilities/getScreenSize";
 import RingLever from "../standalone/RingLever";
 import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
@@ -22,7 +22,7 @@ const Ring = ({
   onAddToStory,
 }) => {
   const size = getScreenWidth();
-  const strokeWidth = 20;
+  const strokeWidth = size === 170 ?  15 : 20
   const colors = [
     "#9747FF",
     "#00659B",

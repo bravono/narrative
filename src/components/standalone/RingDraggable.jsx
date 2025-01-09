@@ -108,7 +108,7 @@ const RingDraggable = ({
             r={radius}
             fill="none"
             stroke="#e6e6e6"
-            strokeWidth={strokeWidth}
+            strokeWidth={strokeWidth-15}
             style={{ pointerEvents: "none" }}
           />
         ) : (
@@ -122,7 +122,7 @@ const RingDraggable = ({
             r={radius}
             fill="none"
             stroke={activeRowIndex != null ? colors[activeRowIndex] : color}
-            strokeWidth={strokeWidth}
+            strokeWidth={strokeWidth }
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"

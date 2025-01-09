@@ -10,7 +10,7 @@ const RingSegment = ({
   colors,
   total,
 }) => {
-  const radius = 50;
+  const radius = 45;
   const circumference = 2 * Math.PI * radius;
 
   // Add the color property
@@ -39,7 +39,7 @@ const RingSegment = ({
         cy="60"
         fill="none"
         stroke="#e6e6e6" /* Background color */
-        strokeWidth={strokeWidth}
+        strokeWidth={strokeWidth + 8}
       />
       {sortedData.map((item, index) => {
         const segmentLength =
