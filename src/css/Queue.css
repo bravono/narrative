@@ -13,17 +13,17 @@
   width: 95%;
   padding: 1rem;
   font-size: 2rem;
-  height: 20vh;
+  height: 18vh;
   margin: 0 0 5px 0;
 }
 
 .answer {
   margin-bottom: 10px;
   position: relative;
-  height: 45vh;
+  height: 42vh;
 }
 
-@media (max-height: 845px) {
+@media (min-height: 845px) {
   .answer {
     margin-bottom: 10px;
     position: relative;

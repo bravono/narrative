@@ -40,12 +40,8 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
                 <div className="learn-welcome-text">
-                  {"Welcome! You can go start your survey by clicking the above START button or click the LEARN button to explore the different buttons and areas offered by Research Libs."}
-                  <Button
-                    onClick={handleLearn}
-                    label="LEARN"
-                    className={`${classNameA} learn-btn primary`}
-                  />
+                  {"Welcome!"}
+                  
                   
                 </div>
                 <EdgeStanding
@@ -59,7 +55,17 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
           <MiddleButton classNameA="disabled" classNameB="disabled" />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"} >
+              <div className="learn-welcome-text">
+
+                {"You can go start your survey by clicking the above START button or click the LEARN button to explore the different buttons and areas offered by Research Libs."}
+                <Button
+                    onClick={handleLearn}
+                    label="LEARN"
+                    className={`${classNameA} learn-btn primary`}
+                  />
+              </div>
+            </Queue>
           </div>
         </div>
       </section>

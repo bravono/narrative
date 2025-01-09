@@ -58,15 +58,18 @@
   bottom: -51px;
 }
 .learn-welcome-text {
-  width: 80%;
+  width: 100%;
   display: flex;
-  margin-right: 4rem;
-  justify-content: space-between;
+  flex-direction: column;
+  font-size: 2rem;
+  height: 50%;
+  justify-content: center;
   align-items: center;
+  padding: 20px 20px 20px 30px;
 }
 
 .learn-btn{
-  margin: 10px;
+  margin: 20px;
 }
 .learn-text {
   position: absolute;
