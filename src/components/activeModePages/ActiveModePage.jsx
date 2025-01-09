@@ -22,8 +22,8 @@ import Talk from "../composed/Talk";
 import Swipe from "../standalone/Swipe";
 
 function ActiveModePage() {
-  const storedState = localStorage.getItem('page2State');
   const containerRef = useRef(null);
+  const animationFrameRef = useRef(null); // Ref to store the animation frame ID
   const location = useLocation();
   const initialDuration = 60;
   const [widgetOutAnimation, setWidgetOutAnimation] = useState("");
@@ -58,6 +58,7 @@ function ActiveModePage() {
   const [selectUptoThree, setSelectUptoThree] = useState(0);
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
+
   const meetOneCondition =
     barPass ||
     ringPass ||
@@ -273,7 +274,7 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {}, [ newChoice, widgetOutAnimation]);
+  useEffect(() => {}, [newChoice, widgetOutAnimation]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -286,22 +287,34 @@ function ActiveModePage() {
   };
 
   // Function to handle scrolling down
+ 
   const scrollDown = () => {
     if (containerRef.current) {
-      containerRef.current.scrollBy({
-        top: 50, // Adjust scroll amount as needed
-        behavior: "smooth",
-      });
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+
+      // Check if there's more content to scroll
+      if (scrollTop + clientHeight < scrollHeight) {
+        containerRef.current.scrollTop += 1; // Scroll down continuously
+        animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
+      } else {
+        // Stop scrolling when the bottom is reached
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     }
   };
 
+  useEffect(() => {
+    // Start scrolling automatically when the component mounts
+    animationFrameRef.current = requestAnimationFrame(scrollDown);
+
+    // Cleanup the animation frame when the component unmounts
+    return () => cancelAnimationFrame(animationFrameRef.current);
+  }, []);
+
   const navigate = useNavigate();
 
-  
   const handlePause = () => {
-    
-      setIsRunning((prevIsRunning) => !prevIsRunning);
-    
+    setIsRunning((prevIsRunning) => !prevIsRunning);
   };
 
   const handleEdge = () => {
@@ -401,7 +414,6 @@ function ActiveModePage() {
 
     if (meetOneCondition) {
       if (response.story) {
-        
         setStory(response.story);
         setStoryBuild((prevStory) => {
           return prevStory + response.story;
@@ -526,10 +538,9 @@ function ActiveModePage() {
           <Logo />
         </div>
         <div className="header">
-         
-            <Edge onClick={handleEdge} />
-         
-          { isRunning ? (
+          <Edge onClick={handleEdge} />
+
+          {isRunning ? (
             <Timer
               duration={duration}
               label={timerLabel.toUpperCase()}
@@ -545,17 +556,11 @@ function ActiveModePage() {
           )}
 
           <div className="top_button-group">
-            <Button
-              label="START"
-              className={
-                 "disabled top_button"
-              }
-              
-            />
+            <Button label="START" className={"disabled top_button"} />
             <Button
               label={isRunning ? "PAUSE" : "RESUME"}
               className={
-                isRunning ?  "primary top_button ": "disabled top_button"
+                isRunning ? "primary top_button " : "disabled top_button"
               }
               onClick={handlePause}
             />
@@ -577,7 +582,7 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            {(
+            {
               <Queue className={"queue question"}>
                 {wantsToTalk ? (
                   <Talk
@@ -597,7 +602,7 @@ function ActiveModePage() {
                   />
                 )}
               </Queue>
-            )}
+            }
           </div>
           <div className="middle_buttons-group">
             <Button
@@ -613,7 +618,7 @@ function ActiveModePage() {
           </div>
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              {widget === "barrel"  ? (
+              {widget === "barrel" ? (
                 <>
                   {!checkboxPass && selectUptoThree ? (
                     <div className="at-least-three">
