@@ -22,6 +22,7 @@ import Talk from "../composed/Talk";
 import Swipe from "../standalone/Swipe";
 
 function ActiveModePage() {
+  const storedState = localStorage.getItem('page2State');
   const containerRef = useRef(null);
   const location = useLocation();
   const initialDuration = 60;
@@ -29,8 +30,7 @@ function ActiveModePage() {
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
   const [timerLabel, setTimerLabel] = useState("pending");
-  const [isWelcome, setIsWelcome] = useState();
-  const [isRunning, setIsRunning] = useState();
+  const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
@@ -83,8 +83,6 @@ function ActiveModePage() {
         setDuration(data.durationInMin * 60);
         setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blank.name);
-        setIsWelcome(data.isWelcome);
-        setIsRunning(data.isRunning);
       } catch (error) {
         toast.error("Error with POST request");
       }
@@ -102,8 +100,6 @@ function ActiveModePage() {
         const data = survey.data.reply;
 
         console.log("Response", data);
-        setIsRunning(data.isRunning);
-        setIsWelcome(data.isWelcome);
         setStory(data.story);
         setStoryBuild(data.story);
         setQuestionType(data.blanks[0].questionType);
@@ -277,7 +273,7 @@ function ActiveModePage() {
     return () => clearInterval(timerInterval);
   }, [duration]); // Empty dependency array ensures this runs once on mount
 
-  useEffect(() => {}, [isRunning, isWelcome, newChoice, widgetOutAnimation]);
+  useEffect(() => {}, [ newChoice, widgetOutAnimation]);
 
   // Function to handle scrolling up
   const scrollUp = () => {
@@ -301,14 +297,11 @@ function ActiveModePage() {
 
   const navigate = useNavigate();
 
-  const handleStart = () => {
-    setIsRunning(true);
-    setIsWelcome(false);
-  };
+  
   const handlePause = () => {
-    if (!isWelcome) {
+    
       setIsRunning((prevIsRunning) => !prevIsRunning);
-    }
+    
   };
 
   const handleEdge = () => {
@@ -408,8 +401,7 @@ function ActiveModePage() {
 
     if (meetOneCondition) {
       if (response.story) {
-        // setIsRunning(response.isRunning);
-        // setIsWelcome(response.isWelcome);
+        
         setStory(response.story);
         setStoryBuild((prevStory) => {
           return prevStory + response.story;
@@ -534,17 +526,14 @@ function ActiveModePage() {
           <Logo />
         </div>
         <div className="header">
-          {isRunning || (!isRunning && !isWelcome) ? (
+         
             <Edge onClick={handleEdge} />
-          ) : (
-            <EdgeChair />
-          )}
-          {isWelcome || isRunning ? (
+         
+          { isRunning ? (
             <Timer
               duration={duration}
               label={timerLabel.toUpperCase()}
               arrowColor={arrowColor}
-              isWelcome={isWelcome}
               isRunning={isRunning}
             />
           ) : (
@@ -559,14 +548,14 @@ function ActiveModePage() {
             <Button
               label="START"
               className={
-                isWelcome ? "primary top_button" : "disabled top_button"
+                 "disabled top_button"
               }
-              onClick={handleStart}
+              
             />
             <Button
-              label={isWelcome ? "PAUSE" : isRunning ? "PAUSE" : "RESUME"}
+              label={isRunning ? "PAUSE" : "RESUME"}
               className={
-                isWelcome ? "disabled top_button" : "primary top_button "
+                isRunning ?  "primary top_button ": "disabled top_button"
               }
               onClick={handlePause}
             />
@@ -588,12 +577,7 @@ function ActiveModePage() {
                 onClick={scrollDown}
               />
             </div>
-            {isWelcome && isRunning !== false ? (
-              <Queue className={"queue welcome"}>
-                <Teleprompter />
-                <Edge type={"standing"} />
-              </Queue>
-            ) : (
+            {(
               <Queue className={"queue question"}>
                 {wantsToTalk ? (
                   <Talk
@@ -629,7 +613,7 @@ function ActiveModePage() {
           </div>
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              {widget === "barrel" && !isWelcome ? (
+              {widget === "barrel"  ? (
                 <>
                   {!checkboxPass && selectUptoThree ? (
                     <div className="at-least-three">
@@ -655,13 +639,13 @@ function ActiveModePage() {
                     }}
                   />
                 </>
-              ) : widget === "bar" && !isWelcome ? (
+              ) : widget === "bar" ? (
                 <Bar
                   widgetOutAnimation={widgetOutAnimation}
                   onSetChoice={handleUpdateChoiceList}
                   choiceList={choiceList}
                 />
-              ) : widget === "ring" && !isWelcome ? (
+              ) : widget === "ring" ? (
                 <Ring
                   widgetOutAnimation={widgetOutAnimation}
                   heading={heading}
@@ -675,7 +659,7 @@ function ActiveModePage() {
                   onAddToStory={handleAddToStory}
                   isRecording={isRecording}
                 />
-              ) : widget === "triade" && !isWelcome ? (
+              ) : widget === "triade" ? (
                 <Triangle
                   widgetOutAnimation={widgetOutAnimation}
                   heading={heading}

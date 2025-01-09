@@ -20,6 +20,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
   const handleLearn = () => {
     navigate("/LearnModeTimer");
   };
+  
   return (
     <main className="main-container">
       <section className="top-section">
@@ -30,7 +31,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
           <EdgeChair />
           <Timer duration={600} label={"PENDING"} />
 
-          <TopButton classNameA={"learn"} classNameB={"learn"} />
+          <TopButton classNameA="primary" classNameB="disabled" />
         </div>
       </section>
 
@@ -38,32 +39,24 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                <div className="talkbubble-btn">
+                <div className="learn-welcome-text">
+                  {"Welcome! You can go start your survey by clicking the above START button or click the LEARN button to explore the different buttons and areas offered by Research Libs."}
                   <Button
                     onClick={handleLearn}
                     label="LEARN"
-                    className={`${classNameA} bottom_button talk-btn-learn learnwelcome`}
+                    className={`${classNameA} learn-btn primary`}
                   />
-                  <Button
-                    onClick={handleExit}
-                    label="BEGIN"
-                    className={`${classNameB} bottom_button talk-btn-exit exitwelcome`}
-                  />
+                  
                 </div>
-
-                <h2 className="learn-welcome-text">
-                  {`Hello and welcome to Research Libs. Click the LEARN button to learn about this tool or BEGIN to begin your survey.`}
-                </h2>
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
                 />
-              </div>
+
             </Queue>
           </div>
 
-          <MiddleButton classNameA={"learn"} classNameB={"learn"} />
+          <MiddleButton classNameA="disabled" classNameB="disabled" />
 
           <div className="story_queue-single">
             <Queue className={"queue answer"} />
@@ -73,10 +66,10 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
       <section className="bottom-section">
         <BottomButton
-          classNameA={"learn"}
-          classNameB={"learn"}
-          classNameC={"learn"}
-          classNameD={"learn"}
+          classNameA="disabled"
+          classNameB="disabled"
+          classNameC="disabled"
+          classNameD="disabled"
         />
       </section>
     </main>

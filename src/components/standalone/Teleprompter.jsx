@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../css/Teleprompter.css";
 
-const Teleprompter = ({ story, storyBuild, containerRef }) => {
+const Teleprompter = ({ story, storyBuild, containerRef, children }) => {
   return (
     <div className="teleprompter-container">
       <div
@@ -12,15 +12,9 @@ const Teleprompter = ({ story, storyBuild, containerRef }) => {
             : "teleprompter-text-container-welcome" // Change teleprompter styling for welcome screen
         }
       >
-        {storyBuild
-          ? <div dangerouslySetInnerHTML={{ __html: storyBuild }} />
-
-          : `Welcome to the opportunity to
-            compare taking the same survey 
-            using a traditional 
-            and a narrative sentence 
-            with a blank/list method.`}
+        { <div dangerouslySetInnerHTML={{ __html: storyBuild }} />}
       </div>
+      {children}
     </div>
   );
 };
