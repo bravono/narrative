@@ -18,51 +18,65 @@ const Introduction = () => {
     <div className="introduction">
       <div className="media-card-group">
         <MediaCard
-          heading="Cubicon Introduction"
+          heading="Research Libs Introduction
+"
           style={{ background: "linear-gradient(to right, #ff9a8b, #fecfef)" }}
         >
           {
             <MediaComponent
-              content={`Cubicon is your frontline defense against unreliable survey data. By combining visual puzzles with advanced validation methods, Cubicon ensures your survey participants are authentic and engaged. Whether you're preventing bots or offering respondents a dynamic storytelling option, Cubicon raises the bar for data quality.
-            Join us as we explore how Cubicon transforms survey validation into a smarter, more secure experience for everyone involved.
-            `}
+              content={`Research Libs turns data collection into a storytelling journey. By allowing respondents to craft narratives, this innovative tool unlocks deeper insights and builds a richer understanding of your audience. Research Libs is about breaking away from traditional survey methods to engage respondents in ways that are fun, meaningful, and impactful. Let's look at how Research Libs makes your surveys stand out while delivering the insights you need to make informed decisions.
+`}
             />
           }
         </MediaCard>
         <MediaCard
-          heading="Cubicon Benefits"
+          heading="Research Libs Benefits
+"
           style={{ background: "linear-gradient(to right, #a1c4fd, #c2e9fb)" }}
         >
           {
             <MediaComponent
-              title="Validates Participants: "
-              content={`Cubicon's visual puzzles ensure only authentic participants engage with your surveys, improving data reliability.`}
+              title="Encourages Engagement:"
+              content={`Turns traditional surveys into interactive storytelling experiences, keeping respondents more invested.
+`}
             />
           }
           {
             <MediaComponent
-              title="Boosts Data Quality:"
-              content={` Reduces the influence of bots and low-effort responses, creating cleaner, more actionable datasets.`}
+              title="Delivers Deeper Insights:"
+              content={`Narrative responses reveal richer context and motivations behind answers.
+`}
             />
           }
           {
             <MediaComponent
-              title="Engages Respondents:"
-              content={` Gamified elements make surveys more engaging, encouraging higher-quality participation.`}
+              title="Builds Respondent Affinity:"
+              content={`By making the process enjoyable, Research Libs fosters a positive connection between respondents and the research process.
+`}
             />
           }
         </MediaCard>
       </div>
       <div className="media-card-group">
         <MediaCard
-          heading="Cubicon Results"
+          heading="Research Libs Results
+"
           style={{ background: "linear-gradient(to right, #fbc2eb, #a6c1ee)" }}
         >
           {
             <MediaComponent
-              title="Higher Data Integrity:"
-              content={` Surveys produce reliable, credible
-                  insights that stakeholders can trust.`}
+              title="More Meaningful Data:"
+              content={`Turns traditional surveys into interactive storytelling experiences, keeping respondents more invested.
+`}
+            />
+          }
+          {
+            <MediaComponent
+              title="Stronger Connections:"
+              content={`
+                  Respondents feel heard and valued, creating a better foundation for ongoing participation.
+
+`}
             />
           }
           {
@@ -78,7 +92,8 @@ const Introduction = () => {
         </MediaCard>
 
         <MediaCard
-          heading="Cubicon Next Steps"
+          heading="Research Libs Next Steps
+"
           style={{ background: "linear-gradient(to right, #fdcbf1, #e6dee9)" }}
         >
           {
@@ -89,14 +104,23 @@ const Introduction = () => {
           }
           {
             <MediaComponent
-              title="Monitor Data Quality:"
-              content={` Use Cubicon's validation metrics to ensure surveys produce reliable, actionable insights.`}
+              title="Design Narrative Surveys:"
+              content={`  Incorporate storytelling elements into your surveys to foster respondent engagement.
+`}
             />
           }
           {
             <MediaComponent
-              title="Combine with Other Security Measures:"
-              content={` Pair Cubicon with additional tools to enhance data integrity and protect against fraudulent responses.`}
+              title="Test and Refine:"
+              content={` Pilot Research Libs surveys with small groups and adjust based on respondent feedback.
+`}
+            />
+          }
+          {
+            <MediaComponent
+              title="Analyze Stories for Patterns:"
+              content={`Use narrative responses to identify trends, motivations, and opportunities that traditional surveys might miss.
+`}
             />
           }
         </MediaCard>

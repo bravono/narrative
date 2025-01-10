@@ -8,6 +8,9 @@ const Home = () => {
   const goToWelcomeScreen = () => {
     navigate("/welcome");
   };
+  const goToIntroduction = () => {
+    navigate("/introduction");
+  };
 
   return (
     <>
@@ -17,7 +20,7 @@ const Home = () => {
         </div> */}
 
         <div className="cards">
-          <div className="card">Introduction</div>
+          <div className="card" onClick={goToIntroduction}>Introduction</div>
           <div className="card">
             Ten Minute Story-Based Survey Experience
           </div>
