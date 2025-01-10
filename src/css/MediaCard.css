@@ -1,0 +1,33 @@
+.media-card {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  font-size: 11.5px;
+  padding: 5px 0;
+  border-radius: 2px;
+}
+
+.media-card h1 {
+  text-align: start;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 500px) {
+    .media-card {
+        width: 50vw;
+        border: 1px solid dodgerblue;
+        margin: 20px;
+        padding: 10px 20px;
+    }
+
+    .media-card h1 {
+      text-align: start;
+      margin: 0;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+   
+}

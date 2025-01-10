@@ -5,6 +5,8 @@ import Preview from "./components/activeModePages/Preview";
 import WelcomePageLM from "./components/learnmodepages/WelcomePageLM";
 import Compare from "./components/activeModePages/Compare";
 import Exit from "./components/activeModePages/ExitPage";
+import Home from "./components/standalone/Home";
+import Introduction from "./components/composed/IntroductionPage";
 import LearnModeTimer from "./components/learnmodepages/LearnModeTimer";
 import LearnModeStart from "./components/learnmodepages/LearnModeStart";
 import LearnModePause from "./components/learnmodepages/LearnModePause";
@@ -37,12 +39,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WelcomePageLM />} />
-        <Route path="/welcomeactivemode" element={<WelcomePageAM />} />
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/welcomeactivemode" element={<WelcomePageAM />} /> */}
         <Route path="/activemode" element={<ActiveModePage />} />
+        <Route path="/exit" element={<Exit />} />
         <Route path="/preview" element={<Preview />} />
         <Route path="/compare" element={<Compare />} />
-        <Route path="/exit" element={<Exit />} />
+        <Route path="/welcome" element={<WelcomePageLM />} />
+        <Route path="/introduction" element={<Introduction />} />
         <Route path="/LearnModeTimer" element={<LearnModeTimer />} />
         <Route path="/LearnModeStart" element={<LearnModeStart />} />
         <Route path="/LearnModePause" element={<LearnModePause />} />

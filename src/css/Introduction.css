@@ -1,0 +1,24 @@
+.introduction {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-items: center;
+    align-items: center;
+}
+
+.media-card-group {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 500px) {
+    .introduction {
+    }
+    .media-card-group {
+        display: flex;
+        flex-direction: row;
+    }
+    
+}
+
+
