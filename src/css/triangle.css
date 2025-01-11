@@ -49,7 +49,7 @@
 }
 
 .triangle {
-  fill: none;
+  fill: dodgerblue;
   stroke: #45546a;
   stroke-width: 1.5rem;
 }
@@ -58,11 +58,14 @@ polyline {
   z-index: 999;
 }
 
+.center-text {
+  font-size: 2rem;
+}
+
 .draggable-circle {
-  fill: #45546a;
+  fill: #c0d8fc;
   cursor: pointer;
   transition: box-shadow 0.2s ease-in-out;
-  border: 1px solid green;
 }
 
 .draggable-circle.glow {

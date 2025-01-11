@@ -174,7 +174,16 @@ const Triangle = ({
           className="triangle"
           points="150,10 0,300 300,300"
         />
-
+        {selectedCorner || selectedBorder ? <text
+          className="center-text"
+          x="150"
+          y="180"
+          transform="rotate(0 140,10)"
+          textAnchor="middle"
+          fill={choiceList[0].value > 0 ? "gold" : ""}
+        >
+          {capitalizeWords("Some Text")}
+        </text> : ""}
         {/* Top corner */}
         <polyline
           points="153,5 95,120"
@@ -240,7 +249,16 @@ const Triangle = ({
           onMouseDown={handleMouseDown}
           onTouchStart={handleMouseDown}
           filter={isDragging ? "url(#circleGlow)" : ""}
-        ></circle>
+        >
+          <image
+            href="/assets/Snowflakes.svg"
+            x="-15"
+            y="-15"
+            width="30"
+            height="30"
+          />
+        </circle>
+
         <text
           className={
             choiceList[0].value > 0
