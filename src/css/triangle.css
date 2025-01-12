@@ -60,6 +60,7 @@ polyline {
 
 .center-text {
   font-size: 2rem;
+  fill: white;
 }
 
 .draggable-circle {
@@ -79,7 +80,11 @@ polyline {
 }
 
 .corner-text {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
+.snowflakes {
+  border: 1px solid green;
+  fill: indigo;
+}
 

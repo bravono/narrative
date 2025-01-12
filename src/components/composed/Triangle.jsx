@@ -180,7 +180,6 @@ const Triangle = ({
           y="180"
           transform="rotate(0 140,10)"
           textAnchor="middle"
-          fill={choiceList[0].value > 0 ? "gold" : ""}
         >
           {capitalizeWords("Some Text")}
         </text> : ""}
@@ -252,10 +251,12 @@ const Triangle = ({
         >
           <image
             href="/assets/Snowflakes.svg"
-            x="-15"
-            y="-15"
-            width="30"
-            height="30"
+            x="150"
+            y="180"
+            width="50"
+            height="50"
+            fill="red"
+            className="snowflakes"
           />
         </circle>
 
@@ -269,7 +270,7 @@ const Triangle = ({
           y="-20"
           transform="rotate(0 140,10)"
           textAnchor="middle"
-          fill={choiceList[0].value > 0 ? "gold" : ""}
+          fill={choiceList[0].value > 0 ? "green" : ""}
         >
           {capitalizeWords(choiceList[0].text)}
         </text>
@@ -279,11 +280,11 @@ const Triangle = ({
               ? "corner-text animate__animated animate__flash"
               : "corner-text"
           }
-          x="10"
+          x="-20"
           y="340"
           transform="rotate(0 10,290)"
           textAnchor="middle"
-          fill={choiceList[1].value > 0 ? "gold" : ""}
+          fill={choiceList[1].value > 0 ? "green" : ""}
         >
           {capitalizeWords(choiceList[1].text)}
         </text>
@@ -293,11 +294,11 @@ const Triangle = ({
               ? "corner-text animate__animated animate__flash"
               : "corner-text"
           }
-          x="290"
+          x="320"
           y="340"
           transform="rotate(0 290,290)"
           textAnchor="middle"
-          fill={choiceList[2].value > 0 ? "gold" : ""}
+          fill={choiceList[2].value > 0 ? "green" : ""}
         >
           {capitalizeWords(choiceList[2].text)}
         </text>
