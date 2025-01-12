@@ -517,19 +517,6 @@ function ActiveModePage() {
     setChoiceList(data);
   };
 
-  const handleSortToggle = () => {
-    setIsDescending((prevIsDescending) => !prevIsDescending);
-
-    if (rankRatePass) {
-      setChoiceList((prevChoiceList) => {
-        return sortChoiceListByValue(prevChoiceList, isDescending);
-      });
-    }
-    setChoiceList((prevChoiceList) => {
-      return sortChoiceListByName(prevChoiceList, isDescending);
-    });
-  };
-
   return (
     <main className="main-container">
       <ToastContainer />
@@ -635,7 +622,6 @@ function ActiveModePage() {
                     isFollowUP={isFollowUp}
                     instruction={instruction}
                     isRecording={isRecording}
-                    onSortToggle={handleSortToggle}
                     onAddToChoice={handleTalk}
                     onSetChoiceList={handleUpdateChoiceList}
                     onSetAllChoiceHaveValue={setRankRatePass}
@@ -657,7 +643,6 @@ function ActiveModePage() {
                   choiceList={choiceList}
                   instruction={instruction}
                   ringPass={ringPass}
-                  onSortToggle={handleSortToggle}
                   onSetChoiceList={handleUpdateChoiceList}
                   onSetAllChoiceHaveValue={setRankRatePass}
                   onAddToChoice={handleTalk}

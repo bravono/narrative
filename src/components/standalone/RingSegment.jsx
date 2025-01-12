@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { sortChoiceListByValue } from "../../utilities/choiceListSorter";
 
 const RingSegment = ({
   style,

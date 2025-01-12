@@ -4,6 +4,7 @@ import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../standalone/StickyArrow";
 import Control from "../standalone/Control";
 import BarrelTable from "../standalone/BarrelTable";
+import { sortChoiceListByName } from "../../utilities/choiceListSorter";
 import "../../css/barrel.css";
 
 const Barrel = ({
@@ -14,11 +15,10 @@ const Barrel = ({
   instruction,
   widgetOutAnimation,
   onSetChoiceList,
-  onSortToggle,
   onAddToChoice,
 }) => {
   const isFollowUp = true;
-  const [isSorted, setIsSorted] = useState(false);
+  const [isDescending, setIsDescending] = useState(false);
   const [activeRow, setActiveRow] = useState();
 
   const handleUpdateActiveRow = (data) => {
@@ -26,8 +26,10 @@ const Barrel = ({
   };
 
   const handleSortToggle = () => {
-    setIsSorted((prevIsSorted) => !prevIsSorted);
-    onSortToggle(isSorted);
+    setIsDescending((prevIsDescending) => !prevIsDescending);
+
+    
+    (sortChoiceListByName(choiceList, isDescending));
   };
 
   const type = questionType;
@@ -166,26 +168,25 @@ const Barrel = ({
         className={`barrel ${
           widgetOutAnimation ? widgetOutAnimation : widgetInAnimation
         }`}
-        
-        >
+      >
         {type !== "scale" ? (
-            <StickyArrow
-              type={type}
-              widgetInAnimation={widgetInAnimation}
-              widgetOutAnimation={widgetOutAnimation}
-            />
-          ) : (
-            ""
-          )}
+          <StickyArrow
+            type={type}
+            widgetInAnimation={widgetInAnimation}
+            widgetOutAnimation={widgetOutAnimation}
+          />
+        ) : (
+          ""
+        )}
         <img className="barrel-img" src="/assets/Barrel.png" alt="" />
 
         <Lever
-          sorted={isSorted}
+          isDescending={isDescending}
           onClick={handleSortToggle}
           widgetInAnimation={widgetInAnimation}
           widgetOutAnimation={widgetOutAnimation}
         />
-        
+
         <BarrelTable
           widgetOutAnimation={widgetOutAnimation}
           type={type}
@@ -199,14 +200,14 @@ const Barrel = ({
           heading={heading}
         />
         {type == "rank" || type == "rate" ? (
-        <Control
-          type={type} //question type
-          onIncrement={handleIncrement}
-          onDecrement={handleDecrement}
-        />
-      ) : (
-        ""
-      )}
+          <Control
+            type={type} //question type
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
+          />
+        ) : (
+          ""
+        )}
       </div>
       <p className="instruction">{instruction}</p>
       <AnswerQueueButtons
@@ -217,7 +218,6 @@ const Barrel = ({
         label={"CONTINUE"}
         onAddToChoice={onAddToChoice}
       />
-      
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect, act } from "react";
 import { tableGenerator } from "../standalone/tableGenerator";
 import { getScreenWidth } from "../../utilities/getScreenSize";
+import {
+  sortChoiceListByName,
+  sortChoiceListByValue,
+} from "../../utilities/choiceListSorter";
 import RingLever from "../standalone/RingLever";
-import capitalizeWords from "../../utilities/capilizeWords";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import RingSegment from "../standalone/RingSegment";
 import RingDraggable from "../standalone/RingDraggable";
@@ -17,12 +20,11 @@ const Ring = ({
   ringPass,
   widgetOutAnimation,
   onSetChoiceList,
-  onSortToggle,
   onAddToChoice,
   onAddToStory,
 }) => {
   const size = getScreenWidth();
-  const strokeWidth = size === 170 ?  15 : 20
+  const strokeWidth = size === 170 ? 15 : 20;
   const colors = [
     "#9747FF",
     "#00659B",
@@ -32,7 +34,7 @@ const Ring = ({
     "#FFE600",
   ];
   const [segmentValue, setSegmentValue] = useState(0);
-  const [isSorted, setIsSorted] = useState(false);
+  const [isDescending, setIsDescending] = useState(false);
   const [activeRow, setActiveRow] = useState({});
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
@@ -49,8 +51,13 @@ const Ring = ({
   }, [choiceList]);
 
   const handleSortToggle = () => {
-    setIsSorted((prevIsSorted) => !prevIsSorted);
-    onSortToggle(isSorted);
+    setIsDescending((prevIsSorted) => !prevIsSorted);
+
+    if (choiceList.filter((choice) => choice.value > 1).length) {
+      sortChoiceListByValue(choiceList, isDescending);
+    } else {
+      sortChoiceListByName(choiceList, isDescending);
+    }
   };
 
   const handleItemSelect = (choice) => {
@@ -75,7 +82,7 @@ const Ring = ({
       </div>
       <div className="ring-set">
         <RingLever
-          sorted={isSorted}
+          sorted={isDescending}
           onClick={handleSortToggle}
           widgetInAnimationLeft={widgetInAnimationLeft}
         />
