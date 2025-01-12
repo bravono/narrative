@@ -14,11 +14,12 @@ const Home = () => {
 
   return (
     <>
-      <main className=" local-container d-flex flex-column justify-content-center align-items-center border border-0">
-        {/* <div className="logo-group">
-          <img id="logo" src="/cubicon_logo.png" alt="Logo" />
-        </div> */}
+      <main className=" local-container ">
+        <div className="logo-container">
 
+          <img id="logo" src="public/assets/Research_Lib_Logo.svg" alt="" />
+        </div>
+       
         <div className="cards">
           <div className="card" onClick={goToIntroduction}>Introduction</div>
           <div className="card">
