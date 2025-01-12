@@ -128,15 +128,15 @@ const Introduction = () => {
 
       <div>
         <button
-          className="btn btn-primary btn-lg m-2"
-          style={{ width: "100px", height: "50px" }}
+          className="button primary"
+          style={{ width: "100px", height: "50px", margin: "10px"}}
           onClick={goHome}
         >
           Back
         </button>
         <button
-          className="btn btn-primary btn-lg m-2"
-          style={{ width: "100px", height: "50px" }}
+          className="button primary"
+          style={{ width: "100px", height: "50px", margin: "10px"}}
           onClick={exit}
         >
           Exit
