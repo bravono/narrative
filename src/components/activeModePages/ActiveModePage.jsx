@@ -2,10 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { getNextBlank, getSurvey } from "../../services/surveyServices";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  sortChoiceListByValue,
-  sortChoiceListByName,
-} from "../../utilities/choiceListSorter";
 import { addAndHightlightChoice } from "../../utilities/addAndHighlightChoice";
 import Queue from "../Queue";
 import Teleprompter from "../standalone/Teleprompter";
@@ -49,7 +45,6 @@ function ActiveModePage() {
   const [wantsToTalk, setWantsToTalk] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [blankName, setBlankName] = useState("");
-  const [isDescending, setIsDescending] = useState(true);
   const [activeRow, setActiveRow] = useState();
   const [rankRatePass, setRankRatePass] = useState(false);
   const [ringPass, setRingPass] = useState(false);
