@@ -4,7 +4,7 @@
     width: 100vw;
     justify-items: center;
     align-items: center;
-    background-image: url(public/assets/Home_Background.jpg);
+    background-image: url(/assets/Home_Background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -17,8 +17,7 @@
 }
 
 @media (min-width: 500px) {
-    .introduction {
-    }
+   
     .media-card-group {
         display: flex;
         flex-direction: row;
