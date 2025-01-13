@@ -17,7 +17,7 @@ const Home = () => {
       <main className=" local-container ">
         <div className="logo-container">
 
-          <img id="logo" src="public/assets/Research_Lib_Logo.svg" alt="" />
+          <img id="logo" src="/assets/Research_Lib_Logo.svg" alt="" />
         </div>
        
         <div className="cards">
@@ -32,9 +32,6 @@ const Home = () => {
           >
             Exit
           </div>
-        </div>
-        <div className="my-icon ">
-          <img className=" star " src="/Star 3.svg" alt="" />
         </div>
       </main>
     </>
