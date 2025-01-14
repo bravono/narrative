@@ -1,11 +1,11 @@
 import "../../css/barrelLever.css";
-export default function Lever({ sorted, onClick, widgetInAnimation, widgetOutAnimation }) {
+export default function Lever({ isDescending, onClick, widgetInAnimation, widgetOutAnimation }) {
   const className = `${widgetOutAnimation ? widgetOutAnimation : widgetInAnimation} barrel-lever barrel-lever-`;
-  if (sorted) {
+  if (isDescending) {
     return (
       <img
         src="/assets/sorted.svg"
-        className={sorted ? className + "sort" : ""}
+        className={isDescending ? className + "sort" : ""}
         onClick={onClick}
       />
     );
@@ -13,7 +13,7 @@ export default function Lever({ sorted, onClick, widgetInAnimation, widgetOutAni
   return (
     <img
       src="/assets/unsorted.svg"
-      className={!sorted ? className + "unsort" : ""}
+      className={!isDescending ? className + "unsort" : ""}
       onClick={onClick}
     />
   );
