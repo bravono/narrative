@@ -1,29 +1,30 @@
 .introduction {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    justify-items: center;
-    align-items: center;
-    background-image: url(/assets/Home_Background.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/assets/Home_Background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .media-card-group {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 }
 
 @media (min-width: 500px) {
-   
-    .media-card-group {
-        display: flex;
-        flex-direction: row;
-        width: 100vw;
-    }
-    
+  .introduction {
+    height: 100vh;
+  }
+
+  .media-card-group {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: center;
+  }
 }
-
-

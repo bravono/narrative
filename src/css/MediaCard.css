@@ -7,6 +7,7 @@
   padding: 5px 0;
   border-radius: 2px;
   border: 3px solid dodgerblue;
+  justify-content: center;
 }
 
 .media-card h1 {
@@ -18,7 +19,7 @@
 
 @media (min-width: 500px) {
     .media-card {
-        width: 50vw;
+        max-width: 50rem;
         margin: 20px;
         padding: 10px 20px;
     }
