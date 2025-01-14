@@ -81,11 +81,6 @@ const Ring = ({
         {"Select an Item then Drag the Ring from 12 O'clock to Add Weight"}
       </div>
       <div className="ring-set">
-        <RingLever
-          sorted={isDescending}
-          onClick={handleSortToggle}
-          widgetInAnimationLeft={widgetInAnimationLeft}
-        />
 
         <div>
           <div
@@ -93,6 +88,11 @@ const Ring = ({
               widgetOutAnimation ? widgetOutAnimation : widgetInAnimationLeft
             }`}
           >
+            <RingLever
+              sorted={isDescending}
+              onClick={handleSortToggle}
+              widgetInAnimationLeft={widgetInAnimationLeft}
+            />
             <table className="ring-table">
               <tbody>
                 {tableGenerator(

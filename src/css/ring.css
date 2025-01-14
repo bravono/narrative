@@ -21,7 +21,6 @@
   }
 }
 
-
 .ring-control {
   position: relative;
 }
@@ -62,11 +61,8 @@
 
 @media (min-width: 730px) {
   .ring-list-container {
-    background-color: #e0e0e0;
-    border-radius: 0 10px 10px 0;
     font-size: 1.1rem;
     padding: 2rem 0.1rem;
-    border: 1px solid black;
   }
 }
 
@@ -77,9 +73,6 @@
   }
 } */
 
-.ring-table {
-  /* position: relative; */
-}
 
 tr:not(:last-child) td {
   border-collapse: collapse;
@@ -153,7 +146,7 @@ td {
 
 @media (min-width: 500px) {
   .ring-lever {
-    top: -10px;
+    top: -35px;
   }
 }
 
