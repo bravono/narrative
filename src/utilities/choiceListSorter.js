@@ -13,9 +13,9 @@ export function sortChoiceListByName(choiceList, isDescending) {
     const textB = b.text.toLowerCase();
 
     // If either text is "others", prioritize it last
-    if (textA === "others") {
+    if (textA.toLowerCase().includes("other")) {
       return 1; 
-    } else if (textB === "others") {
+    } else if (textB.toLowerCase().includes("other")) {
       return -1; 
     }
 
