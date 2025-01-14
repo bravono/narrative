@@ -2,16 +2,9 @@
 .sticky-arrow {
   width: 30px;
   position: absolute;
-  left: 78%;
-  top: -50px;
-  z-index: 999;
-}
-
-.sticky-arrow:hover {
-  width: 30px;
   left: 80%;
   top: -50px;
-  z-index: 100;
+  z-index: 999;
 }
 
 .singleChoice-sticky {
