@@ -1,14 +1,14 @@
 .triangle-set {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
-  justify-items: center;
-  align-items: center;
-  /* border: 2px solid tomato */
 }
 .triangle-svg {
   overflow: visible;
-  width: 80%;
+  width: 50%;
   height: 60%;
   margin-bottom: 3rem;
   user-select: none;
@@ -19,32 +19,6 @@
   .triangle-svg {
     width: 60%;
     height: 60%;
-  }
-}
-
-@media (min-width: 700px) {
-  .triangle-svg {
-    width: 50%;
-    height: 50%;
-  }
-}
-@media (min-width: 1024px) {
-  .triangle-svg {
-    max-width: 60%;
-    height: 70%;
-  }
-}
-
-@media (max-height: 732px) {
-  .triangle-svg {
-    width: 50%;
-   
-  }
-}
-
-@media (max-height: 732px) and (min-width:524px){
-  .triangle-svg {
-    width: 40%;
   }
 }
 
@@ -73,10 +47,19 @@ polyline {
   fill: gold;
 }
 
-.triangle-instruction {
+.triangle-heading {
   font-size: 1.5rem;
-  margin: 0.2rem 0 0 0;
-  align-self: start;
+  width: 80%;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .triangle-heading {
+    font-size: 1.5rem;
+    width: 50%;
+    margin: 0 0 20px;
+  }
 }
 
 .corner-text {
@@ -87,4 +70,3 @@ polyline {
   border: 1px solid green;
   fill: indigo;
 }
-

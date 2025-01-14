@@ -133,7 +133,7 @@ const Triangle = ({
 
   return (
     <div className="triangle-set">
-      <p className="triangle-instruction">{heading}</p>
+      <p className="triangle-heading">{"DRAG THE PUCK TO ANY CORNER OF BORDER TO MAKE YOUR SELECTION"}</p>
       <svg
         ref={svgRef}
         viewBox="0 0 300 300"
@@ -174,15 +174,19 @@ const Triangle = ({
           className="triangle"
           points="150,10 0,300 300,300"
         />
-        {selectedCorner || selectedBorder ? <text
-          className="center-text"
-          x="150"
-          y="180"
-          transform="rotate(0 140,10)"
-          textAnchor="middle"
-        >
-          {capitalizeWords("Some Text")}
-        </text> : ""}
+        {selectedCorner || selectedBorder ? (
+          <text
+            className="center-text"
+            x="150"
+            y="180"
+            transform="rotate(0 140,10)"
+            textAnchor="middle"
+          >
+            {capitalizeWords("Some Text")}
+          </text>
+        ) : (
+          ""
+        )}
         {/* Top corner */}
         <polyline
           points="153,5 95,120"
@@ -262,7 +266,9 @@ const Triangle = ({
 
         <text
           className={
-            choiceList[0].value > 0
+            choiceList[0].value > 0 ||
+            selectedBorder === 1 ||
+            selectedBorder === 3
               ? "corner-text animate__animated animate__flash"
               : "corner-text"
           }
@@ -270,13 +276,21 @@ const Triangle = ({
           y="-20"
           transform="rotate(0 140,10)"
           textAnchor="middle"
-          fill={choiceList[0].value > 0 ? "green" : ""}
+          fill={
+            choiceList[0].value > 0 ||
+            selectedBorder === 1 ||
+            selectedBorder === 3
+              ? "green"
+              : ""
+          }
         >
           {capitalizeWords(choiceList[0].text)}
         </text>
         <text
           className={
-            choiceList[1].value > 0
+            choiceList[1].value > 0 ||
+            selectedBorder === 1 ||
+            selectedBorder === 2
               ? "corner-text animate__animated animate__flash"
               : "corner-text"
           }
@@ -284,13 +298,21 @@ const Triangle = ({
           y="340"
           transform="rotate(0 10,290)"
           textAnchor="middle"
-          fill={choiceList[1].value > 0 ? "green" : ""}
+          fill={
+            choiceList[1].value > 0 ||
+            selectedBorder === 1 ||
+            selectedBorder === 2
+              ? "green"
+              : ""
+          }
         >
           {capitalizeWords(choiceList[1].text)}
         </text>
         <text
           className={
-            choiceList[2].value > 0
+            choiceList[2].value > 0 ||
+            selectedBorder === 2 ||
+            selectedBorder === 3
               ? "corner-text animate__animated animate__flash"
               : "corner-text"
           }
@@ -298,7 +320,13 @@ const Triangle = ({
           y="340"
           transform="rotate(0 290,290)"
           textAnchor="middle"
-          fill={choiceList[2].value > 0 ? "green" : ""}
+          fill={
+            choiceList[2].value > 0 ||
+            selectedBorder === 2 ||
+            selectedBorder === 3
+              ? "green"
+              : ""
+          }
         >
           {capitalizeWords(choiceList[2].text)}
         </text>
