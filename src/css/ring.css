@@ -21,14 +21,6 @@
   }
 }
 
-/* @media (max-height: 732px) {
-  .ring-set {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-  }
-} */
 
 .ring-control {
   position: relative;
@@ -118,10 +110,6 @@ td {
   font-weight: 600;
 }
 
-.highlight {
-  /* fill: red; */
-}
-
 .ring-number {
   font-size: 2rem;
   pointer-events: "none";
@@ -138,18 +126,13 @@ td {
   z-index: 2;
 }
 
-@media (min-width: 730px) {
+@media (min-width: 500px) {
   .polygon-container {
-    top: 15%;
-    right: 45%;
+    top: 18%;
+    right: 47%;
   }
 }
-/* @media (max-height: 732px) {
-  .polygon-container {
-    top: 15%;
-    right: 45%;
-  }
-} */
+
 
 .polygon {
   cursor: pointer;
@@ -165,36 +148,14 @@ td {
   width: 7rem;
   cursor: pointer;
   left: 0%;
-  top: -18%;
+  top: -20%;
 }
 
-/* .ring-lever-sort {
-  top: 0px;
+@media (min-width: 500px) {
+  .ring-lever {
+    top: -10px;
+  }
 }
-
-.ring-lever-unsort {
-  top: 0px;
-} */
-
-/* @media (min-width: 732px) {
-  .ring-lever-sort {
-    top: -25px;
-  }
-
-  .ring-lever-unsort {
-    top: -25px;
-  }
-} */
-
-/* @media (max-height: 732px) {
-  .ring-lever-sort {
-    top: -25px;
-  }
-
-  .ring-lever-unsort {
-    top: -24px;
-  }
-} */
 
 .ring-heading {
   margin: 0 0 2rem ;
@@ -208,6 +169,7 @@ td {
   margin: 0 1rem;
   font-size: 1.5rem;
 }
+
 .ring-buttons {
   align-self: center;
   width: 22.75rem;

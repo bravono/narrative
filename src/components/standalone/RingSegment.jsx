@@ -6,13 +6,13 @@ const RingSegment = ({
   widgetOutAnimation,
   widgetInAnimationRight,
   choiceList,
-  strokeWidth,
   size,
   colors,
   total,
 }) => {
   const radius = 45;
   const circumference = 2 * Math.PI * radius;
+  const strokeWidth = 10
 
   // Add the color property
   choiceList.map((choice, index) => {

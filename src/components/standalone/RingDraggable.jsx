@@ -6,7 +6,6 @@ const RingDraggable = ({
   widgetOutAnimation,
   widgetInAnimationRight,
   size,
-  strokeWidth,
   segmentValue,
   isValidTotal,
   total,
@@ -16,6 +15,7 @@ const RingDraggable = ({
 }) => {
   const circleRef = useRef(null);
   const color = "#4caf50";
+  const strokeWidth = 15;
 
   const [isDragging, setIsDragging] = useState(false);
   const [activeRowIndex, setActiveRowIndex] = useState();
@@ -108,7 +108,7 @@ const RingDraggable = ({
             r={radius}
             fill="none"
             stroke="#e6e6e6"
-            strokeWidth={strokeWidth-15}
+            strokeWidth={strokeWidth}
             style={{ pointerEvents: "none" }}
           />
         ) : (
