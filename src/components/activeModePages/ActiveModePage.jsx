@@ -85,7 +85,7 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
   // Initial backend call
@@ -119,7 +119,7 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
   // Get the next blank
