@@ -21,7 +21,7 @@ function ActiveModePage() {
   const animationFrameRef = useRef(null); // Ref to store the animation frame ID
   const scrollOffset = useRef(0); // Ref to track fractional scrolling
   const location = useLocation();
-  const initialDuration = 60;
+  const initialDuration = 600;
   const [widgetOutAnimation, setWidgetOutAnimation] = useState("");
   const [counterComplete, setCounterComplete] = useState(false);
   const [arrowColor, setArrowColor] = useState("gray"); // Initial SVG color
@@ -39,7 +39,7 @@ function ActiveModePage() {
   const [instruction, setInstruction] = useState("");
   const [duration, setDuration] = useState(initialDuration);
   const [countDirection, setCountDirection] = useState("");
-  const [pauseDuration, setPauseDuration] = useState(100);
+  const [pauseDuration, setPauseDuration] = useState(300);
   const [timeLeft, setTimeLeft] = useState(100);
   const [isRecording, setIsRecording] = useState(false);
   const [wantsToTalk, setWantsToTalk] = useState(false);
@@ -110,9 +110,9 @@ function ActiveModePage() {
         }));
         setChoiceList(newChoiceList);
         setInstruction(data.instruction);
-        setDuration(data.durationInMin * 60);
+        // setDuration(data.durationInMin * 60);
+        // setPauseDuration(data.pauseDuration * 60);
         setCountDirection(data.countDirection);
-        setPauseDuration(data.pauseDuration * 60);
         setBlankName(data.blanks[0].blank);
       } catch (error) {
         toast.error("An unexpected error occured");
