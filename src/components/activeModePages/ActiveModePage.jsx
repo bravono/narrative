@@ -11,7 +11,6 @@ import Ring from "../composed/Ring";
 import Triangle from "../composed/Triangle";
 import Logo from "../Logo";
 import Edge from "../Edge";
-import EdgeChair from "../EdgeChair";
 import Timer from "../../utilities/Timer";
 import Button from "../Button";
 import Talk from "../composed/Talk";
@@ -20,6 +19,7 @@ import Swipe from "../standalone/Swipe";
 function ActiveModePage() {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null); // Ref to store the animation frame ID
+  const scrollOffset = useRef(0); // Ref to track fractional scrolling
   const location = useLocation();
   const initialDuration = 60;
   const [widgetOutAnimation, setWidgetOutAnimation] = useState("");
@@ -53,6 +53,7 @@ function ActiveModePage() {
   const [selectUptoThree, setSelectUptoThree] = useState(0);
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false); // State to track scrolling status
 
   const meetOneCondition =
     barPass ||
@@ -84,7 +85,7 @@ function ActiveModePage() {
       }
     };
 
-    // fetchSurvey();
+    fetchSurvey();
   }, []);
 
   // Initial backend call
@@ -118,7 +119,7 @@ function ActiveModePage() {
       }
     };
 
-    fetchSurvey();
+    // fetchSurvey();
   }, []);
 
   // Get the next blank
@@ -289,13 +290,29 @@ function ActiveModePage() {
 
       // Check if there's more content to scroll
       if (scrollTop + clientHeight < scrollHeight) {
-        containerRef.current.scrollTop += 1; // Scroll down continuously
+        setIsScrolling(true); // Set scrolling to active
+        scrollOffset.current += 0.3; // Accumulate fractional scrolling
+
+        if (scrollOffset.current >= 1) {
+          const scrollAmount = Math.floor(scrollOffset.current);
+          containerRef.current.scrollTop += scrollAmount;
+          scrollOffset.current -= scrollAmount;
+        }
+
         animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
       } else {
         // Stop scrolling when the bottom is reached
-        cancelAnimationFrame(animationFrameRef.current);
+        stopScrolling();
       }
     }
+  };
+
+  const stopScrolling = () => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+    setIsScrolling(false); // Set scrolling to inactive
   };
 
   useEffect(() => {
@@ -303,8 +320,9 @@ function ActiveModePage() {
     animationFrameRef.current = requestAnimationFrame(scrollDown);
 
     // Cleanup the animation frame when the component unmounts
-    return () => cancelAnimationFrame(animationFrameRef.current);
+    return () => stopScrolling();
   }, []);
+
 
   const navigate = useNavigate();
 
@@ -600,7 +618,7 @@ function ActiveModePage() {
           </div>
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              {widget === "barrel" ? (
+              {widget === "barrel" && !isScrolling ? (
                 <>
                   {!checkboxPass && selectUptoThree ? (
                     <div className="at-least-three">
@@ -625,13 +643,13 @@ function ActiveModePage() {
                     }}
                   />
                 </>
-              ) : widget === "bar" ? (
+              ) : widget === "bar" && !isScrolling ? (
                 <Bar
                   widgetOutAnimation={widgetOutAnimation}
                   onSetChoice={handleUpdateChoiceList}
                   choiceList={choiceList}
                 />
-              ) : widget === "ring" ? (
+              ) : widget === "ring" && !isScrolling ? (
                 <Ring
                   widgetOutAnimation={widgetOutAnimation}
                   heading={heading}
@@ -644,7 +662,7 @@ function ActiveModePage() {
                   onAddToStory={handleAddToStory}
                   isRecording={isRecording}
                 />
-              ) : widget === "triade" ? (
+              ) : widget === "triade" && !isScrolling ? (
                 <Triangle
                   widgetOutAnimation={widgetOutAnimation}
                   heading={heading}
