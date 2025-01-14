@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
+import { sortChoiceListByName } from "../../utilities/choiceListSorter";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../standalone/StickyArrow";
 import Control from "../standalone/Control";
 import BarrelTable from "../standalone/BarrelTable";
-import { sortChoiceListByName } from "../../utilities/choiceListSorter";
 import "../../css/barrel.css";
 
 const Barrel = ({
@@ -188,16 +188,16 @@ const Barrel = ({
         />
 
         <BarrelTable
-          widgetOutAnimation={widgetOutAnimation}
           type={type}
-          choiceList={choiceList}
+          heading={heading}
           onRank={handleRank}
           onRate={handleRate}
+          choiceList={choiceList}
           onRadioToggle={handleRadioToggle}
           onScaleToggle={handleScaleToggle}
           onCheckToggle={handleCheckToggle}
           onSetActiveRow={handleUpdateActiveRow}
-          heading={heading}
+          widgetOutAnimation={widgetOutAnimation}
         />
         {type == "rank" || type == "rate" ? (
           <Control

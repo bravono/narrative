@@ -142,7 +142,7 @@ const BarrelTable = ({
                         type={type}
                         isChecked={choice.scales[colIndex] === 1}
                         onScaleToggle={() =>
-                          handleScaleToggle(choice, rowIndex, colIndex)
+                        handleScaleToggle(choice, rowIndex, colIndex)
                         }
                       />
                     )}

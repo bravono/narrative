@@ -19,11 +19,11 @@ function RadioButton({
   } else if (isScrollable && height === 20) {
     width = "14px";
   } else if (isScrollable && height === 15) {
-    width = "15px";
+    width = "8px";
   } else if (length >= 7 && height === 20) {
     width = "17px";
   } else if (length >= 7 && height === 15) {
-    width = "20px";
+    width = "8px";
   }
 
   return (
