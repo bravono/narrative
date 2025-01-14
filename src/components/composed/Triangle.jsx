@@ -273,7 +273,7 @@ const Triangle = ({
               : "corner-text"
           }
           x="150"
-          y="-20"
+          y="-10"
           transform="rotate(0 140,10)"
           textAnchor="middle"
           fill={
@@ -295,7 +295,7 @@ const Triangle = ({
               : "corner-text"
           }
           x="-20"
-          y="340"
+          y="330"
           transform="rotate(0 10,290)"
           textAnchor="middle"
           fill={
@@ -317,7 +317,7 @@ const Triangle = ({
               : "corner-text"
           }
           x="320"
-          y="340"
+          y="330"
           transform="rotate(0 290,290)"
           textAnchor="middle"
           fill={
