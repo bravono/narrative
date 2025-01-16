@@ -123,9 +123,9 @@ function ActiveModePage() {
   }, []);
 
   // Get the next blank
-  const fetchNextBlank = async () => {
+  const fetchNextBlank = async (formData) => {
     try {
-      const newBlank = await getNextBlank();
+      const newBlank = await getNextBlank(formData);
       const data = newBlank;
       return data;
     } catch (error) {
