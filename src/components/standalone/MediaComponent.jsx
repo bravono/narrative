@@ -6,7 +6,7 @@ import "../../css/MediaComponent.css";
 const MediaComponent = ({  title = "",  content = "" }) => {
   return (
     <div className="media-component-container">
-      <img className="media-component__img" src="/colorful-stars.jpg" alt="" />
+      <img className="media-component__img" src="/assets/BuyFacts Logo Bullet Square.png" alt="" />
       <div className="media-component__body">
         <h2>{title}</h2>
         {content}
