@@ -19,7 +19,10 @@ const Home = () => {
           <img id="logo" src="/assets/Research_Lib_Logo.svg" alt="" />
         </div>
 
+
         <div className="cards">
+          <div className="card" onClick={goToIntroduction}>
+            INTRODUCTION
           <div className="card" onClick={goToIntroduction}>
             INTRODUCTION
           </div>
@@ -28,6 +31,7 @@ const Home = () => {
           <div className="card" onClick={goToWelcomeScreen}>
             EXIT
           </div>
+        </div>
         </div>
       </main>
     </>
