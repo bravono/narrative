@@ -1,12 +1,14 @@
 .talk-container {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  background: url("/assets/Artboard 1 1.svg");
+  border: 1px solid dodgerblue;
+  justify-content: space-between;
+  align-items: space-between;
+  /* background: url("/assets/Artboard 1 1.svg");
   background-size: 250px;
   background-repeat: no-repeat;
-  background-position: -10px -35px;
+  background-position: -10px -35px; */
 }
 
 .choice-group {
@@ -27,15 +29,12 @@
   margin-right: 10px;
 }
 
-.added-choice-container {
-}
-
 .talk-group__table {
-  font-size: 0.8rem;
-  width: 140px;
+  font-size: 1rem;
+  width: 100%;
   height: 89px;
   padding: 0;
-  marging: 0;
+  margin: 0;
   align-items: center;
 }
 
@@ -45,7 +44,7 @@
 }
 
 .talk-controls {
-  width: 90%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
   grid-column: 1 / span 2;
@@ -53,7 +52,6 @@
 
 .talk-edge {
   align-self: end;
-  margin-bottom: 18px;
 }
 
 .grid-2x2 {
