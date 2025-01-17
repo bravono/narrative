@@ -23,15 +23,12 @@ const Home = () => {
         <div className="cards">
           <div className="card" onClick={goToIntroduction}>
             INTRODUCTION
-          <div className="card" onClick={goToIntroduction}>
-            INTRODUCTION
           </div>
           <div className="card">GUIDED TOUR - SELF PACE</div>
           <div className="card"> SELF-RUNNING OVERVIEW [SIT BACK AND RELAX]</div>
           <div className="card" onClick={goToWelcomeScreen}>
             EXIT
           </div>
-        </div>
         </div>
       </main>
     </>
