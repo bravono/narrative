@@ -4,7 +4,6 @@
   width: 100%;
   height: 100%;
   justify-content: center;
-  /* border: 1px solid red; */
 }
 
 .ring-set {
@@ -18,6 +17,9 @@
 @media (min-width: 730px) {
   .ring-set {
     padding: 0.3rem 0;
+  }
+  .ring-container {
+    width: 70%;
   }
 }
 
@@ -54,7 +56,7 @@
   display: flex;
   font-size: 1.15rem;
   font-weight: 600;
-  padding: .5rem;
+  padding: 0.5rem;
   user-select: none;
   border: 1px solid black;
 }
@@ -72,7 +74,6 @@
     padding: 1.5rem 1rem;
   }
 } */
-
 
 tr:not(:last-child) td {
   border-collapse: collapse;
@@ -126,7 +127,6 @@ td {
   }
 }
 
-
 .polygon {
   cursor: pointer;
   pointer-events: auto;
@@ -151,7 +151,7 @@ td {
 }
 
 .ring-heading {
-  margin: 0 0 2rem ;
+  margin: 0 0 2rem;
   font-size: 1.2rem;
   text-align: center;
   width: 60%;
