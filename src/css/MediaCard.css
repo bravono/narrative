@@ -19,9 +19,10 @@
 
 @media (min-width: 500px) {
     .media-card {
-        max-width: 50rem;
+        width: 50rem;
         margin: 20px;
         padding: 10px 20px;
+        max-height: 50rem;
     }
 
     .media-card h1 {
