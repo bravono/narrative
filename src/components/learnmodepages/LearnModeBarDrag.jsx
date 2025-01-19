@@ -63,6 +63,16 @@ export default function LearnModeBarDrag({
                     className={`${classNameB} bottom_button talk-btn-exit`}
                   />
                 </div> */}
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br />
+                  {`This is the Bar. Click to increase or decrease Bar.`}
+                </h2>
 
                 <LearnButtonState
                   classNameA={"secondary"}
@@ -73,16 +83,6 @@ export default function LearnModeBarDrag({
                   props={`This is the Bar. 
                     Drag to increase/decrease Bar.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  {`This is the Bar. 
-                    Click to increase/decrease Bar.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>

@@ -14,6 +14,7 @@ import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import BarrelWidget from "./LMBarrelWidget";
 import LeftPointerArrow from "../LeftPointerArrow";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModeBarrel({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -47,6 +48,20 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
+                {/* <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+                <Teleprompter
+                  storyBuild={`This is a barrel which is used
+                    to measure your choice.`}
+                >
+                  
+                  <LearnButtonState
+                    classNameA={"secondary"}
+                    classNameB={"secondary"}
+                  />
+                </Teleprompter> */}
                 {/* <div className="talkbubble-btn">
                   <Button
                     onClick={goToPrevious}
@@ -60,24 +75,26 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
                   />
                 </div> */}
 
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
                 {/* <TalkBubble
                   props={`This is a barrel which is used
                     to measure your choice.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  {`This is a barrel which is used
-                    to measure your choice.`}
-                </h2>
-
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
+                />
+
+                {/* <h2 className="e-greet">{`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit`}</h2> */}
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br />
+                  {`This is a barrel which is used to measure your choice.`}
+                </h2>
+
+                <LearnButtonState
+                  classNameA={"secondary"}
+                  classNameB={"secondary"}
                 />
               </div>
             </Queue>
@@ -87,11 +104,17 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <BarrelWidget />
-
+              <BarrelWidget className="widgets" />
               <div className="barrel_arrow">
                 <LeftPointerArrow />
               </div>
+
+              {/* <Teleprompter>
+                <BarrelWidget />
+                <div className="barrel_arrow">
+                  <LeftPointerArrow />
+                </div>
+              </Teleprompter> */}
             </Queue>
           </div>
         </div>

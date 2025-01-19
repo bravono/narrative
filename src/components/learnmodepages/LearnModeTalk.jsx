@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModeTalk({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -46,6 +47,20 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                {/* <Teleprompter
+                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+                /> */}
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
+                  Exit.`}
+                </h2>
+
                 {/* <div className="talkbubble-btn">
                   <Button
                     onClick={goToPrevious}
@@ -70,16 +85,16 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
                     phrases or sentences.`}
                 /> */}
 
-                <h2 className="learn-text">
+                {/* <h2 className="learn-text">
                   {`This allows you to engage
                     in conversation using preset
                     phrases or sentences.`}
-                </h2>
+                </h2> */}
 
-                <EdgeStanding
+                {/* <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
-                />
+                /> */}
               </div>
             </Queue>
           </div>
@@ -87,10 +102,31 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
           <div className="talk_horizontal_arrow">
             <PointerArrowHorizontal />
           </div>
+
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <h2 className="learn-text">
+                {`TALK`}
+                <br />
+                {`A respondent can verbalize the additional of a 
+                    choice in a ring or barrel question list. Or add a 
+                    comment in their own words to add to their insight. 
+                    A verbal ability to specify something else not listed 
+                    much like the traditional Use of as Other (specify)`}
+              </h2>
+
+              {/* <Teleprompter storyBuild={`This allows you to engage
+                    in conversation using preset
+                    phrases or sentences.`}>
+                      <LearnButtonState
+                  classNameA={"secondary"}
+                  classNameB={"secondary"}
+                />
+
+              </Teleprompter> */}
+            </Queue>
           </div>
         </div>
       </section>

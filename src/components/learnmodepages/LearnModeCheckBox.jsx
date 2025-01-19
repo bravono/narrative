@@ -60,6 +60,17 @@ export default function LearnModeCheckBox({ classNameA, classNameB }) {
                   />
                 </div> */}
 
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br/>
+                  {`This is the checkbox column which allows you to select multiple choices.`}
+                </h2>
+
                 <LearnButtonState
                   classNameA={"secondary"}
                   classNameB={"secondary"}
@@ -70,17 +81,6 @@ export default function LearnModeCheckBox({ classNameA, classNameB }) {
                     which allows you to select
                     multiple choices.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  {`This is the checkbox column
-                    which allows you to select
-                    multiple choices.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>
