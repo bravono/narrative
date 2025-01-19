@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import RightPointerArrow from "../RightPointerArrow";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModePause({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -49,6 +50,19 @@ export default function LearnModePause({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                </h2>
+
+                {/* <Teleprompter
+                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+                /> */}
+
                 {/* <div className="talkbubble-btn">
                   <Button
                     onClick={goToPrevious}
@@ -73,16 +87,16 @@ export default function LearnModePause({ classNameA, classNameB }) {
                     time being.`}
                 /> */}
 
-                <h2 className="learn-text">
+                {/* <h2 className="learn-text">
                   {`The Pause button? it allows you
                     to pause your survey for the
                     time being.`}
-                </h2>
+                </h2> */}
 
-                <EdgeStanding
+                {/* <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
-                />
+                /> */}
               </div>
             </Queue>
           </div>
@@ -90,7 +104,28 @@ export default function LearnModePause({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <h2 className="learn-text">
+                {`PAUSE`}
+                <br />
+                {`A one time, five minutes maximum for a bathroom break 
+                    or to place that takeout order. An overlay comes onto the 
+                    timer that counts down using text that goes from green to 
+                    orange to red. The button area goes blue and text changes 
+                    to say CONTINUE.`}
+              </h2>
+
+              {/* <Teleprompter
+                storyBuild={`The Pause button? it allows you
+                    to pause your survey for the
+                    time being.`}
+              >
+              <LearnButtonState
+                classNameA={"secondary"}
+                classNameB={"secondary"}
+              />
+              </Teleprompter> */}
+            </Queue>
           </div>
         </div>
       </section>

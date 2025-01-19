@@ -1,13 +1,16 @@
 .edge-standing {
-  font-size: 16px;
-  width: 45.07px;
-  height: 70.11px;
+  /* font-size: 16px;
+  width: 45.07px; */
+  font-size: 1.6rem;
+  width: 4.507rem;
+  height: fit-content;
+  text-align: center;
 }
-.edge-chair{
+.edge-chair {
   vertical-align: bottom;
 }
-.hands-back{
+.hands-back {
   position: absolute;
-  right: 8%;
+  left: 8%;
   top: 16%;
 }

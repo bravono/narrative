@@ -65,6 +65,17 @@ export default function LearnModeStickyArrowMultiple({
                     className={`${classNameB} bottom_button talk-btn-exit`}
                   />
                 </div> */}
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
+                  Exit.`}
+                  <br />
+                  {`This is the sticky arrow which
+                    identifies the multiple choice.`}
+                </h2>
 
                 <LearnButtonState
                   classNameA={"secondary"}
@@ -75,16 +86,6 @@ export default function LearnModeStickyArrowMultiple({
                   props={`This is the sticky arrow which
                     identifies the multiple choice.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  {`This is the sticky arrow which
-                    identifies the multiple choice.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>

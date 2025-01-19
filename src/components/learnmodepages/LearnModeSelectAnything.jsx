@@ -60,6 +60,20 @@ export default function LearnModeSelectAnything({ classNameA, classNameB }) {
                   />
                 </div> */}
 
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br />
+                  {`Click on anything on the interface 
+                    to learn about it.
+                    Press next to find the object if
+                    it's not here.`}
+                </h2>
+
                 <LearnButtonState
                   classNameA={"secondary"}
                   classNameB={"secondary"}
@@ -71,18 +85,6 @@ export default function LearnModeSelectAnything({ classNameA, classNameB }) {
                     Press next to find the object if
                     it's not here.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  {`Click on anything on the interface 
-                    to learn about it.
-                    Press next to find the object if
-                    it's not here.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>

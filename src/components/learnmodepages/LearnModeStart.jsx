@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import RightPointerArrow from "../RightPointerArrow";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModeStart({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -49,6 +50,19 @@ export default function LearnModeStart({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
+                  Exit.`}
+                </h2>
+                {/* <Teleprompter
+                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+                /> */}
+
                 {/* <div className="talkbubble-btn">
                   <Button
                     onClick={goToPrevious}
@@ -74,17 +88,18 @@ export default function LearnModeStart({ classNameA, classNameB }) {
                     down.`}
                 /> */}
 
-                <h2 className="learn-text">
+                {/* <h2 className="learn-text">
                   {`When you click the start button 
                     it enables you to start the 
                     survey and your time counts 
                     down.`}
-                </h2>
+                </h2> */}
 
-                <EdgeStanding
+                {/* <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
-                />
+                /> */}
+                {/* </Teleprompter> */}
               </div>
             </Queue>
           </div>
@@ -92,7 +107,24 @@ export default function LearnModeStart({ classNameA, classNameB }) {
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <h2 className="learn-text">
+                {`START`}
+                <br />
+                {`User controls when to begin`}
+              </h2>
+              {/* <Teleprompter
+                storyBuild={`When you click the start button 
+                    it enables you to start the 
+                    survey and your time counts 
+                    down.`}
+              >
+                <LearnButtonState
+                  classNameA={"secondary"}
+                  classNameB={"secondary"}
+                />
+              </Teleprompter> */}
+            </Queue>
           </div>
         </div>
       </section>

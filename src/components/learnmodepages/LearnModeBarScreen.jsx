@@ -60,6 +60,17 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
                   />
                 </div> */}
 
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br/>
+                  {`This is the Bar progress display screen.`}
+                </h2>
+
                 <LearnButtonState
                   classNameA={"secondary"}
                   classNameB={"secondary"}
@@ -69,17 +80,6 @@ export default function LearnModeBarScreen({ classNameA, classNameB }) {
                   props={`This is the Bar progress
                     display screen.`}
                 /> */}
-
-                <h2 className="learn-text">
-                  props=
-                  {`This is the Bar progress
-                    display screen.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>

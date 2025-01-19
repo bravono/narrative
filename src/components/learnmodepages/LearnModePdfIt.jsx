@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
+import LeftPointerArrow from "../LeftPointerArrow";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModePdfIt({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -46,6 +48,19 @@ export default function LearnModePdfIt({ classNameA, classNameB }) {
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
               <div className={"contents"}>
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                </h2>
+
+                {/* <Teleprompter
+                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+                /> */}
+
                 {/* <div className="talkbubble-btn">
                   <Button
                     onClick={goToPrevious}
@@ -71,28 +86,58 @@ export default function LearnModePdfIt({ classNameA, classNameB }) {
                     purpose.`}
                 /> */}
 
-                <h2 className="learn-text">
+                {/* <h2 className="learn-text">
                   {`Pdf it allows you to convert
                     your survey to pdf which can 
                     be viewed or saved for later
                     purpose.`}
-                </h2>
-
+                </h2> */}
+                {/* 
                 <EdgeStanding
                   src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                   className="hands-back"
-                />
+                /> */}
               </div>
             </Queue>
           </div>
 
-          <div className="pdf_horizontal_arrow">
+          {/* <div className="pdf_horizontal_arrow">
             <PointerArrowHorizontal />
+          </div> */}
+
+          <div className="pdf_left_arrow">
+            <LeftPointerArrow />
           </div>
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"} />
+            <Queue className={"queue answer"}>
+              <h2 className="learn-text">
+                {`PDF IT`}
+                <br />
+                {`Available upon successful end point of a Narrative 
+                  surveys generates a .dpf of the story with blanks filled 
+                  with answers up to 25 characters. Answers that exceed the 
+                  maximum display character count show a partial listing on 
+                  the storyline page and use a superscript number to correspond 
+                  to a final page that has those numbers and the response answers 
+                  to all questions as a series of footnotes. This includes choices 
+                  or choices with weights, percentages, importance values, or rankings 
+                  or ratings with the traditional version of the question placed to its 
+                  Left replacing the Sentences with blanks`}
+              </h2>
+              {/* <Teleprompter
+                storyBuild={`Pdf it allows you to convert
+                    your survey to pdf which can 
+                    be viewed or saved for later
+                    purpose.`}
+              >
+                <LearnButtonState
+                  classNameA={"secondary"}
+                  classNameB={"secondary"}
+                />
+              </Teleprompter> */}
+            </Queue>
           </div>
         </div>
       </section>

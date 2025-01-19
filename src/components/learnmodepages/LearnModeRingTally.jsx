@@ -15,10 +15,7 @@ import LearnButtonState from "./LearnButtonState";
 import RingWidget from "./LMRingWidget";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 
-export default function LearnModeRingTally({
-  classNameA,
-  classNameB
-}) {
+export default function LearnModeRingTally({ classNameA, classNameB }) {
   // const navigate = useNavigate();
 
   // const goToPrevious = () => {
@@ -64,21 +61,23 @@ export default function LearnModeRingTally({
                   />
                 </div> */}
 
+                <EdgeStanding
+                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
+                  className="hands-back"
+                />
+
+                <h2 className="edge-greet">
+                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
+                  <br />
+                  {`This is the Ring/Tally.`}
+                </h2>
+
                 <LearnButtonState
                   classNameA={"secondary"}
                   classNameB={"secondary"}
                 />
 
                 {/* <TalkBubble props={`This is the Ring/Tally.`} /> */}
-
-                <h2 className="learn-text">
-                {`This is the Ring/Tally.`}
-                </h2>
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
               </div>
             </Queue>
           </div>
