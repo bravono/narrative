@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addAndHightlightChoice } from "../../utilities/addAndHighlightChoice";
+import { addAndHighlightChoice } from "../../utilities/addAndHighlightChoice";
 import { loadSurveys, addToStory } from "../../store/surveys";
 import { savePauseTimer, saveSessionTimer } from "../../store/timers";
 import { storyAdded } from "../../store/responses";
@@ -34,7 +34,7 @@ const ActiveModePage = () => {
   const [isRunning, setIsRunning] = useState(true);
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
-  const [story, setStory] = useState();
+  const [story, setStory] = useState("");
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("Select Up to Six");
@@ -106,6 +106,11 @@ const ActiveModePage = () => {
   }, [list, lastFetch, dispatch]);
 
   useEffect(() => {
+    console.log("Updated Story", story);
+  }, [story]);
+
+  // Save timer to store every sec
+  useEffect(() => {
     if (savedSession.startTime && isRunning) {
       const elapsed = Math.floor((Date.now() - savedSession.startTime) / 1000);
       setDuration(Math.max(savedSession.remainingTime - elapsed, 0));
@@ -116,10 +121,6 @@ const ActiveModePage = () => {
       setPauseDuration(Math.max(savedPause.remainingTime - elapsed, 0));
     }
   }, [isRunning]);
-
-  useEffect(() => {
-    dispatch(storyAdded(story));
-  }, [story]);
 
   useEffect(() => {
     // Handle the back button navigation
@@ -203,7 +204,7 @@ const ActiveModePage = () => {
     };
   }, [isRecording]);
 
-  // Setting individual condition
+  // Setting individual condition for widgets and question types
   useEffect(() => {
     if (widget == "ring") {
       setRingPass(
@@ -241,6 +242,7 @@ const ActiveModePage = () => {
     }
   }, [choiceList]);
 
+  // Rate the performance of the respondent
   useEffect(() => {
     const timerInterval = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -291,7 +293,6 @@ const ActiveModePage = () => {
   };
 
   // Function to handle scrolling down
-
   const scrollDown = () => {
     if (containerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
@@ -343,68 +344,58 @@ const ActiveModePage = () => {
   };
 
   const handleAddToStory = async () => {
+    // Scroll down the story
+    animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
+
+
     // Animate the outgoing widget
     setWidgetOutAnimation("animate__bounceOut");
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
+    let processedRespondentChoice = "";
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .map((choice) => `${choice.text} (${choice.value})`)
         .join(", ")}</mark>`; // Process respondent choice to be added to story;
 
-      setStory(
-        addAndHightlightChoice(regex, storeStory, processedRespondentChoice)
-      );
       formData = [...choiceList];
     }
 
     // choseOne handle radio and triangle
     if (radioPass && !barPass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
 
-      setStory(
-        addAndHightlightChoice(regex, storeStory, processedRespondentChoice)
-      );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
     }
 
     // Handle checkbox case
     if (checkboxPass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
 
-      setStory(
-        addAndHightlightChoice(regex, storeStory, processedRespondentChoice)
-      );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
     }
 
     // This handle bar
     if (barPass) {
-      const processedRespondentChoice = `<mark>${choiceList[0].value}</mark>`;
-      setStory(
-        addAndHightlightChoice(regex, storeStory, processedRespondentChoice)
-      );
+      processedRespondentChoice = `<mark>${choiceList[0].value}</mark>`;
 
       formData = [...choiceList];
     }
 
     // Handle scale
     if (scalePass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
-      setStory(
-        addAndHightlightChoice(regex, storeStory, processedRespondentChoice)
-      );
 
       formData = choiceList.map((choice) => {
         // Find the index of the scale that is equal to 1
@@ -416,6 +407,10 @@ const ActiveModePage = () => {
         };
       });
     }
+
+    dispatch(
+      storyAdded(addAndHighlightChoice(regex, story, processedRespondentChoice))
+    );
 
     // Set all conditions to false
     setRingPass(false);
@@ -437,9 +432,7 @@ const ActiveModePage = () => {
           value: 0,
           scales: [0, 0, 0, 0, 0, 0],
         }));
-        setStory((prevStory) => {
-          return prevStory + response.story;
-        });
+        setStory(response.story);
         setQuestionType(response.blanks[0].questionType);
         setWidget(response.blanks[0].widget);
         setHeading(response.heading);
@@ -454,7 +447,7 @@ const ActiveModePage = () => {
     if (!isRunning) {
       handlePause();
     }
-    
+
     navigate("/preview");
   };
   const handleCompare = () => {
@@ -603,7 +596,7 @@ const ActiveModePage = () => {
                   />
                 ) : (
                   <Teleprompter
-                    story={storeStory}
+                    story={storeStory.length ? storeStory + "" + story : story}
                     containerRef={containerRef}
                   />
                 )}
