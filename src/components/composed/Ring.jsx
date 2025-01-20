@@ -47,7 +47,6 @@ const Ring = ({
     });
     setTotal(total);
 
-    console.log("Choice List", choiceList);
   }, [choiceList]);
 
   const handleSortToggle = () => {
