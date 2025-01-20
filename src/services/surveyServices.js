@@ -1,13 +1,13 @@
 import http from "./httpServices";
-import { apiEndpoint, testEndpoint, remoteTestEndpoint } from "../config.json";
+import { apiEndpoint, localEndpoint, remoteEndpoint } from "../config.json";
 
 export async function getSurvey(session) {
-  const survey = await http.get(remoteTestEndpoint);
+  const survey = await http.get(testEndpoint);
   return survey;
 }
 
 export async function getNextBlank(formData) {
-  const nextBlank = await http.post(remoteTestEndpoint, {
+  const nextBlank = await http.post(remoteEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
