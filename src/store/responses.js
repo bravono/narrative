@@ -16,7 +16,6 @@ const slice = createSlice({
     },
 
     storyAdded: (responses, action) => {
-      console.log("Payload",action.payload)
       if (action.payload) {
         responses.story = responses.story +" "+ action.payload;
       }
