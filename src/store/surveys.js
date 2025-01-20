@@ -12,6 +12,7 @@ const slice = createSlice({
     sessionTimer: 0,
     pauseTimer: 0,
     lastId: 0,
+    currentIndex: 0,
   },
   reducers: {
     surveyRequested: (surveys, action) => {
@@ -25,9 +26,10 @@ const slice = createSlice({
       });
       surveys.loading = false;
       surveys.lastFetch = { ...action.payload };
+      surveys.currentIndex = surveys.list.length - 2;
     },
     
-    surveyRequestFailed: (surveys, action) => {
+    surveyRequestFailed: (surveys) => {
       surveys.loading = false;
     },
 
@@ -39,7 +41,11 @@ const slice = createSlice({
       surveys.pauseTimer = action.payload;
     },
 
-   
+    moveToPreviousItem: (surveys) => {
+      if (surveys.currentIndex > 0) {
+        surveys.currentIndex -= 1; // Move to the previous item
+      }
+   }
   },
 });
 
@@ -49,6 +55,7 @@ export const {
   surveyRequestFailed,
   updateSessionTimer,
   updatePauseTimer,
+  moveToPreviousItem
 } = slice.actions;
 export default slice.reducer;
 

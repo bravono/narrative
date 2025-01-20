@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addAndHighlightChoice } from "../../utilities/addAndHighlightChoice";
-import { loadSurveys, addToStory } from "../../store/surveys";
+import {
+  loadSurveys,
+  addToStory,
+  moveToPreviousItem,
+} from "../../store/surveys";
 import { savePauseTimer, saveSessionTimer } from "../../store/timers";
 import { storyAdded } from "../../store/responses";
 import { persistor } from "../../store/configureStore";
@@ -68,16 +72,14 @@ const ActiveModePage = () => {
     scalePass;
 
   const dispatch = useDispatch();
-  const { list, lastFetch } = useSelector((state) => state.entities.surveys);
+  const { list, lastFetch, currentIndex } = useSelector(
+    (state) => state.entities.surveys
+  );
   const savedSession = useSelector(
     (state) => state.entities.timers.sessionTimer
   );
   const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
   const storeStory = useSelector((state) => state.entities.responses.story);
-
-  // Get the current item based on the currentIndex
-  const [prevQuestionIndex, setPrevQuestionIndex] = useState(list.length - 1);
-  const previousQuestion = list[prevQuestionIndex];
 
   // API call with Redux
   useEffect(() => {
@@ -85,7 +87,8 @@ const ActiveModePage = () => {
       dispatch(loadSurveys({ session }));
     }
     if (lastFetch) {
-      const data = lastFetch.reply;
+      const data = lastFetch.reply || lastFetch;
+
       const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
         // Reinitializing value to 0
         ...choice,
@@ -106,8 +109,8 @@ const ActiveModePage = () => {
   }, [list, lastFetch, dispatch]);
 
   useEffect(() => {
-    console.log("Updated Story", story);
-  }, [story]);
+    console.log(story, currentIndex, widget);
+  }, [story, widget]);
 
   // Save timer to store every sec
   useEffect(() => {
@@ -123,30 +126,49 @@ const ActiveModePage = () => {
   }, [isRunning]);
 
   useEffect(() => {
-    // Handle the back button navigation
-    if (location.state?.backNavigation) {
-      setPrevQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // Decrement index, but not below 0
-      if (previousQuestion) {
-        const data = previousQuestion.survey.reply;
-        const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-          // Reinitializing value to 0
-          ...choice,
-          value: 0,
-          scales: [0, 0, 0, 0, 0, 0],
-        }));
-        setStory(data.story);
-        setWidget(data.blanks[0].widget);
-        setHeading(data.blanks[0].columnHeaders);
-        setQuestionType(data.blanks[0].questionType);
-        setChoiceList(newChoiceList);
-        setInstruction(data.blanks.instruction);
-        // setDuration(data.durationInMin * 60);
-        setPauseDuration(data.pauseDuration * 60);
-        setCountDirection(data.countDirection);
-        setBlankName(data.blanks.blank);
+    // Push initial state to the history stack
+    window.history.pushState({ custom: true }, "custom");
+    // Listen for back button navigation
+    const handlePopState = (event) => {
+      if (event.state && event.state.custom) {
+        if (currentIndex > 0) {
+          // Dispatch an action to move to the previous item in the list
+          dispatch(moveToPreviousItem());
+          const previousQuestion = list[currentIndex] || null;
+          const data = previousQuestion.survey.reply;
+          const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+            // Reinitializing value to 0
+            ...choice,
+            value: 0,
+            scales: [0, 0, 0, 0, 0, 0],
+          }));
+          setStory(data.story);
+          setWidget(data.blanks[0].widget);
+          setHeading(data.blanks[0].columnHeaders);
+          setQuestionType(data.blanks[0].questionType);
+          setChoiceList(newChoiceList);
+          setInstruction(data.blanks.instruction);
+          // setDuration(data.durationInMin * 60);
+          setPauseDuration(data.pauseDuration * 60);
+          setCountDirection(data.countDirection);
+          setBlankName(data.blanks.blank);
+        } else {
+          window.history.back();
+        }
+      } else {
+        // Let the default navigation occur if it's not a custom state
+        window.history.back();
       }
-    }
-  }, [location.state]);
+    };
+
+    // Attach the popstate event listener
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [dispatch, currentIndex]);
 
   // Timers
   useEffect(() => {
@@ -347,7 +369,6 @@ const ActiveModePage = () => {
     // Scroll down the story
     animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
 
-
     // Animate the outgoing widget
     setWidgetOutAnimation("animate__bounceOut");
 
@@ -444,11 +465,9 @@ const ActiveModePage = () => {
   };
 
   const handlePreview = () => {
-    if (!isRunning) {
-      handlePause();
+    if (typeof storeStory === "string") {
+      navigate("/preview");
     }
-
-    navigate("/preview");
   };
   const handleCompare = () => {
     navigate("/compare");
@@ -612,7 +631,11 @@ const ActiveModePage = () => {
             <Button
               onClick={handlePreview}
               label="PREVIEW"
-              className={`middle_button primary`}
+              className={
+                typeof storeStory === "string"
+                  ? "middle_button primary"
+                  : "middle_button disabled"
+              }
             />
           </div>
           <div className="story_queue-single">
@@ -687,7 +710,7 @@ const ActiveModePage = () => {
             <Button
               label="COMPARE"
               onClick={handleCompare}
-              className={`bottom_button primary`}
+              className={`bottom_button`}
             />
             <Button
               onClick={handleTalk}
