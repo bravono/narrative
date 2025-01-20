@@ -28,11 +28,12 @@
   flex-direction: column;
 }
 .cards {
-  font-family: "Invasion2000";
+  /* font-family: "Invasion2000"; */
   display: flex;
   flex-direction: column;
   width: 35rem;
   font-size: 2.4rem;
+  font-weight: 900;
   text-align: center;
 }
 
@@ -45,17 +46,3 @@
   border-radius: 5px;
 }
 
-.my-icon::before {
-  content: ""; /* Initially empty */
-  color: transparent; /* Invisible initially */
-  font-size: 16px;
-  font-family: Invasion2000;
-  font-weight: bold;
-  white-space: nowrap;
-  transition: color 1s ease; /* Smooth transition effect */
-}
-
-.my-icon:hover::before {
-  content: "BECAUSE THE BOTS WON'T"; /* Text to display */
-  color: dodgerblue;
-}

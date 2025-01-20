@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { updateChoiceList } from "../../utilities/choiceListUpdater";
 
 
@@ -107,7 +107,7 @@ const RingDraggable = ({
             cy={size / 2}
             r={radius}
             fill="none"
-            stroke="#e6e6e6"
+            stroke="#d5d5d5"
             strokeWidth={strokeWidth}
             style={{ pointerEvents: "none" }}
           />

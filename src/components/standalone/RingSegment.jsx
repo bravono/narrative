@@ -39,7 +39,7 @@ const RingSegment = ({
         cx="60"
         cy="60"
         fill="none"
-        stroke="#e6e6e6" /* Background color */
+        stroke="#d5d5d5" /* Background color */
         strokeWidth={strokeWidth + 8}
       />
       {sortedData.map((item, index) => {

@@ -496,7 +496,7 @@ const ActiveModePage = () => {
             scales: [0, 0, 0, 0, 0, 0],
           }
       );
-      respondentChoiceList.pop(); // Remove the empty item in the array
+      // respondentChoiceList.pop(); // Remove the empty item in the array
       setChoiceList((prevChoiceList) => [
         ...respondentChoiceList,
         ...prevChoiceList,

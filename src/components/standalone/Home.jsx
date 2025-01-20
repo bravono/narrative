@@ -16,21 +16,18 @@ const Home = () => {
     <>
       <main className=" local-container ">
         <div className="logo-container">
-
           <img id="logo" src="/assets/Research_Lib_Logo.svg" alt="" />
         </div>
-       
+
+
         <div className="cards">
-          <div className="card" onClick={goToIntroduction}>Introduction</div>
-          <div className="card">
-            Ten Minute Story-Based Survey Experience
+          <div className="card" onClick={goToIntroduction}>
+            INTRODUCTION
           </div>
-          <div className="card">Self-Running Overview [SitBack and Relax]</div>
-          <div
-            className="card"
-            onClick={goToWelcomeScreen}
-          >
-            Exit
+          <div className="card">GUIDED TOUR - SELF PACE</div>
+          <div className="card"> SELF-RUNNING OVERVIEW [SIT BACK AND RELAX]</div>
+          <div className="card" onClick={goToWelcomeScreen}>
+            EXIT
           </div>
         </div>
       </main>

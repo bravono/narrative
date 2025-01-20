@@ -98,12 +98,6 @@ const Introduction = () => {
         >
           {
             <MediaComponent
-              title="Integrate Cubicon into Your Surveys:"
-              content={` Incorporate visual puzzles to validate participant authenticity and engage respondents.`}
-            />
-          }
-          {
-            <MediaComponent
               title="Design Narrative Surveys:"
               content={`  Incorporate storytelling elements into your surveys to foster respondent engagement.
 `}
