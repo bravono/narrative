@@ -1,7 +1,5 @@
 {
   "apiEndpoint": "https://dev.nsdbsurveys.com/narrative-php/natr.php",
-  "testEndpoint": "http://localhost:3000/survey",
-  "remoteTestEndpoint": "https://dev.nsdbsurveys.com/narrative-php/natr.php?sid=83dccf461692121b0d2987c9cbd7d11d&survey_style=api"
+  "localEndpoint": "http://localhost:3000/reply",
+  "remoteEndpoint": "https://dev.nsdbsurveys.com/narrative-php/natr.php?sid=83dccf461692121b0d2987c9cbd7d11d&survey_style=api"
 }
-
-
