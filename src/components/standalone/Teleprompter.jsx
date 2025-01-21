@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../../css/Teleprompter.css";
 
-const Teleprompter = ({ story, storyBuild, containerRef, children }) => {
+const Teleprompter = ({ story, containerRef, children }) => {
   return (
     <div className="teleprompter-container">
       <div
         ref={containerRef}
         className={
-          storyBuild
+          story
             ? "teleprompter-text-container"
             : "teleprompter-text-container-welcome" // Change teleprompter styling for welcome screen
         }
       >
-        { <div dangerouslySetInnerHTML={{ __html: storyBuild }} />}
+        { <div dangerouslySetInnerHTML={{ __html: story }} />}
       </div>
       {children}
     </div>

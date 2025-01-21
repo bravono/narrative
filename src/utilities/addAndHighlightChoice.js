@@ -1,4 +1,4 @@
-export function addAndHightlightChoice(regex, story, respondentChoice) {
+export function addAndHighlightChoice(regex, story, respondentChoice) {
    return story.replace(
         regex,
         (match) =>

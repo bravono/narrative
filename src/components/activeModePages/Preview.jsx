@@ -1,13 +1,14 @@
 import Footer from "../Footer";
 import Queue from "../Queue";
 import Button from "../Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "../../css/preview.css";
 
 function Preview() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const story = location.state?.storyBuild; // Access data from location state
+  const storeStory = useSelector((state) => state.entities.responses.story);
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -15,7 +16,7 @@ function Preview() {
     <main className="main-container">
       <section className="preview-container">
         <Queue className={"queue story preview-queue"}>
-          <div>{story ? <div dangerouslySetInnerHTML={{ __html: story }} /> : <p>Loading data...</p>}</div>
+        { <div dangerouslySetInnerHTML={{ __html: storeStory }} />}
         </Queue>
         <div className="preview-buttons">
           <Button

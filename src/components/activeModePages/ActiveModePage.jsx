@@ -1,26 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
-import { getNextBlank, getSurvey } from "../../services/surveyServices";
-import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addAndHightlightChoice } from "../../utilities/addAndHighlightChoice";
-import Queue from "../Queue";
-import Teleprompter from "../standalone/Teleprompter";
+import { ToastContainer } from "react-toastify";
+
+import { addAndHighlightChoice } from "../../utilities/addAndHighlightChoice";
+import Timer from "../../utilities/Timer";
+
+import {
+  loadSurveys,
+  addToStory,
+  moveToPreviousItem,
+} from "../../store/surveys";
+import { savePauseTimer, saveSessionTimer } from "../../store/timers";
+import { storyAdded } from "../../store/responses";
+import { persistor } from "../../store/configureStore";
+
 import Barrel from "../composed/Barrel";
 import Bar from "../composed/Bar";
 import Ring from "../composed/Ring";
 import Triangle from "../composed/Triangle";
+import Talk from "../composed/Talk";
+
+import Queue from "../Queue";
+import Teleprompter from "../standalone/Teleprompter";
+import Swipe from "../standalone/Swipe";
 import Logo from "../Logo";
 import Edge from "../Edge";
-import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import Talk from "../composed/Talk";
-import Swipe from "../standalone/Swipe";
 
-function ActiveModePage() {
+const ActiveModePage = () => {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null); // Ref to store the animation frame ID
   const scrollOffset = useRef(0); // Ref to track fractional scrolling
   const location = useLocation();
+  const session = location.search;
   const initialDuration = 600;
   const [widgetOutAnimation, setWidgetOutAnimation] = useState("");
   const [counterComplete, setCounterComplete] = useState(false);
@@ -30,7 +43,6 @@ function ActiveModePage() {
   const [isFollowUp, setIsFollowUp] = useState(false);
   const [error, setError] = useState("");
   const [story, setStory] = useState("");
-  const [storyBuild, setStoryBuild] = useState();
   const [questionType, setQuestionType] = useState("");
   const [widget, setWidget] = useState("");
   const [heading, setHeading] = useState("Select Up to Six");
@@ -63,107 +75,130 @@ function ActiveModePage() {
     checkboxPass ||
     scalePass;
 
-  // Fake backend for testing
+  const dispatch = useDispatch();
+  const { list, lastFetch, currentIndex } = useSelector(
+    (state) => state.entities.surveys
+  );
+  const savedSession = useSelector(
+    (state) => state.entities.timers.sessionTimer
+  );
+  const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
+  const storeStory = useSelector((state) => state.entities.responses.story);
+
+  // API call with Redux
   useEffect(() => {
-    const fetchSurvey = async () => {
-      try {
-        const survey = await getSurvey();
-        const data = survey.data;
-        console.log(data);
-        setStory(data.story);
-        setStoryBuild(data.story);
-        setQuestionType(data.blank.questionType);
-        setWidget(data.blank.widget);
-        setHeading(data.blank.heading);
-        setChoiceList(data.blank.choiceList);
-        setInstruction(data.blank.instruction);
-        setDuration(data.durationInMin * 60);
-        setPauseDuration(data.pauseDuration * 60);
-        setBlankName(data.blank.name);
-      } catch (error) {
-        toast.error("Error with POST request");
-      }
-    };
-
-    // fetchSurvey();
-  }, []);
-
-  // Initial backend call
-  useEffect(() => {
-    const fetchSurvey = async () => {
-      try {
-        const session = location.search;
-        const survey = await getSurvey(session);
-        const data = survey.data.reply;
-
-        console.log("Response", data);
-        setStory(data.story);
-        setStoryBuild(data.story);
-        setQuestionType(data.blanks[0].questionType);
-        setWidget(data.blanks[0].widget);
-        setHeading(data.heading);
-        const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
-          // Reinitializing value to 0
-          ...choice,
-          value: 0,
-          scales: [0, 0, 0, 0, 0, 0],
-        }));
-        setChoiceList(newChoiceList);
-        setInstruction(data.instruction);
-        // setDuration(data.durationInMin * 60);
-        // setPauseDuration(data.pauseDuration * 60);
-        setCountDirection(data.countDirection);
-        setBlankName(data.blanks[0].blank);
-      } catch (error) {
-        toast.error("An unexpected error occured");
-      }
-    };
-
-    fetchSurvey();
-  }, []);
-
-  // Get the next blank
-  const fetchNextBlank = async (formData) => {
-    try {
-      const newBlank = await getNextBlank(formData);
-      const data = newBlank;
-      return data;
-    } catch (error) {
-      toast.error("Error with POST request");
+    if (list.length === 0) {
+      dispatch(loadSurveys({ session }));
     }
-  };
+    if (lastFetch) {
+      const data = lastFetch.reply || lastFetch;
+
+      const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+        // Reinitializing value to 0
+        ...choice,
+        value: 0,
+        scales: [0, 0, 0, 0, 0, 0],
+      }));
+      setStory(data.story);
+      setWidget(data.blanks[0].widget);
+      setHeading(data.blanks[0].columnHeaders);
+      setQuestionType(data.blanks[0].questionType);
+      setChoiceList(newChoiceList);
+      setInstruction(data.blanks.instruction);
+      // setDuration(data.durationInMin * 60);
+      setPauseDuration(data.pauseDuration * 60);
+      setCountDirection(data.countDirection);
+      setBlankName(data.blanks.blank);
+    }
+  }, [list, lastFetch, dispatch]);
 
   useEffect(() => {
-    if (isRunning) {
-      const timerId = setInterval(() => {
-        setDuration((prevTime) => {
-          if (prevTime <= 1) {
-            clearInterval(timerId);
-            setCounterComplete(true);
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
+    console.log(story, currentIndex, widget);
+  }, [story, widget]);
 
-      return () => clearInterval(timerId);
+  // Save timer to store every sec
+  useEffect(() => {
+    if (savedSession.startTime && isRunning) {
+      const elapsed = Math.floor((Date.now() - savedSession.startTime) / 1000);
+      setDuration(Math.max(savedSession.remainingTime - elapsed, 0));
     }
 
-    if (!isRunning) {
-      const timerId = setInterval(() => {
-        setPauseDuration((prevTime) => {
-          if (prevTime <= 1) {
-            clearInterval(timerId);
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
-
-      return () => clearInterval(timerId);
+    if (savedPause.startTime && !isRunning) {
+      const elapsed = Math.floor((Date.now() - savedPause.startTime) / 1000);
+      setPauseDuration(Math.max(savedPause.remainingTime - elapsed, 0));
     }
   }, [isRunning]);
 
+  useEffect(() => {
+    // Push initial state to the history stack
+    window.history.pushState({ custom: true }, "custom");
+    // Listen for back button navigation
+    const handlePopState = (event) => {
+      if (event.state && event.state.custom) {
+        if (currentIndex > 0) {
+          // Dispatch an action to move to the previous item in the list
+          dispatch(moveToPreviousItem());
+          const previousQuestion = list[currentIndex] || null;
+          const data = previousQuestion.survey.reply;
+          const newChoiceList = data.blanks[0].choiceList.map((choice) => ({
+            // Reinitializing value to 0
+            ...choice,
+            value: 0,
+            scales: [0, 0, 0, 0, 0, 0],
+          }));
+          setStory(data.story);
+          setWidget(data.blanks[0].widget);
+          setHeading(data.blanks[0].columnHeaders);
+          setQuestionType(data.blanks[0].questionType);
+          setChoiceList(newChoiceList);
+          setInstruction(data.blanks.instruction);
+          // setDuration(data.durationInMin * 60);
+          setPauseDuration(data.pauseDuration * 60);
+          setCountDirection(data.countDirection);
+          setBlankName(data.blanks.blank);
+        } else {
+          history.back();
+        }
+      } else {
+        // Let the default navigation occur if it's not a custom state
+        history.back();
+      }
+    };
+
+    // Attach the popstate event listener
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [dispatch, currentIndex]);
+
+  // Timers
+  useEffect(() => {
+    let timerId;
+
+    if (isRunning) {
+      // Save start time and duration to Redux
+      const startTime = Date.now();
+      dispatch(saveSessionTimer({ startTime, remainingTime: duration }));
+
+      timerId = setInterval(() => {
+        setDuration((prevTime) => Math.max(prevTime - 1, 0));
+      }, 1000);
+    } else {
+      const startTime = Date.now();
+      dispatch(savePauseTimer({ startTime, remainingTime: pauseDuration }));
+
+      timerId = setInterval(() => {
+        setPauseDuration((prevTime) => Math.max(prevTime - 1, 0));
+      }, 1000);
+    }
+
+    return () => clearInterval(timerId);
+  }, [isRunning, duration, pauseDuration, dispatch]);
+
+  // Speech Recognition
   useEffect(() => {
     let recognition;
 
@@ -195,7 +230,7 @@ function ActiveModePage() {
     };
   }, [isRecording]);
 
-  // Setting individual condition
+  // Setting individual condition for widgets and question types
   useEffect(() => {
     if (widget == "ring") {
       setRingPass(
@@ -233,6 +268,7 @@ function ActiveModePage() {
     }
   }, [choiceList]);
 
+  // Rate the performance of the respondent
   useEffect(() => {
     const timerInterval = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -283,7 +319,6 @@ function ActiveModePage() {
   };
 
   // Function to handle scrolling down
- 
   const scrollDown = () => {
     if (containerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
@@ -323,7 +358,6 @@ function ActiveModePage() {
     return () => stopScrolling();
   }, []);
 
-
   const navigate = useNavigate();
 
   const handlePause = () => {
@@ -336,68 +370,57 @@ function ActiveModePage() {
   };
 
   const handleAddToStory = async () => {
+    // Scroll down the story
+    animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
+
     // Animate the outgoing widget
     setWidgetOutAnimation("animate__bounceOut");
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
+    let processedRespondentChoice = "";
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .map((choice) => `${choice.text} (${choice.value})`)
         .join(", ")}</mark>`; // Process respondent choice to be added to story;
 
-      setStoryBuild(
-        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
-      );
       formData = [...choiceList];
     }
 
     // choseOne handle radio and triangle
     if (radioPass && !barPass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
 
-      setStoryBuild(
-        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
-      );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
     }
 
     // Handle checkbox case
     if (checkboxPass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
 
-      setStoryBuild(
-        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
-      );
       formData = [...choiceList.filter((choice) => choice.value === 1)];
     }
 
     // This handle bar
     if (barPass) {
-      const processedRespondentChoice = `<mark>${choiceList[0].value}</mark>`;
-      setStoryBuild(
-        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
-      );
+      processedRespondentChoice = `<mark>${choiceList[0].value}</mark>`;
 
       formData = [...choiceList];
     }
 
     // Handle scale
     if (scalePass) {
-      const processedRespondentChoice = `<mark>${choiceList
+      processedRespondentChoice = `<mark>${choiceList
         .map((choice) => choice.text)
         .join(", ")}</mark>`;
-      setStoryBuild(
-        addAndHightlightChoice(regex, storyBuild, processedRespondentChoice)
-      );
 
       formData = choiceList.map((choice) => {
         // Find the index of the scale that is equal to 1
@@ -410,6 +433,10 @@ function ActiveModePage() {
       });
     }
 
+    dispatch(
+      storyAdded(addAndHighlightChoice(regex, story, processedRespondentChoice))
+    );
+
     // Set all conditions to false
     setRingPass(false);
     setRankRatePass(false);
@@ -421,37 +448,30 @@ function ActiveModePage() {
     setWidgetOutAnimation("");
 
     // Get the next question
-    const newTask = await fetchNextBlank(formData);
-    const response = newTask.reply;
-    console.log("Response", response.blanks[0].choiceList);
-
+    addToStory(formData)(dispatch);
+    const response = lastFetch.reply;
     if (meetOneCondition) {
       if (response.story) {
-        setStory(response.story);
-        setStoryBuild((prevStory) => {
-          return prevStory + response.story;
-        });
-        setQuestionType(response.blanks[0].questionType);
-        setWidget(response.blanks[0].widget);
-        setHeading(response.heading);
         const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
           ...choice,
           value: 0,
           scales: [0, 0, 0, 0, 0, 0],
         }));
+        setStory(response.story);
+        setQuestionType(response.blanks[0].questionType);
+        setWidget(response.blanks[0].widget);
+        setHeading(response.heading);
         setChoiceList(newChoiceList);
         setInstruction(response.instruction);
-        setDuration(response.durationInSec);
-        setCountDirection(response.countDirection);
-        setPauseDuration(response.pauseDuration * 60);
         setBlankName(response.blanks[0].blank);
       }
     }
   };
 
   const handlePreview = () => {
-    // setIsRunning((prevIsRunning) => !prevIsRunning);
-    navigate("/preview", { state: { storyBuild, duration } });
+    if (typeof storeStory === "string") {
+      navigate("/preview");
+    }
   };
   const handleCompare = () => {
     navigate("/compare");
@@ -523,6 +543,7 @@ function ActiveModePage() {
     }
   };
   const handleExit = () => {
+    persistor.purge();
     navigate("/exit");
   };
 
@@ -560,7 +581,9 @@ function ActiveModePage() {
             <Button
               label={isRunning ? "PAUSE" : "RESUME"}
               className={
-                isRunning ? "primary top_button " : "disabled top_button"
+                savedPause.remainingTime || pauseDuration > 0
+                  ? "primary top_button "
+                  : "disabled top_button"
               }
               onClick={handlePause}
             />
@@ -596,8 +619,7 @@ function ActiveModePage() {
                   />
                 ) : (
                   <Teleprompter
-                    story={story}
-                    storyBuild={storyBuild}
+                    story={storeStory.length ? storeStory + "" + story : story}
                     containerRef={containerRef}
                   />
                 )}
@@ -613,7 +635,11 @@ function ActiveModePage() {
             <Button
               onClick={handlePreview}
               label="PREVIEW"
-              className={`middle_button primary`}
+              className={
+                typeof storeStory === "string"
+                  ? "middle_button primary"
+                  : "middle_button disabled"
+              }
             />
           </div>
           <div className="story_queue-single">
@@ -688,7 +714,7 @@ function ActiveModePage() {
             <Button
               label="COMPARE"
               onClick={handleCompare}
-              className={`bottom_button primary`}
+              className={`bottom_button`}
             />
             <Button
               onClick={handleTalk}
@@ -715,6 +741,7 @@ function ActiveModePage() {
       </section>
     </main>
   );
-}
+};
 
+// Container component wraps dummy component (ActiveModePage)
 export default ActiveModePage;
