@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import { addAndHighlightChoice } from "../../utilities/addAndHighlightChoice";
+import Timer from "../../utilities/Timer";
+
 import {
   loadSurveys,
   addToStory,
@@ -11,18 +14,19 @@ import {
 import { savePauseTimer, saveSessionTimer } from "../../store/timers";
 import { storyAdded } from "../../store/responses";
 import { persistor } from "../../store/configureStore";
-import Queue from "../Queue";
-import Teleprompter from "../standalone/Teleprompter";
+
 import Barrel from "../composed/Barrel";
 import Bar from "../composed/Bar";
 import Ring from "../composed/Ring";
 import Triangle from "../composed/Triangle";
+import Talk from "../composed/Talk";
+
+import Queue from "../Queue";
+import Teleprompter from "../standalone/Teleprompter";
+import Swipe from "../standalone/Swipe";
 import Logo from "../Logo";
 import Edge from "../Edge";
-import Timer from "../../utilities/Timer";
 import Button from "../Button";
-import Talk from "../composed/Talk";
-import Swipe from "../standalone/Swipe";
 
 const ActiveModePage = () => {
   const containerRef = useRef(null);
@@ -153,11 +157,11 @@ const ActiveModePage = () => {
           setCountDirection(data.countDirection);
           setBlankName(data.blanks.blank);
         } else {
-          window.history.back();
+          history.back();
         }
       } else {
         // Let the default navigation occur if it's not a custom state
-        window.history.back();
+        history.back();
       }
     };
 
