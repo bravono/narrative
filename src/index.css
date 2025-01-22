@@ -138,7 +138,7 @@ button {
   top: -1%;
 }
 
-.at-least-three {
+.question-type__instruction {
   position: absolute;
   left: 18%;
   top: 0;
@@ -150,6 +150,15 @@ button {
   padding: 10px;
   z-index: 1000;
   border-radius: 3px;
+}
+
+@media(min-width: 500px) {
+  .question-type__instruction {
+    left: 30%;
+    top: 0;
+   
+  }
+
 }
 
 .time-group {

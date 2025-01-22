@@ -3,7 +3,7 @@
     "blanks": [
       {
         "name": "g",
-        "questionType": "singleChoice",
+        "questionType": "rank",
         "choiceList": [
           {
             "name": "item 1",

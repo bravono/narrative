@@ -66,6 +66,8 @@ const ActiveModePage = () => {
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false); // State to track scrolling status
+  const [seenCheckbox, setSeenCheckbox] = useState(false);
+  const [seenRanking, setSeenRanking] = useState(false);
 
   const meetOneCondition =
     barPass ||
@@ -382,6 +384,7 @@ const ActiveModePage = () => {
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
+      setSeenRanking(true);
       processedRespondentChoice = `<mark>${choiceList
         .map((choice) => `${choice.text} (${choice.value})`)
         .join(", ")}</mark>`; // Process respondent choice to be added to story;
@@ -401,6 +404,7 @@ const ActiveModePage = () => {
 
     // Handle checkbox case
     if (checkboxPass) {
+      setSeenCheckbox(true);
       processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
@@ -543,7 +547,7 @@ const ActiveModePage = () => {
     }
   };
   const handleExit = () => {
-    persistor.purge();
+    persistor.purge(); // Remove activities from the browser
     navigate("/exit");
   };
 
@@ -646,9 +650,11 @@ const ActiveModePage = () => {
             <Queue className={"queue answer"}>
               {widget === "barrel" && !isScrolling ? (
                 <>
-                  {!checkboxPass && selectUptoThree ? (
-                    <div className="at-least-three">
-                      Select at least 3 to proceed
+                  {(!seenCheckbox || !seenRanking) && (selectUptoThree || !rankRatePass) ? (
+                    <div className="question-type__instruction">
+                      {questionType === "multipleChoice"
+                        ? "Select at least 3 to proceed"
+                        : "Rank all items to proceed"}
                     </div>
                   ) : (
                     ""
