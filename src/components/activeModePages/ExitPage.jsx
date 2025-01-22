@@ -7,7 +7,7 @@ function Exit({ redirect }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate(redirect || "/welcome"); 
+      navigate(redirect || "/"); 
     }, 1000); 
 
     return () => clearTimeout(timer); 
