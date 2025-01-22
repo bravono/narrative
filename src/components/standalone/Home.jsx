@@ -12,6 +12,11 @@ const Home = () => {
     navigate("/introduction");
   };
 
+  const closeWebsite = () => {
+    console.log("Hello World")
+    window.history.back();
+  }
+
   return (
     <>
       <main className=" local-container ">
@@ -24,9 +29,9 @@ const Home = () => {
           <div className="card" onClick={goToIntroduction}>
             INTRODUCTION
           </div>
-          <div className="card">GUIDED TOUR - SELF PACE</div>
-          <div className="card"> SELF-RUNNING OVERVIEW [SIT BACK AND RELAX]</div>
-          <div className="card" onClick={goToWelcomeScreen}>
+          <div className="card" onClick={goToWelcomeScreen}>GUIDED TOUR - SELF PACE</div>
+          <div className="card" > SELF-RUNNING OVERVIEW [SIT BACK AND RELAX] </div>
+          <div className="card" onClick={closeWebsite}>
             EXIT
           </div>
         </div>

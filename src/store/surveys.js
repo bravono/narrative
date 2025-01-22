@@ -64,7 +64,7 @@ export const loadSurveys = (queryParams = {}) => (dispatch, getState) => {
 
   dispatch(
     apiCallBegan({
-      url: remoteEndpoint,
+      url: localEndpoint,
       onStart: surveyRequested.type,
       onSuccess: surveyReceived.type,
       onError: surveyRequestFailed.type,
