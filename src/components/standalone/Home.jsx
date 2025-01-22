@@ -12,10 +12,9 @@ const Home = () => {
     navigate("/introduction");
   };
 
-  const closeWebsite = () => {
-    console.log("Hello World")
-    window.history.back();
-  }
+  // const closeWebsite = () => {
+  //   window.close();
+  // }
 
   return (
     <>
@@ -31,9 +30,9 @@ const Home = () => {
           </div>
           <div className="card" onClick={goToWelcomeScreen}>GUIDED TOUR - SELF PACE</div>
           <div className="card" > SELF-RUNNING OVERVIEW [SIT BACK AND RELAX] </div>
-          <div className="card" onClick={closeWebsite}>
+          {/* <div className="card" onClick={closeWebsite}>
             EXIT
-          </div>
+          </div> */}
         </div>
       </main>
     </>
