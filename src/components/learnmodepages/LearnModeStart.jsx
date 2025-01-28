@@ -47,60 +47,14 @@ export default function LearnModeStart({ classNameA, classNameB }) {
 
       <section className="middle-section">
         <div className="body_content">
-          <div className="story_queue-group learn-mode">
+          <div className="story_queue-group">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
-                  Exit.`}
-                </h2>
-                {/* <Teleprompter
-                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-                /> */}
-
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`When you click the start button 
-                    it enables you to start the 
-                    survey and your time counts 
-                    down.`}
-                /> */}
-
-                {/* <h2 className="learn-text">
-                  {`When you click the start button 
-                    it enables you to start the 
-                    survey and your time counts 
-                    down.`}
-                </h2> */}
-
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                /> */}
-                {/* </Teleprompter> */}
-              </div>
+               <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 
@@ -113,17 +67,6 @@ export default function LearnModeStart({ classNameA, classNameB }) {
                 <br />
                 {`User controls when to begin`}
               </h2>
-              {/* <Teleprompter
-                storyBuild={`When you click the start button 
-                    it enables you to start the 
-                    survey and your time counts 
-                    down.`}
-              >
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-              </Teleprompter> */}
             </Queue>
           </div>
         </div>

@@ -14,6 +14,7 @@ import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import BarrelWidget from "./LMBarrelWidget";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
+import Teleprompter from "../standalone/Teleprompter";
 
 export default function LearnModeAddChoice({ classNameA, classNameB }) {
   // const navigate = useNavigate();
@@ -46,44 +47,12 @@ export default function LearnModeAddChoice({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
-                  <br />
-                  {`This is the add choice button
-                    that allows you to add different
-                    choices.`}
-                </h2>
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`This is the add choice button
-                    that allows you to add different
-                    choices.`}
-                /> */}
-              </div>
+            <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 

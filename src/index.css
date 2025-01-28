@@ -92,9 +92,21 @@ button {
 }
 
 .middle-section {
+  position: relative;
   display: flex;
   width: 100%;
 }
+
+.body_content {
+  margin: 0 10px;
+}
+
+.story_queue-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .bottom-section {
   bottom: 0;
 }
@@ -178,8 +190,7 @@ button {
 }
 
 .animated-image {
-  position: relative;
-  animation: backAndForth 2s infinite linear;
+  /* animation: backAndForth 2s infinite linear; */
 }
 
 .sideways {
@@ -229,6 +240,11 @@ button {
   height: 20px;
   width: 20px;
   align-items: center;
+}
+
+.pointer-arrow {
+  width: 20px;
+  height: 20px;
 }
 
 

@@ -16,18 +16,8 @@ import BarrelWidget from "./LMBarrelWidget";
 import LeftPointerArrow from "../LeftPointerArrow";
 import Teleprompter from "../standalone/Teleprompter";
 
-export default function LearnModeBarrel({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
-
-  // const goToPrevious = () => {
-  // alert("Routing to LearnModeExit");
-  // navigate("/LearnModeExit");
-  // };
-
-  // const goToNext = () => {
-  // alert("Routing to LearnModeToggle");
-  // navigate("/LearnModeToggle");
-  // };
+export default function LearnModeBarrel() {
+  
 
   return (
     <main className="main-container">
@@ -47,56 +37,12 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-                <Teleprompter
-                  storyBuild={`This is a barrel which is used
-                    to measure your choice.`}
-                >
-                  
-                  <LearnButtonState
-                    classNameA={"secondary"}
-                    classNameB={"secondary"}
-                  />
-                </Teleprompter> */}
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                {/* <TalkBubble
-                  props={`This is a barrel which is used
-                    to measure your choice.`}
-                /> */}
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-
-                {/* <h2 className="e-greet">{`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit`}</h2> */}
-
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
-                  <br />
-                  {`This is a barrel which is used to measure your choice.`}
-                </h2>
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-              </div>
+            <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 
@@ -109,12 +55,7 @@ export default function LearnModeBarrel({ classNameA, classNameB }) {
                 <LeftPointerArrow />
               </div>
 
-              {/* <Teleprompter>
-                <BarrelWidget />
-                <div className="barrel_arrow">
-                  <LeftPointerArrow />
-                </div>
-              </Teleprompter> */}
+             
             </Queue>
           </div>
         </div>

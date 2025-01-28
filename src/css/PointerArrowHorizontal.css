@@ -1,6 +1,6 @@
 .Pointer-image {
-  position: relative;
-  animation: backAndForth 2s infinite linear;
+ position: absolute;
+  /* animation: backAndForth 2s infinite linear; */
 }
 
 .Pointer-image.left,

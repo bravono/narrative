@@ -15,18 +15,8 @@ import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 import Teleprompter from "../standalone/Teleprompter";
 
-export default function LearnModeTalk({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
+export default function LearnModeTalk() {
 
-  // const goToPrevious = () => {
-  //   alert("Routing to LearnModeCompare");
-  //   navigate("/LearnModeCompare");
-  // };
-
-  // const goToNext = () => {
-  //   alert("Routing to LearnModePdfIt");
-  //   navigate("/LearnModePdfIt");
-  // };
 
   return (
     <main className="main-container">
@@ -46,56 +36,12 @@ export default function LearnModeTalk({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-
-                {/* <Teleprompter
-                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-                /> */}
-
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
-                  Exit.`}
-                </h2>
-
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn button-small`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit button-small`}
-                  />
-                </div> */}
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`This allows you to engage
-                    in conversation using preset
-                    phrases or sentences.`}
-                /> */}
-
-                {/* <h2 className="learn-text">
-                  {`This allows you to engage
-                    in conversation using preset
-                    phrases or sentences.`}
-                </h2> */}
-
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                /> */}
-              </div>
+            <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 

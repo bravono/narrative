@@ -1,18 +1,7 @@
-.body_content {
-  width: 100%;
-  /* margin: 0 10px; */
-  margin: 0 1rem;
-}
 
-.story_queue-group {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.learn-mode {
-  display: flex;
-  justify-content: end;
-}
+
+
+
 .story_queue-single {
   display: flex;
   justify-content: end;
@@ -20,19 +9,16 @@
 .contents {
   display: flex;
 }
-.talkbubble-btn {
+.learn_mode_navigator {
   position: relative;
+  top: -20%;
+  left: 35%
 }
 
 .talk-btn-learn,
 .talk-btn-exit,
 .talk-btn-next {
   position: absolute;
-  /*top: 30px;
-   font-size: 8.97px;
-  width: 55.6px;
-  height: 19.84px;
-  padding: 5px; */
   top: 3rem;
   font-size: 0.897rem;
   width: 5.56rem;
@@ -153,43 +139,23 @@
   top: 7.5rem;
   z-index: 5;
 }
-/* 
-.add_story_horizontal_arrow {
-  position: absolute;
-  left: -10px;
-  top: 270px;
-  z-index: 5;
-} */
-.add_story_left_arrow {
-  position: absolute;
-  /* left: 145px;
-  top: 210px; */
-  left: 14.5rem;
-  top: 21rem;
-  z-index: 5;
-}
+
+
 
 .preview_horizontal_arrow {
   position: absolute;
-  /* right: 145px;
-  top: 210px; */
+
   right: 14.5rem;
   top: 21rem;
   z-index: 5;
 }
 
-/* .compare_horizontal_arrow {
-  position: absolute;
-  left: -10px;
-  bottom: 60px;
-  z-index: 5;
-} */
+
 .compare_left_arrow {
   position: absolute;
-  /* left: 109px;
-  bottom: 60px; */
+ 
   left: 10.9rem;
-  bottom: 6rem;
+  bottom: -3rem;
   z-index: 5;
 }
 
@@ -360,7 +326,6 @@
     height: 41rem;
   }
 
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 250px; */
     top: 25rem;
@@ -428,12 +393,10 @@
   .hands-back{
     top: 18rem;
   }
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 330px; */
     top: 33rem;
   }
-  .compare_left_arrow,
   .talk_horizontal_arrow {
     /* bottom: 115px; */
     bottom: 11.5rem;
@@ -543,12 +506,10 @@
     top: 14rem;
     font-size: 1.4rem;
   }
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 310px; */
     top: 31rem;
   }
-  .compare_left_arrow,
   .talk_horizontal_arrow {
     /* bottom: 100px; */
     bottom: 10rem;
@@ -638,12 +599,10 @@
     top: 14.5rem;
     font-size: 1.3rem;
   }
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 310px; */
     top: 32rem;
   }
-  .compare_left_arrow,
   .talk_horizontal_arrow {
     /* bottom: 100px; */
     bottom: 11rem;
@@ -756,12 +715,10 @@
     font-size: 1.6rem;
     line-height: 2.2rem;
   }
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 274px; */
     top: 27.4rem;
   }
-  .compare_left_arrow,
   .talk_horizontal_arrow {
     /* bottom: 80px; */
     bottom: 8rem;
@@ -853,12 +810,10 @@
   .hands-back {
     top: 4.5rem;
   }
-  .add_story_left_arrow,
   .preview_horizontal_arrow {
     /* top: 165px; */
     top: 16.5rem;
   }
-  .compare_left_arrow,
   .talk_horizontal_arrow {
     /* bottom: 12px; */
     bottom: 1.2rem;
@@ -880,4 +835,12 @@
     top: 22.5rem;
     right: 14rem;
   }
+}
+
+/*My CSS*/
+.add_story_left_arrow{
+  position: absolute;
+  top: 160px;
+  left: 150px;
+  z-index: 101;
 }

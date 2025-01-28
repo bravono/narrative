@@ -8,7 +8,7 @@ function PointerArrowHorizontal({ direction }) {
   return (
     <img
       src="/assets/PointerArrow.svg"
-      className={"Pointer-image ${direction}"}
+      className="Pointer-image"
       style={{ transform: transform[direction] || "rotate(90deg)" }}
     />
   );

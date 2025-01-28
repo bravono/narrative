@@ -15,18 +15,8 @@ import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 import Teleprompter from "../standalone/Teleprompter";
 
-export default function LearnModeExit({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
+export default function LearnModeExit() {
 
-  // const goToPrevious = () => {
-  //   alert("Routing to LearnModePdfIt");
-  //   navigate("/LearnModePdfIt");
-  // };
-
-  // const goToNext = () => {
-  //   alert("Routing to LearnModeBarrel");
-  //   navigate("/LearnModeBarrel");
-  // };
 
   return (
     <main className="main-container">
@@ -46,54 +36,12 @@ export default function LearnModeExit({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
-                </h2>
-
-                {/* <Teleprompter
-                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-                /> */}
-
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`The exit button allows you to
-                    leave the survey after you are
-                    done with the survey.`}
-                /> */}
-
-                {/* <h2 className="learn-text">
-                  {`The exit button allows you to
-                    leave the survey after you are
-                    done with the survey.`}
-                </h2> */}
-
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                /> */}
-              </div>
+            <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 
@@ -110,15 +58,7 @@ export default function LearnModeExit({ classNameA, classNameB }) {
                 {`(We don’t ask for confirmation. If you press it, we are sorry to see you go, but “Goodbye”)`}
               </h2>
 
-              {/* <Teleprompter storyBuild={`The exit button allows you to
-                    leave the survey after you are
-                    done with the survey.`}>
-                      <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-              </Teleprompter> */}
+             
             </Queue>
           </div>
         </div>

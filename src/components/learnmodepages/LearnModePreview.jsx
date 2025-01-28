@@ -15,18 +15,8 @@ import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 import Teleprompter from "../standalone/Teleprompter";
 
-export default function LearnModePreview({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
-
-  // const goToPrevious = () => {
-  //   alert("Routing to LearnModeAddToStory");
-  //   navigate("/LearnModeAddToStory");
-  // };
-
-  // const goToNext = () => {
-  //   alert("Routing to LearnModeCompare");
-  //   navigate("/LearnModeCompare");
-  // };
+export default function LearnModePreview() {
+  
 
   return (
     <main className="main-container">
@@ -43,63 +33,21 @@ export default function LearnModePreview({ classNameA, classNameB }) {
       </section>
 
       <section className="middle-section">
+              <PointerArrowHorizontal />
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click Exit.`}
-                </h2>
-
-                {/* <Teleprompter
-                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-                /> */}
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`The preview button allows you
-                    to preview the survey you
-                    worked on.`}
-                /> */}
-
-                {/* <h2 className="learn-text">
-                  {`The preview button allows you
-                    to preview the survey you
-                    worked on.`}
-                </h2> */}
-
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                /> */}
-              </div>
+            <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 
-          <div className="preview_horizontal_arrow">
-            <PointerArrowHorizontal />
-          </div>
+     
+          
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">

@@ -3,29 +3,16 @@ import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
 import Queue from "../Queue";
-import TalkBubble from "../TalkBubble";
 import TopButton from "../composed/TopButton";
 import "../../css/LearnModePage.css";
 import EdgeStanding from "../EdgeStanding";
 import Timer from "../../utilities/Timer";
 import Logo from "../Logo";
-import { useNavigate } from "react-router-dom";
-import Button from "../Button";
 import LearnButtonState from "./LearnButtonState";
 import PointerArrowHorizontal from "../PointerArrowHorizontal";
 import Teleprompter from "../standalone/Teleprompter";
 
-export default function LearnModeTimer({ classNameA, classNameB }) {
-  // const navigate = useNavigate();
-  // // const goToPrevious = () => {
-  //   alert("Routing to WelcomePageLM");
-  //   navigate("/");
-  // };
-
-  // const goToNext = () => {
-  //   alert("Routing to LearnModeStart");
-  //   navigate("/LearnModeStart");
-  // };
+export default function LearnModeTimer() {
 
   return (
     <main className="main-container">
@@ -47,55 +34,14 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
 
       <section className="middle-section">
         <div className="body_content">
-          <div className="story_queue-group learn-mode">
+          <div className="story_queue-group ">
             <Queue className={"queue question"}>
-              <div className={"contents"}>
-                {/* <div className="talkbubble-btn">
-                  <Button
-                    onClick={goToPrevious}
-                    label="PREVIOUS"
-                    className={`${classNameA} bottom_button talk-btn-learn`}
-                  />
-                  <Button
-                    onClick={goToNext}
-                    label="NEXT"
-                    className={`${classNameB} bottom_button talk-btn-exit`}
-                  />
-                </div> */}
-
-                <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                />
-                {/* <Teleprompter
-                  storyBuild={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-                /> */}
-                <h2 className="edge-greet">
-                  {`Hi! I'm Edge, you're currently in Learn Mode. To Exit, Click
-                  Exit.`}
-                </h2>
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-
-                {/* <TalkBubble
-                  props={`This is the timer, it tells you the
-                    amount of time which you have
-                    elapsed while using the survey.`}
-                /> */}
-
-                {/* <h2 className="learn-text">
-                  {`This is the timer, it tells you the
-                    amount of time which you have
-                    elapsed while using the survey.`}
-                </h2> */}
-
-                {/* <EdgeStanding
-                  src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
-                  className="hands-back"
-                /> */}
-              </div>
+              <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
+              <Teleprompter
+                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
+              >
+              <LearnButtonState />
+              </Teleprompter>
             </Queue>
           </div>
 
@@ -110,16 +56,6 @@ export default function LearnModeTimer({ classNameA, classNameB }) {
                   Progress status
                 `}
               </h2>
-              {/* <Teleprompter
-                storyBuild={`This is the timer, it tells you the
-                    amount of time which you have
-                    elapsed while using the survey.`}
-              >
-                <LearnButtonState
-                  classNameA={"secondary"}
-                  classNameB={"secondary"}
-                />
-              </Teleprompter> */}
             </Queue>
           </div>
         </div>
