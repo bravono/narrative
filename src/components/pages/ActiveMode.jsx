@@ -28,7 +28,7 @@ import Logo from "../Logo";
 import Edge from "../Edge";
 import Button from "../Button";
 
-const ActiveModePage = () => {
+const ActiveMode = () => {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null); // Ref to store the animation frame ID
   const scrollOffset = useRef(0); // Ref to track fractional scrolling
@@ -750,4 +750,4 @@ const ActiveModePage = () => {
 };
 
 // Container component wraps dummy component (ActiveModePage)
-export default ActiveModePage;
+export default ActiveMode;

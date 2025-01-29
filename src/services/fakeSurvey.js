@@ -1,8 +1,6 @@
-import Ring from "../composed/Ring";
-
-export default function RingWidget() {
-  const heading = "heading";
-  const choiceList = [
+const fakeSurvey = {
+  heading: "heading",
+  choiceList: [
     {
       name: "item 1",
       text: "Kano",
@@ -21,17 +19,14 @@ export default function RingWidget() {
       value: 0,
       scales: [0, 0, 0, 0, 0, 0],
     },
-  ];
-  const questionType = [
+  ],
+  questionType: [
     "multipleChoice",
     "singleChoice",
-    "rating",
-    "ranking",
-    "scale",
-  ];
-  const instruction = "Your instruction";
+    "rate",
+    "rank",
+  ],
+  instruction: "Your instruction",
+};
 
-  return (
-    <Ring heading={heading} choiceList={choiceList} instruction={instruction} />
-  );
-}
+export default fakeSurvey;
