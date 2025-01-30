@@ -12,10 +12,6 @@ const Home = () => {
     navigate("/introduction");
   };
 
-  // const closeWebsite = () => {
-  //   window.close();
-  // }
-
   return (
     <>
       <main className=" local-container ">
@@ -30,9 +26,7 @@ const Home = () => {
           </div>
           <div className="card" onClick={goToWelcomeScreen}>GUIDED TOUR - SELF PACE</div>
           <div className="card" > SELF-RUNNING OVERVIEW [SIT BACK AND RELAX] </div>
-          {/* <div className="card" onClick={closeWebsite}>
-            EXIT
-          </div> */}
+          
         </div>
       </main>
     </>
