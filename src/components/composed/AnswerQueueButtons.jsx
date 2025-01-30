@@ -87,7 +87,7 @@ export default function AnswerQueueButtons({
         <Button
           onClick={handleAddChoice}
           className={`${classAddAChoice} button-small`}
-          label={isRecording ? "Transcribing..." : "ADD A CHOICE"}
+          label={isRecording ? "Transcribing..." : "OTHERS (Specify)"}
         />
         {canRoundup ? (
           <Button
