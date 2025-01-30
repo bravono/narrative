@@ -23,30 +23,34 @@ import fakeSurvey from "../../services/fakeSurvey";
 import "../../css/LearnMode.css";
 
 export default function LearnMode() {
-  const currentIndex = useSelector((state) => state.entities.elements.index);
-  const currentQuestionTypeIndex = useSelector((state) => state.entities.elements.questionTypeIndex);
-  const left = elements[currentIndex].position.left;
-  const top = elements[currentIndex].position.top;
-  const rotation = elements[currentIndex].rotation;
-  const title = elements[currentIndex].title;
-  const description = elements[currentIndex].description;
-  const widget = elements[currentIndex].widget;
+  const index = useSelector((state) => state.entities.elements.index);
+  const questionTypeIndex = useSelector(
+    (state) => state.entities.elements.questionTypeIndex
+  );
+  const left = elements[index].position.left;
+  const top = elements[index].position.top;
+  const rotation = elements[index].rotation;
+  const title = elements[index].title;
+  const description = elements[index].description;
+  const widget = elements[index].widget;
+  const style = "to_" + elements[index].name
+  console.log("Style:", style)
 
   const choiceList = fakeSurvey.choiceList;
   const heading = fakeSurvey.heading;
-  const questionType = fakeSurvey.questionType[currentQuestionTypeIndex];
+  const questionType = fakeSurvey.questionType[questionTypeIndex];
   const instruction = fakeSurvey.instruction;
+
 
   return (
     <main className="main-container">
+      <ArrowPointer style={style} rotation={rotation} />
       <section className="top-section">
         <div className="logo">
           <Logo />
         </div>
         <div className="header">
           <EdgeChair />
-
-          <ArrowPointer left={left} top={top} rotation={rotation} />
 
           <Timer duration={600} label={"PENDING"} />
           <TopButton classNameA={"learn"} classNameB={"learn"} />
@@ -58,9 +62,11 @@ export default function LearnMode() {
           <div className="story_queue-group ">
             <Queue className={"queue question"}>
               <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
-              <Teleprompter
-                story={`Hello I'm Edge and You are currently in Learn Mode to exit press the Exit button`}
-              >
+              <Teleprompter>
+                <p>
+                  Hello I'm Edge and you are currently in <span>Learn Mode</span> to exit
+                  press the <span>EXIT</span> button.
+                </p>
                 <NavigatorButtons />
               </Teleprompter>
             </Queue>
@@ -85,9 +91,9 @@ export default function LearnMode() {
                 />
               ) : (
                 <p>
-                  {title}
+                  <span>{title}</span>
                   <br />
-                  {description}
+                  {description}.
                 </p>
               )}
             </Queue>

@@ -8,7 +8,8 @@
   --left-margin: 5rem;
 }
 
-html, body {
+html,
+body {
   overscroll-behavior: none;
 }
 
@@ -20,7 +21,6 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 body {
@@ -69,20 +69,26 @@ button {
   user-select: none;
 }
 
+.welcome-text {
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
 .top-section {
   margin: -1rem;
   width: 100%;
   margin-bottom: 10px;
-  
 }
 
-@media (min-width: 730px )  {
+@media (min-width: 730px) {
   .top-section {
     margin: -1rem;
     width: 100%;
     margin-bottom: 10px;
   }
-
 }
 
 @media (max-height: 740px) {
@@ -146,7 +152,7 @@ button {
 
 .logo {
   position: absolute;
-  right: .5rem;
+  right: 0.5rem;
   top: -1%;
 }
 
@@ -164,13 +170,11 @@ button {
   border-radius: 3px;
 }
 
-@media(min-width: 500px) {
+@media (min-width: 500px) {
   .question-type__instruction {
     left: 30%;
     top: 0;
-   
   }
-
 }
 
 .time-group {
@@ -187,10 +191,6 @@ button {
 .arrow {
   margin-top: 27px;
   margin-right: 12px;
-}
-
-.animated-image {
-  /* animation: backAndForth 2s infinite linear; */
 }
 
 .sideways {
@@ -213,8 +213,6 @@ button {
   100% {
     left: 0;
   }
-
-  
 }
 
 .arrow-up {
@@ -246,7 +244,3 @@ button {
   width: 20px;
   height: 20px;
 }
-
-
-
-

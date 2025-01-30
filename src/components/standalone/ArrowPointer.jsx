@@ -1,11 +1,13 @@
 import "../../css/ArrowPointer.css";
-function ArrowPointer({ left, top, rotation }) {
-  
+function ArrowPointer({ style, rotation }) {
   return (
     <img
       src="/assets/PointerArrow.svg"
-      className="arrow_pointer"
-      style={{ position: "absolute", left: left, top: top, transform: rotation || "rotate(90deg)" }}
+      className={`${style} arrow_pointer animate__animated animate__fadeIn animate__infinite to_timer`}
+      style={{
+        position: "absolute",
+        transform: rotation || "rotate(90deg)",
+      }}
     />
   );
 }

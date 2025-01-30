@@ -43,7 +43,7 @@ export default function NavigatorButtons() {
 
       <Button
         onClick={() => {
-          navigate("/exit");
+          navigate(-1);
         }}
         label="EXIT"
         className={`talk-btn-exit exittext`}

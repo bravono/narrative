@@ -7,10 +7,12 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5); /* Added inner shadow */
 }
 
-.welcome, .question {
-  width: 95%;
+.welcome,
+.question {
+  width: 100%;
   padding: 1rem;
   font-size: 2rem;
   height: 18vh;
@@ -29,7 +31,4 @@
     position: relative;
     height: 49vh;
   }
-
 }
-
-

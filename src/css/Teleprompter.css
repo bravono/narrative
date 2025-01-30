@@ -24,8 +24,6 @@
   );
 }
 
-
-
 .text-line {
   transition: opacity 0.8s, font-size 0.3s;
   margin: 0.1rem;

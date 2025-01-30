@@ -4,7 +4,7 @@ const elements = [
     title: "COUNT UP OR COUNT DOWN TIMER",
     description: "Keeps track of time and displays Progress status",
     rotation: "",
-    position: { left: "20px", top: "20px" },
+    position: { left: "8%", top: "5%" },
     widget: "",
   },
   {
@@ -37,7 +37,7 @@ const elements = [
                 a widget below it is also blue to allow someone to move the answer up 
                 with a touch rather than a swipe`,
     rotation: "rotate(-90deg)",
-    position: { left: "140px", top: "250px" },
+    position: { left: "140px", top: "210px" },
     widget: "",
   },
   {
@@ -48,7 +48,7 @@ const elements = [
                     Use Roll to Scroll arrows to move earlier or later. Simply click 
                     outside the Answer Queue to make it disappear`,
     rotation: "",
-    position: { left:"80%", top: "250px" },
+    position: { left:"80%", top: "210px" },
     widget: "",
   },
   {
@@ -67,7 +67,7 @@ const elements = [
                 respondent To the right. The button remains blue, and The text is changed 
                 to say Continue`,
     rotation: "rotate(-90deg)",
-    position: { left: "100px", top: "720px" },
+    position: { left: "30%", top: "87%" },
     widget: "",
   },
   {

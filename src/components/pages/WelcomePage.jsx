@@ -9,7 +9,6 @@ import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import Button from "../Button";
-import "../../css/LearnMode.css";
 
 export default function WelcomePageLM({ classNameA, classNameB }) {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
         <div className="body_content">
           <div className="story_queue-group learn-mode">
             <Queue className={"queue question"}>
-              <div className="learn-welcome-text">{"Welcome!"}</div>
+              <div className="welcome-text">{"Welcome!"}</div>
               <EdgeStanding
                 src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                 className="hands-back"
@@ -51,10 +50,12 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
 
           <div className="story_queue-single">
             <Queue className={"queue answer"}>
-              <div className="learn-welcome-text">
-                {
-                  "You can go start your survey by clicking the above START button or click the LEARN button to explore the different buttons and areas offered by Research Libs."
-                }
+              <div className="welcome-text">
+                <p>
+                  "You can go start your survey by clicking the above START
+                  button or click the LEARN button to explore the different
+                  buttons and areas offered by Research Libs."
+                </p>
                 <Button
                   onClick={handleLearn}
                   label="LEARN"
