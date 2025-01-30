@@ -7,8 +7,9 @@ function Exit({ redirect }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate(redirect || "/"); 
-    }, 1000); 
+      window.location.href = redirect || "https://www.google.com";
+ 
+    }, 5000); 
 
     return () => clearTimeout(timer); 
   }, [navigate, redirect]);

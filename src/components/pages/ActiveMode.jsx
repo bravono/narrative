@@ -62,10 +62,11 @@ const ActiveMode = () => {
   const [ringPass, setRingPass] = useState(false);
   const [radioPass, setRadioPass] = useState(false);
   const [checkboxPass, setCheckboxPass] = useState(false);
-  const [selectUptoThree, setSelectUptoThree] = useState(0);
+  const [selectEnough, setSelectEnough] = useState(false);
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false); // State to track scrolling status
+  const [scrollingSpeed, setScrollingSpeed] = useState(0.3); // State to track scrolling speed
   const [seenCheckbox, setSeenCheckbox] = useState(false);
   const [seenRanking, setSeenRanking] = useState(false);
 
@@ -114,9 +115,7 @@ const ActiveMode = () => {
     }
   }, [list, lastFetch, dispatch]);
 
-  useEffect(() => {
-    console.log(story, currentIndex, widget);
-  }, [story, widget]);
+  useEffect(() => {}, [story, widget]);
 
   // Save timer to store every sec
   useEffect(() => {
@@ -251,7 +250,7 @@ const ActiveMode = () => {
     if (questionType === "multipleChoice") {
       const list = choiceList.filter((choice) => choice.value === 1).length;
       setCheckboxPass(list >= 3);
-      setSelectUptoThree(list < 3 && list >= 1);
+      setSelectEnough(list < 3 && list >= 1);
     }
 
     if (widget == "bar") {
@@ -328,7 +327,7 @@ const ActiveMode = () => {
       // Check if there's more content to scroll
       if (scrollTop + clientHeight < scrollHeight) {
         setIsScrolling(true); // Set scrolling to active
-        scrollOffset.current += 0.3; // Accumulate fractional scrolling
+        scrollOffset.current += scrollingSpeed; // Accumulate fractional scrolling
 
         if (scrollOffset.current >= 1) {
           const scrollAmount = Math.floor(scrollOffset.current);
@@ -361,6 +360,10 @@ const ActiveMode = () => {
   }, []);
 
   const navigate = useNavigate();
+  const handleStart = () => {
+    persistor.purge(); // Remove activities from the browser
+    window.location.reload(); // Reload the page
+  };
 
   const handlePause = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
@@ -475,6 +478,7 @@ const ActiveMode = () => {
   const handlePreview = () => {
     if (typeof storeStory === "string") {
       navigate("/preview");
+      setScrollingSpeed(5);
     }
   };
   const handleCompare = () => {
@@ -547,8 +551,8 @@ const ActiveMode = () => {
     }
   };
   const handleExit = () => {
-    persistor.purge(); // Remove activities from the browser
     navigate("/exit");
+    persistor.purge(); // Remove activities from the browser
   };
 
   const handleUpdateChoiceList = (data) => {
@@ -581,7 +585,11 @@ const ActiveMode = () => {
           )}
 
           <div className="top_button-group">
-            <Button label="START" className={"disabled top_button"} />
+            <Button
+              label="START"
+              className={"disabled top_button"}
+              onClick={handleStart}
+            />
             <Button
               label={isRunning ? "PAUSE" : "RESUME"}
               className={
@@ -650,15 +658,21 @@ const ActiveMode = () => {
             <Queue className={"queue answer"}>
               {widget === "barrel" && !isScrolling ? (
                 <>
-                  {(!seenCheckbox || !seenRanking) && (selectUptoThree || !rankRatePass) ? (
-                    <div className="question-type__instruction">
-                      {questionType === "multipleChoice"
-                        ? "Select at least 3 to proceed"
-                        : "Rank all items to proceed"}
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                 {(!selectEnough && !seenCheckbox) ? "" : <div
+                    className={
+                      questionType === "multipleChoice" ||
+                      questionType === "rank"
+                        ? `question-type__instruction`
+                        : ""
+                    }
+                  >
+                    {questionType === "multipleChoice"
+                      ? "Select at least 3 to proceed"
+                      : questionType === "rank"
+                      ? "Rank all items to proceed"
+                      : ""}
+                  </div> }
+                  
                   <Barrel
                     widgetOutAnimation={widgetOutAnimation}
                     heading={heading}
