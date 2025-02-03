@@ -86,7 +86,6 @@ button {
 @media (min-width: 730px) {
   .top-section {
     margin: -1rem;
-    width: 100%;
     margin-bottom: 10px;
   }
 }
@@ -99,7 +98,11 @@ button {
 
 .middle-section {
   position: relative;
-  display: flex;
+  width: 100%;
+
+}
+
+.bottom-section {
   width: 100%;
 }
 
@@ -195,9 +198,6 @@ button {
 
 .sideways {
   transform: rotateY(90deg);
-}
-.bottom-section {
-  width: 100%;
 }
 
 @keyframes backAndForth {

@@ -56,7 +56,7 @@ export default function Talk({
         <table className="talk-group__table">
           <tbody>
             <tr>
-              <td>RECORD</td>
+              <td>TYPE OR SPEAK</td>
               <td>To add a choice</td>
             </tr>
 
@@ -84,7 +84,7 @@ export default function Talk({
       <div className="talk-controls">
         <Button
           onClick={onRecord}
-          label={isRecording ? "TRANSCRIBING" : "RECORD"}
+          label={isRecording ? "TRANSCRIBING" : "TYPE OR SPEAK"}
           className={"primary button-small"}
         />
         <Button

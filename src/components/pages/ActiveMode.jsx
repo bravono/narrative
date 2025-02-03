@@ -487,9 +487,9 @@ const ActiveMode = () => {
   const handleTalk = () => {
     setWantsToTalk(true);
 
-    if (isRecording) {
-      setIsRecording(false);
-    }
+    if (wantsToTalk) setWantsToTalk(false);
+
+    if (isRecording) setIsRecording(false);
   };
 
   const handleRecord = () => {
@@ -658,21 +658,25 @@ const ActiveMode = () => {
             <Queue className={"queue answer"}>
               {widget === "barrel" && !isScrolling ? (
                 <>
-                 {(!selectEnough && !seenCheckbox) ? "" : <div
-                    className={
-                      questionType === "multipleChoice" ||
-                      questionType === "rank"
-                        ? `question-type__instruction`
-                        : ""
-                    }
-                  >
-                    {questionType === "multipleChoice"
-                      ? "Select at least 3 to proceed"
-                      : questionType === "rank"
-                      ? "Rank all items to proceed"
-                      : ""}
-                  </div> }
-                  
+                  {!selectEnough && !seenCheckbox ? (
+                    ""
+                  ) : (
+                    <div
+                      className={
+                        questionType === "multipleChoice" ||
+                        questionType === "rank"
+                          ? `question-type__instruction`
+                          : ""
+                      }
+                    >
+                      {questionType === "multipleChoice"
+                        ? "Select at least 3 to proceed"
+                        : questionType === "rank"
+                        ? "Rank all items to proceed"
+                        : ""}
+                    </div>
+                  )}
+
                   <Barrel
                     widgetOutAnimation={widgetOutAnimation}
                     heading={heading}
@@ -738,7 +742,7 @@ const ActiveMode = () => {
             />
             <Button
               onClick={handleTalk}
-              label={isRecording ? "STOP" : "TALK"}
+              label={isRecording ? "STOP" : wantsToTalk ? "CANCEL" : "TALK"}
               className={`bottom_button primary`}
             />
           </div>
