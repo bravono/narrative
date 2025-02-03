@@ -376,10 +376,11 @@ const ActiveMode = () => {
 
   const handleAddToStory = async () => {
     // Scroll down the story
-    animationFrameRef.current = requestAnimationFrame(scrollDown); // Continue scrolling
+    animationFrameRef.current = requestAnimationFrame(scrollDown); 
 
     // Animate the outgoing widget
     setWidgetOutAnimation("animate__bounceOut");
+
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
@@ -440,39 +441,42 @@ const ActiveMode = () => {
       });
     }
 
-    dispatch(
-      storyAdded(addAndHighlightChoice(regex, story, processedRespondentChoice))
-    );
-
-    // Set all conditions to false
-    setRingPass(false);
-    setRankRatePass(false);
-    setRadioPass(false);
-    setBarPass(false);
-    setCheckboxPass(0);
-    setScalePass(false);
-    setActiveRow(null);
-    setWidgetOutAnimation("");
-
-    // Get the next question
-    addToStory(formData)(dispatch);
-    const response = lastFetch.reply;
     if (meetOneCondition) {
-      if (response.story) {
-        const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
-          ...choice,
-          value: 0,
-          scales: [0, 0, 0, 0, 0, 0],
-        }));
-        setStory(response.story);
-        setQuestionType(response.blanks[0].questionType);
-        setWidget(response.blanks[0].widget);
-        setHeading(response.heading);
-        setChoiceList(newChoiceList);
-        setInstruction(response.instruction);
-        setBlankName(response.blanks[0].blank);
+      dispatch(
+        storyAdded(addAndHighlightChoice(regex, story, processedRespondentChoice))
+      );
+
+      // Set all conditions to false
+      setRingPass(false);
+      setRankRatePass(false);
+      setRadioPass(false);
+      setBarPass(false);
+      setCheckboxPass(0);
+      setScalePass(false);
+      setActiveRow(null);
+      setWidgetOutAnimation("");
+  
+      // Get the next question
+      addToStory(formData)(dispatch);
+      const response = lastFetch.reply;
+      if (meetOneCondition) {
+        if (response.story) {
+          const newChoiceList = response.blanks[0].choiceList.map((choice) => ({
+            ...choice,
+            value: 0,
+            scales: [0, 0, 0, 0, 0, 0],
+          }));
+          setStory(response.story);
+          setQuestionType(response.blanks[0].questionType);
+          setWidget(response.blanks[0].widget);
+          setHeading(response.heading);
+          setChoiceList(newChoiceList);
+          setInstruction(response.instruction);
+          setBlankName(response.blanks[0].blank);
+        }
       }
     }
+
   };
 
   const handlePreview = () => {
