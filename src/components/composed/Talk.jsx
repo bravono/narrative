@@ -44,13 +44,13 @@ export default function Talk({
             </div>
           </div>
           {!isLengthy ? (
-            <p>
-              <img src="/assets/Bullet.svg" alt="" /> = Individual list
-            </p>
+            <strong>
+              <img src="/assets/Bullet.svg" alt="" /> = Individual list <br/>
+              Pause inbetween to add multiple choices
+            </strong>
           ) : (
             ""
           )}
-          {!isLengthy ? <p>Pause inbetween to add multiple choices</p> : ""}
         </div>
       ) : (
         <table className="talk-group__table">
