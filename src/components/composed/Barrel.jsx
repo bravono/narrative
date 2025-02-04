@@ -210,9 +210,9 @@ const Barrel = ({
           ""
         )}
       </div>
-      <span className="instruction">
-        {questionType === "multipleChoice" ? "Select Up to Six" : ""}
-      </span>
+      <strong className="instruction">
+        {type === "multipleChoice" ? "Select Up to Six" : ""}
+      </strong>
       <AnswerQueueButtons
         isFollowUp={isFollowUp}
         isRecording={isRecording}

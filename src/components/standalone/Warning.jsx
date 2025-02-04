@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import "../../css/warning.css";
 
 export default function Warning({ message, style }) {
   useEffect(() => {}, []);
-  const { ringTotal } = useSelector((state) => state.entities.elements);
 
-  return (ringTotal < 100 && ringTotal > 94) || ringTotal > 100 ? (
-    <div className={style}>{message}</div>
-  ) : (
-    ""
-  );
+  return <div className={style}>{message}</div>;
 }

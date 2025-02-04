@@ -68,8 +68,6 @@ const ActiveMode = () => {
   const [scalePass, setScalePass] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false); // State to track scrolling status
   const [scrollingSpeed, setScrollingSpeed] = useState(0.3); // State to track scrolling speed
-  const [seenCheckbox, setSeenCheckbox] = useState(false);
-  const [seenRanking, setSeenRanking] = useState(false);
 
   const meetOneCondition =
     barPass ||
@@ -88,6 +86,10 @@ const ActiveMode = () => {
   );
   const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
   const storeStory = useSelector((state) => state.entities.responses.story);
+  const { ringTotal, seenCheckbox, seenRank } = useSelector(
+    (state) => state.entities.elements
+  );
+  const ringFail = (ringTotal < 100 && ringTotal > 94) || ringTotal > 100;
 
   // API call with Redux
   useEffect(() => {
@@ -640,12 +642,14 @@ const ActiveMode = () => {
                     containerRef={containerRef}
                   />
                 )}
-                <Warning
-                  style={"ring-total-warning"}
-                  message={
-                    "Your ringTotal does not sum to the required number. Adjust your values or if within 5% of required sum you can press Round Up."
-                  }
-                />
+                {ringFail && (
+                  <Warning
+                    style={"ring-total-warning"}
+                    message={
+                      "Your ringTotal does not sum to the required number. Adjust your values or if within 5% of required sum you can press Round Up."
+                    }
+                  />
+                )}
               </Cue>
             }
           </div>
@@ -667,27 +671,24 @@ const ActiveMode = () => {
           </div>
           <div className="story_queue-single">
             <Cue className={"queue answer"}>
+              {!rankRatePass && questionType === "rank" && !seenRank ? (
+                <Warning
+                  style={"question-type-instruction"}
+                  message={"Rank all items to proceed"}
+                />
+              ) : !checkboxPass &&
+                questionType === "multipleChoice" &&
+                !seenCheckbox ? (
+                <Warning
+                  style={"question-type-instruction"}
+                  message={"Select Up to 3 Items"}
+                />
+              ) : (
+                ""
+              )}
+
               {widget === "barrel" && !isScrolling ? (
                 <>
-                  {!selectEnough && !seenCheckbox ? (
-                    ""
-                  ) : (
-                    <div
-                      className={
-                        questionType === "multipleChoice" ||
-                        questionType === "rank"
-                          ? `question-type__instruction`
-                          : ""
-                      }
-                    >
-                      {questionType === "multipleChoice"
-                        ? "Select at least 3 to proceed"
-                        : questionType === "rank"
-                        ? "Rank all items to proceed"
-                        : ""}
-                    </div>
-                  )}
-
                   <Barrel
                     widgetOutAnimation={widgetOutAnimation}
                     heading={heading}
