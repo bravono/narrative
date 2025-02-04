@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { sortChoiceListByName } from "../../utilities/choiceListSorter";
 import AnswerQueueButtons from "./AnswerQueueButtons";
 import Lever from "../standalone/BarrelLever";
@@ -28,8 +28,7 @@ const Barrel = ({
   const handleSortToggle = () => {
     setIsDescending((prevIsDescending) => !prevIsDescending);
 
-    
-    (sortChoiceListByName(choiceList, isDescending));
+    sortChoiceListByName(choiceList, isDescending);
   };
 
   const type = questionType;
@@ -211,7 +210,9 @@ const Barrel = ({
           ""
         )}
       </div>
-      <p className="instruction">{instruction}</p>
+      <span className="instruction">
+        {questionType === "multipleChoice" ? "Select Up to Six" : ""}
+      </span>
       <AnswerQueueButtons
         isFollowUp={isFollowUp}
         isRecording={isRecording}
