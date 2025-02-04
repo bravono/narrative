@@ -12,10 +12,10 @@
   padding: 10px;
   text-align: center;
   color: white;
+  z-index: 1000;
 }
 
 .question-type-instruction {
   left: 20%;
   top: 0;
-  z-index: 1;
 }
