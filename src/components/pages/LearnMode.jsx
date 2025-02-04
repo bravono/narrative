@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
-import Queue from "../Queue";
+import Cue from "../Cue";
 import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
 import Timer from "../../utilities/Timer";
@@ -60,7 +60,7 @@ export default function LearnMode() {
       <section className="middle-section">
         <div className="body_content">
           <div className="story_queue-group ">
-            <Queue className={"queue question"}>
+            <Cue className={"queue question"}>
               <EdgeStanding src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg" />
               <Teleprompter>
                 <p>
@@ -69,13 +69,13 @@ export default function LearnMode() {
                 </p>
                 <NavigatorButtons />
               </Teleprompter>
-            </Queue>
+            </Cue>
           </div>
 
           <MiddleButton classNameA={"learn"} classNameB={"learn"} />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"}>
+            <Cue className={"queue answer"}>
               {widget === "ring" ? (
                 <Ring choiceList={choiceList} />
               ) : widget === "bar" ? (
@@ -96,7 +96,7 @@ export default function LearnMode() {
                   {description}.
                 </p>
               )}
-            </Queue>
+            </Cue>
           </div>
         </div>
       </section>

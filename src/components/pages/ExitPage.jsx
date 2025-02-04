@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Queue from "../Queue";
+import Cue from "../Cue";
 
 function Exit({ redirect }) {
   const navigate = useNavigate();
@@ -16,9 +16,9 @@ function Exit({ redirect }) {
 
   return (
     <main className="main-container">
-      <Queue className={"queue question"}>
+      <Cue className={"queue question"}>
         <p>We are sorry to see you go, but "Goodbye"</p>
-      </Queue>
+      </Cue>
     </main>
   );
 }

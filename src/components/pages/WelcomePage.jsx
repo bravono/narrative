@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BottomButton from "../BottomButton";
 import EdgeChair from "../EdgeChair";
 import MiddleButton from "../MiddleButton";
-import Queue from "../Queue";
+import Cue from "../Cue";
 import Timer from "../../utilities/Timer";
 import TopButton from "../composed/TopButton";
 import EdgeStanding from "../EdgeStanding";
@@ -37,19 +37,19 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
       <section className="middle-section">
         <div className="body_content">
           <div className="story_queue-group learn-mode">
-            <Queue className={"queue question"}>
+            <Cue className={"queue question"}>
               <div className="welcome-text">{"Welcome!"}</div>
               <EdgeStanding
                 src="/assets/Edge_Emotional_States_Hands_Back_Blue.svg"
                 className="hands-back"
               />
-            </Queue>
+            </Cue>
           </div>
 
           <MiddleButton classNameA="disabled" classNameB="disabled" />
 
           <div className="story_queue-single">
-            <Queue className={"queue answer"}>
+            <Cue className={"queue answer"}>
               <div className="welcome-text">
                 <p>
                   "You can go start your survey by clicking the above START
@@ -62,7 +62,7 @@ export default function WelcomePageLM({ classNameA, classNameB }) {
                   className={`${classNameA} learn-btn primary`}
                 />
               </div>
-            </Queue>
+            </Cue>
           </div>
         </div>
       </section>

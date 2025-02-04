@@ -1,5 +1,5 @@
 import Footer from "../Footer";
-import Queue from "../Queue";
+import Cue from "../Cue";
 import Button from "../Button";
 import BottomButton from "../BottomButton";
 import FooterButton from "../FooterButton";
@@ -7,9 +7,9 @@ import FooterButton from "../FooterButton";
 function Compare() {
   return (
     <main className="main-container">
-      <Queue className={"queue story"}>
+      <Cue className={"queue story"}>
         <p>COMING SOON</p>
-      </Queue>
+      </Cue>
       <section className="bottom-section">
         <FooterButton classNameB={"primary"}/>
       </section>
