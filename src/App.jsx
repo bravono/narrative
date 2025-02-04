@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ActiveMode from "./components/pages/ActiveMode";
 import Preview from "./components/pages/Preview";
-import WelcomePageLM from "./components/pages/WelcomePage";
+import WelcomePage from "./components/pages/WelcomePage";
+import FinishPage from "./components/pages/FinishPage";
 import Compare from "./components/pages/Compare";
 import Exit from "./components/pages/ExitPage";
 import Home from "./components/standalone/Home";
@@ -15,15 +16,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/activemode" element={<ActiveMode />} />
         <Route path="/exit" element={<Exit />} />
-        <Route path="/preview" element={<Preview />} />
         <Route path="/compare" element={<Compare />} />
-        <Route path="/welcome" element={<WelcomePageLM />} />
+        <Route path="/finish" element={<FinishPage />} />
+        <Route path="/preview" element={<Preview />} />
         <Route path="/introduction" element={<Introduction />} />
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/activemode" element={<ActiveMode />} />
         <Route path="/learnmode" element={<LearnMode />} />
         <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

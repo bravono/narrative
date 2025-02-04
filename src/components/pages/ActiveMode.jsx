@@ -86,6 +86,9 @@ const ActiveMode = () => {
   );
   const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
   const storeStory = useSelector((state) => state.entities.responses.story);
+  const finishedStory = useSelector(
+    (state) => state.entities.surveys.list.pop().survey.final
+  );
   const { ringTotal, seenCheckbox, seenRank } = useSelector(
     (state) => state.entities.elements
   );
@@ -449,6 +452,10 @@ const ActiveMode = () => {
           addAndHighlightChoice(regex, story, processedRespondentChoice)
         )
       );
+
+      if (finishedStory) {
+        navigate("/finish");
+      } // Redirect to finish page when the story is complete
 
       // Set all conditions to false
       setRingPass(false);
