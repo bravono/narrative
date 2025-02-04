@@ -132,13 +132,15 @@ const Barrel = ({
             // 1. Get all existing values
             const existingValues = prevChoiceList.map((item) => item.value);
 
+            console.log("existingValues", existingValues);
             // 2. Find the next available value
             let newValue = choice.value - 1;
             while (existingValues.includes(newValue)) {
               newValue--;
+              console.log("newValue", newValue);
               if (newValue < 0) {
-                // Prevent infinite loop if no values are available
-                return prevChoiceList;
+                newValue = 0; // Prevent negative values
+                break;
               }
             }
 
