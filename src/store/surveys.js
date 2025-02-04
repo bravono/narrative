@@ -9,8 +9,6 @@ const slice = createSlice({
     list: [],
     loading: false,
     lastFetch: null,
-    // sessionTimer: 0,
-    // pauseTimer: 0,
     lastId: 0,
     currentIndex: 0,
   },

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../../css/warning.css";
+import "../../css/Warning.css";
 
 export default function Warning({ message, style }) {
   useEffect(() => {}, []);
