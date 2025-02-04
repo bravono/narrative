@@ -86,9 +86,7 @@ const ActiveMode = () => {
   );
   const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
   const storeStory = useSelector((state) => state.entities.responses.story);
-  const finishedStory = useSelector(
-    (state) => state.entities.surveys.list.pop().survey.final
-  );
+  const finishedStory = list.length > 0 ? list[list.length - 1].survey.final : false;
   const { ringTotal, seenCheckbox, seenRank } = useSelector(
     (state) => state.entities.elements
   );
@@ -393,7 +391,6 @@ const ActiveMode = () => {
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
-      setSeenRanking(true);
       processedRespondentChoice = `<mark>${choiceList
         .map((choice) => `${choice.text} (${choice.value})`)
         .join(", ")}</mark>`; // Process respondent choice to be added to story;
@@ -413,7 +410,6 @@ const ActiveMode = () => {
 
     // Handle checkbox case
     if (checkboxPass) {
-      setSeenCheckbox(true);
       processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
