@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect, act } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setRingTotal } from "../../store/elements";
 import { tableGenerator } from "../standalone/tableGenerator";
 import { getScreenWidth } from "../../utilities/getScreenSize";
 import {
@@ -17,7 +19,6 @@ const Ring = ({
   instruction,
   choiceList,
   isRecording,
-  ringPass,
   widgetOutAnimation,
   onSetChoiceList,
   onAddToChoice,
@@ -38,15 +39,15 @@ const Ring = ({
   const [activeRow, setActiveRow] = useState({});
   const [activeRowIndex, setActiveRowIndex] = useState();
   const [currentTotal, setCurrentTotal] = useState(0); // Sum as value changes
-  const [total, setTotal] = useState(0); // Sum only when all items have a value > 0
+  const { ringTotal } = useSelector((state) => state.entities.elements);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let total = 0;
     choiceList.map((choice) => {
       total += Number(choice.value);
     });
-    setTotal(total);
-
+    dispatch(setRingTotal(total));
   }, [choiceList]);
 
   const handleSortToggle = () => {
@@ -68,19 +69,20 @@ const Ring = ({
     setSegmentValue(data);
   };
 
-  const isValidTotal = total < 100 || total > 100;
-  const canContinue = total == 100;
-  const canRoundup = total > 94 && total < 100;
+  const isValidTotal = ringTotal < 100 || ringTotal > 100;
+  const canContinue = ringTotal == 100;
+  const canRoundup = ringTotal > 94 && ringTotal < 100;
   const widgetInAnimationRight = `animate__animated animate__zoomInRight ${widgetOutAnimation}`;
   const widgetInAnimationLeft = `animate__animated animate__zoomInLeft ${widgetOutAnimation}`;
 
   return (
     <div className="ring-container">
       <div className="ring-heading">
-        {"Select an Item then Drag the Ring from 12 O'clock to Add Weight"}
+        {
+          "Select an Item then Drag the outter Ring from 12 O'clock to Add Weight"
+        }
       </div>
       <div className="ring-set">
-
         <div>
           <div
             className={`ring-list-container ${
@@ -121,7 +123,7 @@ const Ring = ({
             strokeWidth={strokeWidth}
             segmentValue={segmentValue}
             isValidTotal={isValidTotal}
-            total={total}
+            total={ringTotal}
             activeRowIndex={activeRowIndex}
             choiceList={choiceList}
             onSetSegmentValue={handleUpdateSegmentVaue}
@@ -143,7 +145,7 @@ const Ring = ({
             strokeWidth={strokeWidth - 3}
             colors={colors}
             choiceList={choiceList}
-            total={total}
+            total={ringTotal}
           />
         </div>
       </div>
@@ -161,15 +163,6 @@ const Ring = ({
           canRoundup={canRoundup}
         />
       </div>
-
-      {(total < 100 && total > 94) || total > 100 ? (
-        <div className="total_below">
-          Your total does not sum to the required number. Adjust your values or
-          if within 5% of required sum you can press Round Up.
-        </div>
-      ) : (
-        ""
-      )}
     </div>
   );
 };

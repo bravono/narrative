@@ -4,6 +4,7 @@ const slice = createSlice({
   initialState: {
     index: 0,
     questionTypeIndex: 0,
+    ringTotal: 0,
   },
   reducers: {
     setIndex: (elements, action) => {
@@ -12,9 +13,12 @@ const slice = createSlice({
     setQuestionTypeIndex: (elements, action) => {
         elements.questionTypeIndex = action.payload;
     },
+    setRingTotal: (elements, action) => {
+        elements.ringTotal = action.payload;
+    },
     
   },
 });
 
-export const { setIndex, setQuestionTypeIndex } = slice.actions;
+export const { setIndex, setQuestionTypeIndex, setRingTotal } = slice.actions;
 export default slice.reducer;

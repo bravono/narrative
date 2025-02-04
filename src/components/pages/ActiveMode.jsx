@@ -21,12 +21,13 @@ import Ring from "../composed/Ring";
 import Triangle from "../composed/Triangle";
 import Talk from "../composed/Talk";
 
-import Queue from "../Queue";
+import Cue from "../Cue";
 import Teleprompter from "../standalone/Teleprompter";
 import Swipe from "../standalone/Swipe";
 import Logo from "../Logo";
 import Edge from "../Edge";
 import Button from "../Button";
+import Warning from "../standalone/Warning";
 
 const ActiveMode = () => {
   const containerRef = useRef(null);
@@ -115,7 +116,7 @@ const ActiveMode = () => {
     }
   }, [list, lastFetch, dispatch]);
 
-  useEffect(() => {}, [story, widget]);
+  useEffect(() => {}, [story]);
 
   // Save timer to store every sec
   useEffect(() => {
@@ -376,11 +377,10 @@ const ActiveMode = () => {
 
   const handleAddToStory = async () => {
     // Scroll down the story
-    animationFrameRef.current = requestAnimationFrame(scrollDown); 
+    animationFrameRef.current = requestAnimationFrame(scrollDown);
 
     // Animate the outgoing widget
     setWidgetOutAnimation("animate__bounceOut");
-
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
@@ -443,7 +443,9 @@ const ActiveMode = () => {
 
     if (meetOneCondition) {
       dispatch(
-        storyAdded(addAndHighlightChoice(regex, story, processedRespondentChoice))
+        storyAdded(
+          addAndHighlightChoice(regex, story, processedRespondentChoice)
+        )
       );
 
       // Set all conditions to false
@@ -455,7 +457,7 @@ const ActiveMode = () => {
       setScalePass(false);
       setActiveRow(null);
       setWidgetOutAnimation("");
-  
+
       // Get the next question
       addToStory(formData)(dispatch);
       const response = lastFetch.reply;
@@ -476,7 +478,6 @@ const ActiveMode = () => {
         }
       }
     }
-
   };
 
   const handlePreview = () => {
@@ -622,7 +623,7 @@ const ActiveMode = () => {
               />
             </div>
             {
-              <Queue className={"queue question"}>
+              <Cue className={"queue question"}>
                 {wantsToTalk ? (
                   <Talk
                     onRecord={handleRecord}
@@ -639,7 +640,13 @@ const ActiveMode = () => {
                     containerRef={containerRef}
                   />
                 )}
-              </Queue>
+                <Warning
+                  style={"ring-total-warning"}
+                  message={
+                    "Your ringTotal does not sum to the required number. Adjust your values or if within 5% of required sum you can press Round Up."
+                  }
+                />
+              </Cue>
             }
           </div>
           <div className="middle_buttons-group">
@@ -659,7 +666,7 @@ const ActiveMode = () => {
             />
           </div>
           <div className="story_queue-single">
-            <Queue className={"queue answer"}>
+            <Cue className={"queue answer"}>
               {widget === "barrel" && !isScrolling ? (
                 <>
                   {!selectEnough && !seenCheckbox ? (
@@ -709,12 +716,12 @@ const ActiveMode = () => {
                   heading={heading}
                   choiceList={choiceList}
                   instruction={instruction}
+                  isRecording={isRecording}
                   ringPass={ringPass}
                   onSetChoiceList={handleUpdateChoiceList}
                   onSetAllChoiceHaveValue={setRankRatePass}
                   onAddToChoice={handleTalk}
                   onAddToStory={handleAddToStory}
-                  isRecording={isRecording}
                 />
               ) : widget === "triade" && !isScrolling ? (
                 <Triangle
@@ -732,7 +739,7 @@ const ActiveMode = () => {
               ) : (
                 ""
               )}
-            </Queue>
+            </Cue>
           </div>
         </div>
       </section>
