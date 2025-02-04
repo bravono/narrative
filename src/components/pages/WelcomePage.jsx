@@ -10,7 +10,7 @@ import EdgeStanding from "../EdgeStanding";
 import Logo from "../Logo";
 import Button from "../Button";
 
-export default function WelcomePageLM({ classNameA, classNameB }) {
+export default function WelcomePage({ classNameA, classNameB }) {
   const navigate = useNavigate();
 
   const handleExit = () => {
