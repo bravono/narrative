@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getScreenHeight } from "../../utilities/getScreenSize";
 
 function Rank({ rank, onRank, className, isScrollable, choiceList }) {
-  
+
   const height = getScreenHeight();
   let width = "15px"; // Default value
   const length = choiceList.length
