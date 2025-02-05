@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { UpdateAddAChoice } from "../../store/elements";
 import Button from "../Button";
-import "../../css/answerQueueButtons.css";
+import "../../css/AnswerCueButtons.css";
 import "../../css/button.css";
 
-export default function AnswerQueueButtons({
+export default function AnswerCueButtons({
   isRecording,
-  classAddAChoice,
   classContinue,
   classRoundup,
   choiceList,
@@ -15,8 +16,15 @@ export default function AnswerQueueButtons({
   canContinue,
   canRoundup,
 }) {
+  const dispatch = useDispatch();
+  const { addAChoice } = useSelector((state) => state.entities.elements);
+
+  useEffect(() => {
+    dispatch(UpdateAddAChoice(choiceList.length < 6));
+  });
+
   const handleAddChoice = () => {
-    onAddToChoice();
+    if (addAChoice) onAddToChoice();
   };
 
   const handleContinue = () => {
@@ -86,7 +94,7 @@ export default function AnswerQueueButtons({
       <div className="answer_queue_buttons">
         <Button
           onClick={handleAddChoice}
-          className={`${classAddAChoice} button-small`}
+          className={addAChoice ? "accent button-small" : "disable button-small"}
           label={isRecording ? "Transcribing..." : "OTHERS (ADD A CHOICE)"}
         />
         {canRoundup ? (

@@ -8,6 +8,7 @@ const slice = createSlice({
     seenCheckbox: false,
     seenRank: false,
     scrollSpeed: 0.3,
+    addAChoice: false,
   },
   reducers: {
     setIndex: (elements, action) => {
@@ -29,6 +30,10 @@ const slice = createSlice({
     setScrollSpeed: (elements, action) => {
       elements.scrollSpeed = action.payload;
     },
+
+    UpdateAddAChoice: (elements, action) => {
+     elements.addAChoice = action.payload;
+    }
   },
 });
 
@@ -39,5 +44,6 @@ export const {
   setSeenCheckbox,
   setSeenRank,
   setScrollSpeed,
+  UpdateAddAChoice,
 } = slice.actions;
 export default slice.reducer;
