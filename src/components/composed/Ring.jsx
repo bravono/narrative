@@ -8,7 +8,7 @@ import {
   sortChoiceListByValue,
 } from "../../utilities/choiceListSorter";
 import RingLever from "../standalone/RingLever";
-import AnswerQueueButtons from "./AnswerQueueButtons";
+import AnswerCueButtons from "./AnswerCueButtons";
 import RingSegment from "../standalone/RingSegment";
 import RingDraggable from "../standalone/RingDraggable";
 import IncreAndDecrePoly from "../standalone/IncreAndDecrePoly";
@@ -150,9 +150,8 @@ const Ring = ({
         </div>
       </div>
       <div className="ring-buttons">
-        <AnswerQueueButtons
+        <AnswerCueButtons
           isRecording={isRecording}
-          classAddAChoice={choiceList.length < 6 ? "accent" : "disabled"}
           classContinue={canContinue ? "accent" : "disabled"}
           classRoundup={canRoundup ? "accent" : "disabled"}
           choiceList={choiceList}

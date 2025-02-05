@@ -88,11 +88,23 @@ const ActiveMode = () => {
   const storeStory = useSelector((state) => state.entities.responses.story);
   const finishedStory =
     list.length > 0 ? list[list.length - 1].survey.final : false;
-  const { ringTotal, seenCheckbox, seenRank, scrollSpeed } = useSelector(
+  const { ringTotal, seenCheckbox, seenRank, scrollSpeed, addAChoice } = useSelector(
     (state) => state.entities.elements
   );
-  const ringFail = (ringTotal < 100 && ringTotal > 94) || ringTotal > 100;
 
+  // Warnings
+  const ringFail = (ringTotal < 100 && ringTotal > 94) || ringTotal > 100;
+  const showCheckboxWarning =
+  !checkboxPass &&
+  questionType === "multipleChoice" &&
+  widget === "barrel" &&
+  !seenCheckbox;
+const showRankWarning =
+  !rankRatePass &&
+  questionType === "rank" &&
+  widget === "barrel" &&
+    !seenRank;
+  
   // API call with Redux
   useEffect(() => {
     if (list.length === 0) {
@@ -332,7 +344,7 @@ const ActiveMode = () => {
       // Check if there's more content to scroll
       if (scrollTop + clientHeight < scrollHeight) {
         setIsScrolling(true); // Set scrolling to active
-        scrollOffset.current += scrollSpeed ; // Accumulate fractional scrolling
+        scrollOffset.current += scrollSpeed; // Accumulate fractional scrolling
 
         if (scrollOffset.current >= 1) {
           const scrollAmount = Math.floor(scrollOffset.current);
@@ -383,7 +395,6 @@ const ActiveMode = () => {
     dispatch(setScrollSpeed(0.3)); // Slow down the scroll speed
     animationFrameRef.current = requestAnimationFrame(scrollDown); // Scroll down the story
 
-    
     setWidgetOutAnimation("animate__bounceOut"); // Animate the outgoing widget
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
@@ -654,6 +665,7 @@ const ActiveMode = () => {
                     }
                   />
                 )}
+                {addAChoice && <Warning style={"ring-total-warning"} message={"Reached Max Choice Allowed"}/>}
               </Cue>
             }
           </div>
@@ -675,14 +687,12 @@ const ActiveMode = () => {
           </div>
           <div className="story_queue-single">
             <Cue className={"queue answer"}>
-              {!rankRatePass && questionType === "rank" && !seenRank ? (
+              {showRankWarning ? (
                 <Warning
                   style={"question-type-instruction"}
                   message={"Rank all items to proceed"}
                 />
-              ) : !checkboxPass &&
-                questionType === "multipleChoice" &&
-                !seenCheckbox ? (
+              ) : showCheckboxWarning ? (
                 <Warning
                   style={"question-type-instruction"}
                   message={"Select Up to 3 Items"}

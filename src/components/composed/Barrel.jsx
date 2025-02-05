@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { sortChoiceListByName } from "../../utilities/choiceListSorter";
-import AnswerQueueButtons from "./AnswerQueueButtons";
+import AnswerCueButtons from "./AnswerCueButtons";
 import Lever from "../standalone/BarrelLever";
 import StickyArrow from "../standalone/StickyArrow";
 import Control from "../standalone/Control";
@@ -213,7 +213,7 @@ const Barrel = ({
       <strong className="instruction">
         {type === "multipleChoice" ? "Select Up to Six" : ""}
       </strong>
-      <AnswerQueueButtons
+      <AnswerCueButtons
         isFollowUp={isFollowUp}
         isRecording={isRecording}
         classAddAChoice={"accent"}
