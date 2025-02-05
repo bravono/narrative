@@ -7,6 +7,7 @@ const slice = createSlice({
     ringTotal: 0,
     seenCheckbox: false,
     seenRank: false,
+    scrollSpeed: 0.3,
   },
   reducers: {
     setIndex: (elements, action) => {
@@ -25,6 +26,9 @@ const slice = createSlice({
     setSeenRank: (elements, action) => {
       elements.seenRank = action.payload;
     },
+    setScrollSpeed: (elements, action) => {
+      elements.scrollSpeed = action.payload;
+    },
   },
 });
 
@@ -34,5 +38,6 @@ export const {
   setRingTotal,
   setSeenCheckbox,
   setSeenRank,
+  setScrollSpeed,
 } = slice.actions;
 export default slice.reducer;

@@ -1,15 +1,18 @@
-import Footer from "../Footer";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setScrollSpeed } from "../../store/elements";
 import Cue from "../Cue";
 import Button from "../Button";
-import { useNavigate } from "react-router-dom";
-import {  useSelector } from "react-redux";
 import "../../css/preview.css";
 
 function Preview() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const storeStory = useSelector((state) => state.entities.responses.story);
+ 
 
   const handleGoBack = () => {
+    dispatch(setScrollSpeed(10));
     navigate(-1);
   };
   return (

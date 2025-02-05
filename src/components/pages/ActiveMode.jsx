@@ -12,6 +12,7 @@ import {
   moveToPreviousItem,
 } from "../../store/surveys";
 import { savePauseTimer, saveSessionTimer } from "../../store/timers";
+import { setScrollSpeed } from "../../store/elements";
 import { storyAdded } from "../../store/responses";
 import { persistor } from "../../store/configureStore";
 
@@ -67,7 +68,6 @@ const ActiveMode = () => {
   const [barPass, setBarPass] = useState(false);
   const [scalePass, setScalePass] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false); // State to track scrolling status
-  const [scrollingSpeed, setScrollingSpeed] = useState(0.3); // State to track scrolling speed
 
   const meetOneCondition =
     barPass ||
@@ -86,8 +86,9 @@ const ActiveMode = () => {
   );
   const savedPause = useSelector((state) => state.entities.timers.pauseTimer);
   const storeStory = useSelector((state) => state.entities.responses.story);
-  const finishedStory = list.length > 0 ? list[list.length - 1].survey.final : false;
-  const { ringTotal, seenCheckbox, seenRank } = useSelector(
+  const finishedStory =
+    list.length > 0 ? list[list.length - 1].survey.final : false;
+  const { ringTotal, seenCheckbox, seenRank, scrollSpeed } = useSelector(
     (state) => state.entities.elements
   );
   const ringFail = (ringTotal < 100 && ringTotal > 94) || ringTotal > 100;
@@ -331,7 +332,7 @@ const ActiveMode = () => {
       // Check if there's more content to scroll
       if (scrollTop + clientHeight < scrollHeight) {
         setIsScrolling(true); // Set scrolling to active
-        scrollOffset.current += scrollingSpeed; // Accumulate fractional scrolling
+        scrollOffset.current += scrollSpeed ; // Accumulate fractional scrolling
 
         if (scrollOffset.current >= 1) {
           const scrollAmount = Math.floor(scrollOffset.current);
@@ -379,11 +380,11 @@ const ActiveMode = () => {
   };
 
   const handleAddToStory = async () => {
-    // Scroll down the story
-    animationFrameRef.current = requestAnimationFrame(scrollDown);
+    dispatch(setScrollSpeed(0.3)); // Slow down the scroll speed
+    animationFrameRef.current = requestAnimationFrame(scrollDown); // Scroll down the story
 
-    // Animate the outgoing widget
-    setWidgetOutAnimation("animate__bounceOut");
+    
+    setWidgetOutAnimation("animate__bounceOut"); // Animate the outgoing widget
 
     const regex = new RegExp(`_{1,}[?]?[1-9]?_{1,}`);
     let formData = [];
@@ -487,8 +488,8 @@ const ActiveMode = () => {
 
   const handlePreview = () => {
     if (typeof storeStory === "string") {
+      // Ensure story has been added to activate button
       navigate("/preview");
-      setScrollingSpeed(5);
     }
   };
   const handleCompare = () => {
