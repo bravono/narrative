@@ -12,7 +12,7 @@ import {
   moveToPreviousItem,
 } from "../../store/surveys";
 import { savePauseTimer, saveSessionTimer } from "../../store/timers";
-import { setScrollSpeed } from "../../store/elements";
+import { setScrollSpeed, setSeenRank, setSeenCheckbox } from "../../store/elements";
 import { storyAdded } from "../../store/responses";
 import { persistor } from "../../store/configureStore";
 
@@ -88,23 +88,22 @@ const ActiveMode = () => {
   const storeStory = useSelector((state) => state.entities.responses.story);
   const finishedStory =
     list.length > 0 ? list[list.length - 1].survey.final : false;
-  const { ringTotal, seenCheckbox, seenRank, scrollSpeed, addAChoice } = useSelector(
-    (state) => state.entities.elements
-  );
+  const { ringTotal, seenCheckbox, seenRank, scrollSpeed, addAChoice } =
+    useSelector((state) => state.entities.elements);
 
   // Warnings
   const ringFail = (ringTotal < 100 && ringTotal > 94) || ringTotal > 100;
   const showCheckboxWarning =
-  !checkboxPass &&
-  questionType === "multipleChoice" &&
-  widget === "barrel" &&
-  !seenCheckbox;
-const showRankWarning =
-  !rankRatePass &&
-  questionType === "rank" &&
-  widget === "barrel" &&
+    !checkboxPass &&
+    questionType === "multipleChoice" &&
+    widget === "barrel" &&
+    !seenCheckbox;
+  const showRankWarning =
+    !rankRatePass &&
+    questionType === "rank" &&
+    widget === "barrel" &&
     !seenRank;
-  
+
   // API call with Redux
   useEffect(() => {
     if (list.length === 0) {
@@ -403,6 +402,7 @@ const showRankWarning =
 
     //  handles ring, rank and rate
     if (ringPass || rankRatePass) {
+      if (!seenRank) dispatch(setSeenRank(true));
       processedRespondentChoice = `<mark>${choiceList
         .map((choice) => `${choice.text} (${choice.value})`)
         .join(", ")}</mark>`; // Process respondent choice to be added to story;
@@ -422,6 +422,7 @@ const showRankWarning =
 
     // Handle checkbox case
     if (checkboxPass) {
+      if (!seenCheckbox) dispatch(setSeenCheckbox(true));
       processedRespondentChoice = `<mark>${choiceList
         .filter((choice) => choice.value === 1)
         .map((choice) => choice.text)
@@ -665,7 +666,12 @@ const showRankWarning =
                     }
                   />
                 )}
-                {addAChoice && <Warning style={"ring-total-warning"} message={"Reached Max Choice Allowed"}/>}
+                {addAChoice && (
+                  <Warning
+                    style={"ring-total-warning"}
+                    message={"Reached Max Choice Allowed"}
+                  />
+                )}
               </Cue>
             }
           </div>

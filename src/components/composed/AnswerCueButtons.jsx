@@ -18,9 +18,10 @@ export default function AnswerCueButtons({
 }) {
   const dispatch = useDispatch();
   const { addAChoice } = useSelector((state) => state.entities.elements);
-
+  const { list } = useSelector((state) => state.entities.surveys);
+  const widget = list[list.length -1].survey.reply.blanks[0].widget;
   useEffect(() => {
-    dispatch(UpdateAddAChoice(choiceList.length < 6));
+    dispatch(UpdateAddAChoice(widget === "ring" && choiceList?.length < 6 ));
   });
 
   const handleAddChoice = () => {
@@ -94,7 +95,9 @@ export default function AnswerCueButtons({
       <div className="answer_queue_buttons">
         <Button
           onClick={handleAddChoice}
-          className={addAChoice ? "accent button-small" : "disable button-small"}
+          className={
+            addAChoice ? "accent button-small" : "disabled button-small"
+          }
           label={isRecording ? "Transcribing..." : "OTHERS (ADD A CHOICE)"}
         />
         {canRoundup ? (
